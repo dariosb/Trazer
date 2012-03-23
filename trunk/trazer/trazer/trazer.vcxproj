@@ -58,6 +58,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,7 +92,7 @@
     <ClInclude Include="sources\common\rkhtrc.h" />
     <ClInclude Include="sources\common\rkhtype.h" />
     <ClInclude Include="sources\common\timer.h" />
-    <ClInclude Include="sources\parser\trazer.h" />
+    <ClInclude Include="sources\parser\tzparse.h" />
     <ClInclude Include="sources\stdafx.h" />
     <ClInclude Include="sources\stream\tplact.h" />
     <ClInclude Include="sources\stream\tplcfg.h" />
@@ -111,7 +112,7 @@
     <ClCompile Include="sources\common\getopt.cpp" />
     <ClCompile Include="sources\common\lang.cpp" />
     <ClCompile Include="sources\common\rerror.c" />
-    <ClCompile Include="sources\parser\trazer.c" />
+    <ClCompile Include="sources\parser\tzparse.c" />
     <ClCompile Include="sources\stdafx.cpp" />
     <ClCompile Include="sources\stream\tplact.cpp" />
     <ClCompile Include="sources\stream\tplfsm.cpp" />

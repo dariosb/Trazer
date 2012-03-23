@@ -1,0 +1,65 @@
+#
+# Trazer Tool configuration file
+#
+# The format of this file is as follows
+# - #'s are comments
+# - Event blocks are are grouped by framework service type.
+# - Each event must be defined as a member of group,
+#   and defined into a Grup directive declaration.
+# - Event definition:
+# 		Event: id.
+# 		Name: Allias.
+#		Args: arguments to log, in the order that are traced.
+#		Text: optional descriptive text.
+#
+
+#
+# --- Memory Pool (MP) ------------------
+#
+Group: MP
+{
+	Event: RKH_TRCE_MP_INIT
+	Name: INIT
+	Args: mp=%s, nblock=%d
+	Text: "Memory Pool Init"
+
+	Event: RKH_TRCE_MP_GET
+	Name: GET
+	Args: mp=%s, nfree=%d
+	Text: "Memory Pool Get"
+
+	Event: RKH_TRCE_MP_PUT
+	Name: PUT
+	Args: mp=%s, nfree=%d
+}
+	
+#
+# --- Queue (RQ) ------------------------
+#
+Group: RQ
+{
+	Event: RKH_TRCE_RQ_INIT
+	Name: INIT
+	Args: rq=%s, sma=%s, nelem=%d
+
+	Event: RKH_TRCE_RQ_GET
+	Name: GET
+	Args: rq=%s, nused=%d
+	
+	Event: KH_TRCE_RQ_FIFO
+	Name: POST_FIFO
+	Args: rq=%s, nused=%d
+	
+	Event: RKH_TRCE_RQ_LIFO
+	Name: POST_LIFO
+	Args: rq=%s, nused=%d
+	
+	Event: RKH_TRCE_RQ_FULL
+	Name: FULL
+	Args: rq=%s
+	
+	Event: RKH_TRCE_RQ_DPT
+	Name: DEPLETE
+	Args: rq=%s
+}
+

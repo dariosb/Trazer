@@ -74,9 +74,6 @@
     <ClInclude Include="sources\stream\uart\serial.h">
       <Filter>Resource Files\stream\uart</Filter>
     </ClInclude>
-    <ClInclude Include="sources\parser\trazer.h">
-      <Filter>Resource Files\parser</Filter>
-    </ClInclude>
     <ClInclude Include="sources\common\rkhcfg.h">
       <Filter>Resource Files\common</Filter>
     </ClInclude>
@@ -94,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="sources\targetver.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\parser\tzparse.h">
+      <Filter>Resource Files\parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -127,14 +127,14 @@
     <ClCompile Include="sources\stream\uart\sertbl.c">
       <Filter>Resource Files\stream\uart</Filter>
     </ClCompile>
-    <ClCompile Include="sources\parser\trazer.c">
-      <Filter>Resource Files\parser</Filter>
-    </ClCompile>
     <ClCompile Include="sources\stdafx.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\trazer.cpp">
       <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\tzparse.c">
+      <Filter>Resource Files\parser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

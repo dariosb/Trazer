@@ -205,7 +205,7 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-FILE *fdbg;
+extern "C" { FILE *fdbg; }
 
 void 
 rkh_trc_open( void )
