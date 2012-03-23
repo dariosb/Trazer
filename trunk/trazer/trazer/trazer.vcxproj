@@ -52,7 +52,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -84,10 +84,15 @@
     <ClInclude Include="sources\common\getopt.h" />
     <ClInclude Include="sources\common\lang.h" />
     <ClInclude Include="sources\common\mydefs.h" />
+    <ClInclude Include="sources\common\myevt.h" />
     <ClInclude Include="sources\common\mytypes.h" />
     <ClInclude Include="sources\common\rerror.h" />
+    <ClInclude Include="sources\common\rkhcfg.h" />
+    <ClInclude Include="sources\common\rkhtrc.h" />
+    <ClInclude Include="sources\common\rkhtype.h" />
     <ClInclude Include="sources\common\timer.h" />
     <ClInclude Include="sources\parser\trazer.h" />
+    <ClInclude Include="sources\stdafx.h" />
     <ClInclude Include="sources\stream\tplact.h" />
     <ClInclude Include="sources\stream\tplcfg.h" />
     <ClInclude Include="sources\stream\tpldefs.h" />
@@ -97,6 +102,7 @@
     <ClInclude Include="sources\stream\tpltbl.h" />
     <ClInclude Include="sources\stream\uart\serdefs.h" />
     <ClInclude Include="sources\stream\uart\serial.h" />
+    <ClInclude Include="sources\targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
@@ -106,12 +112,14 @@
     <ClCompile Include="sources\common\lang.cpp" />
     <ClCompile Include="sources\common\rerror.c" />
     <ClCompile Include="sources\parser\trazer.c" />
+    <ClCompile Include="sources\stdafx.cpp" />
     <ClCompile Include="sources\stream\tplact.cpp" />
     <ClCompile Include="sources\stream\tplfsm.cpp" />
     <ClCompile Include="sources\stream\tplhal.cpp" />
     <ClCompile Include="sources\stream\tplink.cpp" />
     <ClCompile Include="sources\stream\tpltbl.cpp" />
     <ClCompile Include="sources\stream\uart\sertbl.c" />
+    <ClCompile Include="sources\trazer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

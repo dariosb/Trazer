@@ -205,3 +205,21 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+FILE *fdbg;
+
+void 
+rkh_trc_open( void )
+{
+	//rkh_trc_init();
+	//rkh_trc_control( RKH_TRC_START );
+
+	if( ( fdbg = fopen( "../ahlog.txt", "w+" ) ) == NULL )
+	{
+		perror( "Can't open file\n" );
+		exit( EXIT_FAILURE );
+	}
+
+	//trazer_init();
+}
+
+
