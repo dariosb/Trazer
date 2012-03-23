@@ -24,16 +24,14 @@
  */
 
 
-//#include "rkhtrc.h"
+#include "mytypes.h"
+#include "rkhtrc.h"
 //#include "rkh.h"
-//#include "rkhcfg.h"
+#include "rkhcfg.h"
 //#include "my.h"
-//#include "myevt.h"
+#include "myevt.h"
 //#include "rkhtim.h"
 #include <stdio.h>
-
-
-RKH_THIS_MODULE
 
 
 #define TRAZER_EN 			(RKH_TRC_EN == 1 && ( RKH_TRC_ALL == 1 || 		\
@@ -328,7 +326,20 @@ static rkhui8_t *trb;				/* points to trace event buffer */
 static char fmt[ 128 ];
 extern FILE *fdbg;
 
-extern RKHT_T my_timer;
+ushort my_timer;
+	ushort my;
+	ushort my_equeue;
+	ushort my_timer;
+	ushort rkheplist[2];
+	ushort S1;
+	ushort S11;
+	ushort S111;
+	ushort S112;
+	ushort S12;
+	ushort S2;
+	ushort S3;
+	ushort S31;
+	ushort S32;
 
 static
 void
@@ -336,8 +347,8 @@ make_symtbl( void )
 {
 	int i = -1;
 
-	MKO( my, 			"my"		);
-	MKO( &my->equeue,	"my_queue"	);
+	MKO( &my, 			"my"		);
+	MKO( &my_equeue,	"my_queue"	);
 	MKO( &my_timer, 	"my_timer"	);
 	MKO( &rkheplist[0], "ep0"		);
 	MKO( &rkheplist[1], "ep1"		);
