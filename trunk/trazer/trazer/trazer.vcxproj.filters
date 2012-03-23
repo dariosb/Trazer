@@ -9,99 +9,108 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\common">
+      <UniqueIdentifier>{7fa3ece1-163d-4f37-8670-ba91c94acf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\parser">
+      <UniqueIdentifier>{e07850ad-d23c-4c74-b7ef-f37de5910e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\stream">
+      <UniqueIdentifier>{54cac175-b485-4f06-b704-eb04ea3bd88c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\stream\file">
+      <UniqueIdentifier>{c7d9a55d-f231-4415-975c-26b91635e073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\stream\uart">
+      <UniqueIdentifier>{998fd99d-8c58-4ab2-a357-85cda16667ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sources\common\getopt.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
     <ClInclude Include="sources\common\lang.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
     <ClInclude Include="sources\common\mydefs.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
     <ClInclude Include="sources\common\mytypes.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
     <ClInclude Include="sources\common\rerror.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\common\serdefs.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\common\serial.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
     <ClInclude Include="sources\common\timer.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tplact.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tplact.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tplcfg.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tplcfg.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tpldefs.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tpldefs.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tplfsm.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tplfsm.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tplhal.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tplhal.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tplink.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tplink.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="sources\instream\tpltbl.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sources\stream\tpltbl.h">
+      <Filter>Resource Files\stream</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="sources\common\getopt.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\common\lang.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\common\rerror.c">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\common\sertbl.c">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\instream\tplact.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\instream\tplfsm.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\instream\tplhal.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\instream\tplink.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\instream\tpltbl.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="trazer.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
+    <ClInclude Include="sources\stream\uart\serdefs.h">
+      <Filter>Resource Files\stream\uart</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\stream\uart\serial.h">
+      <Filter>Resource Files\stream\uart</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\parser\trazer.h">
+      <Filter>Resource Files\parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\common\rerror.c">
+      <Filter>Resource Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\common\getopt.cpp">
+      <Filter>Resource Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\common\lang.cpp">
+      <Filter>Resource Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tplact.cpp">
+      <Filter>Resource Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tplfsm.cpp">
+      <Filter>Resource Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tplhal.cpp">
+      <Filter>Resource Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tplink.cpp">
+      <Filter>Resource Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tpltbl.cpp">
+      <Filter>Resource Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\uart\sertbl.c">
+      <Filter>Resource Files\stream\uart</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\trazer.c">
+      <Filter>Resource Files\parser</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

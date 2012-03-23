@@ -194,9 +194,8 @@ tplink_onxmit_cmp( void )
 
 #endif
 
-int _tmain(int argc, char **argv)
+int main(int argc, char **argv)
 {
-
 	evaluate_args( argc, argv );
 
 

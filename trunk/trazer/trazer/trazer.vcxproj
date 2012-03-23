@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)sources\instream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)sources\parser;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)sources\;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -86,34 +86,32 @@
     <ClInclude Include="sources\common\mydefs.h" />
     <ClInclude Include="sources\common\mytypes.h" />
     <ClInclude Include="sources\common\rerror.h" />
-    <ClInclude Include="sources\common\serdefs.h" />
-    <ClInclude Include="sources\common\serial.h" />
     <ClInclude Include="sources\common\timer.h" />
-    <ClInclude Include="sources\instream\tplact.h" />
-    <ClInclude Include="sources\instream\tplcfg.h" />
-    <ClInclude Include="sources\instream\tpldefs.h" />
-    <ClInclude Include="sources\instream\tplfsm.h" />
-    <ClInclude Include="sources\instream\tplhal.h" />
-    <ClInclude Include="sources\instream\tplink.h" />
-    <ClInclude Include="sources\instream\tpltbl.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="sources\parser\trazer.h" />
+    <ClInclude Include="sources\stream\tplact.h" />
+    <ClInclude Include="sources\stream\tplcfg.h" />
+    <ClInclude Include="sources\stream\tpldefs.h" />
+    <ClInclude Include="sources\stream\tplfsm.h" />
+    <ClInclude Include="sources\stream\tplhal.h" />
+    <ClInclude Include="sources\stream\tplink.h" />
+    <ClInclude Include="sources\stream\tpltbl.h" />
+    <ClInclude Include="sources\stream\uart\serdefs.h" />
+    <ClInclude Include="sources\stream\uart\serial.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\lowlevel.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\common\getopt.cpp" />
     <ClCompile Include="sources\common\lang.cpp" />
     <ClCompile Include="sources\common\rerror.c" />
-    <ClCompile Include="sources\common\sertbl.c" />
-    <ClCompile Include="sources\instream\tplact.cpp" />
-    <ClCompile Include="sources\instream\tplfsm.cpp" />
-    <ClCompile Include="sources\instream\tplhal.cpp" />
-    <ClCompile Include="sources\instream\tplink.cpp" />
-    <ClCompile Include="sources\instream\tpltbl.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="trazer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="libs\lowlevel.lib" />
+    <ClCompile Include="sources\parser\trazer.c" />
+    <ClCompile Include="sources\stream\tplact.cpp" />
+    <ClCompile Include="sources\stream\tplfsm.cpp" />
+    <ClCompile Include="sources\stream\tplhal.cpp" />
+    <ClCompile Include="sources\stream\tplink.cpp" />
+    <ClCompile Include="sources\stream\tpltbl.cpp" />
+    <ClCompile Include="sources\stream\uart\sertbl.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
