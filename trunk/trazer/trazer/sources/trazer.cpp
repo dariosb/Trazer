@@ -16,6 +16,9 @@
 #include "tplink.h"
 #include "tplact.h"
 #include "options.h"
+#include "messages.h"
+#include "error.h"
+#include "tzparse.h"
 
 
 static char *args = "d:D:hH";
@@ -169,31 +172,40 @@ tplink_onxmit_cmp( void )
 
 #endif
 
-int main(int argc, char **argv)
+FILE *f;
+FILE *fdbg;
+
+int
+main(int argc, char **argv)
 {
+	char c;
+
 	init_options( argc, argv );
 
-	tplink_init();
-
-	for(;;);
-	return 0;
-}
-
-extern "C" { FILE *fdbg; }
-
-void 
-rkh_trc_open( void )
-{
-	//rkh_trc_init();
-	//rkh_trc_control( RKH_TRC_START );
-
-	if( ( fdbg = fopen( "../ahlog.txt", "w+" ) ) == NULL )
+	if( !options.instream_file.empty() )
 	{
-		perror( "Can't open file\n" );
+		if( ( f = fopen( options.instream_file.c_str(), "rt" ) ) == NULL )
+			fatal_error( no_trace_file, options.instream_file.c_str() );
+	}
+
+
+	if( ( fdbg = fopen( "tzlog.txt", "w+" ) ) == NULL )
+	{
+		perror( "Can't open file tzlog.txt\n" );
 		exit( EXIT_FAILURE );
 	}
 
-	//trazer_init();
+	trazer_init();
+
+//	tplink_init();
+	while( (c = fgetc(f)) != EOF )
+		trazer_parse( c );
+
+	fflush( fdbg );
+	fclose( fdbg );
+
+	for(;;);
+	return 0;
 }
 
 

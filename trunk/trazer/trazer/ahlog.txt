@@ -1,0 +1,120 @@
+---- RKH trace log session ----
+date : Mar 29 201217:44:22
+Number of trace events = 45
+Number of trace groups = 6
+Configurations = 
+
+   TRAZER_SIZEOF_SIG     = 1
+   TRAZER_SIZEOF_TSTAMP  = 4
+   TRAZER_SIZEOF_POINTER = 4
+   TRAZER_SIZEOF_NTIMER  = 2
+   TRAZER_SIZEOF_NBLOCK  = 1
+   TRAZER_SIZEOF_NELEM   = 1
+   TRAZER_SIZEOF_ESIZE   = 2
+   TRAZER_EN_NSEQ        = 1
+   TRAZER_EN_CHK         = 1
+   TRAZER_EN_TSTAMP      = 1
+   RKH_TRC_ALL        	 = 1
+   RKH_TRC_EN_MP         = 0
+   RKH_TRC_EN_RQ         = 0
+   RKH_TRC_EN_SMA        = 0
+   RKH_TRC_EN_TIM        = 0
+   RKH_TRC_EN_SM         = 0
+   RKH_TRC_EN_RKH        = 0
+
+---- BEGIN TRACE SESSION ----
+
+       120 [  0] MP  | INIT            : mp=ep0, nblock=16
+       120 [  1] RKH | EPOOL_REG       : epix =1, ssize=64, esize=4
+       120 [  2] MP  | INIT            : mp=ep1, nblock=4
+       120 [  3] RKH | EPOOL_REG       : epix =2, ssize=32, esize=8
+       120 [  4] RKH | SYM_OBJ         : obj=0x00FD1780, sym=&rkheplist[0]
+       120 [  5] RKH | SYM_OBJ         : obj=0x00FD1794, sym=&rkheplist[1]
+       120 [  6] RKH | SYM_SIG         : sig=1, sym=ONE
+       120 [  7] RQ  | INIT            : rq=my_queue, sma=my, nelem=4
+       120 [  8] SMA | REGISTER        : sma=my, prio=0
+       120 [  9] SM  | INIT            : sma=my, istate=S1
+       120 [ 10] TIM | INIT            : timer=my_timer, sig=TOUT
+       120 [ 11] SM  | ENTRY_STATE     : sma=my, state=S1
+       120 [ 12] SM  | ENTRY_STATE     : sma=my, state=S11
+       120 [ 13] SM  | ENTRY_STATE     : sma=my, state=S111
+       120 [ 14] SMA | ACTIVATE        : sma=my
+       121 [ 15] RKH | ENTER           :  
+     12818 [ 16] MP  | GET             : mp=ep1, nfree=3
+     12818 [ 17] RKH | ALLOC_EVENT     : esize=6, sig=ONE
+     12819 [ 18] RQ  | POST_FIFO       : rq=my_queue, nused=1
+     12819 [ 19] SMA | POST_FIFO       : sma=my, sig=ONE
+     12819 [ 20] RQ  | GET_LAST        : rq=my_queue
+     12819 [ 21] SMA | GET_EVENT       : sma=my, sig=ONE
+     12819 [ 22] SM  | DISPATCH        : sma=my, sig=ONE
+     12819 [ 23] SM  | TRANSITION      : sma=my, sstate=S111, tstate=S112
+     12819 [ 24] SM  | COMP_STATE      : sma=my, state=S112
+     12819 [ 25] SM  | NUM_EN_EX       : sma=my, nentry=1, nexit=1
+     12819 [ 26] SM  | EXIT_STATE      : sma=my, state=S111
+     12819 [ 27] SM  | NUM_TRN_ACT     : sma=my, ntrnaction=1
+     12819 [ 28] SM  | ENTRY_STATE     : sma=my, state=S112
+     12819 [ 29] SM  | CURRENT_STATE   : sma=my, state=S112
+     12819 [ 30] SM  | DISPATCH_RCODE  : sma=my, retcode=RKH_OK
+     12819 [ 31] RKH | GC_RECYCLE      : sig=ONE
+     12819 [ 32] MP  | PUT             : mp=ep1, nfree=4
+     13721 [ 39] SM  | DISPATCH        : sma=my, sig=THREE
+     13721 [ 40] SM  | TRANSITION      : sma=my, sstate=S112, tstate=J
+     13721 [ 41] SM  | COMP_STATE      : sma=my, state=J
+     13721 [ 42] SM  | COMP_STATE      : sma=my, state=S3
+     13721 [ 43] SM  | COMP_STATE      : sma=my, state=S31
+     13721 [ 44] SM  | NUM_EN_EX       : sma=my, nentry=2, nexit=3
+     13722 [ 45] SM  | EXIT_STATE      : sma=my, state=S112
+     13722 [ 46] TIM | ATTEMPT_STOP    : timer=my_timer
+     13722 [ 47] SM  | EXIT_STATE      : sma=my, state=S11
+     13722 [ 48] SM  | EXIT_STATE      : sma=my, state=S1
+     13722 [ 49] SM  | NUM_TRN_ACT     : sma=my, ntrnaction=3
+     13722 [ 50] SM  | ENTRY_STATE     : sma=my, state=S3
+     13722 [ 51] SM  | ENTRY_STATE     : sma=my, state=S31
+     13722 [ 52] SM  | CURRENT_STATE   : sma=my, state=S31
+     13722 [ 53] SM  | DISPATCH_RCODE  : sma=my, retcode=RKH_OK
+     13722 [ 54] RKH | GC_RECYCLE      : sig=THREE
+     13722 [ 55] MP  | PUT             : mp=ep1, nfree=4
+     14279 [ 62] SM  | DISPATCH        : sma=my, sig=TWO
+     14279 [ 63] SM  | TRANSITION      : sma=my, sstate=S3, tstate=C1
+     14279 [ 64] SM  | COMP_STATE      : sma=my, state=C1
+     14279 [ 65] SM  | COMP_STATE      : sma=my, state=S1
+     14279 [ 66] SM  | COMP_STATE      : sma=my, state=S11
+     14279 [ 67] SM  | COMP_STATE      : sma=my, state=S111
+     14279 [ 68] SM  | NUM_EN_EX       : sma=my, nentry=3, nexit=2
+     14279 [ 69] SM  | EXIT_STATE      : sma=my, state=S31
+     14279 [ 70] SM  | EXIT_STATE      : sma=my, state=S3
+     14279 [ 71] SM  | NUM_TRN_ACT     : sma=my, ntrnaction=4
+     14279 [ 72] SM  | ENTRY_STATE     : sma=my, state=S1
+     14279 [ 73] SM  | ENTRY_STATE     : sma=my, state=S11
+     14279 [ 74] SM  | ENTRY_STATE     : sma=my, state=S111
+     14279 [ 75] SM  | CURRENT_STATE   : sma=my, state=S111
+     14279 [ 76] SM  | DISPATCH_RCODE  : sma=my, retcode=RKH_OK
+     14279 [ 77] RKH | GC_RECYCLE      : sig=TWO
+     14279 [ 78] MP  | PUT             : mp=ep1, nfree=4
+     15091 [ 80] RKH | ALLOC_EVENT     : esize=6, sig=FOUR
+     15091 [ 81] RQ  | POST_FIFO       : rq=my_queue, nused=1
+     15091 [ 82] SMA | POST_FIFO       : sma=my, sig=FOUR
+     15091 [ 83] RQ  | GET_LAST        : rq=my_queue
+     15091 [ 84] SMA | GET_EVENT       : sma=my, sig=FOUR
+     15091 [ 85] SM  | DISPATCH        : sma=my, sig=FOUR
+     15091 [ 86] SM  | TRANSITION      : sma=my, sstate=S11, tstate=S12
+     15091 [ 87] SM  | COMP_STATE      : sma=my, state=S12
+     15091 [ 88] SM  | NUM_EN_EX       : sma=my, nentry=1, nexit=2
+     15091 [ 89] SM  | EXIT_STATE      : sma=my, state=S111
+     15091 [ 90] TIM | ATTEMPT_STOP    : timer=my_timer
+     15091 [ 91] SM  | EXIT_STATE      : sma=my, state=S11
+     15091 [ 92] SM  | NUM_TRN_ACT     : sma=my, ntrnaction=1
+     15091 [ 93] SM  | ENTRY_STATE     : sma=my, state=S12
+     15091 [ 94] SM  | CURRENT_STATE   : sma=my, state=S12
+     15091 [ 95] SM  | DISPATCH_RCODE  : sma=my, retcode=RKH_OK
+     15091 [ 96] RKH | GC_RECYCLE      : sig=FOUR
+     15091 [ 97] MP  | PUT             : mp=ep1, nfree=4
+     17890 [ 98] RQ  | POST_FIFO       : rq=my_queue, nused=1
+     17890 [ 99] SMA | POST_FIFO       : sma=my, sig=TERM
+     17890 [100] RQ  | GET_LAST        : rq=my_queue
+     17890 [101] SMA | GET_EVENT       : sma=my, sig=TERM
+     17890 [102] SM  | DISPATCH        : sma=my, sig=TERM
+     17890 [103] SM  | TRANSITION      : sma=my, sstate=S1, tstate=S1
+     17890 [104] SM  | NUM_TRN_ACT     : sma=my, ntrnaction=0
+     17907 [105] RKH | EXIT            :  
+     17907 [106] SM  | DISPATCH_RCODE  : sma=my, retcode=RKH_OK

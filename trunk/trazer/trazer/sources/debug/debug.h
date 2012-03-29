@@ -12,7 +12,7 @@ void dprintf( const char* fmt, ... );
 
 #else
 
-#define ldebug()
+#define dprintf()
 
 #endif
 

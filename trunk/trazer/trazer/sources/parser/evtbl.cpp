@@ -12,10 +12,11 @@ using namespace std;
 
 vector <EVENT_INFO_ST> event_tbl;
 
+string nstring;
+
 #define MKFI( id, gn, nm, fmt, fargs )	\
-	{ id, #id, fargs }
-
-
+	{ { id, "", "", fmt, fargs }, #id, NULL }
+	
 static FMT_ID_T fmt_id_tbl[] =
 {
 	MKFI(	RKH_TRCE_MP_INIT,	"MP", "INIT", 
@@ -120,28 +121,42 @@ static FMT_ID_T fmt_id_tbl[] =
 			"sig=%d, sym=%s", 				h_symsig )
 };
 
+FMT_ID_T *
+get_evt_id( string *idstr )
+{
+	FMT_ID_T *p;
+
+	for( p=fmt_id_tbl; p < fmt_id_tbl + RKH_TRCE_USER; ++p )
+		if( idstr->compare(p->idstr) == 0 )
+			return p;
+
+	return NULL;
+}
 
 int
 add_to_evtbl( EVENT_INFO_ST *p )
 {
 	if( p->event.empty() ||
 		p->group.empty() ||
-		p->name.empty() || 
-		( p->id == -1 ) 
+		p->name.empty() 
 	)
 	{
 		printf(error_incomplete_trace_evt_data);
 		return -1;
 	}
 
-	if( p->id > RKH_TRCE_NEVENT )
-		printf(error_invalid_trace_id, p->id );
+	if( (p->fmtid = get_evt_id( &p->event )) == NULL )
+	{
+		printf( error_event_id_unknown, p->event.c_str() );
+		return -1;
+	}
 
-	p->fmtid = &fmt_id_tbl[p->id];
-		
+
 	event_tbl.push_back( *p );
 
-	fmt_id_tbl[p->id].evinfo = &event_tbl.back(); 
+	fmt_id_tbl[p->fmtid->tre.id].evinfo = &event_tbl.back(); 
+	fmt_id_tbl[p->fmtid->tre.id].tre.group.assign( event_tbl.back().group.c_str() );
+	fmt_id_tbl[p->fmtid->tre.id].tre.name.assign( event_tbl.back().name.c_str() );
 
 	p->event.clear();
 	p->group.clear();
@@ -152,3 +167,13 @@ add_to_evtbl( EVENT_INFO_ST *p )
 	return 0;
 }
 
+
+const
+TRE_T *
+find_trevt( unsigned char id )
+{
+	if( id > sizeof(fmt_id_tbl)/sizeof(fmt_id_tbl[0]) )
+		return ( TRE_T* )0;
+
+	return &(fmt_id_tbl[id].tre);
+}

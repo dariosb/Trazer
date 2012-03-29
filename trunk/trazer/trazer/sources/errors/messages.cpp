@@ -80,12 +80,12 @@ const char * usage_msg =
 
 const char * no_options_file =
 {
-		"\nWARNING: Option file %s doesn't exists...\n"
+		"\nWARNING: Event definition file %s doesn't exists...\n"
 };
 
 const char * getting_options_from =
 {
-		"\nObtaining options from file %s\n"
+		"\nReading Event definition from file %s\n"
 };
 
 const char * error_in_options_file =
@@ -102,3 +102,14 @@ const char * error_invalid_trace_id =
 {
 	"\nInvalid Trace Event ID %d"
 };
+
+const char * error_event_id_unknown =
+{
+	"\nEvent ID not defined for: %s"
+};
+
+const char * no_trace_file =
+{
+		"\nERROR: Trace file %s doesn't exists...\n"
+};
+

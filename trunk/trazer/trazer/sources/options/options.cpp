@@ -33,7 +33,6 @@ enum
 {
 	GROUP_OPT,
 	EVENT_OPT,
-	ID_OPT,
 	NAME_OPT,
 	ARGS_OPT,
 	COMMENT_OPT,
@@ -49,7 +48,6 @@ static const char *commands[ MAX_OPTS ] =
 {
 	"Group",
 	"Event",
-	"ID",
 	"Name",
 	"Args",
 	"Comment"
@@ -170,7 +168,6 @@ process_event( FILE *f )
 	int inscan = 0;
 	int line;
 
-	evt.id = -1;
 	for( line = 1; fgets( buffer, sizeof( buffer ), f ) != NULL; ++line )
 	{
 		if( (strlen( buffer ) == 0) || *buffer == COMMENT 
@@ -192,10 +189,6 @@ process_event( FILE *f )
 				if( add_to_evtbl( &evt ) < 0 )
 					return -line;
 				if( str_options_cpy( &evt.event, p ) < 0 )
-					return -line;
-				break;
-			case ID_OPT:
-				if( (evt.id = num_options_cpy( p )) < 0 )
 					return -line;
 				break;
 			case GROUP_OPT:
@@ -231,7 +224,10 @@ read_option_file( char *option_file )
 	int line;
 
 	if( ( f = fopen( option_file, "rt" ) ) == NULL )
+	{
 		printf( no_options_file, option_file );
+		fatal_error( no_options_file, option_file );
+	}
 	else
 	{
 		dprintf( getting_options_from, option_file );
@@ -240,6 +236,7 @@ read_option_file( char *option_file )
 			fclose( f );
 			fatal_error( error_in_options_file, option_file, -line );
 		}
+		fclose( f );
 	}
 }
 
@@ -261,7 +258,6 @@ void
 evaluate_args( int argc, char **argv )
 {
 	int c;
-//	char *p;
 
 	if( argc < 2 )
 		usage( argv[0] );
@@ -272,20 +268,11 @@ evaluate_args( int argc, char **argv )
 			case 'd':
 				options.enable_debug = ENABLE_OPT;
 				break;
-			case 't':
-			//	options.tree_info = ENABLE_OPT;
-				break;
-			case 's':
-			//	options.hsm_summary = ENABLE_OPT;
-				break;
 			case 'f':
-			//	strncpy( options.source_file, optarg, sizeof( options.source_file ) );
-				break;
-			case 'o':
-			//	strncpy( options.target_dir, optarg, sizeof( options.target_dir ) );
+				options.instream_file.assign(optarg);
 				break;
 			case 'c':
-			//	strncpy( options.rkh_cfg_file, optarg, sizeof( options.rkh_cfg_file ) );
+				options.instream_comport.assign(optarg);
 				break;
 			case 'v':
 				show_version();

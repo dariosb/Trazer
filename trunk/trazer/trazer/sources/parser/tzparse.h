@@ -26,8 +26,21 @@
 #define __TZPARSE_H__
 
 #include "rkhtype.h"
+#include <string>
+
+using namespace std;
 
 typedef char *(*HDLR_T)( const void *tre );
+
+typedef struct tre_t
+{
+	unsigned char id;
+	string group;
+	string name;
+	const char *fmt;
+	HDLR_T fmt_args;
+} TRE_T;
+
 
 void trazer_parse( rkhui8_t d );
 void trazer_init( void );

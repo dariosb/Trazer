@@ -31,9 +31,9 @@
 //#include "my.h"
 #include "myevt.h"
 #include "tzparse.h"
+#include "evtbl.h"
 //#include "rkhtim.h"
 #include <stdio.h>
-
 
 #define TRAZER_EN 			(RKH_TRC_EN == 1 && ( RKH_TRC_ALL == 1 || 		\
 							RKH_TRC_EN_MP == 1 || RKH_TRC_EN_RQ == 1 || 	\
@@ -160,16 +160,6 @@
 
 #define CTE( te )		((const struct tre_t*)(te))
 
-typedef struct tre_t
-{
-	unsigned char id;
-	const char *group;
-	const char *name;
-	const char *fmt;
-	HDLR_T fmt_args;
-} TRE_T;
-
-
 typedef struct symobj_t
 {
 	unsigned long adr;
@@ -183,7 +173,7 @@ typedef struct symsig_t
 	const char *name;
 } SYMSIG_T;
 
-
+#if 0
 static const TRE_T traces[] =
 {
 
@@ -290,7 +280,7 @@ static const TRE_T traces[] =
 			"sig=%d, sym=%s", 				h_symsig )
 
 };
-
+#endif
 
 static const SYMSIG_T sigtbl[] = 			/* signal symbol table */
 {
@@ -342,7 +332,7 @@ enum
 static SYMOBJ_T objtbl[ 128 ];		/* object symbol table */
 static rkhui8_t *trb;				/* points to trace event buffer */
 static char fmt[ 128 ];
-static FILE *fdbg;
+extern FILE *fdbg;
 
 static ushort my_timer;
 static rkhui8_t state = PARSER_WFLAG;
@@ -424,7 +414,7 @@ map_sig( TRZE_T sig )
 	return CC( 0 );
 }
 
-
+#if 0
 static
 const
 TRE_T *
@@ -438,6 +428,7 @@ find_trevt( unsigned char id )
 
 	return ( TRE_T* )0;
 }
+#endif
 
 
 static
@@ -743,6 +734,8 @@ void
 parser( void )
 {
 	const TRE_T *ftr;			/* received trace event */
+//	const FMT_ID_T ftr;
+
 	TRZTS_T ts;
 	rkhui8_t nseq;
 
@@ -753,18 +746,21 @@ parser( void )
 			get_nseq();
 			set_to_ts();		/* from timestamp field */
 			ts = get_ts();
-			printf( trheader, ts, nseq, ftr->group, ftr->name );
-			fprintf( fdbg, trheader, ts, nseq, ftr->group, ftr->name );
+			//printf( trheader, ts, nseq, ftr->group, ftr->name );
+			printf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+			//fprintf( fdbg, trheader, ts, nseq, ftr->group, ftr->name );
+			fprintf( fdbg, trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+			//printf( fdbg, trheader, ts, nseq, ftr->evinfo->group.c_str(), ftr->evifo->name.c_str() );
 			printf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
-			fprintf( fdbg, "%s\n", fmt );
+			fprintf( fdbg, "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 		}
 		return;
 	}
 	
 	printf( "Unknown trace event = %s (%d), group = %s\n", 	
-										ftr->name, ftr->group, ftr - traces );
+										ftr->name, ftr->id, ftr->group );
 	fprintf( fdbg, "Unknown trace event = %s (%d), group = %s\n",	
-										ftr->name, ftr->group, ftr - traces );
+										ftr->name, ftr->id, ftr->group );
 }
 
 

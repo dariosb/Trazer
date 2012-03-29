@@ -11,16 +11,14 @@ using namespace std;
 
 typedef struct fmt_id_t
 {
-	int id;
+	TRE_T tre;
 	string idstr;
-	HDLR_T fmt;
 	struct event_info_st *evinfo;
 }FMT_ID_T;
 
 typedef struct event_info_st
 {
 	string event;
-	int id;
 	string group;
 	string name;
 	string args;
@@ -29,5 +27,7 @@ typedef struct event_info_st
 }EVENT_INFO_ST;
 
 int add_to_evtbl( EVENT_INFO_ST *p );
+
+const TRE_T *find_trevt( unsigned char id );
 
 #endif
