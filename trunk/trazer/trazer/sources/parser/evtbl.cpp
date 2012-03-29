@@ -1,0 +1,154 @@
+/*
+ * evtbl.c
+ */
+#include <string>
+#include <vector>
+#include "evtbl.h"
+#include "rkhtrc.h"
+#include "tzparse.h"
+#include "messages.h"
+
+using namespace std;
+
+vector <EVENT_INFO_ST> event_tbl;
+
+#define MKFI( id, gn, nm, fmt, fargs )	\
+	{ id, #id, fargs }
+
+
+static FMT_ID_T fmt_id_tbl[] =
+{
+	MKFI(	RKH_TRCE_MP_INIT,	"MP", "INIT", 
+			"mp=%s, nblock=%d",				h_symnblk ),
+	MKFI(	 RKH_TRCE_MP_GET, 	"MP", "GET", 
+			"mp=%s, nfree=%d", 				h_symnblk ),
+	MKFI( 	RKH_TRCE_MP_PUT, 	"MP", "PUT", 
+			"mp=%s, nfree=%d", 				h_symnblk ),
+	
+	/* --- Queue (RQ) ------------------------ */
+	MKFI( 	RKH_TRCE_RQ_INIT,	"RQ", "INIT", 
+			"rq=%s, sma=%s, nelem=%d",		h_2symnused ),
+	MKFI( 	RKH_TRCE_RQ_GET, 	"RQ", "GET", 
+			"rq=%s, nused=%d", 				h_symnused ),
+	MKFI( 	RKH_TRCE_RQ_FIFO,	"RQ", "POST_FIFO", 
+			"rq=%s, nused=%d", 				h_symnused ),
+	MKFI( 	RKH_TRCE_RQ_LIFO,	"RQ", "POST_LIFO", 
+			"rq=%s, nused=%d", 				h_symnused ),
+	MKFI( 	RKH_TRCE_RQ_FULL,	"RQ", "FULL", 
+			"rq=%s", 						h_1sym ),
+	MKFI( 	RKH_TRCE_RQ_DPT,	"RQ", "DEPLETE", 
+			"rq=%s", 						h_1sym ),
+	MKFI( 	RKH_TRCE_RQ_GET_LAST,	"RQ", "GET_LAST", 
+			"rq=%s", 						h_1sym ),
+
+	/* --- State Machine Application (SMA) --- */
+	MKFI( 	RKH_TRCE_SMA_ACT,	"SMA", "ACTIVATE", 
+			"sma=%s", 						h_1sym ),
+	MKFI( 	RKH_TRCE_SMA_TERM,	"SMA", "TERMINATE", 
+			"sma=%s", 						h_1sym ),
+	MKFI( 	RKH_TRCE_SMA_GET,	"SMA", "GET_EVENT", 
+			"sma=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_SMA_FIFO,	"SMA", "POST_FIFO", 
+			"sma=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_SMA_LIFO,	"SMA", "POST_LIFO", 
+			"sma=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_SMA_REG,	"SMA", "REGISTER", 
+			"sma=%s, prio=%d", 				h_symu8 ),
+	MKFI( 	RKH_TRCE_SMA_UNREG,	"SMA", "UNREGISTER", 
+			"sma=%s, prio=%d", 				h_symu8 ),
+
+	/* --- State machine (SM) ---------------- */
+	MKFI( 	RKH_TRCE_SM_INIT,	"SM", "INIT", 
+			"sma=%s, istate=%s", 			h_2sym ),
+	MKFI( 	RKH_TRCE_SM_CLRH,	"SM", "CLEAR_HIST", 
+			"sma=%s, hist=%s", 				h_2sym ),
+	MKFI( 	RKH_TRCE_SM_DCH,	"SM", "DISPATCH", 
+			"sma=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_SM_TRN,	"SM", "TRANSITION", 
+			"sma=%s, sstate=%s, tstate=%s", h_symtrn ),
+	MKFI( 	RKH_TRCE_SM_STATE,	"SM", "CURRENT_STATE", 
+			"sma=%s, state=%s", 			h_2sym ),
+	MKFI( 	RKH_TRCE_SM_ENSTATE,"SM", "ENTRY_STATE", 
+			"sma=%s, state=%s", 			h_2sym ),
+	MKFI( 	RKH_TRCE_SM_EXSTATE,"SM", "EXIT_STATE", 
+			"sma=%s, state=%s", 			h_2sym ),
+	MKFI( 	RKH_TRCE_SM_NENEX,	"SM", "NUM_EN_EX", 
+			"sma=%s, nentry=%d, nexit=%d",	h_sym2u8 ),
+	MKFI( 	RKH_TRCE_SM_NTRNACT,"SM", "NUM_TRN_ACT", 
+			"sma=%s, ntrnaction=%d", 		h_symu8 ),
+	MKFI( 	RKH_TRCE_SM_CSTATE,	"SM", "COMP_STATE", 
+			"sma=%s, state=%s", 			h_2sym ),
+	MKFI( 	RKH_TRCE_SM_DCH_RC,	"SM", "DISPATCH_RCODE", 
+			"sma=%s, retcode=%s", 			h_symrc ),
+
+	/* --- Timer (TIM) ----------------------- */
+	MKFI( 	RKH_TRCE_TIM_INIT,	"TIM", "INIT", 
+			"timer=%s, sig=%s", 			h_symevt ),
+	MKFI( 	RKH_TRCE_TIM_START,	"TIM", "START", 
+			"timer=%s, sma=%s, ntick=%d", 	h_2symntick ),
+	MKFI( 	RKH_TRCE_TIM_RESTART,"TIM", "RESTART", 
+			"timer=%s, ntick=%5d", 			h_symntick ),
+	MKFI( 	RKH_TRCE_TIM_STOP,	"TIM", "STOP", 
+			"timer=%s", 					h_1sym ),
+	MKFI( 	RKH_TRCE_TIM_TOUT,	"TIM", "TIMEOUT", 
+			"timer=%s", 					h_1sym ),
+	MKFI( 	RKH_TRCE_TIM_REM,	"TIM", "REMOVED", 
+			"timer=%s", 					h_1sym ),
+	MKFI( 	RKH_TRCE_TIM_ATTEMPT_STOP,	"TIM", "ATTEMPT_STOP", 
+			"timer=%s", 					h_1sym ),
+
+	/* --- Framework (RKH) ------------------- */
+	MKFI( 	RKH_TRCE_RKH_EN,	"RKH", "ENTER", 
+			"", 							h_none ),
+	MKFI( 	RKH_TRCE_RKH_EX,	"RKH", "EXIT", 
+			"", 							h_none ),
+	MKFI( 	RKH_TRCE_RKH_EPREG,	"RKH", "EPOOL_REG", 
+			"epix =%d, ssize=%d, esize=%d",	h_epreg ),
+	MKFI( 	RKH_TRCE_RKH_AE,	"RKH", "ALLOC_EVENT", 
+			"esize=%d, sig=%s", 			h_ae ),
+	MKFI( 	RKH_TRCE_RKH_GC,	"RKH", "GC", 
+			"sig=%s", 						h_evt ),
+	MKFI( 	RKH_TRCE_RKH_GCR,	"RKH", "GC_RECYCLE", 
+			"sig=%s", 						h_evt ),
+	MKFI( 	RKH_TRCE_RKH_DEFER,	"RKH", "DEFER", 
+			"rq=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_RKH_RCALL,	"RKH", "RECALL", 
+			"sma=%s, sig=%s", 				h_symevt ),
+	MKFI( 	RKH_TRCE_OBJ,		"RKH", "SYM_OBJ", 
+			"obj=0x%08X, sym=%s", 			h_symobj ),
+	MKFI( 	RKH_TRCE_SIG,		"RKH", "SYM_SIG", 
+			"sig=%d, sym=%s", 				h_symsig )
+};
+
+
+int
+add_to_evtbl( EVENT_INFO_ST *p )
+{
+	if( p->event.empty() ||
+		p->group.empty() ||
+		p->name.empty() || 
+		( p->id == -1 ) 
+	)
+	{
+		printf(error_incomplete_trace_evt_data);
+		return -1;
+	}
+
+	if( p->id > RKH_TRCE_NEVENT )
+		printf(error_invalid_trace_id, p->id );
+
+	p->fmtid = &fmt_id_tbl[p->id];
+		
+	event_tbl.push_back( *p );
+
+	fmt_id_tbl[p->id].evinfo = &event_tbl.back(); 
+
+	p->event.clear();
+	p->group.clear();
+	p->name.clear();
+	p->args.clear();
+	p->comment.clear();
+
+	return 0;
+}
+

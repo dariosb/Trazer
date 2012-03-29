@@ -87,13 +87,13 @@
  *
  * 	The trace filter management is similar to the native priority management.
  * 	In this case, each trace event is assigned a unique number 
- * 	(RKH_TRC_EVENTS). When a event is ready to record a trace it also clears 
- * 	its corresponding bit in the filter table, trceftbl[]. The size of 
+ * 	(RKH_TRC_EVENTS). When a event is ready to record a trace its 
+ * 	corresponding bit in the filter table must be clear. The size of 
  * 	trceftbl[] depends on RKH_TRC_MAX_EVENTS (see rkhcfg.h).
  *
  * 	Trace event number = | 0 | Y | Y | Y | Y | X | X | X |
  *
- * 	Y's:	index into trceftbl[ RKH_TRC_MAX_EVENTS ] table.
+ * 	Y's:	index into trceftbl[ RKH_TRC_MAX_EVENTS_PER_GROUP ] table.
  * 	X's:	bit position in trceftbl[ Y's ].
  *
  * 	The lower 3 bits (X's) of the trace event number are used to determine 
@@ -101,7 +101,15 @@
  * 	(Y's) are used to determine the index into trceftbl[].
  */
 
-extern rkhui8_t trceftbl[ RKH_TRC_MAX_EVENTS ];
+#if RKH_TRC_MAX_EVENTS <= 64
+	#define RKH_TRC_MAX_EVENTS_PER_GROUP	8
+#elif RKH_TRC_MAX_EVENTS > 64 && RKH_TRC_MAX_EVENTS <= 128
+	#define RKH_TRC_MAX_EVENTS_PER_GROUP	8
+#else
+	#define RKH_TRC_MAX_EVENTS_PER_GROUP	8
+#endif
+
+extern rkhui8_t trceftbl[ RKH_TRC_MAX_EVENTS_PER_GROUP ];
 
 
 /**
@@ -223,6 +231,7 @@ typedef enum rkh_trc_events
 	RKH_TRCE_RQ_LIFO,
 	RKH_TRCE_RQ_FULL,
 	RKH_TRCE_RQ_DPT,
+	RKH_TRCE_RQ_GET_LAST,
 
 	/* --- State Machine Application events (SMA group) --- */
 	RKH_TRCE_SMA_ACT,
@@ -256,7 +265,6 @@ typedef enum rkh_trc_events
 	RKH_TRCE_TIM_ATTEMPT_STOP,
 
 	/* --- Framework events (RKH group) ------------------- */
-	RKH_TRCE_RKH_INIT,
 	RKH_TRCE_RKH_EN,
 	RKH_TRCE_RKH_EX,
 	RKH_TRCE_RKH_EPREG,
@@ -265,11 +273,41 @@ typedef enum rkh_trc_events
 	RKH_TRCE_RKH_GCR,
 	RKH_TRCE_RKH_DEFER,
 	RKH_TRCE_RKH_RCALL,
+	RKH_TRCE_OBJ,
+	RKH_TRCE_SIG,
 
 	RKH_TRCE_USER,
 
 	RKH_TRCE_NEVENT
 } RKH_TRC_EVENTS;
+
+
+#define RKH_XOR		0x20	/* x-ored byte for stuffing a single byte */
+#define RKH_FLG		0x7E	/* flag byte, used as a trace event delimiter */
+#define RKH_ESC		0x7D	/* escape byte stuffing a single byte */
+
+
+/* 
+ * 	Inserts the previously calculated checksum as:
+ * 	checksum = 0 - sum mod-256 -> ~(sum mod-256) + 1.
+ */
+
+#if RKH_TRC_EN_CHK == 1
+	#define RKH_TRC_CHK()					\
+				chk = (rkhui8_t)(~chk + 1); \
+				rkh_trc_ui8( chk )
+#else
+	#define RKH_TRC_CHK()
+#endif
+
+
+/* 
+ * 	Inserts directly into the trace stream the flag byte in a raw (without 
+ * 	escaped sequence) manner.
+ */
+
+#define RKH_TRC_FLG()						\
+				RKH_TRC_UI8_RAW( RKH_FLG )
 
 
 /** 
@@ -280,47 +318,55 @@ typedef enum rkh_trc_events
  * 	configurable via the RKH_TRC_SIZEOF_TSTAMP preprocessor option.
  */
 
-#if RKH_TRC_SIZEOF_TSTAMP == 8
-	typedef rkhui8_t RKHTS_T;
-	#define RKH_TRC_TSTAMP()					\
-				RKH_TRC_UI8( rkh_trc_getts() )
-#elif RKH_TRC_SIZEOF_TSTAMP == 16
-	typedef rkhui16_t RKHTS_T;
-	#define RKH_TRC_TSTAMP()					\
-				RKH_TRC_UI16( rkh_trc_getts() )
-#elif RKH_TRC_SIZEOF_TSTAMP == 32
-	typedef rkhui32_t RKHTS_T;
-	#define RKH_TRC_TSTAMP()					\
-				RKH_TRC_UI32( rkh_trc_getts() )
+#if RKH_TRC_EN_TSTAMP == 1
+	#if RKH_TRC_SIZEOF_TSTAMP == 8
+		typedef rkhui8_t RKHTS_T;
+		#define RKH_TRC_TSTAMP()					\
+					RKH_TRC_UI8( rkh_trc_getts() )
+	#elif RKH_TRC_SIZEOF_TSTAMP == 16
+		typedef rkhui16_t RKHTS_T;
+		#define RKH_TRC_TSTAMP()					\
+					RKH_TRC_UI16( rkh_trc_getts() )
+	#elif RKH_TRC_SIZEOF_TSTAMP == 32
+		typedef rkhui32_t RKHTS_T;
+		#define RKH_TRC_TSTAMP()					\
+					RKH_TRC_UI32( rkh_trc_getts() )
+	#else
+		typedef rkhui16_t RKHTS_T;
+		#define RKH_TRC_TSTAMP()					\
+					RKH_TRC_UI16( rkh_trc_getts() )
+	#endif
 #else
 	typedef rkhui16_t RKHTS_T;
-	#define RKH_TRC_TSTAMP()					\
-				RKH_TRC_UI16( rkh_trc_getts() )
+	#define RKH_TRC_TSTAMP()
 #endif
 
 
 #if RKH_TRC_RUNTIME_FILTER == 1
 	#define RKH_TRC_BEGIN( grp, eid )			\
 				RKH_SR_CRITICAL_;				\
-				if(rkh_trc_ison_(grp, eid)) {	\
+				if(rkh_trc_isoff_(grp, eid)) {	\
 					RKH_ENTER_CRITICAL_();		\
-					rkh_trc_begin();			\
-					RKH_TRC_HDR( eid );
+					rkh_trc_begin( eid );
 
 	#define RKH_TRC_END()						\
+					rkh_trc_end();				\
 					RKH_EXIT_CRITICAL_();		\
 				}
 #else
 	#define RKH_TRC_BEGIN( grp, eid )			\
 				RKH_SR_CRITICAL_;				\
 				RKH_ENTER_CRITICAL_();			\
-				rkh_trc_begin();				\
-				RKH_TRC_HDR( eid );
+				rkh_trc_begin( eid );
 
 	#define RKH_TRC_END()						\
+				rkh_trc_end();					\
 				RKH_EXIT_CRITICAL_();
 #endif
 
+
+#define RKH_TRC_UI8_RAW( d )	\
+			rkh_trc_put( (d) )
 
 #define RKH_TRC_UI8( d )	\
 			rkh_trc_ui8( (d) )
@@ -331,15 +377,22 @@ typedef enum rkh_trc_events
 #define RKH_TRC_UI32( d )	\
 			rkh_trc_ui32( (d) )
 
+#define RKH_TRC_STR( s )	\
+			rkh_trc_str( (s) )
 
-#if RKH_TRC_EN_TSTAMP == 1
-	#define RKH_TRC_HDR( eid ) 		\
-				RKH_TRC_UI8( eid );	\
-				RKH_TRC_TSTAMP()
+#if RKH_TRC_EN_NSEQ == 1
+	#define RKH_TRC_NSEQ()				\
+				RKH_TRC_UI8( nseq );	\
+				++nseq
 #else
-	#define RKH_TRC_HDR( eid ) 		\
-				RKH_TRC_UI8( eid )
+	#define RKH_TRC_NSEQ()
 #endif
+
+#define RKH_TRC_HDR( eid ) 			\
+			chk = 0;				\
+			RKH_TRC_UI8( eid );		\
+			RKH_TRC_NSEQ();			\
+			RKH_TRC_TSTAMP()
 
 
 #if RKH_TRC_SIZEOF_POINTER == 16
@@ -491,6 +544,11 @@ typedef enum rkh_trc_events
 					RKH_TRC_BEGIN( RKH_TRCG_RQ, RKH_TRCE_RQ_DPT )	\
 						RKH_TRC_SYM( q ); 							\
 					RKH_TRC_END()
+
+		#define RKH_TRCR_RQ_GET_LAST( q )							\
+					RKH_TRC_BEGIN( RKH_TRCG_RQ, RKH_TRCE_RQ_GET_LAST )	\
+						RKH_TRC_SYM( q ); 							\
+					RKH_TRC_END()
 	#else
 		#define RKH_TRCR_RQ_INIT( q, nelem, sma )
 		#define RKH_TRCR_RQ_GET( q, qty )
@@ -498,6 +556,7 @@ typedef enum rkh_trc_events
 		#define RKH_TRCR_RQ_LIFO( q, qty )
 		#define RKH_TRCR_RQ_FULL( q )
 		#define RKH_TRCR_RQ_DEPLETE( q )
+		#define RKH_TRCR_RQ_GET_LAST( q )
 	#endif
 
 	/* --- State Machine Application (SMA) --- */
@@ -708,10 +767,6 @@ typedef enum rkh_trc_events
 
 	/* --- Framework (RKH) ----------------------- */
 	#if RKH_TRC_ALL == 1 || RKH_TRC_EN_RKH == 1
-		#define RKH_TRCR_RKH_INIT()										\
-					RKH_TRC_BEGIN( RKH_TRCG_RKH, RKH_TRCE_RKH_INIT )	\
-					RKH_TRC_END()
-
 		#define RKH_TRCR_RKH_EN()										\
 					RKH_TRC_BEGIN( RKH_TRCG_RKH, RKH_TRCE_RKH_EN )		\
 					RKH_TRC_END()
@@ -754,8 +809,28 @@ typedef enum rkh_trc_events
 						RKH_TRC_SYM( sma );								\
 						RKH_TRC_SIG( ev->e );							\
 					RKH_TRC_END()
+
+		/* --- Symbol entry table for objects --------- */
+		#define RKH_TRCR_RKH_OBJ( __o )									\
+				do{ 													\
+					static RKHROM char *const __o_n = #__o;				\
+					RKH_TRC_BEGIN( RKH_TRCG_RKH, RKH_TRCE_OBJ )			\
+						RKH_TRC_SYM( __o );								\
+						RKH_TRC_STR( __o_n );							\
+					RKH_TRC_END();										\
+				} while(0)
+
+		/* --- Symbol entry table for event signals ---- */
+		#define RKH_TRCR_RKH_SIG( __s )									\
+				do{ 													\
+					static RKHROM char *const __s_n = #__s;				\
+					RKH_TRC_BEGIN( RKH_TRCG_RKH, RKH_TRCE_SIG )			\
+						RKH_TRC_SIG( __s );								\
+						RKH_TRC_STR( __s_n );							\
+					RKH_TRC_END();										\
+				} while(0)
+
 	#else
-		#define RKH_TRCR_RKH_INIT()
 		#define RKH_TRCR_RKH_EN()
 		#define RKH_TRCR_RKH_EX()
 		#define RKH_TRCR_RKH_EPREG( epix, ssize, esize )
@@ -764,7 +839,10 @@ typedef enum rkh_trc_events
 		#define RKH_TRCR_RKH_GCR( ev )
 		#define RKH_TRCR_RKH_DEFER( q, ev )
 		#define RKH_TRCR_RKH_RCALL( sma, ev )
+		#define RKH_TRCR_RKH_OBJ( __o )
+		#define RKH_TRCR_RKH_SIG( __s )
 	#endif
+	
 #else
 	/* --- Memory Pool (MP) ------------------ */
 	#define RKH_TRCR_MP_INIT( mp, nblock )
@@ -778,6 +856,7 @@ typedef enum rkh_trc_events
 	#define RKH_TRCR_RQ_LIFO( q, qty )
 	#define RKH_TRCR_RQ_FULL( q )
 	#define RKH_TRCR_RQ_DEPLETE( q )
+	#define RKH_TRCR_RQ_GET_LAST( q )
 
 	/* --- State Machine Application (SMA) --- */
 	#define RKH_TRCR_SMA_ACT( sma )
@@ -811,7 +890,6 @@ typedef enum rkh_trc_events
 	#define RKH_TRCR_TIM_ATTEMPT_STOP( t )
 
 	/* --- Framework (RKH) ----------------------- */
-	#define RKH_TRCR_RKH_INIT()
 	#define RKH_TRCR_RKH_EN()
 	#define RKH_TRCR_RKH_EX()
 	#define RKH_TRCR_RKH_EPREG( epix, ssize, esize )
@@ -820,6 +898,8 @@ typedef enum rkh_trc_events
 	#define RKH_TRCR_RKH_GCR( ev )
 	#define RKH_TRCR_RKH_DEFER( q, ev )
 	#define RKH_TRCR_RKH_RCALL( sma, ev )
+	#define RKH_TRCR_RKH_OBJ( __o )
+	#define RKH_TRCR_RKH_SIG( __s )
 #endif
 
 
@@ -843,12 +923,9 @@ typedef enum rkh_trc_events
  *	\note
  *	The timestamp is optional, thus it could be eliminated from the trace 
  *	event in compile-time with RKH_TRC_EN_TSTAMP = 0.
- *	\note
- *	The trace stream is an array of buffers.
- *
  */
 
-typedef rkhui8_t RKH_TRCE_T[ RKH_TRC_SIZEOF_EVENT ];
+typedef rkhui8_t RKH_TRCE_T;
 
 
 /**
@@ -874,35 +951,36 @@ void rkh_trc_control( HUInt opt );
 
 /**
  * 	\brief
- *	Retrieves a pointer to oldest trace event in the trace stream. 
+ *	Retrieves a pointer to oldest stored byte in the trace stream. 
  *	Frequently, this function is used by the called trace analyzer.
  *
+ * \note
+ * 	The data is stored in a single ring buffer, called trace stream. In this 
+ *	manner the recorder always holds the most recent history.
+ *
  * 	\returns
- * 	A pointer to the beginning of the buffer into which the trace event was 
- * 	stored if trace stream was not empty, otherwise NULL pointer.
+ * 	A pointer to the oldest stored byte if trace stream was not empty, 
+ * 	otherwise NULL pointer.
  */
 
-rkhui8_t *rkh_trc_get_oldest( void );
+rkhui8_t *rkh_trc_get( void );
 
 
 /**
  * 	\brief
- * 	Get the next trace event buffer from the trace stream. The retrieved 
- * 	buffer will be used to record a new trace event.
+ * 	Put a data byte into the trace stream. 
  *
- * 	\returns
- * 	A pointer to the beginning of the reserved buffer into which the trace 
- * 	event will be copied if trace stream was not stopped, otherwise NULL 
- * 	pointer.
+ * 	The data is stored in a single ring buffer, called trace stream. In this 
+ *	manner the recorder always holds the most recent history.
  */
 
-rkhui8_t *rkh_trc_get_nextbuf( void );
+void rkh_trc_put( rkhui8_t b );
 
 
 #if RKH_TRC_RUNTIME_FILTER == 1
 	/**
 	 * 	\brief
-	 * 	Emit all trace events from a specific group. 
+	 * 	Suppress all trace events from a specific group. 
 	 */
 
 	#define RKH_FILTER_ON_GROUP( grp )				\
@@ -910,7 +988,7 @@ rkhui8_t *rkh_trc_get_nextbuf( void );
 
 	/**
 	 * 	\brief
-	 * 	Suppress all trace events from a specific group. 
+	 * 	Emit all trace events from a specific group. 
 	 */
 
 	#define RKH_FILTER_OFF_GROUP( grp )				\
@@ -1035,16 +1113,21 @@ void rkh_trc_filter_event_( rkhui8_t rule, rkhui8_t evt );
  * 	'1' (TRUE) if the group and event is not filtered, otherwise '0' (FALSE).
  */
 
-HUInt rkh_trc_ison_( rkhui8_t grp, rkhui8_t e );
+HUInt rkh_trc_isoff_( rkhui8_t grp, rkhui8_t e );
 
 
 /**
  * 	\brief
- * 	Get a buffer from the trace stream. The retrieved buffer will be used 
- * 	to record a new trace event.
  */
 
-void rkh_trc_begin( void );
+void rkh_trc_begin( rkhui8_t eid );
+
+
+/**
+ * 	\brief
+ */
+
+void rkh_trc_end( void );
 
 
 /**
@@ -1070,5 +1153,12 @@ void rkh_trc_ui16( rkhui16_t d );
 
 void rkh_trc_ui32( rkhui32_t d );
 
+
+/**
+ * 	\brief
+ * 	Store a string terminated in '\0' into the current trace event buffer.
+ */
+
+void rkh_trc_str( const char *s );
 
 #endif

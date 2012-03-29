@@ -37,19 +37,22 @@
 #define RKH_MAX_EPOOL					4	/* 	CFG01 */ 
 #define RKH_LOWEST_PRIO					8	/* 	CFG01 */ 
 #define RKH_EN_REENTRANT				0	/* 	CFG01 */
-#define RKH_EN_DEFERRED_EVENT			0	/* 	CFG01 */
+#define RKH_EN_DEFERRED_EVENT			1	/* 	CFG01 */
 #define RKH_SIZEOF_EVENT				8	/* 	CFG01 */ 
-#define RKH_EN_DYNAMIC_EVENT			1	/* 	CFG01 */ 
-#define RKH_ASSERT_EN					1	/* 	CFG01 */
+#define RKH_ASSERT_EN					0	/* 	CFG01 */
+#define RKH_EN_DYNAMIC_EVENT			1	/* 	CFG01 */
 #define RKH_SIZEOF_ESIZE				16	/* 	CFG01 */
 #define RKH_HK_EN_DISPATCH				1	/* 	CFG01 */
 #define RKH_HK_EN_SIGNAL				1	/* 	CFG01 */
 #define RKH_HK_EN_TIMEOUT				1	/* 	CFG01 */
 #define RKH_HK_EN_START					1	/* 	CFG01 */
 #define RKH_HK_EN_EXIT					1	/* 	CFG01 */
+#define RKH_EN_SMA_THREAD 				1	/* 	CFG01 */
+#define RKH_EN_SMA_THREAD_DATA			1	/* 	CFG01 */
 
 #define RKH_EN_NATIVE_SCHEDULER			0	/* 	CFG01 */ 
 #define RKH_EN_NATIVE_EQUEUE			1	/* 	CFG01 */ 
+#define RKH_EN_NATIVE_DYN_EVENT			1	/* 	CFG01 */ 
 
 #define RKH_SMA_EN_HCAL					1	/* 	CFG00 */
 #define RKH_SMA_MAX_HCAL_DEPTH			4	/* 	CFG01 */
@@ -75,7 +78,7 @@
 #define RKH_SMA_EN_GET_INFO				0	/* 	CFG01 */
 
 #define RKH_TRC_EN						1	/* 	CFG01 */
-#define RKH_TRC_MAX_EVENTS				16	/* 	CFG01 */
+#define RKH_TRC_MAX_EVENTS				8	/* 	CFG01 */
 #define RKH_TRC_RUNTIME_FILTER			1	/* 	CFG01 */
 #define RKH_TRC_ALL						1	/* 	CFG01 */
 #define RKH_TRC_EN_MP					0	/* 	CFG01 */
@@ -95,9 +98,11 @@
 #define RKH_TRC_EN_SM_NTRNACT			1	/* 	CFG01 */
 #define RKH_TRC_EN_SM_CSTATE			1	/* 	CFG01 */
 #define RKH_TRC_EN_SM_DCH_RC			1	/* 	CFG01 */
+#define RKH_TRC_EN_NSEQ					1	/* 	CFG01 */
+#define RKH_TRC_EN_CHK					1	/* 	CFG01 */
 #define RKH_TRC_EN_TSTAMP				1	/* 	CFG01 */
 #define RKH_TRC_SIZEOF_TSTAMP			32	/* 	CFG01 */
-#define RKH_TRC_MAX_TRACES				16	/* 	CFG01 */
+#define RKH_TRC_SIZEOF_STREAM			256	/* 	CFG01 */
 #define RKH_TRC_SIZEOF_EVENT			17	/* 	CFG01 */
 #define RKH_TRC_SIZEOF_POINTER			32	/* 	CFG01 */
 

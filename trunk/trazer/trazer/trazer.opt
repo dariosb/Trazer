@@ -5,61 +5,74 @@
 # - #'s are comments
 # - Event blocks are are grouped by framework service type.
 # - Each event must be defined as a member of group,
-#   and defined into a Grup directive declaration.
+#   and defined into a Group directive declaration.
 # - Event definition:
-# 		Event: id.
-# 		Name: Allias.
+# 		Event: Event id.
+# 		ID: 
+# 		Name: Alias.
 #		Args: arguments to log, in the order that are traced.
-#		Text: optional descriptive text.
+#		Comment: optional descriptive comment.
 #
 
 #
 # --- Memory Pool (MP) ------------------
 #
+Event: RKH_TRCE_MP_INIT
+ID: 0
 Group: MP
-{
-	Event: RKH_TRCE_MP_INIT
-	Name: INIT
-	Args: mp=%s, nblock=%d
-	Text: "Memory Pool Init"
+Name: INIT
+Args: mp=%s,nblock=%d
+Comment: Memory Pool Init
 
-	Event: RKH_TRCE_MP_GET
-	Name: GET
-	Args: mp=%s, nfree=%d
-	Text: "Memory Pool Get"
+Event: RKH_TRCE_MP_GET
+ID: 1
+Group: MP
+Name: GET
+Args: mp=%s,nfree=%d
+Comment: Memory Pool Get
 
-	Event: RKH_TRCE_MP_PUT
-	Name: PUT
-	Args: mp=%s, nfree=%d
-}
-	
+Event: RKH_TRCE_MP_PUT
+ID: 2
+Group: MP
+Name: PUT
+Args: mp=%s,nfree=%d
+
 #
 # --- Queue (RQ) ------------------------
 #
+Event: RKH_TRCE_RQ_INIT
+ID: 3
 Group: RQ
-{
-	Event: RKH_TRCE_RQ_INIT
-	Name: INIT
-	Args: rq=%s, sma=%s, nelem=%d
+Name: INIT
+Args: rq=%s, sma=%s, nelem=%d
 
-	Event: RKH_TRCE_RQ_GET
-	Name: GET
-	Args: rq=%s, nused=%d
-	
-	Event: KH_TRCE_RQ_FIFO
-	Name: POST_FIFO
-	Args: rq=%s, nused=%d
-	
-	Event: RKH_TRCE_RQ_LIFO
-	Name: POST_LIFO
-	Args: rq=%s, nused=%d
-	
-	Event: RKH_TRCE_RQ_FULL
-	Name: FULL
-	Args: rq=%s
-	
-	Event: RKH_TRCE_RQ_DPT
-	Name: DEPLETE
-	Args: rq=%s
-}
+Event: RKH_TRCE_RQ_GET
+ID: 4
+Group: RQ
+Name: GET
+Args: rq=%s, nused=%d
+
+Event: RKH_TRCE_RQ_FIFO
+ID: 5
+Group: RQ
+Name: POST_FIFO
+Args: rq=%s, nused=%d
+
+Event: RKH_TRCE_RQ_LIFO
+ID: 6
+Group: RQ
+Name: POST_LIFO
+Args: rq=%s, nused=%d
+
+Event: RKH_TRCE_RQ_FULL
+ID: 7
+Group: RQ
+Name: FULL
+Args: rq=%s
+
+Event: RKH_TRCE_RQ_DPT
+ID: 8
+Group: RQ
+Name: DEPLETE
+Args: rq=%s
 

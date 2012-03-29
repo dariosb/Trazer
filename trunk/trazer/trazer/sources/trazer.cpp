@@ -15,6 +15,7 @@
 #include "timer.h"
 #include "tplink.h"
 #include "tplact.h"
+#include "options.h"
 
 
 static char *args = "d:D:hH";
@@ -24,32 +25,6 @@ void
 show_help( char *name )
 {
 	fatal( "Usage: %s [-d {0|1} -h]", name );
-}
-
-static
-void
-evaluate_args( int argc, char **argv )
-{
-	int c;
-
-	
-	while( ( c = getopt( argc, argv, args ) ) != EOF )
-	{
-		switch( c )
-		{
-			case 'd':
-			case 'D':
-				debugging = atoi( optarg );
-				break;
-			case 'h':
-			case 'H':
-				show_help( *argv );
-				break;
-			default:
-				show_help( *argv );
-				break;
-		}
-	}
 }
 
 MUInt rcv;
@@ -196,8 +171,7 @@ tplink_onxmit_cmp( void )
 
 int main(int argc, char **argv)
 {
-	evaluate_args( argc, argv );
-
+	init_options( argc, argv );
 
 	tplink_init();
 

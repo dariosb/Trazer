@@ -5,65 +5,123 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.5.4	//
 ACCEL_T	.\trazer.cpp	/^}ACCEL_T;$/;"	t	file:
+ACTIVE_DEBUG	.\debug\debug.h	7;"	d
+ARGS_OPT	.\options\options.cpp	/^	ARGS_OPT,$/;"	e	file:
+AUXILIAR_BUFFER_SIZE	.\utils\utils.cpp	9;"	d	file:
+BG_BLUE	.\utils\console.cpp	22;"	d	file:
+BG_GREEN	.\utils\console.cpp	21;"	d	file:
+BG_INT	.\utils\console.cpp	19;"	d	file:
+BG_RED	.\utils\console.cpp	20;"	d	file:
+BLACK_ON_GRAY	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
+BLACK_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
+BLUE_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
+BLUE_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
+C1	.\parser\tzparse.cpp	/^	ushort C1;$/;"	v
+C2	.\parser\tzparse.cpp	/^	ushort C2;$/;"	v
 CBOX_ST	.\trazer.cpp	/^}CBOX_ST;$/;"	t	file:
+CC	.\parser\tzparse.cpp	46;"	d	file:
 CHECK_MASKH	.\stream\tpldefs.h	27;"	d
 CHECK_MASKL	.\stream\tpldefs.h	28;"	d
 CHECK_OFFSET	.\stream\tpldefs.h	29;"	d
+COMMENT	.\options\options.cpp	28;"	d	file:
+COMMENT_OPT	.\options\options.cpp	/^	COMMENT_OPT,$/;"	e	file:
+CONSOLE_OPTIONS_DEFINITION	.\options\options.h	30;"	d
+CTE	.\parser\tzparse.cpp	162;"	d	file:
+CYAN_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
+CYAN_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
+DH	.\parser\tzparse.cpp	/^	ushort DH;$/;"	v
+DISABLE_OPT	.\options\options.h	/^	DISABLE_OPT,$/;"	e
 EIGHT	.\common\myevt.h	/^	EIGHT,$/;"	e
+ENABLE_OPT	.\options\options.h	/^	ENABLE_OPT$/;"	e
+ENDOF_AUX_BUFF	.\utils\utils.cpp	11;"	d	file:
 ENGLISH	.\common\lang.h	/^	ENGLISH, SPANISH,$/;"	e
-EOSIGTBL	.\parser\tzparse.c	136;"	d	file:
-ERR	.\common\getopt.cpp	21;"	d	file:
+EOSIGTBL	.\parser\tzparse.cpp	158;"	d	file:
+ERR	.\utils\getopt.cpp	20;"	d	file:
 ESC	.\common\mydefs.h	9;"	d
+EVENT_INFO_ST	.\parser\evtbl.h	/^}EVENT_INFO_ST;$/;"	t
+EVENT_OPT	.\options\options.cpp	/^	EVENT_OPT,$/;"	e	file:
+FG_BLUE	.\utils\console.cpp	18;"	d	file:
+FG_GREEN	.\utils\console.cpp	17;"	d	file:
+FG_INT	.\utils\console.cpp	15;"	d	file:
+FG_RED	.\utils\console.cpp	16;"	d	file:
 FILTER_OFF	.\common\rkhtrc.h	/^	FILTER_OFF,$/;"	e
 FILTER_ON	.\common\rkhtrc.h	/^	FILTER_ON,$/;"	e
 FIVE	.\common\myevt.h	/^	FIVE,$/;"	e
+FMT_ID_T	.\parser\evtbl.h	/^}FMT_ID_T;$/;"	t
 FOUR	.\common\myevt.h	/^	FOUR,$/;"	e
+GREEN_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
+GREEN_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
+GROUP_OPT	.\options\options.cpp	/^	GROUP_OPT,$/;"	e	file:
 GRSENS_T	.\trazer.cpp	/^} GRSENS_T;$/;"	t	file:
-HDLR_T	.\parser\tzparse.c	/^typedef char *(*HDLR_T)( const struct tre_t *tre );$/;"	t	file:
+H	.\parser\tzparse.cpp	/^	ushort H;$/;"	v
+HDLR_T	.\parser\tzparse.h	/^typedef char *(*HDLR_T)( const void *tre );$/;"	t
 HInt	.\common\rkhtype.h	/^typedef signed int		HInt;$/;"	t
+HSM_INFO_MSK_ST	.\options\options.h	/^}HSM_INFO_MSK_ST;$/;"	t
 HUInt	.\common\rkhtype.h	/^typedef unsigned int	HUInt;$/;"	t
-ILLEGAL_OPTION	.\common\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
+ID_OPT	.\options\options.cpp	/^	ID_OPT,$/;"	e	file:
+ILLEGAL_OPTION	.\utils\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
+J	.\parser\tzparse.cpp	/^	ushort J;$/;"	v
+MAGENTA_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
+MAGENTA_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
+MAX_OPTS	.\options\options.cpp	/^	MAX_OPTS$/;"	e	file:
 MInt	.\common\mytypes.h	/^typedef int				MInt;$/;"	t
 MInt	.\common\mytypes.h	/^typedef schar			MInt;$/;"	t
-MKO	.\parser\tzparse.c	131;"	d	file:
-MKS	.\parser\tzparse.c	128;"	d	file:
-MKTR	.\parser\tzparse.c	125;"	d	file:
+MKFI	.\parser\evtbl.cpp	15;"	d	file:
+MKO	.\parser\tzparse.cpp	153;"	d	file:
+MKS	.\parser\tzparse.cpp	150;"	d	file:
+MKTR	.\parser\tzparse.cpp	147;"	d	file:
 MUInt	.\common\mytypes.h	/^typedef uchar			MUInt;$/;"	t
 MUInt	.\common\mytypes.h	/^typedef uint			MUInt;$/;"	t
+NAME_OPT	.\options\options.cpp	/^	NAME_OPT,$/;"	e	file:
 NINE	.\common\myevt.h	/^	NINE,$/;"	e
-NO_ARGUMENT	.\common\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
+NO_ARGUMENT	.\utils\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
+NUM_ATTRIBS	.\utils\console.h	/^	NUM_ATTRIBS$/;"	e
 NUM_LANG	.\common\lang.h	/^	NUM_LANG$/;"	e
-NUM_MSGS	.\common\getopt.cpp	/^	NUM_MSGS$/;"	e	file:
+NUM_MSGS	.\utils\getopt.cpp	/^	NUM_MSGS$/;"	e	file:
 NUM_SERIALS	.\stream\uart\serdefs.h	6;"	d
 ONE	.\common\myevt.h	/^	ONE,$/;"	e
+OPTIONS_FILE	.\options\options.h	32;"	d
+OPTIONS_T	.\options\options.h	/^} OPTIONS_T;$/;"	t
+PARSER_COLLECT	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
+PARSER_ESCAPING	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
+PARSER_MAX_SIZE_BUF	.\parser\tzparse.cpp	334;"	d	file:
+PARSER_WFLAG	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
 PAR_EVEN	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_MARK	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_NONE	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_ODD	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_SPACE	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PROCFUNC_T	.\stream\tplfsm.h	/^typedef MUInt(*PROCFUNC_T)(MUInt, uchar);$/;"	t
+RED_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
+RED_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 RKHTR_CTRL	.\common\rkhtrc.h	/^} RKHTR_CTRL;$/;"	t
+RKHTS_T	.\common\rkhtrc.h	/^		typedef rkhui16_t RKHTS_T;$/;"	t
+RKHTS_T	.\common\rkhtrc.h	/^		typedef rkhui32_t RKHTS_T;$/;"	t
+RKHTS_T	.\common\rkhtrc.h	/^		typedef rkhui8_t RKHTS_T;$/;"	t
 RKHTS_T	.\common\rkhtrc.h	/^	typedef rkhui16_t RKHTS_T;$/;"	t
-RKHTS_T	.\common\rkhtrc.h	/^	typedef rkhui32_t RKHTS_T;$/;"	t
-RKHTS_T	.\common\rkhtrc.h	/^	typedef rkhui8_t RKHTS_T;$/;"	t
-RKH_ASSERT_EN	.\common\rkhcfg.h	43;"	d
+RKH_ASSERT_EN	.\common\rkhcfg.h	42;"	d
 RKH_EN_DEFERRED_EVENT	.\common\rkhcfg.h	40;"	d
-RKH_EN_DYNAMIC_EVENT	.\common\rkhcfg.h	42;"	d
-RKH_EN_NATIVE_EQUEUE	.\common\rkhcfg.h	52;"	d
-RKH_EN_NATIVE_SCHEDULER	.\common\rkhcfg.h	51;"	d
+RKH_EN_DYNAMIC_EVENT	.\common\rkhcfg.h	43;"	d
+RKH_EN_NATIVE_DYN_EVENT	.\common\rkhcfg.h	55;"	d
+RKH_EN_NATIVE_EQUEUE	.\common\rkhcfg.h	54;"	d
+RKH_EN_NATIVE_SCHEDULER	.\common\rkhcfg.h	53;"	d
 RKH_EN_REENTRANT	.\common\rkhcfg.h	39;"	d
-RKH_FILTER_OFF_EVENT	.\common\rkhtrc.h	932;"	d
-RKH_FILTER_OFF_EVENT	.\common\rkhtrc.h	956;"	d
-RKH_FILTER_OFF_GROUP	.\common\rkhtrc.h	916;"	d
-RKH_FILTER_OFF_GROUP	.\common\rkhtrc.h	954;"	d
-RKH_FILTER_OFF_GROUP_EVENT	.\common\rkhtrc.h	949;"	d
-RKH_FILTER_OFF_GROUP_EVENT	.\common\rkhtrc.h	958;"	d
-RKH_FILTER_ON_EVENT	.\common\rkhtrc.h	924;"	d
-RKH_FILTER_ON_EVENT	.\common\rkhtrc.h	955;"	d
-RKH_FILTER_ON_GROUP	.\common\rkhtrc.h	908;"	d
-RKH_FILTER_ON_GROUP	.\common\rkhtrc.h	953;"	d
-RKH_FILTER_ON_GROUP_EVENT	.\common\rkhtrc.h	940;"	d
-RKH_FILTER_ON_GROUP_EVENT	.\common\rkhtrc.h	957;"	d
+RKH_EN_SMA_THREAD	.\common\rkhcfg.h	50;"	d
+RKH_EN_SMA_THREAD_DATA	.\common\rkhcfg.h	51;"	d
+RKH_ESC	.\common\rkhtrc.h	287;"	d
+RKH_FILTER_OFF_EVENT	.\common\rkhtrc.h	1010;"	d
+RKH_FILTER_OFF_EVENT	.\common\rkhtrc.h	1034;"	d
+RKH_FILTER_OFF_GROUP	.\common\rkhtrc.h	1032;"	d
+RKH_FILTER_OFF_GROUP	.\common\rkhtrc.h	994;"	d
+RKH_FILTER_OFF_GROUP_EVENT	.\common\rkhtrc.h	1027;"	d
+RKH_FILTER_OFF_GROUP_EVENT	.\common\rkhtrc.h	1036;"	d
+RKH_FILTER_ON_EVENT	.\common\rkhtrc.h	1002;"	d
+RKH_FILTER_ON_EVENT	.\common\rkhtrc.h	1033;"	d
+RKH_FILTER_ON_GROUP	.\common\rkhtrc.h	1031;"	d
+RKH_FILTER_ON_GROUP	.\common\rkhtrc.h	986;"	d
+RKH_FILTER_ON_GROUP_EVENT	.\common\rkhtrc.h	1018;"	d
+RKH_FILTER_ON_GROUP_EVENT	.\common\rkhtrc.h	1035;"	d
+RKH_FLG	.\common\rkhtrc.h	286;"	d
 RKH_HK_EN_DISPATCH	.\common\rkhcfg.h	45;"	d
 RKH_HK_EN_EXIT	.\common\rkhcfg.h	49;"	d
 RKH_HK_EN_SIGNAL	.\common\rkhcfg.h	46;"	d
@@ -72,57 +130,58 @@ RKH_HK_EN_TIMEOUT	.\common\rkhcfg.h	47;"	d
 RKH_LOWEST_PRIO	.\common\rkhcfg.h	38;"	d
 RKH_MAX_EPOOL	.\common\rkhcfg.h	37;"	d
 RKH_MAX_SMA	.\common\rkhcfg.h	36;"	d
-RKH_MP_EN	.\common\rkhcfg.h	114;"	d
-RKH_MP_EN_GET_BSIZE	.\common\rkhcfg.h	119;"	d
-RKH_MP_EN_GET_INFO	.\common\rkhcfg.h	122;"	d
-RKH_MP_EN_GET_LWM	.\common\rkhcfg.h	121;"	d
-RKH_MP_EN_GET_NFREE	.\common\rkhcfg.h	120;"	d
-RKH_MP_MAX	.\common\rkhcfg.h	115;"	d
-RKH_MP_REDUCED	.\common\rkhcfg.h	116;"	d
-RKH_MP_SIZEOF_BSIZE	.\common\rkhcfg.h	117;"	d
-RKH_MP_SIZEOF_NBLOCK	.\common\rkhcfg.h	118;"	d
-RKH_RQ_EN	.\common\rkhcfg.h	104;"	d
-RKH_RQ_EN_DEPLETE	.\common\rkhcfg.h	109;"	d
-RKH_RQ_EN_GET_INFO	.\common\rkhcfg.h	107;"	d
-RKH_RQ_EN_GET_LWMARK	.\common\rkhcfg.h	106;"	d
-RKH_RQ_EN_GET_NELEMS	.\common\rkhcfg.h	111;"	d
-RKH_RQ_EN_IS_FULL	.\common\rkhcfg.h	110;"	d
-RKH_RQ_EN_PUT_LIFO	.\common\rkhcfg.h	112;"	d
-RKH_RQ_EN_READ	.\common\rkhcfg.h	108;"	d
-RKH_RQ_SIZEOF_NELEM	.\common\rkhcfg.h	105;"	d
+RKH_MP_EN	.\common\rkhcfg.h	119;"	d
+RKH_MP_EN_GET_BSIZE	.\common\rkhcfg.h	124;"	d
+RKH_MP_EN_GET_INFO	.\common\rkhcfg.h	127;"	d
+RKH_MP_EN_GET_LWM	.\common\rkhcfg.h	126;"	d
+RKH_MP_EN_GET_NFREE	.\common\rkhcfg.h	125;"	d
+RKH_MP_MAX	.\common\rkhcfg.h	120;"	d
+RKH_MP_REDUCED	.\common\rkhcfg.h	121;"	d
+RKH_MP_SIZEOF_BSIZE	.\common\rkhcfg.h	122;"	d
+RKH_MP_SIZEOF_NBLOCK	.\common\rkhcfg.h	123;"	d
+RKH_RQ_EN	.\common\rkhcfg.h	109;"	d
+RKH_RQ_EN_DEPLETE	.\common\rkhcfg.h	114;"	d
+RKH_RQ_EN_GET_INFO	.\common\rkhcfg.h	112;"	d
+RKH_RQ_EN_GET_LWMARK	.\common\rkhcfg.h	111;"	d
+RKH_RQ_EN_GET_NELEMS	.\common\rkhcfg.h	116;"	d
+RKH_RQ_EN_IS_FULL	.\common\rkhcfg.h	115;"	d
+RKH_RQ_EN_PUT_LIFO	.\common\rkhcfg.h	117;"	d
+RKH_RQ_EN_READ	.\common\rkhcfg.h	113;"	d
+RKH_RQ_SIZEOF_NELEM	.\common\rkhcfg.h	110;"	d
 RKH_SIZEOF_ESIZE	.\common\rkhcfg.h	44;"	d
 RKH_SIZEOF_EVENT	.\common\rkhcfg.h	41;"	d
-RKH_SMA_EN_ACT_ARG_EVT	.\common\rkhcfg.h	67;"	d
-RKH_SMA_EN_ACT_ARG_SMA	.\common\rkhcfg.h	66;"	d
-RKH_SMA_EN_CONDITIONAL	.\common\rkhcfg.h	61;"	d
-RKH_SMA_EN_DEEP_HISTORY	.\common\rkhcfg.h	58;"	d
-RKH_SMA_EN_ENT_ARG_SMA	.\common\rkhcfg.h	64;"	d
-RKH_SMA_EN_EXT_ARG_SMA	.\common\rkhcfg.h	65;"	d
-RKH_SMA_EN_GET_INFO	.\common\rkhcfg.h	75;"	d
-RKH_SMA_EN_GRD_ARG_EVT	.\common\rkhcfg.h	68;"	d
-RKH_SMA_EN_GRD_ARG_SMA	.\common\rkhcfg.h	69;"	d
-RKH_SMA_EN_HCAL	.\common\rkhcfg.h	54;"	d
-RKH_SMA_EN_ID	.\common\rkhcfg.h	73;"	d
-RKH_SMA_EN_IEVENT	.\common\rkhcfg.h	74;"	d
-RKH_SMA_EN_INIT_ARG_IE	.\common\rkhcfg.h	63;"	d
-RKH_SMA_EN_INIT_ARG_SMA	.\common\rkhcfg.h	62;"	d
-RKH_SMA_EN_JUNCTION	.\common\rkhcfg.h	60;"	d
-RKH_SMA_EN_PPRO	.\common\rkhcfg.h	72;"	d
-RKH_SMA_EN_PPRO_ARG_SMA	.\common\rkhcfg.h	70;"	d
-RKH_SMA_EN_PSEUDOSTATE	.\common\rkhcfg.h	57;"	d
-RKH_SMA_EN_SHALLOW_HISTORY	.\common\rkhcfg.h	59;"	d
-RKH_SMA_EN_STATE_ID	.\common\rkhcfg.h	71;"	d
-RKH_SMA_MAX_HCAL_DEPTH	.\common\rkhcfg.h	55;"	d
-RKH_SMA_MAX_TRC_SEGS	.\common\rkhcfg.h	56;"	d
-RKH_TIM_EN	.\common\rkhcfg.h	124;"	d
-RKH_TIM_EN_GET_INFO	.\common\rkhcfg.h	126;"	d
-RKH_TIM_EN_HOOK	.\common\rkhcfg.h	125;"	d
-RKH_TIM_EN_RESTART	.\common\rkhcfg.h	127;"	d
-RKH_TIM_SIZEOF_NTIMER	.\common\rkhcfg.h	128;"	d
+RKH_SMA_EN_ACT_ARG_EVT	.\common\rkhcfg.h	70;"	d
+RKH_SMA_EN_ACT_ARG_SMA	.\common\rkhcfg.h	69;"	d
+RKH_SMA_EN_CONDITIONAL	.\common\rkhcfg.h	64;"	d
+RKH_SMA_EN_DEEP_HISTORY	.\common\rkhcfg.h	61;"	d
+RKH_SMA_EN_ENT_ARG_SMA	.\common\rkhcfg.h	67;"	d
+RKH_SMA_EN_EXT_ARG_SMA	.\common\rkhcfg.h	68;"	d
+RKH_SMA_EN_GET_INFO	.\common\rkhcfg.h	78;"	d
+RKH_SMA_EN_GRD_ARG_EVT	.\common\rkhcfg.h	71;"	d
+RKH_SMA_EN_GRD_ARG_SMA	.\common\rkhcfg.h	72;"	d
+RKH_SMA_EN_HCAL	.\common\rkhcfg.h	57;"	d
+RKH_SMA_EN_ID	.\common\rkhcfg.h	76;"	d
+RKH_SMA_EN_IEVENT	.\common\rkhcfg.h	77;"	d
+RKH_SMA_EN_INIT_ARG_IE	.\common\rkhcfg.h	66;"	d
+RKH_SMA_EN_INIT_ARG_SMA	.\common\rkhcfg.h	65;"	d
+RKH_SMA_EN_JUNCTION	.\common\rkhcfg.h	63;"	d
+RKH_SMA_EN_PPRO	.\common\rkhcfg.h	75;"	d
+RKH_SMA_EN_PPRO_ARG_SMA	.\common\rkhcfg.h	73;"	d
+RKH_SMA_EN_PSEUDOSTATE	.\common\rkhcfg.h	60;"	d
+RKH_SMA_EN_SHALLOW_HISTORY	.\common\rkhcfg.h	62;"	d
+RKH_SMA_EN_STATE_ID	.\common\rkhcfg.h	74;"	d
+RKH_SMA_MAX_HCAL_DEPTH	.\common\rkhcfg.h	58;"	d
+RKH_SMA_MAX_TRC_SEGS	.\common\rkhcfg.h	59;"	d
+RKH_TIM_EN	.\common\rkhcfg.h	129;"	d
+RKH_TIM_EN_GET_INFO	.\common\rkhcfg.h	131;"	d
+RKH_TIM_EN_HOOK	.\common\rkhcfg.h	130;"	d
+RKH_TIM_EN_RESTART	.\common\rkhcfg.h	132;"	d
+RKH_TIM_SIZEOF_NTIMER	.\common\rkhcfg.h	133;"	d
 RKH_TRCE_MP_GET	.\common\rkhtrc.h	/^	RKH_TRCE_MP_GET,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_MP_INIT	.\common\rkhtrc.h	/^	RKH_TRCE_MP_INIT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_MP_PUT	.\common\rkhtrc.h	/^	RKH_TRCE_MP_PUT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_NEVENT	.\common\rkhtrc.h	/^	RKH_TRCE_NEVENT$/;"	e	enum:rkh_trc_events
+RKH_TRCE_OBJ	.\common\rkhtrc.h	/^	RKH_TRCE_OBJ,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_AE	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_AE,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_DEFER	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_DEFER,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_EN	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_EN,$/;"	e	enum:rkh_trc_events
@@ -130,14 +189,15 @@ RKH_TRCE_RKH_EPREG	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_EPREG,$/;"	e	enum:rkh_trc_e
 RKH_TRCE_RKH_EX	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_EX,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_GC	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_GC,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_GCR	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_GCR,$/;"	e	enum:rkh_trc_events
-RKH_TRCE_RKH_INIT	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_INIT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RKH_RCALL	.\common\rkhtrc.h	/^	RKH_TRCE_RKH_RCALL,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_DPT	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_DPT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_FIFO	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_FIFO,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_FULL	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_FULL,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_GET	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_GET,$/;"	e	enum:rkh_trc_events
+RKH_TRCE_RQ_GET_LAST	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_GET_LAST,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_INIT	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_INIT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_RQ_LIFO	.\common\rkhtrc.h	/^	RKH_TRCE_RQ_LIFO,$/;"	e	enum:rkh_trc_events
+RKH_TRCE_SIG	.\common\rkhtrc.h	/^	RKH_TRCE_SIG,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_SMA_ACT	.\common\rkhtrc.h	/^	RKH_TRCE_SMA_ACT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_SMA_FIFO	.\common\rkhtrc.h	/^	RKH_TRCE_SMA_FIFO,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_SMA_GET	.\common\rkhtrc.h	/^	RKH_TRCE_SMA_GET,$/;"	e	enum:rkh_trc_events
@@ -156,7 +216,7 @@ RKH_TRCE_SM_NENEX	.\common\rkhtrc.h	/^	RKH_TRCE_SM_NENEX,$/;"	e	enum:rkh_trc_eve
 RKH_TRCE_SM_NTRNACT	.\common\rkhtrc.h	/^	RKH_TRCE_SM_NTRNACT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_SM_STATE	.\common\rkhtrc.h	/^	RKH_TRCE_SM_STATE,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_SM_TRN	.\common\rkhtrc.h	/^	RKH_TRCE_SM_TRN,$/;"	e	enum:rkh_trc_events
-RKH_TRCE_T	.\common\rkhtrc.h	/^typedef rkhui8_t RKH_TRCE_T[ RKH_TRC_SIZEOF_EVENT ];$/;"	t
+RKH_TRCE_T	.\common\rkhtrc.h	/^typedef rkhui8_t RKH_TRCE_T;$/;"	t
 RKH_TRCE_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	/^	RKH_TRCE_TIM_ATTEMPT_STOP,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_TIM_INIT	.\common\rkhtrc.h	/^	RKH_TRCE_TIM_INIT,$/;"	e	enum:rkh_trc_events
 RKH_TRCE_TIM_REM	.\common\rkhtrc.h	/^	RKH_TRCE_TIM_REM,$/;"	e	enum:rkh_trc_events
@@ -172,213 +232,233 @@ RKH_TRCG_RQ	.\common\rkhtrc.h	/^	RKH_TRCG_RQ,$/;"	e	enum:rkh_trc_groups
 RKH_TRCG_SM	.\common\rkhtrc.h	/^	RKH_TRCG_SM,$/;"	e	enum:rkh_trc_groups
 RKH_TRCG_SMA	.\common\rkhtrc.h	/^	RKH_TRCG_SMA,$/;"	e	enum:rkh_trc_groups
 RKH_TRCG_TIM	.\common\rkhtrc.h	/^	RKH_TRCG_TIM,$/;"	e	enum:rkh_trc_groups
-RKH_TRCR_MP_GET	.\common\rkhtrc.h	441;"	d
-RKH_TRCR_MP_GET	.\common\rkhtrc.h	454;"	d
-RKH_TRCR_MP_GET	.\common\rkhtrc.h	771;"	d
-RKH_TRCR_MP_INIT	.\common\rkhtrc.h	435;"	d
-RKH_TRCR_MP_INIT	.\common\rkhtrc.h	453;"	d
-RKH_TRCR_MP_INIT	.\common\rkhtrc.h	770;"	d
-RKH_TRCR_MP_PUT	.\common\rkhtrc.h	447;"	d
-RKH_TRCR_MP_PUT	.\common\rkhtrc.h	455;"	d
-RKH_TRCR_MP_PUT	.\common\rkhtrc.h	772;"	d
-RKH_TRCR_RKH_AE	.\common\rkhtrc.h	730;"	d
-RKH_TRCR_RKH_AE	.\common\rkhtrc.h	762;"	d
-RKH_TRCR_RKH_AE	.\common\rkhtrc.h	818;"	d
-RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	746;"	d
-RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	765;"	d
-RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	821;"	d
-RKH_TRCR_RKH_EN	.\common\rkhtrc.h	715;"	d
-RKH_TRCR_RKH_EN	.\common\rkhtrc.h	759;"	d
-RKH_TRCR_RKH_EN	.\common\rkhtrc.h	815;"	d
-RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	723;"	d
-RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	761;"	d
-RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	817;"	d
-RKH_TRCR_RKH_EX	.\common\rkhtrc.h	719;"	d
-RKH_TRCR_RKH_EX	.\common\rkhtrc.h	760;"	d
-RKH_TRCR_RKH_EX	.\common\rkhtrc.h	816;"	d
-RKH_TRCR_RKH_GC	.\common\rkhtrc.h	736;"	d
-RKH_TRCR_RKH_GC	.\common\rkhtrc.h	763;"	d
-RKH_TRCR_RKH_GC	.\common\rkhtrc.h	819;"	d
-RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	741;"	d
-RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	764;"	d
-RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	820;"	d
-RKH_TRCR_RKH_INIT	.\common\rkhtrc.h	711;"	d
-RKH_TRCR_RKH_INIT	.\common\rkhtrc.h	758;"	d
-RKH_TRCR_RKH_INIT	.\common\rkhtrc.h	814;"	d
-RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	752;"	d
-RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	766;"	d
-RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	822;"	d
-RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	490;"	d
-RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	500;"	d
-RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	780;"	d
-RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	473;"	d
-RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	497;"	d
-RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	777;"	d
-RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	485;"	d
-RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	499;"	d
-RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	779;"	d
-RKH_TRCR_RQ_GET	.\common\rkhtrc.h	467;"	d
-RKH_TRCR_RQ_GET	.\common\rkhtrc.h	496;"	d
-RKH_TRCR_RQ_GET	.\common\rkhtrc.h	776;"	d
-RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	460;"	d
-RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	495;"	d
-RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	775;"	d
-RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	479;"	d
-RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	498;"	d
-RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	778;"	d
-RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	505;"	d
-RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	545;"	d
-RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	783;"	d
-RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	521;"	d
-RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	548;"	d
-RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	786;"	d
-RKH_TRCR_SMA_GET	.\common\rkhtrc.h	515;"	d
-RKH_TRCR_SMA_GET	.\common\rkhtrc.h	547;"	d
-RKH_TRCR_SMA_GET	.\common\rkhtrc.h	785;"	d
-RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	527;"	d
-RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	549;"	d
-RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	787;"	d
-RKH_TRCR_SMA_REG	.\common\rkhtrc.h	533;"	d
-RKH_TRCR_SMA_REG	.\common\rkhtrc.h	550;"	d
-RKH_TRCR_SMA_REG	.\common\rkhtrc.h	788;"	d
-RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	510;"	d
-RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	546;"	d
-RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	784;"	d
-RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	539;"	d
-RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	551;"	d
-RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	789;"	d
-RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	573;"	d
-RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	647;"	d
-RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	793;"	d
-RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	631;"	d
-RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	655;"	d
-RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	801;"	d
-RKH_TRCR_SM_DCH	.\common\rkhtrc.h	565;"	d
-RKH_TRCR_SM_DCH	.\common\rkhtrc.h	648;"	d
-RKH_TRCR_SM_DCH	.\common\rkhtrc.h	794;"	d
-RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	639;"	d
-RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	656;"	d
-RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	802;"	d
-RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	598;"	d
-RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	651;"	d
-RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	797;"	d
-RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	606;"	d
-RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	652;"	d
-RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	798;"	d
-RKH_TRCR_SM_INIT	.\common\rkhtrc.h	557;"	d
-RKH_TRCR_SM_INIT	.\common\rkhtrc.h	646;"	d
-RKH_TRCR_SM_INIT	.\common\rkhtrc.h	792;"	d
-RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	614;"	d
-RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	653;"	d
-RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	799;"	d
-RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	623;"	d
-RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	654;"	d
-RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	800;"	d
-RKH_TRCR_SM_STATE	.\common\rkhtrc.h	590;"	d
-RKH_TRCR_SM_STATE	.\common\rkhtrc.h	650;"	d
-RKH_TRCR_SM_STATE	.\common\rkhtrc.h	796;"	d
-RKH_TRCR_SM_TRN	.\common\rkhtrc.h	581;"	d
-RKH_TRCR_SM_TRN	.\common\rkhtrc.h	649;"	d
-RKH_TRCR_SM_TRN	.\common\rkhtrc.h	795;"	d
-RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	695;"	d
-RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	706;"	d
-RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	811;"	d
-RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	661;"	d
-RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	700;"	d
-RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	805;"	d
-RKH_TRCR_TIM_REM	.\common\rkhtrc.h	690;"	d
-RKH_TRCR_TIM_REM	.\common\rkhtrc.h	705;"	d
-RKH_TRCR_TIM_REM	.\common\rkhtrc.h	810;"	d
-RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	674;"	d
-RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	702;"	d
-RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	807;"	d
-RKH_TRCR_TIM_START	.\common\rkhtrc.h	667;"	d
-RKH_TRCR_TIM_START	.\common\rkhtrc.h	701;"	d
-RKH_TRCR_TIM_START	.\common\rkhtrc.h	806;"	d
-RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	680;"	d
-RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	703;"	d
-RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	808;"	d
-RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	685;"	d
-RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	704;"	d
-RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	809;"	d
-RKH_TRC_ALL	.\common\rkhcfg.h	80;"	d
-RKH_TRC_ALL_EVENTS	.\common\rkhtrc.h	150;"	d
-RKH_TRC_ALL_GROUPS	.\common\rkhtrc.h	142;"	d
-RKH_TRC_BEGIN	.\common\rkhtrc.h	303;"	d
-RKH_TRC_BEGIN	.\common\rkhtrc.h	314;"	d
-RKH_TRC_EN	.\common\rkhcfg.h	77;"	d
-RKH_TRC_END	.\common\rkhtrc.h	310;"	d
-RKH_TRC_END	.\common\rkhtrc.h	320;"	d
-RKH_TRC_EN_MP	.\common\rkhcfg.h	81;"	d
-RKH_TRC_EN_RKH	.\common\rkhcfg.h	86;"	d
-RKH_TRC_EN_RQ	.\common\rkhcfg.h	82;"	d
-RKH_TRC_EN_SM	.\common\rkhcfg.h	85;"	d
-RKH_TRC_EN_SMA	.\common\rkhcfg.h	83;"	d
-RKH_TRC_EN_SM_CLRH	.\common\rkhcfg.h	89;"	d
-RKH_TRC_EN_SM_CSTATE	.\common\rkhcfg.h	96;"	d
-RKH_TRC_EN_SM_DCH	.\common\rkhcfg.h	88;"	d
-RKH_TRC_EN_SM_DCH_RC	.\common\rkhcfg.h	97;"	d
-RKH_TRC_EN_SM_ENSTATE	.\common\rkhcfg.h	92;"	d
-RKH_TRC_EN_SM_EXSTATE	.\common\rkhcfg.h	93;"	d
-RKH_TRC_EN_SM_INIT	.\common\rkhcfg.h	87;"	d
-RKH_TRC_EN_SM_NENEX	.\common\rkhcfg.h	94;"	d
-RKH_TRC_EN_SM_NTRNACT	.\common\rkhcfg.h	95;"	d
-RKH_TRC_EN_SM_STATE	.\common\rkhcfg.h	91;"	d
-RKH_TRC_EN_SM_TRN	.\common\rkhcfg.h	90;"	d
-RKH_TRC_EN_TIM	.\common\rkhcfg.h	84;"	d
-RKH_TRC_EN_TSTAMP	.\common\rkhcfg.h	98;"	d
-RKH_TRC_ES	.\common\rkhtrc.h	418;"	d
-RKH_TRC_ES	.\common\rkhtrc.h	421;"	d
-RKH_TRC_ES	.\common\rkhtrc.h	424;"	d
-RKH_TRC_ES	.\common\rkhtrc.h	427;"	d
+RKH_TRCR_MP_GET	.\common\rkhtrc.h	494;"	d
+RKH_TRCR_MP_GET	.\common\rkhtrc.h	507;"	d
+RKH_TRCR_MP_GET	.\common\rkhtrc.h	849;"	d
+RKH_TRCR_MP_INIT	.\common\rkhtrc.h	488;"	d
+RKH_TRCR_MP_INIT	.\common\rkhtrc.h	506;"	d
+RKH_TRCR_MP_INIT	.\common\rkhtrc.h	848;"	d
+RKH_TRCR_MP_PUT	.\common\rkhtrc.h	500;"	d
+RKH_TRCR_MP_PUT	.\common\rkhtrc.h	508;"	d
+RKH_TRCR_MP_PUT	.\common\rkhtrc.h	850;"	d
+RKH_TRCR_RKH_AE	.\common\rkhtrc.h	785;"	d
+RKH_TRCR_RKH_AE	.\common\rkhtrc.h	837;"	d
+RKH_TRCR_RKH_AE	.\common\rkhtrc.h	896;"	d
+RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	801;"	d
+RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	840;"	d
+RKH_TRCR_RKH_DEFER	.\common\rkhtrc.h	899;"	d
+RKH_TRCR_RKH_EN	.\common\rkhtrc.h	770;"	d
+RKH_TRCR_RKH_EN	.\common\rkhtrc.h	834;"	d
+RKH_TRCR_RKH_EN	.\common\rkhtrc.h	893;"	d
+RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	778;"	d
+RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	836;"	d
+RKH_TRCR_RKH_EPREG	.\common\rkhtrc.h	895;"	d
+RKH_TRCR_RKH_EX	.\common\rkhtrc.h	774;"	d
+RKH_TRCR_RKH_EX	.\common\rkhtrc.h	835;"	d
+RKH_TRCR_RKH_EX	.\common\rkhtrc.h	894;"	d
+RKH_TRCR_RKH_GC	.\common\rkhtrc.h	791;"	d
+RKH_TRCR_RKH_GC	.\common\rkhtrc.h	838;"	d
+RKH_TRCR_RKH_GC	.\common\rkhtrc.h	897;"	d
+RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	796;"	d
+RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	839;"	d
+RKH_TRCR_RKH_GCR	.\common\rkhtrc.h	898;"	d
+RKH_TRCR_RKH_OBJ	.\common\rkhtrc.h	814;"	d
+RKH_TRCR_RKH_OBJ	.\common\rkhtrc.h	842;"	d
+RKH_TRCR_RKH_OBJ	.\common\rkhtrc.h	901;"	d
+RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	807;"	d
+RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	841;"	d
+RKH_TRCR_RKH_RCALL	.\common\rkhtrc.h	900;"	d
+RKH_TRCR_RKH_SIG	.\common\rkhtrc.h	824;"	d
+RKH_TRCR_RKH_SIG	.\common\rkhtrc.h	843;"	d
+RKH_TRCR_RKH_SIG	.\common\rkhtrc.h	902;"	d
+RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	543;"	d
+RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	558;"	d
+RKH_TRCR_RQ_DEPLETE	.\common\rkhtrc.h	858;"	d
+RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	526;"	d
+RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	555;"	d
+RKH_TRCR_RQ_FIFO	.\common\rkhtrc.h	855;"	d
+RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	538;"	d
+RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	557;"	d
+RKH_TRCR_RQ_FULL	.\common\rkhtrc.h	857;"	d
+RKH_TRCR_RQ_GET	.\common\rkhtrc.h	520;"	d
+RKH_TRCR_RQ_GET	.\common\rkhtrc.h	554;"	d
+RKH_TRCR_RQ_GET	.\common\rkhtrc.h	854;"	d
+RKH_TRCR_RQ_GET_LAST	.\common\rkhtrc.h	548;"	d
+RKH_TRCR_RQ_GET_LAST	.\common\rkhtrc.h	559;"	d
+RKH_TRCR_RQ_GET_LAST	.\common\rkhtrc.h	859;"	d
+RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	513;"	d
+RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	553;"	d
+RKH_TRCR_RQ_INIT	.\common\rkhtrc.h	853;"	d
+RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	532;"	d
+RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	556;"	d
+RKH_TRCR_RQ_LIFO	.\common\rkhtrc.h	856;"	d
+RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	564;"	d
+RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	604;"	d
+RKH_TRCR_SMA_ACT	.\common\rkhtrc.h	862;"	d
+RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	580;"	d
+RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	607;"	d
+RKH_TRCR_SMA_FIFO	.\common\rkhtrc.h	865;"	d
+RKH_TRCR_SMA_GET	.\common\rkhtrc.h	574;"	d
+RKH_TRCR_SMA_GET	.\common\rkhtrc.h	606;"	d
+RKH_TRCR_SMA_GET	.\common\rkhtrc.h	864;"	d
+RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	586;"	d
+RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	608;"	d
+RKH_TRCR_SMA_LIFO	.\common\rkhtrc.h	866;"	d
+RKH_TRCR_SMA_REG	.\common\rkhtrc.h	592;"	d
+RKH_TRCR_SMA_REG	.\common\rkhtrc.h	609;"	d
+RKH_TRCR_SMA_REG	.\common\rkhtrc.h	867;"	d
+RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	569;"	d
+RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	605;"	d
+RKH_TRCR_SMA_TERM	.\common\rkhtrc.h	863;"	d
+RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	598;"	d
+RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	610;"	d
+RKH_TRCR_SMA_UNREG	.\common\rkhtrc.h	868;"	d
+RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	632;"	d
+RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	706;"	d
+RKH_TRCR_SM_CLRH	.\common\rkhtrc.h	872;"	d
+RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	690;"	d
+RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	714;"	d
+RKH_TRCR_SM_CSTATE	.\common\rkhtrc.h	880;"	d
+RKH_TRCR_SM_DCH	.\common\rkhtrc.h	624;"	d
+RKH_TRCR_SM_DCH	.\common\rkhtrc.h	707;"	d
+RKH_TRCR_SM_DCH	.\common\rkhtrc.h	873;"	d
+RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	698;"	d
+RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	715;"	d
+RKH_TRCR_SM_DCH_RC	.\common\rkhtrc.h	881;"	d
+RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	657;"	d
+RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	710;"	d
+RKH_TRCR_SM_ENSTATE	.\common\rkhtrc.h	876;"	d
+RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	665;"	d
+RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	711;"	d
+RKH_TRCR_SM_EXSTATE	.\common\rkhtrc.h	877;"	d
+RKH_TRCR_SM_INIT	.\common\rkhtrc.h	616;"	d
+RKH_TRCR_SM_INIT	.\common\rkhtrc.h	705;"	d
+RKH_TRCR_SM_INIT	.\common\rkhtrc.h	871;"	d
+RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	673;"	d
+RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	712;"	d
+RKH_TRCR_SM_NENEX	.\common\rkhtrc.h	878;"	d
+RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	682;"	d
+RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	713;"	d
+RKH_TRCR_SM_NTRNACT	.\common\rkhtrc.h	879;"	d
+RKH_TRCR_SM_STATE	.\common\rkhtrc.h	649;"	d
+RKH_TRCR_SM_STATE	.\common\rkhtrc.h	709;"	d
+RKH_TRCR_SM_STATE	.\common\rkhtrc.h	875;"	d
+RKH_TRCR_SM_TRN	.\common\rkhtrc.h	640;"	d
+RKH_TRCR_SM_TRN	.\common\rkhtrc.h	708;"	d
+RKH_TRCR_SM_TRN	.\common\rkhtrc.h	874;"	d
+RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	754;"	d
+RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	765;"	d
+RKH_TRCR_TIM_ATTEMPT_STOP	.\common\rkhtrc.h	890;"	d
+RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	720;"	d
+RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	759;"	d
+RKH_TRCR_TIM_INIT	.\common\rkhtrc.h	884;"	d
+RKH_TRCR_TIM_REM	.\common\rkhtrc.h	749;"	d
+RKH_TRCR_TIM_REM	.\common\rkhtrc.h	764;"	d
+RKH_TRCR_TIM_REM	.\common\rkhtrc.h	889;"	d
+RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	733;"	d
+RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	761;"	d
+RKH_TRCR_TIM_RESTART	.\common\rkhtrc.h	886;"	d
+RKH_TRCR_TIM_START	.\common\rkhtrc.h	726;"	d
+RKH_TRCR_TIM_START	.\common\rkhtrc.h	760;"	d
+RKH_TRCR_TIM_START	.\common\rkhtrc.h	885;"	d
+RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	739;"	d
+RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	762;"	d
+RKH_TRCR_TIM_STOP	.\common\rkhtrc.h	887;"	d
+RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	744;"	d
+RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	763;"	d
+RKH_TRCR_TIM_TOUT	.\common\rkhtrc.h	888;"	d
+RKH_TRC_ALL	.\common\rkhcfg.h	83;"	d
+RKH_TRC_ALL_EVENTS	.\common\rkhtrc.h	158;"	d
+RKH_TRC_ALL_GROUPS	.\common\rkhtrc.h	150;"	d
+RKH_TRC_BEGIN	.\common\rkhtrc.h	346;"	d
+RKH_TRC_BEGIN	.\common\rkhtrc.h	357;"	d
+RKH_TRC_CHK	.\common\rkhtrc.h	296;"	d
+RKH_TRC_CHK	.\common\rkhtrc.h	300;"	d
+RKH_TRC_EN	.\common\rkhcfg.h	80;"	d
+RKH_TRC_END	.\common\rkhtrc.h	352;"	d
+RKH_TRC_END	.\common\rkhtrc.h	362;"	d
+RKH_TRC_EN_CHK	.\common\rkhcfg.h	102;"	d
+RKH_TRC_EN_MP	.\common\rkhcfg.h	84;"	d
+RKH_TRC_EN_NSEQ	.\common\rkhcfg.h	101;"	d
+RKH_TRC_EN_RKH	.\common\rkhcfg.h	89;"	d
+RKH_TRC_EN_RQ	.\common\rkhcfg.h	85;"	d
+RKH_TRC_EN_SM	.\common\rkhcfg.h	88;"	d
+RKH_TRC_EN_SMA	.\common\rkhcfg.h	86;"	d
+RKH_TRC_EN_SM_CLRH	.\common\rkhcfg.h	92;"	d
+RKH_TRC_EN_SM_CSTATE	.\common\rkhcfg.h	99;"	d
+RKH_TRC_EN_SM_DCH	.\common\rkhcfg.h	91;"	d
+RKH_TRC_EN_SM_DCH_RC	.\common\rkhcfg.h	100;"	d
+RKH_TRC_EN_SM_ENSTATE	.\common\rkhcfg.h	95;"	d
+RKH_TRC_EN_SM_EXSTATE	.\common\rkhcfg.h	96;"	d
+RKH_TRC_EN_SM_INIT	.\common\rkhcfg.h	90;"	d
+RKH_TRC_EN_SM_NENEX	.\common\rkhcfg.h	97;"	d
+RKH_TRC_EN_SM_NTRNACT	.\common\rkhcfg.h	98;"	d
+RKH_TRC_EN_SM_STATE	.\common\rkhcfg.h	94;"	d
+RKH_TRC_EN_SM_TRN	.\common\rkhcfg.h	93;"	d
+RKH_TRC_EN_TIM	.\common\rkhcfg.h	87;"	d
+RKH_TRC_EN_TSTAMP	.\common\rkhcfg.h	103;"	d
+RKH_TRC_ES	.\common\rkhtrc.h	471;"	d
+RKH_TRC_ES	.\common\rkhtrc.h	474;"	d
+RKH_TRC_ES	.\common\rkhtrc.h	477;"	d
+RKH_TRC_ES	.\common\rkhtrc.h	480;"	d
 RKH_TRC_EVENTS	.\common\rkhtrc.h	/^} RKH_TRC_EVENTS;$/;"	t
+RKH_TRC_FLG	.\common\rkhtrc.h	309;"	d
 RKH_TRC_FOPT	.\common\rkhtrc.h	/^} RKH_TRC_FOPT;$/;"	t
 RKH_TRC_GROUPS	.\common\rkhtrc.h	/^} RKH_TRC_GROUPS;$/;"	t
-RKH_TRC_HDR	.\common\rkhtrc.h	336;"	d
-RKH_TRC_HDR	.\common\rkhtrc.h	340;"	d
-RKH_TRC_MAX_EVENTS	.\common\rkhcfg.h	78;"	d
-RKH_TRC_MAX_TRACES	.\common\rkhcfg.h	100;"	d
-RKH_TRC_NBLK	.\common\rkhtrc.h	373;"	d
-RKH_TRC_NBLK	.\common\rkhtrc.h	376;"	d
-RKH_TRC_NBLK	.\common\rkhtrc.h	379;"	d
-RKH_TRC_NBLK	.\common\rkhtrc.h	382;"	d
-RKH_TRC_NE	.\common\rkhtrc.h	388;"	d
-RKH_TRC_NE	.\common\rkhtrc.h	391;"	d
-RKH_TRC_NE	.\common\rkhtrc.h	394;"	d
-RKH_TRC_NE	.\common\rkhtrc.h	397;"	d
-RKH_TRC_NTICK	.\common\rkhtrc.h	358;"	d
-RKH_TRC_NTICK	.\common\rkhtrc.h	361;"	d
-RKH_TRC_NTICK	.\common\rkhtrc.h	364;"	d
-RKH_TRC_NTICK	.\common\rkhtrc.h	367;"	d
-RKH_TRC_RUNTIME_FILTER	.\common\rkhcfg.h	79;"	d
-RKH_TRC_SIG	.\common\rkhtrc.h	403;"	d
-RKH_TRC_SIG	.\common\rkhtrc.h	406;"	d
-RKH_TRC_SIG	.\common\rkhtrc.h	409;"	d
-RKH_TRC_SIG	.\common\rkhtrc.h	412;"	d
-RKH_TRC_SIZEOF_EVENT	.\common\rkhcfg.h	101;"	d
-RKH_TRC_SIZEOF_POINTER	.\common\rkhcfg.h	102;"	d
-RKH_TRC_SIZEOF_TSTAMP	.\common\rkhcfg.h	99;"	d
+RKH_TRC_HDR	.\common\rkhtrc.h	391;"	d
+RKH_TRC_MAX_EVENTS	.\common\rkhcfg.h	81;"	d
+RKH_TRC_MAX_EVENTS_PER_GROUP	.\common\rkhtrc.h	105;"	d
+RKH_TRC_MAX_EVENTS_PER_GROUP	.\common\rkhtrc.h	107;"	d
+RKH_TRC_MAX_EVENTS_PER_GROUP	.\common\rkhtrc.h	109;"	d
+RKH_TRC_NBLK	.\common\rkhtrc.h	426;"	d
+RKH_TRC_NBLK	.\common\rkhtrc.h	429;"	d
+RKH_TRC_NBLK	.\common\rkhtrc.h	432;"	d
+RKH_TRC_NBLK	.\common\rkhtrc.h	435;"	d
+RKH_TRC_NE	.\common\rkhtrc.h	441;"	d
+RKH_TRC_NE	.\common\rkhtrc.h	444;"	d
+RKH_TRC_NE	.\common\rkhtrc.h	447;"	d
+RKH_TRC_NE	.\common\rkhtrc.h	450;"	d
+RKH_TRC_NSEQ	.\common\rkhtrc.h	384;"	d
+RKH_TRC_NSEQ	.\common\rkhtrc.h	388;"	d
+RKH_TRC_NTICK	.\common\rkhtrc.h	411;"	d
+RKH_TRC_NTICK	.\common\rkhtrc.h	414;"	d
+RKH_TRC_NTICK	.\common\rkhtrc.h	417;"	d
+RKH_TRC_NTICK	.\common\rkhtrc.h	420;"	d
+RKH_TRC_RUNTIME_FILTER	.\common\rkhcfg.h	82;"	d
+RKH_TRC_SIG	.\common\rkhtrc.h	456;"	d
+RKH_TRC_SIG	.\common\rkhtrc.h	459;"	d
+RKH_TRC_SIG	.\common\rkhtrc.h	462;"	d
+RKH_TRC_SIG	.\common\rkhtrc.h	465;"	d
+RKH_TRC_SIZEOF_EVENT	.\common\rkhcfg.h	106;"	d
+RKH_TRC_SIZEOF_POINTER	.\common\rkhcfg.h	107;"	d
+RKH_TRC_SIZEOF_STREAM	.\common\rkhcfg.h	105;"	d
+RKH_TRC_SIZEOF_TSTAMP	.\common\rkhcfg.h	104;"	d
 RKH_TRC_START	.\common\rkhtrc.h	/^	RKH_TRC_STOP, RKH_TRC_START$/;"	e
 RKH_TRC_STOP	.\common\rkhtrc.h	/^	RKH_TRC_STOP, RKH_TRC_START$/;"	e
-RKH_TRC_SYM	.\common\rkhtrc.h	346;"	d
-RKH_TRC_SYM	.\common\rkhtrc.h	349;"	d
-RKH_TRC_SYM	.\common\rkhtrc.h	352;"	d
-RKH_TRC_TSTAMP	.\common\rkhtrc.h	285;"	d
-RKH_TRC_TSTAMP	.\common\rkhtrc.h	289;"	d
-RKH_TRC_TSTAMP	.\common\rkhtrc.h	293;"	d
-RKH_TRC_TSTAMP	.\common\rkhtrc.h	297;"	d
-RKH_TRC_UI16	.\common\rkhtrc.h	328;"	d
-RKH_TRC_UI32	.\common\rkhtrc.h	331;"	d
-RKH_TRC_UI8	.\common\rkhtrc.h	325;"	d
-S1	.\parser\tzparse.c	/^	ushort S1;$/;"	v
-S11	.\parser\tzparse.c	/^	ushort S11;$/;"	v
-S111	.\parser\tzparse.c	/^	ushort S111;$/;"	v
-S112	.\parser\tzparse.c	/^	ushort S112;$/;"	v
-S12	.\parser\tzparse.c	/^	ushort S12;$/;"	v
-S2	.\parser\tzparse.c	/^	ushort S2;$/;"	v
-S3	.\parser\tzparse.c	/^	ushort S3;$/;"	v
-S31	.\parser\tzparse.c	/^	ushort S31;$/;"	v
-S32	.\parser\tzparse.c	/^	ushort S32;$/;"	v
+RKH_TRC_STR	.\common\rkhtrc.h	380;"	d
+RKH_TRC_SYM	.\common\rkhtrc.h	399;"	d
+RKH_TRC_SYM	.\common\rkhtrc.h	402;"	d
+RKH_TRC_SYM	.\common\rkhtrc.h	405;"	d
+RKH_TRC_TSTAMP	.\common\rkhtrc.h	324;"	d
+RKH_TRC_TSTAMP	.\common\rkhtrc.h	328;"	d
+RKH_TRC_TSTAMP	.\common\rkhtrc.h	332;"	d
+RKH_TRC_TSTAMP	.\common\rkhtrc.h	336;"	d
+RKH_TRC_TSTAMP	.\common\rkhtrc.h	341;"	d
+RKH_TRC_UI16	.\common\rkhtrc.h	374;"	d
+RKH_TRC_UI32	.\common\rkhtrc.h	377;"	d
+RKH_TRC_UI8	.\common\rkhtrc.h	371;"	d
+RKH_TRC_UI8_RAW	.\common\rkhtrc.h	368;"	d
+RKH_XOR	.\common\rkhtrc.h	285;"	d
+S1	.\parser\tzparse.cpp	/^	ushort S1;$/;"	v
+S11	.\parser\tzparse.cpp	/^	ushort S11;$/;"	v
+S111	.\parser\tzparse.cpp	/^	ushort S111;$/;"	v
+S112	.\parser\tzparse.cpp	/^	ushort S112;$/;"	v
+S12	.\parser\tzparse.cpp	/^	ushort S12;$/;"	v
+S2	.\parser\tzparse.cpp	/^	ushort S2;$/;"	v
+S3	.\parser\tzparse.cpp	/^	ushort S3;$/;"	v
+S31	.\parser\tzparse.cpp	/^	ushort S31;$/;"	v
+S32	.\parser\tzparse.cpp	/^	ushort S32;$/;"	v
+SAME_EXEC_PATH	.\options\options.h	34;"	d
 SERIAL_CBACK_T	.\stream\uart\serial.h	/^} SERIAL_CBACK_T;$/;"	t
 SERIAL_T	.\stream\uart\serdefs.h	/^} SERIAL_T;$/;"	t
 SEVEN	.\common\myevt.h	/^	SEVEN,$/;"	e
@@ -387,8 +467,8 @@ SPANISH	.\common\lang.h	/^	ENGLISH, SPANISH,$/;"	e
 STOP2	.\stream\uart\serial.h	/^	STOP_1, STOP_1HALF, STOP2$/;"	e
 STOP_1	.\stream\uart\serial.h	/^	STOP_1, STOP_1HALF, STOP2$/;"	e
 STOP_1HALF	.\stream\uart\serial.h	/^	STOP_1, STOP_1HALF, STOP2$/;"	e
-SYMOBJ_T	.\parser\tzparse.c	/^} SYMOBJ_T;$/;"	t	file:
-SYMSIG_T	.\parser\tzparse.c	/^} SYMSIG_T;$/;"	t	file:
+SYMOBJ_T	.\parser\tzparse.cpp	/^} SYMOBJ_T;$/;"	t	file:
+SYMSIG_T	.\parser\tzparse.cpp	/^} SYMSIG_T;$/;"	t	file:
 TERM	.\common\myevt.h	/^	TERM	$/;"	e
 THREE	.\common\myevt.h	/^	THREE,$/;"	e
 TIME_INTER	.\common\timer.h	16;"	d
@@ -434,41 +514,55 @@ TPL_WNDATAL	.\stream\tpltbl.h	/^	TPL_WNDATAL,$/;"	e
 TPL_WXMIT	.\stream\tpltbl.h	/^	TPL_WXMIT,$/;"	e
 TPL_XCHK	.\stream\tpltbl.h	/^	TPL_XCHK,$/;"	e
 TPL_XMIT_ESC	.\stream\tpltbl.h	/^	TPL_XMIT_ESC,$/;"	e
-TRAZER_EN	.\parser\tzparse.c	37;"	d	file:
-TRAZER_NTRE	.\parser\tzparse.c	42;"	d	file:
-TRAZER_NTRG	.\parser\tzparse.c	43;"	d	file:
-TRAZER_SIZEOF_ESIZE	.\parser\tzparse.c	56;"	d	file:
-TRAZER_SIZEOF_NBLOCK	.\parser\tzparse.c	54;"	d	file:
-TRAZER_SIZEOF_NELEM	.\parser\tzparse.c	55;"	d	file:
-TRAZER_SIZEOF_NTIMER	.\parser\tzparse.c	53;"	d	file:
-TRAZER_SIZEOF_POINTER	.\parser\tzparse.c	52;"	d	file:
-TRAZER_SIZEOF_SIG	.\parser\tzparse.c	50;"	d	file:
-TRAZER_SIZEOF_TSTAMP	.\parser\tzparse.c	51;"	d	file:
-TRE_T	.\parser\tzparse.c	/^} TRE_T;$/;"	t	file:
-TRZES_T	.\parser\tzparse.c	/^	typedef unsigned char TRZES_T;$/;"	t	file:
-TRZES_T	.\parser\tzparse.c	/^	typedef unsigned long TRZES_T;$/;"	t	file:
-TRZES_T	.\parser\tzparse.c	/^	typedef unsigned short TRZES_T;$/;"	t	file:
-TRZE_T	.\parser\tzparse.c	/^	typedef unsigned char TRZE_T;$/;"	t	file:
-TRZE_T	.\parser\tzparse.c	/^	typedef unsigned long TRZE_T;$/;"	t	file:
-TRZE_T	.\parser\tzparse.c	/^	typedef unsigned short TRZE_T;$/;"	t	file:
-TRZNB_T	.\parser\tzparse.c	/^	typedef unsigned char TRZNB_T;$/;"	t	file:
-TRZNB_T	.\parser\tzparse.c	/^	typedef unsigned long TRZNB_T;$/;"	t	file:
-TRZNB_T	.\parser\tzparse.c	/^	typedef unsigned short TRZNB_T;$/;"	t	file:
-TRZNE_T	.\parser\tzparse.c	/^	typedef unsigned char TRZNE_T;$/;"	t	file:
-TRZNE_T	.\parser\tzparse.c	/^	typedef unsigned long TRZNE_T;$/;"	t	file:
-TRZNE_T	.\parser\tzparse.c	/^	typedef unsigned short TRZNE_T;$/;"	t	file:
-TRZNT_T	.\parser\tzparse.c	/^	typedef unsigned char TRZNT_T;$/;"	t	file:
-TRZNT_T	.\parser\tzparse.c	/^	typedef unsigned long TRZNT_T;$/;"	t	file:
-TRZNT_T	.\parser\tzparse.c	/^	typedef unsigned short TRZNT_T;$/;"	t	file:
-TRZTS_T	.\parser\tzparse.c	/^	typedef unsigned char TRZTS_T;$/;"	t	file:
-TRZTS_T	.\parser\tzparse.c	/^	typedef unsigned long TRZTS_T;$/;"	t	file:
-TRZTS_T	.\parser\tzparse.c	/^	typedef unsigned short TRZTS_T;$/;"	t	file:
+TRAZER_EN	.\parser\tzparse.cpp	39;"	d	file:
+TRAZER_EN_CHK	.\parser\tzparse.cpp	61;"	d	file:
+TRAZER_EN_NSEQ	.\parser\tzparse.cpp	60;"	d	file:
+TRAZER_EN_TSTAMP	.\parser\tzparse.cpp	62;"	d	file:
+TRAZER_NTRE	.\parser\tzparse.cpp	44;"	d	file:
+TRAZER_NTRG	.\parser\tzparse.cpp	45;"	d	file:
+TRAZER_SIZEOF_ESIZE	.\parser\tzparse.cpp	59;"	d	file:
+TRAZER_SIZEOF_NBLOCK	.\parser\tzparse.cpp	57;"	d	file:
+TRAZER_SIZEOF_NELEM	.\parser\tzparse.cpp	58;"	d	file:
+TRAZER_SIZEOF_NTIMER	.\parser\tzparse.cpp	56;"	d	file:
+TRAZER_SIZEOF_POINTER	.\parser\tzparse.cpp	55;"	d	file:
+TRAZER_SIZEOF_SIG	.\parser\tzparse.cpp	53;"	d	file:
+TRAZER_SIZEOF_TSTAMP	.\parser\tzparse.cpp	54;"	d	file:
+TRE_T	.\parser\tzparse.cpp	/^} TRE_T;$/;"	t	file:
+TRZES_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZES_T;$/;"	t	file:
+TRZES_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZES_T;$/;"	t	file:
+TRZES_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZES_T;$/;"	t	file:
+TRZE_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZE_T;$/;"	t	file:
+TRZE_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZE_T;$/;"	t	file:
+TRZE_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZE_T;$/;"	t	file:
+TRZNB_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZNB_T;$/;"	t	file:
+TRZNB_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZNB_T;$/;"	t	file:
+TRZNB_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZNB_T;$/;"	t	file:
+TRZNE_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZNE_T;$/;"	t	file:
+TRZNE_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZNE_T;$/;"	t	file:
+TRZNE_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZNE_T;$/;"	t	file:
+TRZNT_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZNT_T;$/;"	t	file:
+TRZNT_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZNT_T;$/;"	t	file:
+TRZNT_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZNT_T;$/;"	t	file:
+TRZTS_T	.\parser\tzparse.cpp	/^	typedef unsigned char TRZTS_T;$/;"	t	file:
+TRZTS_T	.\parser\tzparse.cpp	/^	typedef unsigned long TRZTS_T;$/;"	t	file:
+TRZTS_T	.\parser\tzparse.cpp	/^	typedef unsigned short TRZTS_T;$/;"	t	file:
 TWO	.\common\myevt.h	/^	TWO,$/;"	e
+VERSION_STRING_TXT	.\version.h	5;"	d
+WHITE_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
+WHITE_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
+YELLOW_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
+YELLOW_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 ZERO	.\common\myevt.h	/^	ZERO,$/;"	e
+__CONSOLE_H__	.\utils\console.h	6;"	d
+__DEBUG_H__	.\debug\debug.h	5;"	d
+__ERROR_H__	.\errors\error.h	6;"	d
+__EVTBL_H__	.\parser\evtbl.h	3;"	d
 __LANG_H__	.\common\lang.h	2;"	d
 __MYDEFS_H__	.\common\mydefs.h	2;"	d
 __MYEVT_H__	.\common\myevt.h	7;"	d
 __MYTYPES_H__	.\common\mytypes.h	6;"	d
+__OPTIONS_H__	.\options\options.h	5;"	d
+__PRINTRGB_H__	.\utils\printrgb.h	6;"	d
 __RKHCFG_H__	.\common\rkhcfg.h	33;"	d
 __RKHTRC_H__	.\common\rkhtrc.h	76;"	d
 __RKHT_H__	.\common\rkhtype.h	32;"	d
@@ -481,116 +575,166 @@ __TPLHAL_H__	.\stream\tplhal.h	6;"	d
 __TPLINK_DBG__	.\stream\tplcfg.h	26;"	d
 __TPLINK_H__	.\stream\tplink.h	6;"	d
 __TPLTBL_H__	.\stream\tpltbl.h	5;"	d
-__TRAZER_H__	.\parser\tzparse.h	28;"	d
+__TZPARSE_H__	.\parser\tzparse.h	26;"	d
 __USE_TPLINK_ONCHERR_CBF__	.\stream\tplcfg.h	43;"	d
 __USE_TPLINK_ONXMIT_CMP_CBF__	.\stream\tplcfg.h	42;"	d
+__UTILS_H__	.\utils\utils.h	6;"	d
 a	.\trazer.cpp	/^	ACCEL_T a;$/;"	m	file:
 add_check_sum	.\stream\tplact.cpp	35;"	d	file:
+add_to_evtbl	.\parser\evtbl.cpp	/^add_to_evtbl( EVENT_INFO_ST *p )$/;"	f
 addr	.\stream\tplink.h	/^	uchar addr;$/;"	m
-adr	.\parser\tzparse.c	/^	unsigned long adr;$/;"	m	struct:symobj_t	file:
-args	.\common\getopt.cpp	/^char *args = "b:ijk:";$/;"	v
+adr	.\parser\tzparse.cpp	/^	unsigned long adr;$/;"	m	struct:symobj_t	file:
+args	.\parser\evtbl.h	/^	string args;$/;"	m
 args	.\trazer.cpp	/^static char *args = "d:D:hH";$/;"	v	file:
-assemble	.\parser\tzparse.c	/^assemble( int size )$/;"	f	file:
+args	.\utils\getopt.cpp	/^char *args = "b:ijk:";$/;"	v
+assemble	.\parser\tzparse.cpp	/^assemble( int size )$/;"	f	file:
+assemble_str	.\parser\tzparse.cpp	/^assemble_str( void  )$/;"	f	file:
+attrib	.\utils\console.cpp	/^static const WORD attrib[ NUM_ATTRIBS ] =$/;"	v	file:
+aux_buff	.\utils\utils.cpp	/^static char aux_buff[AUXILIAR_BUFFER_SIZE];$/;"	v	file:
 baud	.\stream\uart\serdefs.h	/^	unsigned baud;$/;"	m
 bit_num	.\stream\uart\serdefs.h	/^	int bit_num;$/;"	m
 bitf	.\common\mytypes.h	/^typedef uint			bitf;$/;"	t
 bitf	.\common\mytypes.h	/^typedef ushort			bitf;$/;"	t
+buffer	.\options\options.cpp	/^static char buffer[ 100 ];			\/*	buffer: used for field separation	*\/	$/;"	v	file:
 calc_check	.\stream\tpldefs.h	31;"	d
 call_tplst	.\stream\tplfsm.cpp	/^call_tplst( TPL_STATE_T dest_st, TPL_STATE_T src_st )$/;"	f
 cb	.\trazer.cpp	/^static CBOX_ST cb;$/;"	v	file:
 check	.\stream\tplact.cpp	/^static ushort curr_dcnt, check;$/;"	v	file:
 check_sum	.\stream\tplact.cpp	/^static uchar check_sum, curr_escape;$/;"	v	file:
+clr2rgb	.\utils\console.cpp	/^clr2rgb( int color )$/;"	f
+clrscr	.\utils\console.cpp	/^clrscr( void )$/;"	f
 cmd	.\trazer.cpp	/^	uchar cmd;$/;"	m	file:
 com	.\stream\uart\serdefs.h	/^	void *com;$/;"	m
 com_name	.\stream\uart\serdefs.h	/^	char com_name[20];$/;"	m
+commands	.\options\options.cpp	/^static const char *commands[ MAX_OPTS ] =$/;"	v	file:
+comment	.\parser\evtbl.h	/^	string comment;$/;"	m
 curr_dcnt	.\stream\tplact.cpp	/^static ushort curr_dcnt, check;$/;"	v	file:
 curr_escape	.\stream\tplact.cpp	/^static uchar check_sum, curr_escape;$/;"	v	file:
 currst	.\stream\tplfsm.cpp	/^static TPL_STATE_T currst, tempst;$/;"	v	file:
 debug	.\common\rerror.c	/^debug( const char *fmt, ... )$/;"	f
 debugging	.\common\rerror.c	/^int debugging;$/;"	v
+dprintf	.\debug\debug.cpp	/^dprintf( const char* fmt, ...)$/;"	f
+enable_debug	.\options\options.h	/^	unsigned enable_debug;$/;"	m
 enable_xmit	.\stream\tplhal.cpp	/^static int enable_xmit = 0;$/;"	v	file:
 endian_val	.\trazer.cpp	/^int endian_val=1;$/;"	v
 endiannes	.\trazer.cpp	/^char *endiannes= (char *)&endian_val;$/;"	v
+err_fopen	.\errors\messages.cpp	/^extern const char * err_fopen =$/;"	v
+err_redef	.\errors\messages.cpp	/^extern const char * err_redef =$/;"	v
+err_syntax	.\errors\messages.cpp	/^extern const char * err_syntax	=$/;"	v
+err_trans	.\errors\messages.cpp	/^extern const char * err_trans =$/;"	v
+err_undef	.\errors\messages.cpp	/^extern const char * err_undef =$/;"	v
+error_in_options_file	.\errors\messages.cpp	/^const char * error_in_options_file =$/;"	v
+error_incomplete_trace_evt_data	.\errors\messages.cpp	/^const char * error_incomplete_trace_evt_data =$/;"	v
+error_invalid_trace_id	.\errors\messages.cpp	/^const char * error_invalid_trace_id =$/;"	v
 esc_codes	.\stream\tplact.cpp	/^static const uchar esc_codes[TPLINK_NUM_ESC_CODES-1] = { TPL_SOF, TPL_ESC };$/;"	v	file:
-evaluate_args	.\trazer.cpp	/^evaluate_args( int argc, char **argv )$/;"	f	file:
+evaluate_args	.\options\options.cpp	/^evaluate_args( int argc, char **argv )$/;"	f
+event	.\parser\evtbl.h	/^	string event;$/;"	m
 fatal	.\common\rerror.c	/^fatal( const char *fmt, ... )$/;"	f
-fdbg	.\trazer.cpp	/^FILE *fdbg;$/;"	v
-find_trevt	.\parser\tzparse.c	/^find_trevt( unsigned char id )$/;"	f	file:
+fatal_error	.\errors\error.cpp	/^fatal_error( const char* fmt, ...)$/;"	f
+fdbg	.\trazer.cpp	/^extern "C" { FILE *fdbg; }$/;"	v
+find_str_into_file	.\utils\utils.cpp	/^find_str_into_file(FILE* pFile, const char* str)$/;"	f
+find_trevt	.\parser\tzparse.cpp	/^find_trevt( unsigned char id )$/;"	f	file:
 fits_in_pload_size	.\stream\tplact.cpp	26;"	d	file:
 flow	.\trazer.cpp	/^	ushort flow;	\/\/ grain volume by second.$/;"	m	file:
-fmt	.\parser\tzparse.c	/^	const char *fmt;$/;"	m	struct:tre_t	file:
-fmt	.\parser\tzparse.c	/^static char fmt[ 128 ];$/;"	v	file:
-fmt_args	.\parser\tzparse.c	/^	HDLR_T fmt_args;$/;"	m	struct:tre_t	file:
+fmt	.\parser\evtbl.h	/^	HDLR_T fmt;$/;"	m
+fmt	.\parser\tzparse.cpp	/^	const char *fmt;$/;"	m	struct:tre_t	file:
+fmt	.\parser\tzparse.cpp	/^static char fmt[ 128 ];$/;"	v	file:
+fmt_args	.\parser\tzparse.cpp	/^	HDLR_T fmt_args;$/;"	m	struct:tre_t	file:
+fmt_id_tbl	.\parser\evtbl.cpp	/^static const FMT_ID_T fmt_id_tbl[] =$/;"	v	file:
+fmtid	.\parser\evtbl.h	/^	const FMT_ID_T *fmtid;$/;"	m
 forever	.\common\mydefs.h	8;"	d
-get_accel_data	.\trazer.cpp	92;"	d	file:
+get_accel_data	.\trazer.cpp	67;"	d	file:
 get_esc_code	.\stream\tplact.cpp	31;"	d	file:
-get_humedity_sensor	.\trazer.cpp	94;"	d	file:
-get_movdet	.\trazer.cpp	93;"	d	file:
+get_humedity_sensor	.\trazer.cpp	69;"	d	file:
+get_movdet	.\trazer.cpp	68;"	d	file:
+get_nseq	.\parser\tzparse.cpp	132;"	d	file:
+get_nseq	.\parser\tzparse.cpp	135;"	d	file:
 get_slave_addr	.\stream\tpldefs.h	67;"	d
 get_tplfsm_state	.\stream\tplfsm.cpp	/^get_tplfsm_state( void )$/;"	f
-getopt	.\common\getopt.cpp	/^getopt( int argc, char **argv, char *opts )$/;"	f
-group	.\parser\tzparse.c	/^	const char *group;$/;"	m	struct:tre_t	file:
-grs_read	.\trazer.cpp	91;"	d	file:
+get_ts	.\parser\tzparse.cpp	141;"	d	file:
+get_ts	.\parser\tzparse.cpp	143;"	d	file:
+getopt	.\utils\getopt.cpp	/^getopt( int argc, char **argv, char *opts )$/;"	f
+getting_options_from	.\errors\messages.cpp	/^const char * getting_options_from =$/;"	v
+gotoxy	.\utils\console.cpp	/^gotoxy(int x, int y)$/;"	f
+group	.\parser\evtbl.h	/^	string group;$/;"	m
+group	.\parser\tzparse.cpp	/^	const char *group;$/;"	m	struct:tre_t	file:
+grs_read	.\trazer.cpp	66;"	d	file:
 h	.\trazer.cpp	/^	GRSENS_T h;$/;"	m	file:
 h2ns	.\trazer.cpp	/^h2ns( ushort *x )$/;"	f
-h2ns	.\trazer.cpp	123;"	d	file:
-h_1sym	.\parser\tzparse.c	/^h_1sym( const struct tre_t *tre )$/;"	f
-h_2sym	.\parser\tzparse.c	/^h_2sym( const struct tre_t *tre )$/;"	f
-h_2symntick	.\parser\tzparse.c	/^h_2symntick( const struct tre_t *tre )$/;"	f
-h_2symnused	.\parser\tzparse.c	/^h_2symnused( const struct tre_t *tre )$/;"	f
-h_3sym	.\parser\tzparse.c	/^h_3sym( const struct tre_t *tre )$/;"	f
-h_ae	.\parser\tzparse.c	/^h_ae( const struct tre_t *tre )$/;"	f
-h_epreg	.\parser\tzparse.c	/^h_epreg( const struct tre_t *tre )$/;"	f
-h_evt	.\parser\tzparse.c	/^h_evt( const struct tre_t *tre )$/;"	f
-h_none	.\parser\tzparse.c	/^h_none( const struct tre_t *tre )$/;"	f
-h_sym2u8	.\parser\tzparse.c	/^h_sym2u8( const struct tre_t *tre )$/;"	f
-h_symevt	.\parser\tzparse.c	/^h_symevt( const struct tre_t *tre )$/;"	f
-h_symnblk	.\parser\tzparse.c	/^h_symnblk( const struct tre_t *tre )$/;"	f
-h_symntick	.\parser\tzparse.c	/^h_symntick( const struct tre_t *tre )$/;"	f
-h_symnused	.\parser\tzparse.c	/^h_symnused( const struct tre_t *tre )$/;"	f
-h_symrc	.\parser\tzparse.c	/^h_symrc( const struct tre_t *tre )$/;"	f
-h_symu8	.\parser\tzparse.c	/^h_symu8( const struct tre_t *tre )$/;"	f
+h2ns	.\trazer.cpp	98;"	d	file:
+h_1sym	.\parser\tzparse.cpp	/^h_1sym( const void *tre )$/;"	f
+h_2sym	.\parser\tzparse.cpp	/^h_2sym( const void *tre )$/;"	f
+h_2symntick	.\parser\tzparse.cpp	/^h_2symntick( const void *tre )$/;"	f
+h_2symnused	.\parser\tzparse.cpp	/^h_2symnused( const void *tre )$/;"	f
+h_ae	.\parser\tzparse.cpp	/^h_ae( const void *tre )$/;"	f
+h_epreg	.\parser\tzparse.cpp	/^h_epreg( const void *tre )$/;"	f
+h_evt	.\parser\tzparse.cpp	/^h_evt( const void *tre )$/;"	f
+h_none	.\parser\tzparse.cpp	/^h_none( const void *tre )$/;"	f
+h_sym2u8	.\parser\tzparse.cpp	/^h_sym2u8( const void *tre )$/;"	f
+h_symevt	.\parser\tzparse.cpp	/^h_symevt( const void *tre )$/;"	f
+h_symnblk	.\parser\tzparse.cpp	/^h_symnblk( const void *tre )$/;"	f
+h_symntick	.\parser\tzparse.cpp	/^h_symntick( const void *tre )$/;"	f
+h_symnused	.\parser\tzparse.cpp	/^h_symnused( const void *tre )$/;"	f
+h_symobj	.\parser\tzparse.cpp	/^h_symobj( const void *tre )$/;"	f
+h_symrc	.\parser\tzparse.cpp	/^h_symrc( const void *tre )$/;"	f
+h_symsig	.\parser\tzparse.cpp	/^h_symsig( const void *tre )$/;"	f
+h_symtrn	.\parser\tzparse.cpp	/^h_symtrn( const void *tre )$/;"	f
+h_symu8	.\parser\tzparse.cpp	/^h_symu8( const void *tre )$/;"	f
+help_message	.\errors\messages.cpp	/^const char * help_message =$/;"	v
 hoard	.\trazer.cpp	/^	ushort hoard;	\/\/ grain hoard.$/;"	m	file:
 hum	.\trazer.cpp	/^	uchar hum;$/;"	m	file:
-id	.\parser\tzparse.c	/^	unsigned char id;$/;"	m	struct:tre_t	file:
+id	.\parser\evtbl.h	/^	int id;$/;"	m
+id	.\parser\tzparse.cpp	/^	unsigned char id;$/;"	m	struct:tre_t	file:
+idstr	.\parser\evtbl.h	/^	string idstr;$/;"	m
 inform_error	.\common\rerror.c	/^inform_error( const char *fmt, ... )$/;"	f
+init_options	.\options\options.cpp	/^init_options( int argc, char **argv )$/;"	f
 init_pload	.\stream\tplact.cpp	45;"	d	file:
 init_tpl_hal	.\stream\tplhal.cpp	/^init_tpl_hal( void )$/;"	f
 init_tplfsm	.\stream\tplfsm.cpp	/^init_tplfsm( TPL_STATE_T init_st )$/;"	f
 is_esc_code	.\stream\tplact.cpp	/^is_esc_code( uchar data )$/;"	f	file:
 is_from_last_slave	.\stream\tplact.cpp	175;"	d	file:
 is_from_master	.\stream\tplact.cpp	174;"	d	file:
-is_little_endian	.\trazer.cpp	103;"	d	file:
+is_little_endian	.\trazer.cpp	78;"	d	file:
 is_modem	.\stream\uart\serdefs.h	/^	int is_modem;$/;"	m
 is_my_slave_addr	.\stream\tplact.cpp	176;"	d	file:
 is_rcv_inframe	.\stream\tplact.cpp	42;"	d	file:
 is_xmit_inframe	.\stream\tplact.cpp	43;"	d	file:
 lang	.\common\lang.cpp	/^extern unsigned lang = ENGLISH;$/;"	v
+ldebug	.\debug\debug.h	15;"	d
 m	.\trazer.cpp	/^	uchar m;$/;"	m	file:
-main	.\common\getopt.cpp	/^main( int argc, char **argv )$/;"	f
 main	.\trazer.cpp	/^int main(int argc, char **argv)$/;"	f
-make_symtbl	.\parser\tzparse.c	/^make_symtbl( void )$/;"	f	file:
-map_obj	.\parser\tzparse.c	/^map_obj( unsigned long adr )$/;"	f	file:
-map_sig	.\parser\tzparse.c	/^map_sig( TRZE_T sig )$/;"	f	file:
-messages	.\common\getopt.cpp	/^static char * const messages[ NUM_LANG ][ NUM_MSGS ] =$/;"	v	file:
+main	.\utils\getopt.cpp	/^main( int argc, char **argv )$/;"	f
+make_symtbl	.\parser\tzparse.cpp	/^make_symtbl( void )$/;"	f	file:
+map_obj	.\parser\tzparse.cpp	/^map_obj( unsigned long adr )$/;"	f	file:
+map_sig	.\parser\tzparse.cpp	/^map_sig( TRZE_T sig )$/;"	f	file:
+messages	.\utils\getopt.cpp	/^static char * const messages[ NUM_MSGS ] =$/;"	v	file:
 mprintf	.\stream\tplhal.h	20;"	d
 mprintf	.\stream\tplhal.h	22;"	d
-my	.\parser\tzparse.c	/^	ushort my;$/;"	v
-my_equeue	.\parser\tzparse.c	/^	ushort my_equeue;$/;"	v
-my_timer	.\parser\tzparse.c	/^	ushort my_timer;$/;"	v
-my_timer	.\parser\tzparse.c	/^ushort my_timer;$/;"	v
-n2hs	.\trazer.cpp	118;"	d	file:
-n2hs	.\trazer.cpp	122;"	d	file:
-name	.\parser\tzparse.c	/^	const char *name;$/;"	m	struct:symobj_t	file:
-name	.\parser\tzparse.c	/^	const char *name;$/;"	m	struct:symsig_t	file:
-name	.\parser\tzparse.c	/^	const char *name;$/;"	m	struct:tre_t	file:
+my	.\parser\tzparse.cpp	/^	ushort my;$/;"	v
+my_equeue	.\parser\tzparse.cpp	/^	ushort my_equeue;$/;"	v
+my_timer	.\parser\tzparse.cpp	/^static ushort my_timer;$/;"	v	file:
+n2hs	.\trazer.cpp	93;"	d	file:
+n2hs	.\trazer.cpp	97;"	d	file:
+name	.\parser\evtbl.h	/^	string name;$/;"	m
+name	.\parser\tzparse.cpp	/^	const char *name;$/;"	m	struct:symobj_t	file:
+name	.\parser\tzparse.cpp	/^	const char *name;$/;"	m	struct:symsig_t	file:
+name	.\parser\tzparse.cpp	/^	const char *name;$/;"	m	struct:tre_t	file:
 need_escape	.\stream\tplact.cpp	/^need_escape( uchar data )$/;"	f	file:
-objtbl	.\parser\tzparse.c	/^static SYMOBJ_T objtbl[ 128 ];		\/* object symbol table *\/$/;"	v	file:
-optarg	.\common\getopt.cpp	/^char *optarg;$/;"	v
-opterr	.\common\getopt.cpp	/^int	opterr = 1;$/;"	v
-optind	.\common\getopt.cpp	/^int	optind = 1;$/;"	v
-optopt	.\common\getopt.cpp	/^static int	optopt;$/;"	v	file:
+no_options_file	.\errors\messages.cpp	/^const char * no_options_file =$/;"	v
+num_options_cpy	.\options\options.cpp	/^num_options_cpy( char *ptail )$/;"	f	file:
+objtbl	.\parser\tzparse.cpp	/^static SYMOBJ_T objtbl[ 128 ];		\/* object symbol table *\/$/;"	v	file:
+optarg	.\utils\getopt.cpp	/^char *optarg;$/;"	v
+opterr	.\utils\getopt.cpp	/^int	opterr = 1;$/;"	v
+optind	.\utils\getopt.cpp	/^int	optind = 1;$/;"	v
+options	.\options\options.cpp	/^OPTIONS_T options =$/;"	v
+options_enable	.\options\options.cpp	/^options_enable( unsigned *opt, char *ptail )$/;"	f	file:
+optopt	.\utils\getopt.cpp	/^static int	optopt;$/;"	v	file:
+opts	.\options\options.cpp	/^static char *opts = CONSOLE_OPTIONS_DEFINITION; $/;"	v	file:
 parity	.\stream\uart\serdefs.h	/^	int parity;$/;"	m
+parser	.\parser\tzparse.cpp	/^parser( void )$/;"	f	file:
+parser_chk	.\parser\tzparse.cpp	/^parser_chk( void )$/;"	f	file:
+parser_collect	.\parser\tzparse.cpp	/^parser_collect( rkhui8_t d )$/;"	f	file:
+parser_init	.\parser\tzparse.cpp	/^parser_init( void )$/;"	f	file:
 pl	.\stream\tplact.cpp	/^static uchar *pl;$/;"	v	file:
 pload	.\stream\tplink.h	/^	uchar pload[ TPLINK_MAX_PLOAD_SIZE + 2 ];$/;"	m
 pqty	.\trazer.cpp	/^	ushort pqty;     \/\/ pails quantity.$/;"	m	file:
@@ -606,15 +750,21 @@ proc_tpl_wxmit	.\stream\tplact.cpp	/^proc_tpl_wxmit( MUInt input, uchar data )$/
 proc_tpl_xchk	.\stream\tplact.cpp	/^proc_tpl_xchk( MUInt input, uchar data )$/;"	f
 proc_tpl_xmitesc	.\stream\tplact.cpp	/^proc_tpl_xmitesc( MUInt input, uchar data )$/;"	f
 proc_tplfsm	.\stream\tplfsm.cpp	/^proc_tplfsm( MUInt input, uchar data )$/;"	f
+process_event	.\options\options.cpp	/^process_event( FILE *f )$/;"	f	file:
+pstate_props	.\options\options.h	/^	unsigned pstate_props;$/;"	m
+pstate_stimu	.\options\options.h	/^	unsigned pstate_stimu;$/;"	m
 ptpl_fsm	.\stream\tplfsm.cpp	/^static PROCFUNC_T ptpl_fsm;$/;"	v	file:
+ptr	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
 qty	.\stream\tplink.h	/^	ushort qty;$/;"	m
-rctbl	.\parser\tzparse.c	/^static const char *rctbl[] =				\/* dispatch ret code table *\/$/;"	v	file:
+rctbl	.\parser\tzparse.cpp	/^static const char *rctbl[] =				\/* dispatch ret code table *\/$/;"	v	file:
 rcv	.\trazer.cpp	/^MUInt rcv;$/;"	v
+read_option_file	.\options\options.cpp	/^read_option_file( char *option_file )$/;"	f
 ret_tplst	.\stream\tplfsm.cpp	/^ret_tplst( MUInt input, uchar data )$/;"	f
+rgb_printf	.\utils\printrgb.cpp	/^rgb_printf(int color, char* fmt, ...)$/;"	f
 rkh_trc_events	.\common\rkhtrc.h	/^typedef enum rkh_trc_events$/;"	g
 rkh_trc_groups	.\common\rkhtrc.h	/^typedef enum rkh_trc_groups$/;"	g
 rkh_trc_open	.\trazer.cpp	/^rkh_trc_open( void )$/;"	f
-rkheplist	.\parser\tzparse.c	/^	ushort rkheplist[2];$/;"	v
+rkheplist	.\parser\tzparse.cpp	/^	ushort rkheplist[2];$/;"	v
 rkhi16_t	.\common\rkhtype.h	/^typedef signed short 	rkhi16_t;$/;"	t
 rkhi32_t	.\common\rkhtype.h	/^typedef signed long		rkhi32_t;$/;"	t
 rkhi8_t	.\common\rkhtype.h	/^typedef signed char 	rkhi8_t;$/;"	t
@@ -624,6 +774,8 @@ rkhui8_t	.\common\rkhtype.h	/^typedef unsigned char 	rkhui8_t;$/;"	t
 rx	.\stream\uart\serial.h	/^	void (*rx)( unsigned char byte );$/;"	m
 save_escaped	.\stream\tplact.cpp	30;"	d	file:
 schar	.\common\mytypes.h	/^typedef signed char		schar;$/;"	t
+screensize	.\utils\console.cpp	/^POINT screensize;$/;"	v
+sep	.\options\options.cpp	30;"	d	file:
 ser_cback	.\stream\tplhal.cpp	/^static SERIAL_CBACK_T ser_cback =$/;"	v	file:
 ser_rx_isr	.\stream\tplhal.cpp	/^ser_rx_isr( unsigned char byte )$/;"	f	file:
 ser_tx_isr	.\stream\tplhal.cpp	/^ser_tx_isr( void )$/;"	f	file:
@@ -635,11 +787,19 @@ serial_disconnect	.\stream\uart\serial.h	/^	void (*serial_disconnect)( void );$/
 serial_ring	.\stream\uart\serial.h	/^	void (*serial_ring)( void );$/;"	m
 serials	.\stream\uart\sertbl.c	/^SERIAL_T serials[ NUM_SERIALS ] =$/;"	v
 set_language	.\common\lang.cpp	/^set_language( unsigned language )$/;"	f
+set_to_ts	.\parser\tzparse.cpp	133;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	136;"	d	file:
+setrgb	.\utils\console.cpp	/^setrgb(int color)$/;"	f
+show_help	.\options\options.cpp	/^show_help( void )$/;"	f
 show_help	.\trazer.cpp	/^show_help( char *name )$/;"	f	file:
-sig	.\parser\tzparse.c	/^	TRZE_T sig;$/;"	m	struct:symsig_t	file:
-sigtbl	.\parser\tzparse.c	/^static const SYMSIG_T sigtbl[] = 			\/* signal symbol table *\/$/;"	v	file:
+show_version	.\options\options.cpp	/^show_version( void )$/;"	f	file:
+sig	.\parser\tzparse.cpp	/^	TRZE_T sig;$/;"	m	struct:symsig_t	file:
+sigtbl	.\parser\tzparse.cpp	/^static const SYMSIG_T sigtbl[] = 			\/* signal symbol table *\/$/;"	v	file:
 start_rcv	.\stream\tplact.cpp	/^start_rcv( void )$/;"	f	file:
 start_xmit	.\stream\tplact.cpp	/^start_xmit( uchar addr, uchar *pb, ushort qty )$/;"	f
+state	.\parser\tzparse.cpp	/^static rkhui8_t state = PARSER_WFLAG;$/;"	v	file:
+state_props	.\options\options.h	/^	unsigned state_props;$/;"	m
+state_stimu	.\options\options.h	/^	unsigned state_stimu;$/;"	m
 stop_num	.\stream\uart\serdefs.h	/^	int stop_num;$/;"	m
 store_addr	.\stream\tplact.cpp	23;"	d	file:
 store_chk_h	.\stream\tplact.cpp	36;"	d	file:
@@ -647,8 +807,12 @@ store_chk_l	.\stream\tplact.cpp	37;"	d	file:
 store_data	.\stream\tplact.cpp	28;"	d	file:
 store_dcnt_h	.\stream\tplact.cpp	24;"	d	file:
 store_dcnt_l	.\stream\tplact.cpp	25;"	d	file:
-symobj_t	.\parser\tzparse.c	/^typedef struct symobj_t$/;"	s	file:
-symsig_t	.\parser\tzparse.c	/^typedef struct symsig_t$/;"	s	file:
+str2lower	.\utils\utils.cpp	/^str2lower( const char *src )$/;"	f
+str2upper	.\utils\utils.cpp	/^str2upper( const char *src )$/;"	f
+str_options_cpy	.\options\options.cpp	/^str_options_cpy( string *dest, char *ptail )$/;"	f	file:
+symobj_t	.\parser\tzparse.cpp	/^typedef struct symobj_t$/;"	s	file:
+symsig_t	.\parser\tzparse.cpp	/^typedef struct symsig_t$/;"	s	file:
+symstr	.\parser\tzparse.cpp	/^static char symstr[ 16 ];$/;"	v	file:
 tempst	.\stream\tplfsm.cpp	/^static TPL_STATE_T currst, tempst;$/;"	v	file:
 timer_isr	.\stream\tplhal.cpp	/^timer_isr( void )$/;"	f	file:
 tpl	.\stream\tplact.cpp	/^static TPLFRM_T tpl;$/;"	v	file:
@@ -670,18 +834,23 @@ tplink_onxmit_cmp	.\stream\tplink.h	107;"	d
 tplink_onxmit_cmp	.\trazer.cpp	/^tplink_onxmit_cmp( void )$/;"	f
 tplink_send_frame	.\stream\tplink.cpp	/^tplink_send_frame( uchar addr, uchar *pl, ushort qty )$/;"	f
 tpltbl	.\stream\tpltbl.cpp	/^const PROCFUNC_T tpltbl[TPL_NUM_STATES] =$/;"	v
-traces	.\parser\tzparse.c	/^static const TRE_T traces[] =$/;"	v	file:
-trazer_init	.\parser\tzparse.c	/^trazer_init( void )$/;"	f
-trazer_parse	.\parser\tzparse.c	/^trazer_parse( rkhui8_t *tre )$/;"	f
-trb	.\parser\tzparse.c	/^static rkhui8_t *trb;				\/* points to trace event buffer *\/$/;"	v	file:
-tre_t	.\parser\tzparse.c	/^typedef struct tre_t$/;"	s	file:
-trheader	.\parser\tzparse.c	/^	static const char *trheader = "%10d %-4s| %-15s : ";$/;"	v	file:
-trheader	.\parser\tzparse.c	/^	static const char *trheader = "%5d %-4s| %-15s : ";$/;"	v	file:
+tr	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
+traces	.\parser\tzparse.cpp	/^static const TRE_T traces[] =$/;"	v	file:
+trazer_init	.\parser\tzparse.cpp	/^trazer_init( void )$/;"	f
+trazer_parse	.\parser\tzparse.cpp	/^trazer_parse( rkhui8_t d )$/;"	f
+trb	.\parser\tzparse.cpp	/^static rkhui8_t *trb;				\/* points to trace event buffer *\/$/;"	v	file:
+tre_t	.\parser\tzparse.cpp	/^typedef struct tre_t$/;"	s	file:
+trheader	.\parser\tzparse.cpp	/^	static const char *trheader = "%10d [%3d] %-4s| %-15s : ";$/;"	v	file:
+trheader	.\parser\tzparse.cpp	/^	static const char *trheader = "%5d [%3d] %-4s| %-15s : ";$/;"	v	file:
+trix	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
 tst_frame	.\trazer.cpp	/^static TPLFRM_T tst_frame =$/;"	v	file:
 uchar	.\common\mytypes.h	/^typedef unsigned char	uchar;$/;"	t
 uint	.\common\mytypes.h	/^typedef unsigned int	uint;$/;"	t
 ulong	.\common\mytypes.h	/^typedef unsigned long	ulong;$/;"	t
+usage	.\options\options.cpp	/^usage( char *name )$/;"	f
+usage_msg	.\errors\messages.cpp	/^const char * usage_msg =$/;"	v
 ushort	.\common\mytypes.h	/^typedef unsigned short	ushort;$/;"	t
+validate_command	.\options\options.cpp	/^validate_command( const char *pcomm )$/;"	f	file:
 verify_check	.\stream\tplact.cpp	40;"	d	file:
 x	.\trazer.cpp	/^	ushort x;$/;"	m	file:
 xmit_buff	.\trazer.cpp	/^static uchar xmit_buff[sizeof(CBOX_ST)];$/;"	v	file:

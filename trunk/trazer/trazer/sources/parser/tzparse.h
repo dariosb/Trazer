@@ -22,15 +22,34 @@
  * RKH web site:	http://
  * e-mail:			francuccilea@gmail.com
  */
+#ifndef __TZPARSE_H__
+#define __TZPARSE_H__
 
+#include "rkhtype.h"
 
-#ifndef __TRAZER_H__
-#define __TRAZER_H__
+typedef char *(*HDLR_T)( const void *tre );
 
-
-#include "rkh.h"
-
-void trazer_parse( rkhui8_t *tre );
+void trazer_parse( rkhui8_t d );
 void trazer_init( void );
+
+char * h_none( const void *tre );
+char * h_epreg( const void *tre );
+char * h_ae( const void *tre );
+char * h_evt( const void *tre );
+char * h_1sym( const void *tre );
+char * h_2sym( const void *tre );
+char * h_symtrn( const void *tre );
+char * h_symrc( const void *tre );
+char * h_symu8( const void *tre );
+char * h_sym2u8( const void *tre );
+char * h_symevt( const void *tre );
+char * h_symnblk( const void *tre );
+char * h_2symnused( const void *tre );
+char * h_symnused( const void *tre );
+char * h_symobj( const void *tre );
+char * h_symsig( const void *tre );
+char * h_2symntick( const void *tre );
+char * h_symntick( const void *tre );
+
 
 #endif

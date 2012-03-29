@@ -24,14 +24,23 @@
     <Filter Include="Resource Files\stream\uart">
       <UniqueIdentifier>{998fd99d-8c58-4ab2-a357-85cda16667ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\options">
+      <UniqueIdentifier>{128dca45-1c13-4aa6-a577-164f310adb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\debug">
+      <UniqueIdentifier>{8e43c250-e4c7-47bc-b085-86ead69dc120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\utils">
+      <UniqueIdentifier>{2a72b088-896d-4bce-a89c-c9c39dd75943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\errors">
+      <UniqueIdentifier>{cb7d9c97-e38b-4e0d-a1d3-6d40a8ff8493}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\common\getopt.h">
-      <Filter>Resource Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\common\lang.h">
       <Filter>Resource Files\common</Filter>
     </ClInclude>
@@ -95,15 +104,39 @@
     <ClInclude Include="sources\parser\tzparse.h">
       <Filter>Resource Files\parser</Filter>
     </ClInclude>
+    <ClInclude Include="sources\options\options.h">
+      <Filter>Resource Files\options</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\debug\debug.h">
+      <Filter>Resource Files\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\utils\console.h">
+      <Filter>Resource Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\utils\getopt.h">
+      <Filter>Resource Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\utils\printrgb.h">
+      <Filter>Resource Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\utils\utils.h">
+      <Filter>Resource Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\errors\error.h">
+      <Filter>Resource Files\errors</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\errors\messages.h">
+      <Filter>Resource Files\errors</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\parser\evtbl.h">
+      <Filter>Resource Files\parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\common\rerror.c">
-      <Filter>Resource Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\common\getopt.cpp">
       <Filter>Resource Files\common</Filter>
     </ClCompile>
     <ClCompile Include="sources\common\lang.cpp">
@@ -133,7 +166,34 @@
     <ClCompile Include="sources\trazer.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\parser\tzparse.c">
+    <ClCompile Include="sources\options\options.cpp">
+      <Filter>Resource Files\options</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\debug\debug.cpp">
+      <Filter>Resource Files\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\utils\console.cpp">
+      <Filter>Resource Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\utils\getopt.cpp">
+      <Filter>Resource Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\utils\printrgb.cpp">
+      <Filter>Resource Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\utils\utils.cpp">
+      <Filter>Resource Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\errors\error.cpp">
+      <Filter>Resource Files\errors</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\errors\messages.cpp">
+      <Filter>Resource Files\errors</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\evtbl.cpp">
+      <Filter>Resource Files\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\tzparse.cpp">
       <Filter>Resource Files\parser</Filter>
     </ClCompile>
   </ItemGroup>

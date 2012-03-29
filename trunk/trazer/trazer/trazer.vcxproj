@@ -39,9 +39,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)sources\parser;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)sources\errors;$(ProjectDir)sources\debug;$(ProjectDir)sources\parser;$(ProjectDir)sources\utils;$(ProjectDir)sources\options;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)sources\;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)libs\;$(LibraryPath)</LibraryPath>
+    <ReferencePath>.\sources;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -82,7 +83,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\common\getopt.h" />
     <ClInclude Include="sources\common\lang.h" />
     <ClInclude Include="sources\common\mydefs.h" />
     <ClInclude Include="sources\common\myevt.h" />
@@ -92,6 +92,11 @@
     <ClInclude Include="sources\common\rkhtrc.h" />
     <ClInclude Include="sources\common\rkhtype.h" />
     <ClInclude Include="sources\common\timer.h" />
+    <ClInclude Include="sources\debug\debug.h" />
+    <ClInclude Include="sources\errors\error.h" />
+    <ClInclude Include="sources\errors\messages.h" />
+    <ClInclude Include="sources\options\options.h" />
+    <ClInclude Include="sources\parser\evtbl.h" />
     <ClInclude Include="sources\parser\tzparse.h" />
     <ClInclude Include="sources\stdafx.h" />
     <ClInclude Include="sources\stream\tplact.h" />
@@ -104,15 +109,23 @@
     <ClInclude Include="sources\stream\uart\serdefs.h" />
     <ClInclude Include="sources\stream\uart\serial.h" />
     <ClInclude Include="sources\targetver.h" />
+    <ClInclude Include="sources\utils\console.h" />
+    <ClInclude Include="sources\utils\getopt.h" />
+    <ClInclude Include="sources\utils\printrgb.h" />
+    <ClInclude Include="sources\utils\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\common\getopt.cpp" />
     <ClCompile Include="sources\common\lang.cpp" />
     <ClCompile Include="sources\common\rerror.c" />
-    <ClCompile Include="sources\parser\tzparse.c" />
+    <ClCompile Include="sources\debug\debug.cpp" />
+    <ClCompile Include="sources\errors\error.cpp" />
+    <ClCompile Include="sources\errors\messages.cpp" />
+    <ClCompile Include="sources\options\options.cpp" />
+    <ClCompile Include="sources\parser\evtbl.cpp" />
+    <ClCompile Include="sources\parser\tzparse.cpp" />
     <ClCompile Include="sources\stdafx.cpp" />
     <ClCompile Include="sources\stream\tplact.cpp" />
     <ClCompile Include="sources\stream\tplfsm.cpp" />
@@ -121,6 +134,10 @@
     <ClCompile Include="sources\stream\tpltbl.cpp" />
     <ClCompile Include="sources\stream\uart\sertbl.c" />
     <ClCompile Include="sources\trazer.cpp" />
+    <ClCompile Include="sources\utils\console.cpp" />
+    <ClCompile Include="sources\utils\getopt.cpp" />
+    <ClCompile Include="sources\utils\printrgb.cpp" />
+    <ClCompile Include="sources\utils\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
