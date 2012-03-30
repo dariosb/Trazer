@@ -1,5 +1,5 @@
 /*
- * evtbl.c
+ * evtbl.cpp
  */
 #include <string>
 #include <vector>
@@ -11,8 +11,6 @@
 using namespace std;
 
 vector <EVENT_INFO_ST> event_tbl;
-
-string nstring;
 
 #define MKFI( id, gn, nm, fmt, fargs )	\
 	{ { id, "", "", fmt, fargs }, #id, NULL }
@@ -173,6 +171,9 @@ TRE_T *
 find_trevt( unsigned char id )
 {
 	if( id > sizeof(fmt_id_tbl)/sizeof(fmt_id_tbl[0]) )
+		return ( TRE_T* )0;
+	
+	if( fmt_id_tbl[id].evinfo == NULL )
 		return ( TRE_T* )0;
 
 	return &(fmt_id_tbl[id].tre);

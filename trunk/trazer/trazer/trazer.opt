@@ -66,3 +66,61 @@ Group: RQ
 Name: DEPLETE
 Args: rq=%s
 
+Event: RKH_TRCE_RQ_GET_LAST
+Group: RQ
+Name: GET_LAST
+Args: rq=%s
+
+
+#
+# --- Framework (RKH) ------------------------
+#
+
+Event: RKH_TRCE_RKH_EN
+Group: RKH
+Name: ENTER
+
+Event: RKH_TRCE_RKH_EX
+Group: RKH
+Name: EXIT
+
+Event: RKH_TRCE_RKH_EPREG
+Group: RKH
+Name: EPOOL_REG
+Args: epix =%d, ssize=%d, esize=%d
+
+Event: RKH_TRCE_RKH_AE
+Group: RKH
+Name: ALLOC_EVENT
+Args: esize=%d, sig=%s
+
+Event: RKH_TRCE_RKH_GC
+Group: RKH
+Name: GC
+Args: sig=%s
+
+Event: RKH_TRCE_RKH_GCR
+Group: RKH
+Name: GC_RECYCLE
+Args: sig=%s
+
+Event: RKH_TRCE_RKH_DEFER
+Group: RKH
+Name: DEFER
+Args: rq=%s, sig=%s
+
+Event: RKH_TRCE_RKH_RCALL
+Group: RKH
+Name: RECALL
+Args: sma=%s, sig=%s
+
+Event: RKH_TRCE_OBJ
+Group: RKH
+Name: SYM_OBJ
+Args: obj=0x%08X, sym=%s
+
+Event: RKH_TRCE_SIG
+Group: RKH
+Name: SYM_SIG 
+Args: sig=%d, sym=%s
+

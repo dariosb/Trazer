@@ -32,6 +32,7 @@
 #include "myevt.h"
 #include "tzparse.h"
 #include "evtbl.h"
+#include "symbtbl.h"
 //#include "rkhtim.h"
 #include <stdio.h>
 
@@ -159,12 +160,6 @@
 
 
 #define CTE( te )		((const struct tre_t*)(te))
-
-typedef struct symobj_t
-{
-	unsigned long adr;
-	const char *name;
-} SYMOBJ_T;
 
 
 typedef struct symsig_t
@@ -358,7 +353,7 @@ static char symstr[ 16 ];
 	ushort DH;
 	ushort H;
 
-
+#if 0
 static
 void
 make_symtbl( void )
@@ -387,8 +382,9 @@ make_symtbl( void )
 
 	MKO( 0, 			CC( 0 ) );
 }
+#endif
 
-
+#if 0
 static
 const char *
 map_obj( unsigned long adr )
@@ -400,7 +396,7 @@ map_obj( unsigned long adr )
 			return p->name;
 	return CC( 0 );
 }
-
+#endif
 
 static
 const char *
@@ -673,6 +669,7 @@ h_symobj( const void *tre )
 	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
 	s = assemble_str();
 	sprintf( fmt, CTE( tre )->fmt, obj, s );
+	add_to_symtbl( obj, s );
 	return fmt;
 }
 
@@ -757,10 +754,8 @@ parser( void )
 		return;
 	}
 	
-	printf( "Unknown trace event = %s (%d), group = %s\n", 	
-										ftr->name, ftr->id, ftr->group );
-	fprintf( fdbg, "Unknown trace event = %s (%d), group = %s\n",	
-										ftr->name, ftr->id, ftr->group );
+	printf( "\tUnknown trace event = (%d)\n", tr[0] );
+	fprintf( fdbg, "\tUnknown trace event = (%d)\n", tr[0] );
 }
 
 
@@ -857,5 +852,5 @@ trazer_init( void )
 	fprintf( fdbg, "   RKH_TRC_EN_RKH        = %d\n", RKH_TRC_EN_RKH );
 	fprintf( fdbg, "\n---- BEGIN TRACE SESSION ----\n\n" );
 
-	make_symtbl();
+	//make_symtbl();
 }

@@ -131,6 +131,9 @@
     <ClInclude Include="sources\parser\evtbl.h">
       <Filter>Resource Files\parser</Filter>
     </ClInclude>
+    <ClInclude Include="sources\parser\symbtbl.h">
+      <Filter>Resource Files\parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
@@ -194,6 +197,9 @@
       <Filter>Resource Files\parser</Filter>
     </ClCompile>
     <ClCompile Include="sources\parser\tzparse.cpp">
+      <Filter>Resource Files\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\symbtbl.cpp">
       <Filter>Resource Files\parser</Filter>
     </ClCompile>
   </ItemGroup>

@@ -97,6 +97,7 @@
     <ClInclude Include="sources\errors\messages.h" />
     <ClInclude Include="sources\options\options.h" />
     <ClInclude Include="sources\parser\evtbl.h" />
+    <ClInclude Include="sources\parser\symbtbl.h" />
     <ClInclude Include="sources\parser\tzparse.h" />
     <ClInclude Include="sources\stdafx.h" />
     <ClInclude Include="sources\stream\tplact.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="sources\errors\messages.cpp" />
     <ClCompile Include="sources\options\options.cpp" />
     <ClCompile Include="sources\parser\evtbl.cpp" />
+    <ClCompile Include="sources\parser\symbtbl.cpp" />
     <ClCompile Include="sources\parser\tzparse.cpp" />
     <ClCompile Include="sources\stdafx.cpp" />
     <ClCompile Include="sources\stream\tplact.cpp" />

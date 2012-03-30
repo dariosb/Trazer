@@ -41,6 +41,11 @@ typedef struct tre_t
 	HDLR_T fmt_args;
 } TRE_T;
 
+typedef struct symobj_t
+{
+	unsigned long adr;
+	string name;
+} SYMOBJ_T;
 
 void trazer_parse( rkhui8_t d );
 void trazer_init( void );
