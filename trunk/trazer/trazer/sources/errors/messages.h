@@ -28,3 +28,6 @@ extern const char * error_invalid_trace_id;
 extern const char * msg_comm_channel;
 extern const char * error_event_id_unknown;
 extern const char * no_trace_file;
+extern const char * no_config_file;
+extern const char * error_in_config_file;
+extern const char * invalid_com_config;

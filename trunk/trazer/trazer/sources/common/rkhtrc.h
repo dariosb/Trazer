@@ -91,10 +91,10 @@
  * 	corresponding bit in the filter table must be clear. The size of 
  * 	trceftbl[] depends on RKH_TRC_MAX_EVENTS (see rkhcfg.h).
  *
- * 	Trace event number = | 0 | Y | Y | Y | Y | X | X | X |
+ * 	Trace event number = | 0 | Y | Y | Y | Y | X | X | X |\n\n
  *
- * 	Y's:	index into trceftbl[ RKH_TRC_MAX_EVENTS_PER_GROUP ] table.
- * 	X's:	bit position in trceftbl[ Y's ].
+ * 	Y's:	index into trceftbl[ RKH_TRC_MAX_EVENTS_PER_GROUP ] table.\n
+ * 	X's:	bit position in trceftbl[ Y's ].\n\n
  *
  * 	The lower 3 bits (X's) of the trace event number are used to determine 
  * 	the bit position in trceftbl[], while the next four most significant bits 
@@ -119,7 +119,7 @@ extern rkhui8_t trceftbl[ RKH_TRC_MAX_EVENTS_PER_GROUP ];
  * 	Each bit in trcgfilter is used to indicate whenever any trace group 
  * 	is filtered out its events. See RKH_TRC_GROUPS.
  *
- *  bit position = 7   6   5   4   3   2   1   0   -- Groups   
+ *  bit position =   7   6   5   4   3   2   1   0   -- Groups   
  * 	trcgfilter   = | Y | Y | Y | Y | Y | Y | Y | Y |
  * 				   		     |		   	     |   |___ RKH_TRCG_MP
  *						     |			     |_______ RKH_TRCG_RQ
@@ -160,8 +160,7 @@ typedef enum
 
 typedef enum
 {
-	FILTER_ON,
-	FILTER_OFF,
+	FILTER_ON, FILTER_OFF,
 } RKH_TRC_FOPT;
 
 
@@ -939,6 +938,7 @@ void rkh_trc_init( void );
 /**
  * 	\brief
  * 	Starts or stops the tracing session. 
+ *
  * 	The stream can be in two different states: running (RKH_TRC_START) or 
  * 	suspended (RKH_TRC_STOP). These two states determine whether or not the 
  * 	stream is accepting events to be stored.
@@ -1093,7 +1093,8 @@ void rkh_trc_filter_group_( rkhui8_t ctrl, rkhui8_t grp );
  * 	\param evt		trace event. The available groups are enumerated in 
  * 					RKH_TRC_EVENTS.
  */
-void rkh_trc_filter_event_( rkhui8_t rule, rkhui8_t evt );
+
+void rkh_trc_filter_event_( rkhui8_t ctrl, rkhui8_t evt );
 
 
 /**
@@ -1118,6 +1119,12 @@ HUInt rkh_trc_isoff_( rkhui8_t grp, rkhui8_t e );
 
 /**
  * 	\brief
+ * 	Prepare the trace event to record.
+ * 	Store the event ID, the number of sequence, and the timestamp.
+ *
+ * 	\note
+ *	This function should be called indirectly through the macro 
+ *	RKH_TRC_BEGIN.
  */
 
 void rkh_trc_begin( rkhui8_t eid );
@@ -1125,6 +1132,11 @@ void rkh_trc_begin( rkhui8_t eid );
 
 /**
  * 	\brief
+ * 	Terminate the recorded trace event.
+ *
+ * 	\note
+ *	This function should be called indirectly through the macro 
+ *	RKH_TRC_END.
  */
 
 void rkh_trc_end( void );
@@ -1156,9 +1168,10 @@ void rkh_trc_ui32( rkhui32_t d );
 
 /**
  * 	\brief
- * 	Store a string terminated in '\0' into the current trace event buffer.
+ * 	Store a string terminated in '\\0' into the current trace event buffer.
  */
 
 void rkh_trc_str( const char *s );
+
 
 #endif

@@ -71,6 +71,142 @@ Group: RQ
 Name: GET_LAST
 Args: rq=%s
 
+#
+# --- State Machine Application (SMA) ---
+#
+
+Event: RKH_TRCE_SMA_ACT
+Group: SMA
+Name: ACTIVATE
+Args: sma=%s
+
+Event: RKH_TRCE_SMA_TERM
+Group: SMA
+Name: TERMINATE
+Args: sma=%s
+
+Event: RKH_TRCE_SMA_GET
+Group: SMA
+Name: GET_EVENT
+Args: sma=%s, sig=%s 
+
+Event: RKH_TRCE_SMA_FIFO
+Group: SMA
+Name: POST_FIFO
+Args: sma=%s, sig=%s
+
+Event: RKH_TRCE_SMA_LIFO
+Group: SMA
+Name: POST_LIFO
+Args: sma=%s, sig=%s
+
+Event: RKH_TRCE_SMA_REG
+Group: SMA
+Name: REGISTER
+Args: sma=%s, prio=%d
+
+Event: RKH_TRCE_SMA_UNREG
+Group: SMA
+Name: UNREGISTER
+Args: sma=%s, prio=%d
+
+#
+# --- State machine (SM) ---------------- 
+# 
+
+Event: RKH_TRCE_SM_INIT
+Group: SM
+Name: INIT
+Args: sma=%s, istate=%s
+
+Event: RKH_TRCE_SM_CLRH
+Group: SM
+Name: CLEAR_HIST
+Args: sma=%s, hist=%s
+
+Event: RKH_TRCE_SM_DCH
+Group: SM
+Name: DISPATCH
+Args: sma=%s, sig=%s
+
+Event: RKH_TRCE_SM_TRN
+Group: SM
+Name: TRANSITION
+Args: sma=%s, sstate=%s, tstate=%s
+
+Event: RKH_TRCE_SM_STATE
+Group: SM
+Name: CURRENT_STATE
+Args: sma=%s, state=%s
+
+Event: RKH_TRCE_SM_ENSTATE
+Group: SM
+Name: ENTRY_STATE
+Args: sma=%s, state=%s
+
+Event: RKH_TRCE_SM_EXSTATE
+Group: SM
+Name: EXIT_STATE
+Args: sma=%s, state=%s
+
+Event: RKH_TRCE_SM_NENEX
+Group: SM
+Name: NUM_EN_EX
+Args: sma=%s, nentry=%d, nexit=%d
+
+Event: RKH_TRCE_SM_NTRNACT
+Group: SM
+Name: NUM_TRN_ACT
+Args: sma=%s, ntrnaction=%d
+
+Event: RKH_TRCE_SM_CSTATE
+Group: SM
+Name: COMP_STATE
+Args: sma=%s, state=%s
+
+Event: RKH_TRCE_SM_DCH_RC
+Group: SM
+Name: DISPATCH_RCODE
+Args: sma=%s, retcode=%s
+
+#
+# --- Timer (TIM) -----------------------
+#
+
+Event: RKH_TRCE_TIM_INIT
+Group: TIM
+Name: INIT
+Args: timer=%s, sig=%s
+
+Event: RKH_TRCE_TIM_START
+Group: TIM
+Name: START
+Args: timer=%s, sma=%s, ntick=%d
+
+Event: RKH_TRCE_TIM_RESTART
+Group: TIM
+Name: RESTART
+Args: timer=%s, ntick=%5d
+
+Event: RKH_TRCE_TIM_STOP
+Group: TIM
+Name: STOP
+Args: timer=%s
+
+Event: RKH_TRCE_TIM_TOUT
+Group: TIM
+Name: TIMEOUT
+Args: timer=%s
+
+Event: RKH_TRCE_TIM_REM
+Group: TIM
+Name: REMOVED
+Args: timer=%s
+
+Event: RKH_TRCE_TIM_ATTEMPT_STOP
+Group: TIM
+Name: ATTEMPT_STOP
+Args: timer=%s
 
 #
 # --- Framework (RKH) ------------------------
@@ -124,3 +260,4 @@ Group: RKH
 Name: SYM_SIG 
 Args: sig=%d, sym=%s
 
+END_OF_EVTBL

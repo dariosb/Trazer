@@ -24,7 +24,7 @@ debug( const char *fmt, ... )
 		fputc( '\n', stderr );
 		return 1;
 	}
-	return 0;
+	return 1;
 }
 
 int

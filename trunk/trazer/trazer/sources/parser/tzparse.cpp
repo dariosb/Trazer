@@ -1,26 +1,7 @@
 /*
  *	file: trazer.c
  *	Last updated for version: 2.0
- *	Date of the last update:  Mar 19, 2012
- *
- * 	Copyright (C) 2010 Leandro Francucci. All rights reserved.
- *
- * 	RKH is free software: you can redistribute it and/or modify
- * 	it under the terms of the GNU General Public License as published by
- * 	the Free Software Foundation, either version 3 of the License, or
- * 	(at your option) any later version.
- *
- *  RKH is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with RKH, see copying.txt file.
- *
- * Contact information:
- * RKH web site:	http://
- * e-mail:			francuccilea@gmail.com
+ *	Date of the last update:  Apr 03, 2012
  */
 
 
@@ -33,6 +14,8 @@
 #include "tzparse.h"
 #include "evtbl.h"
 #include "symbtbl.h"
+#include "sigtbl.h"
+#include "cfgdep.h"
 //#include "rkhtim.h"
 #include <stdio.h>
 
@@ -45,34 +28,7 @@
 #define TRAZER_NTRG			RKH_TRCG_NGROUP
 #define CC(s)				((const char*)(s))
 
-
-/*
- * 	Application dependent macros and typedefs
- */
-
-#define TRAZER_SIZEOF_SIG			RKH_SIZEOF_EVENT/8
-#define TRAZER_SIZEOF_TSTAMP		RKH_TRC_SIZEOF_TSTAMP/8
-#define TRAZER_SIZEOF_POINTER		RKH_TRC_SIZEOF_POINTER/8
-#define TRAZER_SIZEOF_NTIMER		RKH_TIM_SIZEOF_NTIMER/8
-#define TRAZER_SIZEOF_NBLOCK		RKH_MP_SIZEOF_NBLOCK/8
-#define TRAZER_SIZEOF_NELEM			RKH_RQ_SIZEOF_NELEM/8
-#define TRAZER_SIZEOF_ESIZE			RKH_SIZEOF_ESIZE/8
-#define TRAZER_EN_NSEQ				RKH_TRC_EN_NSEQ
-#define TRAZER_EN_CHK				RKH_TRC_EN_CHK
-#define TRAZER_EN_TSTAMP			RKH_TRC_EN_TSTAMP
-
-
-#if TRAZER_SIZEOF_SIG == 1
-	typedef unsigned char TRZE_T;
-#elif TRAZER_SIZEOF_SIG == 2
-	typedef unsigned short TRZE_T;
-#elif TRAZER_SIZEOF_SIG == 4
-	typedef unsigned long TRZE_T;
-#else
-	typedef unsigned char TRZE_T;
-#endif
-
-
+#if 0
 #if TRAZER_SIZEOF_TSTAMP == 1
 	typedef unsigned char TRZTS_T;
 #elif TRAZER_SIZEOF_TSTAMP == 2
@@ -82,8 +38,11 @@
 #else
 	typedef unsigned char TRZTS_T;
 #endif
+#else
+	typedef unsigned long TRZTS_T;
+#endif
 
-
+#if 0
 #if TRAZER_SIZEOF_NBLOCK == 1
 	typedef unsigned char TRZNB_T;
 #elif TRAZER_SIZEOF_NBLOCK == 2
@@ -93,8 +52,11 @@
 #else
 	typedef unsigned char TRZNB_T;
 #endif
+#else
+	typedef unsigned long TRZNB_T;
+#endif
 
-
+#if 0
 #if TRAZER_SIZEOF_NELEM == 1
 	typedef unsigned char TRZNE_T;
 #elif TRAZER_SIZEOF_NELEM == 2
@@ -104,8 +66,11 @@
 #else
 	typedef unsigned char TRZNE_T;
 #endif
+#else
+	typedef unsigned long TRZNE_T;
+#endif
 
-
+#if 0
 #if TRAZER_SIZEOF_NTIMER == 1
 	typedef unsigned char TRZNT_T;
 #elif TRAZER_SIZEOF_NTIMER == 2
@@ -115,8 +80,11 @@
 #else
 	typedef unsigned char TRZNT_T;
 #endif
+#else
+	typedef unsigned long TRZNT_T;
+#endif
 
-
+#if 0
 #if TRAZER_SIZEOF_ESIZE == 1
 	typedef unsigned char TRZES_T;
 #elif TRAZER_SIZEOF_ESIZE == 2
@@ -126,8 +94,11 @@
 #else
 	typedef unsigned char TRZES_T;
 #endif
+#else
+	typedef unsigned long TRZES_T;
+#endif
 
-
+#if 0
 #if TRAZER_EN_NSEQ == 1
 	#define get_nseq()		nseq = tr[ 1 ]
 	#define set_to_ts()		trb = tr + 2
@@ -135,14 +106,24 @@
 	#define get_nseq()		nseq = 0
 	#define set_to_ts()		trb = tr + 1
 #endif
+#else
 
+	#define get_nseq()		nseq = ( TRAZER_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
+	#define set_to_ts()		trb = ( TRAZER_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
 
+#endif
+
+#if 0
 #if TRAZER_EN_TSTAMP == 1
 	#define get_ts()		( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP )
 #else
 	#define get_ts()		0
 #endif
+#else
+	#define get_ts()		( TRAZER_EN_TSTAMP == 1 ) ? ( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP ) : 0
+#endif
 
+#if 0
 
 #define MKTR( id, gn, nm, fmt, fargs )	\
 				{ id, gn, nm, fmt, fargs }
@@ -157,16 +138,9 @@
 
 #define EOSIGTBL	\
 				{ 0, CC( 0 ) }
-
+#endif
 
 #define CTE( te )		((const struct tre_t*)(te))
-
-
-typedef struct symsig_t
-{
-	TRZE_T sig;
-	const char *name;
-} SYMSIG_T;
 
 #if 0
 static const TRE_T traces[] =
@@ -277,6 +251,7 @@ static const TRE_T traces[] =
 };
 #endif
 
+#if 0
 static const SYMSIG_T sigtbl[] = 			/* signal symbol table */
 {
 	MKS( ZERO,	"ZERO"	),
@@ -294,7 +269,7 @@ static const SYMSIG_T sigtbl[] = 			/* signal symbol table */
 
 	EOSIGTBL
 };
-
+#endif
 
 static const char *rctbl[] =				/* dispatch ret code table */
 {
@@ -307,13 +282,13 @@ static const char *rctbl[] =				/* dispatch ret code table */
 	"RKH_EXCEED_TRC_SEGS"
 };
 
-
+#if 0
 #if TRAZER_SIZEOF_TSTAMP == 2
 	static const char *trheader = "%5d [%3d] %-4s| %-15s : ";
 #else
 	static const char *trheader = "%10d [%3d] %-4s| %-15s : ";
 #endif
-
+#endif
 
 #define PARSER_MAX_SIZE_BUF			64
 
@@ -324,34 +299,15 @@ enum
 };
 
 
-static SYMOBJ_T objtbl[ 128 ];		/* object symbol table */
+//static SYMOBJ_T objtbl[ 128 ];		/* object symbol table */
 static rkhui8_t *trb;				/* points to trace event buffer */
 static char fmt[ 128 ];
 extern FILE *fdbg;
 
-static ushort my_timer;
+//static ushort my_timer;
 static rkhui8_t state = PARSER_WFLAG;
 static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
-
-	ushort my;
-	ushort my_equeue;
-	
-	ushort rkheplist[2];
-	ushort S1;
-	ushort S11;
-	ushort S111;
-	ushort S112;
-	ushort S12;
-	ushort S2;
-	ushort S3;
-	ushort S31;
-	ushort S32;
-	ushort C1;
-	ushort C2;
-	ushort J;
-	ushort DH;
-	ushort H;
 
 #if 0
 static
@@ -397,7 +353,7 @@ map_obj( unsigned long adr )
 	return CC( 0 );
 }
 #endif
-
+#if 0
 static
 const char *
 map_sig( TRZE_T sig )
@@ -409,7 +365,7 @@ map_sig( TRZE_T sig )
 			return p->name;
 	return CC( 0 );
 }
-
+#endif
 #if 0
 static
 const
@@ -534,7 +490,7 @@ h_symnblk( const void *tre )
 	TRZNB_T nblock;
 
 	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	nblock = (TRZNB_T)assemble( sizeof( TRZNB_T ) );
+	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj ), nblock );
 	return fmt;
 }
@@ -548,7 +504,7 @@ h_2symnused( const void *tre )
 
 	obj1 = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
 	obj2 = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	nelem = (TRZNE_T)assemble( sizeof( TRZNE_T ) );
+	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj1 ), map_obj( obj2 ), nelem );
 	return fmt;
 }
@@ -561,7 +517,7 @@ h_symnused( const void *tre )
 	TRZNE_T nelem;
 
 	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	nelem = (TRZNE_T)assemble( sizeof( TRZNE_T ) );
+	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj ), nelem );
 	return fmt;
 }
@@ -575,7 +531,7 @@ h_2symntick( const void *tre )
 
 	obj1 = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
 	obj2 = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	ntick = (TRZNT_T)assemble( sizeof( TRZNT_T ) );
+	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj1 ), map_obj( obj2 ), ntick );
 	return fmt;
 }
@@ -588,7 +544,7 @@ h_symntick( const void *tre )
 	TRZNT_T ntick;
 
 	obj1 = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	ntick = (TRZNT_T)assemble( sizeof( TRZNT_T ) );
+	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj1 ), ntick );
 	return fmt;
 }
@@ -613,7 +569,7 @@ h_evt( const void *tre )
 {
 	TRZE_T e;
 
-	e = (TRZE_T)assemble( sizeof( TRZE_T ) );
+	e = (TRZE_T)assemble( sizeof_trze() );
 	sprintf( fmt, CTE( tre )->fmt, map_sig( e ) );
 	return fmt;
 }
@@ -626,7 +582,7 @@ h_symevt( const void *tre )
 	TRZE_T e;
 
 	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-	e = (TRZE_T)assemble( sizeof( TRZE_T ) );
+	e = (TRZE_T)assemble( sizeof_trze() );
 	sprintf( fmt, CTE( tre )->fmt, map_obj( obj ), map_sig( e ) );
 	return fmt;
 }
@@ -641,7 +597,7 @@ h_epreg( const void *tre )
 
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	u32 = (unsigned long)assemble( sizeof( long ) );
-	esize = (TRZES_T)assemble( sizeof( TRZES_T ) );
+	esize = (TRZES_T)assemble( sizeof_trzes() );
 	sprintf( fmt, CTE( tre )->fmt, u8, u32, esize  );
 	return fmt;
 }
@@ -653,8 +609,8 @@ h_ae( const void *tre )
 	TRZES_T esize;
 	TRZE_T e;
 
-	esize = (TRZES_T)assemble( sizeof( TRZES_T ) );
-	e = (TRZE_T)assemble( sizeof( TRZE_T ) );
+	esize = (TRZES_T)assemble( sizeof_trzes() );
+	e = (TRZE_T)assemble( sizeof_trze() );
 	sprintf( fmt, CTE( tre )->fmt, esize, map_sig( e ) );
 	return fmt;
 }
@@ -680,9 +636,10 @@ h_symsig( const void *tre )
 	TRZE_T e;
 	char *s;
 
-	e = (TRZE_T)assemble( sizeof( TRZE_T ) );
+	e = (TRZE_T)assemble( sizeof_trze() );
 	s = assemble_str();
 	sprintf( fmt, CTE( tre )->fmt, e, s );
+	add_to_sigtbl( e, s );
 	return fmt;
 }
 
@@ -713,6 +670,7 @@ static
 int
 parser_chk( void )
 {
+#if 0
 #if TRAZER_EN_CHK == 1
 	rkhui8_t *p, chk;
 	int i;
@@ -721,6 +679,18 @@ parser_chk( void )
 		chk = (rkhui8_t)( chk + *p );
 	return chk == 0;
 #else
+	return 1;
+#endif
+#else
+	rkhui8_t *p, chk;
+	int i;
+	if( TRAZER_EN_CHK == 1 )
+	{
+		for( chk = 0, p = tr, i = trix; i--; ++p )
+			chk = (rkhui8_t)( chk + *p );
+		return chk == 0;	
+	}
+	
 	return 1;
 #endif
 }

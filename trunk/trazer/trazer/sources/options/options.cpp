@@ -36,6 +36,7 @@ enum
 	NAME_OPT,
 	ARGS_OPT,
 	COMMENT_OPT,
+	ENDOFTBL,
 
 	MAX_OPTS
 };
@@ -50,7 +51,8 @@ static const char *commands[ MAX_OPTS ] =
 	"Event",
 	"Name",
 	"Args",
-	"Comment"
+	"Comment",
+	"END_OF_EVTBL"
 };
 
 /*
@@ -205,6 +207,10 @@ process_event( FILE *f )
 			case COMMENT_OPT:
 				str_options_cpy( &evt.comment, p ); 
 				break;
+			case ENDOFTBL:
+				if( add_to_evtbl( &evt ) < 0 )
+					return -line;
+				break;
 			default:
 				return -line;
 		}
@@ -273,6 +279,8 @@ evaluate_args( int argc, char **argv )
 				break;
 			case 'c':
 				options.instream_comport.assign(optarg);
+				options.baudrate.assign(get_next(argv));
+				options.parity.assign(get_next(argv));
 				break;
 			case 'v':
 				show_version();
@@ -291,5 +299,4 @@ init_options( int argc, char **argv )
 {
 	evaluate_args( argc, argv );
 	read_option_file( OPTIONS_FILE );
-	//set_rkhcfg_opts();
 }

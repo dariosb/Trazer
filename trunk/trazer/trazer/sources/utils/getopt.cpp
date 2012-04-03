@@ -87,6 +87,12 @@ getopt( int argc, char **argv, char *opts )
 	return(c);
 }
 
+char *
+get_next( char **argv )
+{
+	return argv[optind++];
+}
+
 #ifdef TEST_GETOPT
 
 char *args = "b:ijk:";

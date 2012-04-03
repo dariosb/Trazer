@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)sources\errors;$(ProjectDir)sources\debug;$(ProjectDir)sources\parser;$(ProjectDir)sources\utils;$(ProjectDir)sources\options;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)sources\errors;$(ProjectDir)sources\debug;$(ProjectDir)sources\config;$(ProjectDir)sources\parser;$(ProjectDir)sources\utils;$(ProjectDir)sources\options;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)sources\;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)libs\;$(LibraryPath)</LibraryPath>
     <ReferencePath>.\sources;$(ReferencePath)</ReferencePath>
@@ -53,7 +53,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;N_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;__W32STVC08__</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,14 +89,18 @@
     <ClInclude Include="sources\common\mytypes.h" />
     <ClInclude Include="sources\common\rerror.h" />
     <ClInclude Include="sources\common\rkhcfg.h" />
+    <ClInclude Include="sources\common\rkht.h" />
     <ClInclude Include="sources\common\rkhtrc.h" />
     <ClInclude Include="sources\common\rkhtype.h" />
     <ClInclude Include="sources\common\timer.h" />
+    <ClInclude Include="sources\config\cfgdep.h" />
+    <ClInclude Include="sources\config\config.h" />
     <ClInclude Include="sources\debug\debug.h" />
     <ClInclude Include="sources\errors\error.h" />
     <ClInclude Include="sources\errors\messages.h" />
     <ClInclude Include="sources\options\options.h" />
     <ClInclude Include="sources\parser\evtbl.h" />
+    <ClInclude Include="sources\parser\sigtbl.h" />
     <ClInclude Include="sources\parser\symbtbl.h" />
     <ClInclude Include="sources\parser\tzparse.h" />
     <ClInclude Include="sources\stdafx.h" />
@@ -121,11 +125,14 @@
   <ItemGroup>
     <ClCompile Include="sources\common\lang.cpp" />
     <ClCompile Include="sources\common\rerror.c" />
+    <ClCompile Include="sources\config\cfgdep.cpp" />
+    <ClCompile Include="sources\config\config.cpp" />
     <ClCompile Include="sources\debug\debug.cpp" />
     <ClCompile Include="sources\errors\error.cpp" />
     <ClCompile Include="sources\errors\messages.cpp" />
     <ClCompile Include="sources\options\options.cpp" />
     <ClCompile Include="sources\parser\evtbl.cpp" />
+    <ClCompile Include="sources\parser\sigtbl.cpp" />
     <ClCompile Include="sources\parser\symbtbl.cpp" />
     <ClCompile Include="sources\parser\tzparse.cpp" />
     <ClCompile Include="sources\stdafx.cpp" />
@@ -134,6 +141,7 @@
     <ClCompile Include="sources\stream\tplhal.cpp" />
     <ClCompile Include="sources\stream\tplink.cpp" />
     <ClCompile Include="sources\stream\tpltbl.cpp" />
+    <ClCompile Include="sources\stream\uart\myser.cpp" />
     <ClCompile Include="sources\stream\uart\sertbl.c" />
     <ClCompile Include="sources\trazer.cpp" />
     <ClCompile Include="sources\utils\console.cpp" />

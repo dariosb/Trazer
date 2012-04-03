@@ -3,7 +3,12 @@
  * 		Serial definitions
  */
 
-#define NUM_SERIALS		1
+enum
+{
+	TRAZZER_SERIAL,
+	NUM_SERIALS
+};
+
 
 typedef struct
 {

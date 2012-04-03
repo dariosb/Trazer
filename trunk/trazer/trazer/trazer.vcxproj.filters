@@ -36,6 +36,9 @@
     <Filter Include="Resource Files\errors">
       <UniqueIdentifier>{cb7d9c97-e38b-4e0d-a1d3-6d40a8ff8493}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\config">
+      <UniqueIdentifier>{319cdc62-a136-4bc6-b6af-6e02e45bdd26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -134,6 +137,18 @@
     <ClInclude Include="sources\parser\symbtbl.h">
       <Filter>Resource Files\parser</Filter>
     </ClInclude>
+    <ClInclude Include="sources\common\rkht.h">
+      <Filter>Resource Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\parser\sigtbl.h">
+      <Filter>Resource Files\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\config\config.h">
+      <Filter>Resource Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\config\cfgdep.h">
+      <Filter>Resource Files\config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
@@ -201,6 +216,18 @@
     </ClCompile>
     <ClCompile Include="sources\parser\symbtbl.cpp">
       <Filter>Resource Files\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\sigtbl.cpp">
+      <Filter>Resource Files\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\config\config.cpp">
+      <Filter>Resource Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\config\cfgdep.cpp">
+      <Filter>Resource Files\config</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\uart\myser.cpp">
+      <Filter>Resource Files\stream\uart</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

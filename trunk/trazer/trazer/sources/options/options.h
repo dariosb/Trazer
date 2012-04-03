@@ -30,9 +30,11 @@ typedef struct
 	unsigned enable_debug;
 	string instream_file;
 	string instream_comport;
+	string baudrate;
+	string parity;
 } OPTIONS_T;
 
-#define CONSOLE_OPTIONS_DEFINITION	"df:c:hv"
+#define CONSOLE_OPTIONS_DEFINITION	"df:c:::hv"
 
 #define OPTIONS_FILE				"trazer.opt"
 

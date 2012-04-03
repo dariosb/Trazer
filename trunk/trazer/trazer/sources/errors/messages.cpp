@@ -113,3 +113,20 @@ const char * no_trace_file =
 		"\nERROR: Trace file %s doesn't exists...\n"
 };
 
+const char * no_config_file =
+{
+		"\nERROR: Config file %s doesn't exists...\n"
+};
+
+const char * error_in_config_file =
+{
+	"\nError in config file %s on line %d\n"
+};
+
+
+const char * invalid_com_config =
+{
+	"\nInvalid Serial Port configuration\n"
+};
+
+

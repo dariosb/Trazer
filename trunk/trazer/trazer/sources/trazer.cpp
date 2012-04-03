@@ -16,6 +16,7 @@
 #include "tplink.h"
 #include "tplact.h"
 #include "options.h"
+#include "config.h"
 #include "messages.h"
 #include "error.h"
 #include "tzparse.h"
@@ -179,15 +180,17 @@ int
 main(int argc, char **argv)
 {
 	char c;
+	size_t r;
 
 	init_options( argc, argv );
 
+	read_config_file( CONFIG_FILE );
+
 	if( !options.instream_file.empty() )
 	{
-		if( ( f = fopen( options.instream_file.c_str(), "rt" ) ) == NULL )
+		if( ( f = fopen( options.instream_file.c_str(), "rb" ) ) == NULL )
 			fatal_error( no_trace_file, options.instream_file.c_str() );
 	}
-
 
 	if( ( fdbg = fopen( "tzlog.txt", "w+" ) ) == NULL )
 	{
@@ -197,14 +200,24 @@ main(int argc, char **argv)
 
 	trazer_init();
 
-//	tplink_init();
-	while( (c = fgetc(f)) != EOF )
-		trazer_parse( c );
+	if( !options.instream_file.empty() )
+	{
+		while( (r = fread(&c,sizeof(c),sizeof(c),f)) == sizeof(c) )
+		{
+			trazer_parse( c );
+		}
+	}
+	else
+	{
+		init_serial();
+	}
+
+
+	for(;;);
 
 	fflush( fdbg );
 	fclose( fdbg );
 
-	for(;;);
 	return 0;
 }
 

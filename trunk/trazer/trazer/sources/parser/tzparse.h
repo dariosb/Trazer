@@ -30,6 +30,43 @@
 
 using namespace std;
 
+
+/*
+ * 	Application dependent macros and typedefs
+ */
+#if 0
+#define TRAZER_SIZEOF_SIG			RKH_SIZEOF_EVENT/8
+#define TRAZER_SIZEOF_TSTAMP		RKH_TRC_SIZEOF_TSTAMP/8
+#define TRAZER_SIZEOF_POINTER		RKH_TRC_SIZEOF_POINTER/8
+#define TRAZER_SIZEOF_NTIMER		RKH_TIM_SIZEOF_NTIMER/8
+#define TRAZER_SIZEOF_NBLOCK		RKH_MP_SIZEOF_NBLOCK/8
+#define TRAZER_SIZEOF_NELEM			RKH_RQ_SIZEOF_NELEM/8
+#define TRAZER_SIZEOF_ESIZE			RKH_SIZEOF_ESIZE/8
+#define TRAZER_EN_NSEQ				RKH_TRC_EN_NSEQ
+#define TRAZER_EN_CHK				RKH_TRC_EN_CHK
+#define TRAZER_EN_TSTAMP			RKH_TRC_EN_TSTAMP
+
+#endif
+
+#if 0
+
+#if TRAZER_SIZEOF_SIG == 1
+	typedef unsigned char TRZE_T;
+#elif TRAZER_SIZEOF_SIG == 2
+	typedef unsigned short TRZE_T;
+#elif TRAZER_SIZEOF_SIG == 4
+	typedef unsigned long TRZE_T;
+#else
+	typedef unsigned char TRZE_T;
+#endif
+
+#else
+
+typedef	unsigned long TRZE_T;
+
+#endif
+
+
 typedef char *(*HDLR_T)( const void *tre );
 
 typedef struct tre_t
@@ -46,6 +83,12 @@ typedef struct symobj_t
 	unsigned long adr;
 	string name;
 } SYMOBJ_T;
+
+typedef struct symsig_t
+{
+	TRZE_T sig;
+	string name;
+} SYMSIG_T;
 
 void trazer_parse( rkhui8_t d );
 void trazer_init( void );

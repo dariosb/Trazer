@@ -42,6 +42,9 @@ void set_dtr( int device_no );
 void disconnect_serial( int device_no );
 void deinit_serial_hard( int device_no );
 
+
+void init_serial( void );
+
 #ifdef __cplusplus
 }
 #endif
