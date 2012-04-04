@@ -36,9 +36,7 @@ typedef struct
 
 #define CONSOLE_OPTIONS_DEFINITION	"df:c:::hv"
 
-#define OPTIONS_FILE				"trazer.opt"
-
-#define SAME_EXEC_PATH				"."
+#define OPTIONS_FILE				"trazer.evt"
 
 extern OPTIONS_T options;
 

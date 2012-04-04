@@ -16,6 +16,22 @@ void
 add_to_sigtbl( TRZE_T sig, const char * name)
 {
 	SYMSIG_T signal;
+	vector<SYMSIG_T>::iterator i;
+
+	for( i = sig_tbl.begin(); i < sig_tbl.end(); ++i )
+	{
+		if( i->sig == sig )
+		{
+			i->name.assign( name );
+			return;
+		}
+		if( strcmp( i->name.c_str(), name ) == 0 )
+		{
+			i->sig = sig;
+			return;
+		}
+
+	}
 
 	signal.sig = sig;
 	signal.name.assign( name );

@@ -12,6 +12,8 @@ using namespace std;
 
 vector <EVENT_INFO_ST> event_tbl;
 
+#define MAX_EVENT_TBL_SIZE	100
+
 #define MKFI( id, gn, nm, fmt, fargs )	\
 	{ { id, "", "", fmt, fargs }, #id, NULL }
 	
@@ -150,6 +152,15 @@ add_to_evtbl( EVENT_INFO_ST *p )
 	}
 
 
+	if( event_tbl.empty() )
+		event_tbl.reserve( MAX_EVENT_TBL_SIZE );
+
+	if( event_tbl.size() == MAX_EVENT_TBL_SIZE )
+	{
+		printf( "\nThere are no space in Event Table\n" );
+		return -1;
+	}
+
 	event_tbl.push_back( *p );
 
 	fmt_id_tbl[p->fmtid->tre.id].evinfo = &event_tbl.back(); 
@@ -177,4 +188,10 @@ find_trevt( unsigned char id )
 		return ( TRE_T* )0;
 
 	return &(fmt_id_tbl[id].tre);
+}
+
+string *
+get_evt_comment( unsigned char id )
+{
+	return &(fmt_id_tbl[id].evinfo->comment);
 }

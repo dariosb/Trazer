@@ -12,4 +12,7 @@ char * str2upper( const char *src );
 
 long find_str_into_file( FILE* pFile, const char* str);
 
+#define ESC		0x1b
+int test_key( void );
+
 #endif

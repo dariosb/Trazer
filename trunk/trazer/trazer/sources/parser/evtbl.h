@@ -30,4 +30,9 @@ int add_to_evtbl( EVENT_INFO_ST *p );
 
 const TRE_T *find_trevt( unsigned char id );
 
+string * get_evt_comment( unsigned char id );
+
+extern vector <EVENT_INFO_ST> event_tbl;
+
+
 #endif

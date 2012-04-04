@@ -4,6 +4,7 @@
 #include "utils.h"
 #include <string.h>
 #include <ctype.h>
+#include <conio.h>
 #include <stdlib.h>
 
 #define AUXILIAR_BUFFER_SIZE	1024
@@ -112,5 +113,20 @@ find_str_into_file(FILE* pFile, const char* str)
 
     //and return -1
     return -1;
+}
+
+
+int
+test_key( void )
+{
+	int c;
+
+	if( !_kbhit() )
+		return 0;
+	c = _getch();
+	if( c == ESC )
+		exit( EXIT_SUCCESS );
+
+	return c;
 }
 

@@ -23,7 +23,7 @@ ser_rx_isr( unsigned char byte )
 }
 
 void
-init_serial( void )
+init_serial( void (*prcv)(unsigned char byte) )
 {
 	char parbuff[3];
 
@@ -70,10 +70,16 @@ init_serial( void )
 	serials[TRAZZER_SERIAL].is_modem = 0;
 	
 	memset( &serial_callback, 0, sizeof( serial_callback ) );
-	serial_callback.rx = &ser_rx_isr;
+	serial_callback.rx = prcv;
 	init_serial_hard( TRAZZER_SERIAL, &serial_callback );
 	connect_serial( TRAZZER_SERIAL );
 
 }
 
+void
+close_mserial( void )
+{
+	disconnect_serial( TRAZZER_SERIAL );
+	deinit_serial_hard( TRAZZER_SERIAL );
+}
 

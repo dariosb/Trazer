@@ -8,7 +8,7 @@
 #include "mytypes.h"
 #include "rkhtrc.h"
 //#include "rkh.h"
-#include "rkhcfg.h"
+//#include "rkhcfg.h"
 //#include "my.h"
 #include "myevt.h"
 #include "tzparse.h"
@@ -16,16 +16,12 @@
 #include "symbtbl.h"
 #include "sigtbl.h"
 #include "cfgdep.h"
+#include "tzlog.h"
 //#include "rkhtim.h"
 #include <stdio.h>
 
-#define TRAZER_EN 			(RKH_TRC_EN == 1 && ( RKH_TRC_ALL == 1 || 		\
-							RKH_TRC_EN_MP == 1 || RKH_TRC_EN_RQ == 1 || 	\
-							RKH_TRC_EN_SMA == 1 || RKH_TRC_EN_TIM == 1 || 	\
-							RKH_TRC_EN_SM == 1 || RKH_TRC_EN_RKH == 1 ))
-
-#define TRAZER_NTRE			RKH_TRCE_USER
-#define TRAZER_NTRG			RKH_TRCG_NGROUP
+#define TRAZER_NTRE			event_tbl.size()
+//#define TRAZER_NTRG			RKH_TRCG_NGROUP
 #define CC(s)				((const char*)(s))
 
 #if 0
@@ -110,6 +106,24 @@
 
 	#define get_nseq()		nseq = ( TRAZER_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
 	#define set_to_ts()		trb = ( TRAZER_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
+
+static rkhui8_t lastnseq;
+
+static
+int
+verify_nseq( rkhui8_t nseq )
+{
+	int r;
+
+	if( TRAZER_EN_NSEQ == 0 )
+		return 1;
+
+	r = ( (rkhui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
+
+	lastnseq = nseq;
+
+	return r;
+}
 
 #endif
 
@@ -670,18 +684,6 @@ static
 int
 parser_chk( void )
 {
-#if 0
-#if TRAZER_EN_CHK == 1
-	rkhui8_t *p, chk;
-	int i;
-
-	for( chk = 0, p = tr, i = trix; i--; ++p )
-		chk = (rkhui8_t)( chk + *p );
-	return chk == 0;
-#else
-	return 1;
-#endif
-#else
 	rkhui8_t *p, chk;
 	int i;
 	if( TRAZER_EN_CHK == 1 )
@@ -690,9 +692,7 @@ parser_chk( void )
 			chk = (rkhui8_t)( chk + *p );
 		return chk == 0;	
 	}
-	
 	return 1;
-#endif
 }
 
 
@@ -701,31 +701,37 @@ void
 parser( void )
 {
 	const TRE_T *ftr;			/* received trace event */
-//	const FMT_ID_T ftr;
 
 	TRZTS_T ts;
 	rkhui8_t nseq;
+	string *ps;
 
 	if( ( ftr = find_trevt( tr[ 0 ] ) ) != ( TRE_T* )0 )
 	{
 		if( ftr->fmt_args != ( HDLR_T )0 )
 		{
+
 			get_nseq();
+
+			if( !verify_nseq( nseq ) )
+				lprintf( "***** May be have lost trace info, sequence are not correlatives\n" );
+
 			set_to_ts();		/* from timestamp field */
 			ts = get_ts();
-			//printf( trheader, ts, nseq, ftr->group, ftr->name );
-			printf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-			//fprintf( fdbg, trheader, ts, nseq, ftr->group, ftr->name );
-			fprintf( fdbg, trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-			//printf( fdbg, trheader, ts, nseq, ftr->evinfo->group.c_str(), ftr->evifo->name.c_str() );
-			printf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
-			fprintf( fdbg, "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+			lprintf( "%s", (*ftr->fmt_args)( CTE( ftr ) ) );
+			ps = get_evt_comment( tr[0] );
+			if( !ps->empty() )
+				lprintf( "  : %s\n", ps->c_str() );
+			else
+				lprintf( "\n" );
+
+
 		}
 		return;
 	}
 	
-	printf( "\tUnknown trace event = (%d)\n", tr[0] );
-	fprintf( fdbg, "\tUnknown trace event = (%d)\n", tr[0] );
+	lprintf( "***** Unknown trace event = (%d)\n", tr[0] );
 }
 
 
@@ -744,8 +750,14 @@ trazer_parse( rkhui8_t d )
 		case PARSER_COLLECT:
 			if( d == RKH_FLG )
 			{
-				if( trix > 0 && parser_chk() )
-					parser();
+				if( trix > 0 )
+				{
+					if( parser_chk() )
+						parser();
+					else
+						lprintf( "***** Stream Checksum Error\n" );
+				}
+
 				parser_init();
 			}
 			else if( d == RKH_ESC )
@@ -774,53 +786,29 @@ trazer_parse( rkhui8_t d )
 void
 trazer_init( void )
 {
-	printf( "---- RKH trace log session ----\n\n" );
-	printf( "Date = "__DATE__ __TIME__"\n" );
-	printf( "Number of trace events = %d\n", TRAZER_NTRE );
-	printf( "Number of trace groups = %d\n", TRAZER_NTRG );
-	printf( "Configurations = \n\n" );
-	printf( "   TRAZER_SIZEOF_SIG     = %d\n", TRAZER_SIZEOF_SIG );
-	printf( "   TRAZER_SIZEOF_TSTAMP  = %d\n", TRAZER_SIZEOF_TSTAMP );
-	printf( "   TRAZER_SIZEOF_POINTER = %d\n", TRAZER_SIZEOF_POINTER );
-	printf( "   TRAZER_SIZEOF_NTIMER  = %d\n", TRAZER_SIZEOF_NTIMER );
-	printf( "   TRAZER_SIZEOF_NBLOCK  = %d\n", TRAZER_SIZEOF_NBLOCK );
-	printf( "   TRAZER_SIZEOF_NELEM   = %d\n", TRAZER_SIZEOF_NELEM );
-	printf( "   TRAZER_SIZEOF_ESIZE   = %d\n", TRAZER_SIZEOF_ESIZE );
-	printf( "   TRAZER_EN_NSEQ        = %d\n", TRAZER_EN_NSEQ );
-	printf( "   TRAZER_EN_CHK         = %d\n", TRAZER_EN_CHK );
-	printf( "   TRAZER_EN_TSTAMP      = %d\n", TRAZER_EN_TSTAMP );
-	printf( "   RKH_TRC_ALL           = %d\n", RKH_TRC_ALL );
-	printf( "   RKH_TRC_EN_MP         = %d\n", RKH_TRC_EN_MP );
-	printf( "   RKH_TRC_EN_RQ         = %d\n", RKH_TRC_EN_RQ );
-	printf( "   RKH_TRC_EN_SMA        = %d\n", RKH_TRC_EN_SMA );
-	printf( "   RKH_TRC_EN_TIM        = %d\n", RKH_TRC_EN_TIM );
-	printf( "   RKH_TRC_EN_SM         = %d\n", RKH_TRC_EN_SM );
-	printf( "   RKH_TRC_EN_RKH        = %d\n", RKH_TRC_EN_RKH );
-	printf( "\n---- BEGIN TRACE SESSION ----\n\n" );
-
-	fprintf( fdbg, "---- RKH trace log session ----\n" );
-	fprintf( fdbg, "date : "__DATE__ __TIME__"\n" );
-	fprintf( fdbg, "Number of trace events = %d\n", TRAZER_NTRE );
-	fprintf( fdbg, "Number of trace groups = %d\n", TRAZER_NTRG );
-	fprintf( fdbg, "Configurations = \n\n" );
-	fprintf( fdbg, "   TRAZER_SIZEOF_SIG     = %d\n", TRAZER_SIZEOF_SIG );
-	fprintf( fdbg, "   TRAZER_SIZEOF_TSTAMP  = %d\n", TRAZER_SIZEOF_TSTAMP );
-	fprintf( fdbg, "   TRAZER_SIZEOF_POINTER = %d\n", TRAZER_SIZEOF_POINTER );
-	fprintf( fdbg, "   TRAZER_SIZEOF_NTIMER  = %d\n", TRAZER_SIZEOF_NTIMER );
-	fprintf( fdbg, "   TRAZER_SIZEOF_NBLOCK  = %d\n", TRAZER_SIZEOF_NBLOCK );
-	fprintf( fdbg, "   TRAZER_SIZEOF_NELEM   = %d\n", TRAZER_SIZEOF_NELEM );
-	fprintf( fdbg, "   TRAZER_SIZEOF_ESIZE   = %d\n", TRAZER_SIZEOF_ESIZE );
-	fprintf( fdbg, "   TRAZER_EN_NSEQ        = %d\n", TRAZER_EN_NSEQ );
-	fprintf( fdbg, "   TRAZER_EN_CHK         = %d\n", TRAZER_EN_CHK );
-	fprintf( fdbg, "   TRAZER_EN_TSTAMP      = %d\n", TRAZER_EN_TSTAMP );
-	fprintf( fdbg, "   RKH_TRC_ALL        	 = %d\n", RKH_TRC_ALL );
-	fprintf( fdbg, "   RKH_TRC_EN_MP         = %d\n", RKH_TRC_EN_MP );
-	fprintf( fdbg, "   RKH_TRC_EN_RQ         = %d\n", RKH_TRC_EN_RQ );
-	fprintf( fdbg, "   RKH_TRC_EN_SMA        = %d\n", RKH_TRC_EN_SMA );
-	fprintf( fdbg, "   RKH_TRC_EN_TIM        = %d\n", RKH_TRC_EN_TIM );
-	fprintf( fdbg, "   RKH_TRC_EN_SM         = %d\n", RKH_TRC_EN_SM );
-	fprintf( fdbg, "   RKH_TRC_EN_RKH        = %d\n", RKH_TRC_EN_RKH );
-	fprintf( fdbg, "\n---- BEGIN TRACE SESSION ----\n\n" );
-
-	//make_symtbl();
+	lastnseq = 255;
+	lprintf( "---- RKH trace log session ----\n\n" );
+	lprintf( "Date = "__DATE__" "__TIME__"\n\n" );
+	lprintf( "\nTrace Setup\n\n" );
+	lprintf( "   Trace events quantity = %d\n", TRAZER_NTRE );
+//	lprintf( "Number of trace groups = %d\n", TRAZER_NTRG );
+	lprintf( "   TRAZER_SIZEOF_SIG     = %d\n", TRAZER_SIZEOF_SIG );
+	lprintf( "   TRAZER_SIZEOF_TSTAMP  = %d\n", TRAZER_SIZEOF_TSTAMP );
+	lprintf( "   TRAZER_SIZEOF_POINTER = %d\n", TRAZER_SIZEOF_POINTER );
+	lprintf( "   TRAZER_SIZEOF_NTIMER  = %d\n", TRAZER_SIZEOF_NTIMER );
+	lprintf( "   TRAZER_SIZEOF_NBLOCK  = %d\n", TRAZER_SIZEOF_NBLOCK );
+	lprintf( "   TRAZER_SIZEOF_NELEM   = %d\n", TRAZER_SIZEOF_NELEM );
+	lprintf( "   TRAZER_SIZEOF_ESIZE   = %d\n", TRAZER_SIZEOF_ESIZE );
+	lprintf( "   TRAZER_EN_NSEQ        = %d\n", TRAZER_EN_NSEQ );
+	lprintf( "   TRAZER_EN_CHK         = %d\n", TRAZER_EN_CHK );
+	lprintf( "   TRAZER_EN_TSTAMP      = %d\n", TRAZER_EN_TSTAMP );
+	lprintf( "   RKH_TRC_ALL           = %d\n", RKH_TRC_ALL );
+	lprintf( "   RKH_TRC_EN_MP         = %d\n", RKH_TRC_EN_MP );
+	lprintf( "   RKH_TRC_EN_RQ         = %d\n", RKH_TRC_EN_RQ );
+	lprintf( "   RKH_TRC_EN_SMA        = %d\n", RKH_TRC_EN_SMA );
+	lprintf( "   RKH_TRC_EN_TIM        = %d\n", RKH_TRC_EN_TIM );
+	lprintf( "   RKH_TRC_EN_SM         = %d\n", RKH_TRC_EN_SM );
+	lprintf( "   RKH_TRC_EN_RKH        = %d\n", RKH_TRC_EN_RKH );
+	//lprintf( "\n---- BEGIN TRACE SESSION ----\n\n" );
+	lprintf( "\n" );
 }

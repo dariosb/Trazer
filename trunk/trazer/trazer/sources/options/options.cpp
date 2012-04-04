@@ -231,12 +231,10 @@ read_option_file( char *option_file )
 
 	if( ( f = fopen( option_file, "rt" ) ) == NULL )
 	{
-		printf( no_options_file, option_file );
 		fatal_error( no_options_file, option_file );
 	}
 	else
 	{
-		dprintf( getting_options_from, option_file );
 		if( ( line = process_event( f ) ) < 0 )
 		{
 			fclose( f );

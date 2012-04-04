@@ -16,6 +16,21 @@ void
 add_to_symtbl( unsigned long obj, const char *sym )
 {
 	SYMOBJ_T symbol;
+	vector<SYMOBJ_T>::iterator i;
+
+	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
+	{
+		if( i->adr == obj )
+		{
+			i->name.assign( sym );
+			return;
+		}
+		if( strcmp(i->name.c_str(), sym ) == 0 )
+		{
+			i->adr = obj;
+			return;
+		}
+	}
 
 	symbol.adr = obj;
 	symbol.name.assign( sym );

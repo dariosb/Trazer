@@ -59,27 +59,6 @@
     <ClInclude Include="sources\common\timer.h">
       <Filter>Resource Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\stream\tplact.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tplcfg.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tpldefs.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tplfsm.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tplhal.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tplink.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\stream\tpltbl.h">
-      <Filter>Resource Files\stream</Filter>
-    </ClInclude>
     <ClInclude Include="sources\stream\uart\serdefs.h">
       <Filter>Resource Files\stream\uart</Filter>
     </ClInclude>
@@ -149,6 +128,9 @@
     <ClInclude Include="sources\config\cfgdep.h">
       <Filter>Resource Files\config</Filter>
     </ClInclude>
+    <ClInclude Include="sources\parser\tzlog.h">
+      <Filter>Resource Files\parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
@@ -159,21 +141,6 @@
     </ClCompile>
     <ClCompile Include="sources\common\lang.cpp">
       <Filter>Resource Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\stream\tplact.cpp">
-      <Filter>Resource Files\stream</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\stream\tplfsm.cpp">
-      <Filter>Resource Files\stream</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\stream\tplhal.cpp">
-      <Filter>Resource Files\stream</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\stream\tplink.cpp">
-      <Filter>Resource Files\stream</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\stream\tpltbl.cpp">
-      <Filter>Resource Files\stream</Filter>
     </ClCompile>
     <ClCompile Include="sources\stream\uart\sertbl.c">
       <Filter>Resource Files\stream\uart</Filter>
@@ -228,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="sources\stream\uart\myser.cpp">
       <Filter>Resource Files\stream\uart</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\parser\tzlog.cpp">
+      <Filter>Resource Files\parser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

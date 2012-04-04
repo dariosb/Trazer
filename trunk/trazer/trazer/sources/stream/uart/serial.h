@@ -43,7 +43,8 @@ void disconnect_serial( int device_no );
 void deinit_serial_hard( int device_no );
 
 
-void init_serial( void );
+void init_serial( void (*prcv)(unsigned char byte) );
+void close_mserial( void );
 
 #ifdef __cplusplus
 }

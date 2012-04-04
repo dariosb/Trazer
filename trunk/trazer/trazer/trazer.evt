@@ -1,16 +1,16 @@
 #
-# Trazer Tool configuration file
+# Trazer Tool Event Table
 #
 # The format of this file is as follows
 # - #'s are comments
 # - Event blocks are are grouped by framework service type.
-# - Each event must be defined as a member of group,
-#   and defined into a Group directive declaration.
+# - Each event must be defined as a member of group.
 # - Event definition:
 # 		Event: Event id.
 # 		Name: Alias.
 #		Args: arguments to log, in the order that are traced.
 #		Comment: optional descriptive comment.
+# - END_OF_EVTBL label must be writed at end of event definitions
 #
 
 #
@@ -74,7 +74,6 @@ Args: rq=%s
 #
 # --- State Machine Application (SMA) ---
 #
-
 Event: RKH_TRCE_SMA_ACT
 Group: SMA
 Name: ACTIVATE
@@ -113,7 +112,6 @@ Args: sma=%s, prio=%d
 #
 # --- State machine (SM) ---------------- 
 # 
-
 Event: RKH_TRCE_SM_INIT
 Group: SM
 Name: INIT
@@ -172,7 +170,6 @@ Args: sma=%s, retcode=%s
 #
 # --- Timer (TIM) -----------------------
 #
-
 Event: RKH_TRCE_TIM_INIT
 Group: TIM
 Name: INIT
@@ -211,7 +208,6 @@ Args: timer=%s
 #
 # --- Framework (RKH) ------------------------
 #
-
 Event: RKH_TRCE_RKH_EN
 Group: RKH
 Name: ENTER
