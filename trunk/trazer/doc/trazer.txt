@@ -1,0 +1,651 @@
+/**
+\anchor main_page
+\mainpage Trazer Reference Manual
+
+\image html trazer.png
+
+- \ref qspy_intro_sec
+- \ref trazer_command
+- \ref trazer_config
+- \ref trazer_evtbl
+- \subpage trazer_human_format
+- \ref rev_page_trazer
+
+\section qspy_intro_sec Introduction
+
+%Trazer is a real-time tracing instrumentation that works with the RKH Framework 
+built in trace facility. Trace allows you to gain visibility into your application 
+by selectively logging almost all interesting events occurring within state machines, the framework, and your
+application code.
+%Trazer helps you to faster troubleshooting especially on complex problems where a debugger is not sufficient,
+by providing a simple consolidated, human-readable textual output.
+
+Given the RKH cross plataform portability, trace data may come from 8, 16, or 32 bit machines. In order to that %Trazer need to 
+be configured to support this diversity of plataform and the wide range of RKH framework configurations. 
+
+%Trazer requiere these setups:
+
+- \ref trazer_command command-line parameters to configure comunication link 
+- \ref trazer_config configuration file (trazer.cfg) to configure all target dependencies, such as pointer sizes, signal sizes, etc
+- \ref trazer_evtbl trace event table (trazer.evt), to define parseable trace events and custom information.
+
+\section trazer_command Command-Line Parameters
+
+<TABLE SUMMARY="Trazer Command Line" cellSpacing=4 cellPadding=1 border=0
+ALIGN="center" VALIGN="middle">
+  <TR bgColor="#c8cedc">
+    <TD><B>&nbsp;Option</B></TD>
+    <TD><B>&nbsp;Example</B></TD>
+    <TD><B>&nbsp;Comments</B></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>-h</TD>
+    <TD>-h</TD>
+    <TD>Help. Prints the summary of options</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>-q</TD>
+    <TD>-q</TD>
+    <TD>Quiet mode (no stdout output)</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>-v</TD>
+    <TD>-v</TD>
+    <TD>Visualize Traze version and compatibility with RKH framework</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>-o</TD>
+    <TD>-o trazer.txt</TD>
+    <TD>Produce output to the specified file</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>-c</TD>
+    <TD>-c COM1 115200 8N1</TD>
+    <TD>COM port and baudrate selection. Not compatible with -t, -f</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>-t</TD>
+    <TD>-t 6602</TD>
+    <TD>TCP/IP server and port number. Not compatible with -c, -f</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>-f</TD>
+    <TD>-f trace.bin</TD>
+    <TD>File input selection. Not compatible with -c, -t</TD>
+  </TR>
+
+</TABLE>
+
+
+\section trazer_config Config file "trazer.cfg"
+
+%Traze is designed to work with all possible target CPU, which requires a wide range of configurability. 
+For example, for any given target CPU, Trazer must "know" the size of object pointers, event size, timestamp size and so on. 
+You must to provide this information through "trazer.cfg", wich content is summarized in the following table:
+
+<TABLE SUMMARY="Trazer config" cellSpacing=4 cellPadding=1 border=0
+ALIGN="center" VALIGN="middle">
+  <TR bgColor="#c8cedc">
+    <TD><B>&nbsp;Parameter</B></TD>
+    <TD><B>&nbsp;Valid Values</B></TD>
+    <TD><B>&nbsp;Must match RKH config (rkhcfg.h)</B></TD>
+    <TD><B>&nbsp;Comments</B></TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>\c #TRAZER_SIZEOF_SIG</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_SIZEOF_EVENT</TD>
+    <TD>Event Signal size in bytes.</TD>
+  </TR>
+
+</TABLE>
+
+
+The QSPY host application is designed to work with all possible target CPUs
+and data links, which requires a wide range of configurability. For example,
+for any given target CPU the QSPY application must "know" the size of object
+pointers, function pointers, event signals, timestamp size and so on. You
+provide this information to QSPY by means of command-line parameters, which
+are summarized in table above. Please note that the options are case sensitive.
+
+
+Your main concern when invoking QSPY is to match exactly the target system you
+are using. The fourth column of the table above lists the configuration macros
+used by the target system as well as the platform-specific QP header files
+where those macros are defined. You need to use the corresponding QSPY
+command-line option only when the QP macro differs from the default. The
+default values assumed by QSPY are consistent with the defaults used in QP.
+
+\note When you do not match the QSPY host application with the QS target
+component, the QSPY application will be unable to parse correctly the
+mismatched trace records and will start generating the following errors:
+
+\verbatim
+     ********** 028: Error xx bytes unparsed
+     ********** 014: Error -yy bytes unparsed
+\endverbatim
+
+The number in front of the error indicates the Record ID of the trace record
+that could not be parsed.
+
+
+<HR>
+
+\section trazer_licensing Licensing Trazer
+
+Trazer application is licensed the same way as all other components of
+the RKH framework. See section \ref licensing.
+
+Copyright &copy; 2010-2012 Vortex Technologies. All Rights Reserved.\n
+
+e-mail: dariosb@gmail.com
+*/
+
+/**
+\page trazer_human_format Human Readable Output
+
+The QSPY host application is just a simple console-type program without any
+fancy user interface. QSPY application displays the trace data in a
+human-readable textual format. The following listing shows fragments of such
+a data log generated from the DOS/QK version of the DPP application.
+
+\note The QSPY host application supports also exporting data to the powerful
+MATLAB/Octave environment, as described in Section \ref qspy_matlab.
+
+\verbatim
+QSPY host application 4.2.00
+Copyright (c) Quantum Leaps, LLC.
+Mon Aug 01 17:38:23 2011
+
+-T 4
+-O 4
+-F 4
+-S 1
+-E 2
+-Q 1
+-P 2
+-B 2
+-C 2
+
+           Obj Dic: 16CA18D8->l_smlPoolSto
+           Obj Dic: 16CA1900->l_tableQueueSto
+           Obj Dic: 16CA1914->l_philoQueueSto[0]
+. . . . . .
+           EQ.INIT: Obj=l_tableQueueSto Len= 5
+0000000000 AO.ADD : Active=16CA1CB8 Prio= 6
+           Obj Dic: 16CA1CB8->&l_table
+           Fun Dic: 141E0006->&QHsm_top
+           Fun Dic: 12DA00C9->&Table_initial
+           Fun Dic: 12DA020B->&Table_serving
+           Sig Dic: 00000008,Obj=16CA1CB8 ->HUNGRY_SIG
+0000000000 AO.SUB : Active=l_table Sig=DONE_SIG
+0000000000 AO.SUB : Active=l_table Sig=TERMINATE_SIG
+           Q_INIT : Obj=l_table Source=QHsm_top Target=Table_serving
+0000000000 ==>Init: Obj=l_table New=Table_serving
+0000070346 QF_isrE: IsrNest= 1, CurrPrio=255
+           TICK   : Ctr=         1
+0000070367 QF_isrX: IsrNest= 1, CurrPrio=255
+0000135566 QF_isrE: IsrNest= 1, CurrPrio=255
+           TICK   : Ctr=         2
+0000135581 QF_isrX: IsrNest= 1, CurrPrio=255
+. . . . .
+0000461783 QF_isrE: IsrNest= 1, CurrPrio=255
+           TICK   : Ctr=         7
+           TE.ADRM: Obj=l_philo[1].timeEvt Act=l_philo[1]
+0000461797 TE.POST: Obj=l_philo[1].timeEvt Sig=TIMEOUT_SIG Act=l_philo[1]
+0000461808 AO.FIFO: Obj=l_philo[1] Evt(Sig=TIMEOUT_SIG, Pool=0, Ref= 0)
+>          Queue(nUsed=  5, nMax=  5)
+0000461824 QF_isrX: IsrNest= 1, CurrPrio=255
+0000461836 AO.GETL: Active= l_philo[1] Evt(Sig=TIMEOUT_SIG, Pool=0, Ref= 0)
+0000461850 NEW    : Evt(Sig=HUNGRY_SIG, size=    3)
+0000461862 MP.GET : Obj=l_smlPoolSto nFree=   9 nMin=   9
+0000461874 AO.FIFO: Obj=l_table Evt(Sig=HUNGRY_SIG, Pool=1, Ref= 0)
+>          Queue(nUsed=  5, nMax=  5)
+0000461886 AO.GETL: Active= l_table Evt(Sig=HUNGRY_SIG, Pool=1, Ref= 1)
+0000461906 NEW    : Evt(Sig=EAT_SIG, size=    3)
+\endverbatim
+
+The QS trace log shown in the listing above contains quite detailed
+information, because most QS records are enabled (are not blocked in the QS
+filters). The following bullet items highlight the most interesting parts of
+the trace and illustrate how you can interpret the trace data:
+
+- The QS log always contains the QSPY application version number, the date and
+time of the run, and all the options explicitly provided to the QSPY host
+application.
+- A log typically starts with the dictionary records that provide a mapping
+between addresses of various objects in memory and their symbolic names. The
+dictionary entries don't have timestamps.
+- After the dictionaries, you see the active object initialization. For
+example, the EQ.INIT record indicates event queue initialization with the
+l_tableQueueSto buffer. After this the AO.ADD trace record you see adding the
+Table object with priority 6. At this point, the time tick interrupt is not
+configured, so all timestamps are 0000000000 (timestamps are always placed in
+the first 8 columns).
+- Active object initialization can contain dictionary entries for items that
+are encapsulated within the active object. For example initialization of Table
+inserts an object dictionary entry for \c l_table object and three function
+dictionary entries for state handlers \c QHsm_top, \c Table_initial and
+\c Table_serving. Finally, the top-most initial transition is taken from \c
+QHsm_top to \c Table_serving.
+- After the active object initialization, interrupts are enabled, and the
+first Tick interrupt arrives at the timestamp 0000070346. You can find out the
+type of the interrupt by the unique priority number. For example, the priority
+of the Tick interrupt is 0xFF == 255.
+
+
+\section QSPY_QEP QEP Trace Records
+
+<TABLE SUMMARY="QEP Records" cellSpacing=4 cellPadding=1 border=0 width="95%">
+  <TR bgColor="#c8cedc">
+    <TD><B>Rec.\n Num.</B></TD>
+    <TD><B>Rec.\n Enum.</B></TD>
+    <TD><B>QSPY\n Abbrev.\n</B></TD>
+    <TD><B>Comment</B></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>0</TD>
+    <TD>#QS_QEP_STATE_EMPTY</TD>
+    <TD></TD>
+    <TD></TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>1</TD>
+    <TD>#QS_QEP_STATE_ENTRY</TD>
+    <TD>Q_ENTRY</TD>
+    <TD>a state was entered</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>2</TD>
+    <TD>#QS_QEP_STATE_EXIT</TD>
+    <TD>Q_EXIT</TD>
+    <TD>a state was exited</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>3</TD>
+    <TD>#QS_QEP_STATE_INIT</TD>
+    <TD>Q_INIT</TD>
+    <TD>an intial transition was taken in a state</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>4</TD>
+    <TD>#QS_QEP_INIT_TRAN</TD>
+    <TD>==>Init</TD>
+    <TD>the top-most initial transition was taken</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>5</TD>
+    <TD>#QS_QEP_INTERN_TRAN</TD>
+    <TD>Intern</TD>
+    <TD>an internal transition was taken</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>6</TD>
+    <TD>#QS_QEP_TRAN</TD>
+    <TD>==>Tran</TD>
+    <TD>a regular transition was taken</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>7</TD>
+    <TD>#QS_QEP_IGNORED</TD>
+    <TD>Ignored</TD>
+    <TD>an event was ignored (silently discarded)</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>8</TD>
+    <TD>#QS_QEP_DISPATCH</TD>
+    <TD>Dispatch</TD>
+    <TD>an event was dispatched (begin of RTC step)</TD>
+  </TR>
+</TABLE>
+
+\section QSPY_QF QF Trace Records
+
+<TABLE SUMMARY="QF Records" cellSpacing=4 cellPadding=1 border=0 width="95%">
+  <TR bgColor="#c8cedc">
+    <TD><B>Rec.\n Num.</B></TD>
+    <TD><B>Rec.\n Enum.</B></TD>
+    <TD><B>QSPY\n Abbrev.\n</B></TD>
+    <TD><B>Comment</B></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>10</TD>
+    <TD>#QS_QF_ACTIVE_ADD</TD>
+    <TD>ADD</TD>
+    <TD>an AO has been added to QF (started)</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>11</TD>
+    <TD>#QS_QF_ACTIVE_REMOVE</TD>
+    <TD>REM</TD>
+    <TD>an AO has been removed from QF (stopped)</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>12</TD>
+    <TD>#QS_QF_ACTIVE_SUBSCRIBE</TD>
+    <TD>SUB</TD>
+    <TD>an AO subscribed to an event</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>13</TD>
+    <TD>#QS_QF_ACTIVE_UNSUBSCRIBE</TD>
+    <TD>USUB</TD>
+    <TD>an AO unsubscribed to an event</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>14</TD>
+    <TD>#QS_QF_ACTIVE_POST_FIFO</TD>
+    <TD>AO.FIFO</TD>
+    <TD>an event was posted (FIFO) directly to AO</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>15</TD>
+    <TD>#QS_QF_ACTIVE_POST_LIFO</TD>
+    <TD>AO.LIFO</TD>
+    <TD>an event was posted (LIFO) directly to AO</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>16</TD>
+    <TD>#QS_QF_ACTIVE_GET</TD>
+    <TD>AO.GET</TD>
+    <TD>AO got an event and its queue is still not empty</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>17</TD>
+    <TD>#QS_QF_ACTIVE_GET_LAST</TD>
+    <TD>AO.GETL</TD>
+    <TD>AO got an event and its queue is empty</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>18</TD>
+    <TD>#QS_QF_EQUEUE_INIT</TD>
+    <TD>EQ.INIT</TD>
+    <TD>an event queue was initialized</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>19</TD>
+    <TD>#QS_QF_EQUEUE_POST_FIFO</TD>
+    <TD>EQ.FIFO</TD>
+    <TD>an event was posted (FIFO) to a raw queue</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>20</TD>
+    <TD>#QS_QF_EQUEUE_POST_LIFO</TD>
+    <TD>EQ.LIFO</TD>
+    <TD>an event was posted (LIFO) to a raw queue</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>21</TD>
+    <TD>#QS_QF_EQUEUE_GET</TD>
+    <TD>EQ.GET</TD>
+    <TD>get an event and queue still not empty</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>22</TD>
+    <TD>#QS_QF_EQUEUE_GET_LAST</TD>
+    <TD>EQ.GETL</TD>
+    <TD>get the last event from the queue</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>23</TD>
+    <TD>#QS_QF_MPOOL_INIT</TD>
+    <TD>MP.INIT</TD>
+    <TD>a memory pool was initialized</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>24</TD>
+    <TD>#QS_QF_MPOOL_GET</TD>
+    <TD>MP.GET</TD>
+    <TD>a memory block was removed from a memory pool</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>25</TD>
+    <TD>#QS_QF_MPOOL_PUT</TD>
+    <TD>MP.PUT</TD>
+    <TD>a memory block was returned to a memory pool</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>26</TD>
+    <TD>#QS_QF_PUBLISH</TD>
+    <TD>PUBLISH</TD>
+    <TD>an event was published</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>27</TD>
+    <TD>#reserved</TD>
+    <TD></TD>
+    <TD></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>28</TD>
+    <TD>#QS_QF_NEW</TD>
+    <TD>NEW</TD>
+    <TD>new event creation</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>29</TD>
+    <TD>#QS_QF_GC_ATTEMPT</TD>
+    <TD>GC-ATT</TD>
+    <TD>garbage collection attempt</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>30</TD>
+    <TD>#QS_QF_GC</TD>
+    <TD>GC</TD>
+    <TD>garbage collection performed</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>31</TD>
+    <TD>#QS_QF_TICK</TD>
+    <TD>TICK</TD>
+    <TD>QF_tick() was called</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>32</TD>
+    <TD>#QS_QF_TIMEEVT_ARM</TD>
+    <TD>TE.ARM</TD>
+    <TD>a time event was armed</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>33</TD>
+    <TD>#QS_QF_TIMEEVT_AUTO_DISARM</TD>
+    <TD>TE.ADRM</TD>
+    <TD>a time event expired and was disarmed</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>34</TD>
+    <TD>#QS_QF_TIMEEVT_DISARM_ATTEMPT</TD>
+    <TD>TE.DATT</TD>
+    <TD>attempt to disarmed a disarmed tevent</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>35</TD>
+    <TD>#QS_QF_TIMEEVT_DISARM</TD>
+    <TD>TE.DARM</TD>
+    <TD>true disarming of an armed time event</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>36</TD>
+    <TD>#QS_QF_TIMEEVT_REARM</TD>
+    <TD>TE.RARM</TD>
+    <TD>rearming of a time event</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>37</TD>
+    <TD>#QS_QF_TIMEEVT_POST</TD>
+    <TD>TE.POST</TD>
+    <TD>a time event posted itself directly to an AO</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>38</TD>
+    <TD>#reserved</TD>
+    <TD></TD>
+    <TD></TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>39</TD>
+    <TD>#QS_QF_INT_LOCK</TD>
+    <TD>QF_intL</TD>
+    <TD>interrupts were locked</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>40</TD>
+    <TD>#QS_QF_INT_UNLOCK</TD>
+    <TD>QF_intU</TD>
+    <TD>interrupts were unlocked</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>42</TD>
+    <TD>#QS_QF_ISR_ENTRY</TD>
+    <TD>QF_isrE</TD>
+    <TD>an ISR was entered</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>42</TD>
+    <TD>#QS_QF_ISR_EXIT</TD>
+    <TD>QF_isrX</TD>
+    <TD>an ISR was exited</TD>
+  </TR>
+</TABLE>
+
+\section QSPY_QK QK Trace Records
+
+<TABLE SUMMARY="QK Records" cellSpacing=4 cellPadding=1 border=0 width="95%">
+  <TR bgColor="#c8cedc">
+    <TD><B>Rec.\n Num.</B></TD>
+    <TD><B>Rec.\n Enum.</B></TD>
+    <TD><B>QSPY\n Abbrev.\n</B></TD>
+    <TD><B>Comment</B></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>50</TD>
+    <TD>#QS_QK_MUTEX_LOCK</TD>
+    <TD>QK_muxL</TD>
+    <TD>the QK mutex was locked</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>51</TD>
+    <TD>#QS_QK_MUTEX_UNLOCK</TD>
+    <TD>QK_muxU</TD>
+    <TD>the QK mutex was unlocked</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>52</TD>
+    <TD>#QS_QK_SCHEDULE</TD>
+    <TD>QK_sche</TD>
+    <TD>the QK scheduled a new task to execute</TD>
+  </TR>
+</TABLE>
+
+\section QSPY_MISC Miscellaneous Trace Records
+
+<TABLE SUMMARY="Miscellaneous Records" cellSpacing=4 cellPadding=1 border=0
+width="95%">
+  <TR bgColor="#c8cedc">
+    <TD><B>Rec.\n Num.</B></TD>
+    <TD><B>Rec.\n Enum.</B></TD>
+    <TD><B>QSPY\n Abbrev.\n</B></TD>
+    <TD><B>Comment</B></TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>60</TD>
+    <TD>#QS_SIG_DICTIONARY</TD>
+    <TD>Sig Dic</TD>
+    <TD>signal dictionary entry</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>61</TD>
+    <TD>#QS_OBJ_DICTIONARY</TD>
+    <TD>Obj Dic</TD>
+    <TD>object dictionary entry</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>62</TD>
+    <TD>#QS_FUN_DICTIONARY</TD>
+    <TD>Fun Dic</TD>
+    <TD>function dictionary entry</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>63</TD>
+    <TD>#QS_ASSERT</TD>
+    <TD>!ASSERT</TD>
+    <TD>Assertion fired</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>...</TD>
+    <TD></TD>
+    <TD></TD>
+    <TD></TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>70</TD>
+    <TD>#QS_USER</TD>
+    <TD>UserXXX</TD>
+    <TD>the first record available for user QS records</TD>
+  </TR>
+</TABLE>
+
+
+\image html logo_ql_TM.jpg
+Copyright &copy; 2002-2008 Quantum Leaps, LLC. All Rights Reserved.\n
+http://www.state-machine.com
+*/
