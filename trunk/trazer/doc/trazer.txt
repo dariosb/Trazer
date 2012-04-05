@@ -4,14 +4,14 @@
 
 \image html trazer.png
 
-- \ref qspy_intro_sec
+- \ref trazer_intro
 - \ref trazer_command
 - \ref trazer_config
 - \ref trazer_evtbl
 - \subpage trazer_human_format
 - \ref rev_page_trazer
 
-\section qspy_intro_sec Introduction
+\section trazer_intro Introduction
 
 %Trazer is a real-time tracing instrumentation that works with the RKH Framework 
 built in trace facility. Trace allows you to gain visibility into your application 
@@ -69,7 +69,7 @@ ALIGN="center" VALIGN="middle">
     <TD>COM port and baudrate selection. Not compatible with -t, -f</TD>
   </TR>
 
-  <TR bgColor="#f0f0f0">
+  <TR bgColor="#c0c0c0">
     <TD>-t</TD>
     <TD>-t 6602</TD>
     <TD>TCP/IP server and port number. Not compatible with -c, -f</TD>
@@ -84,7 +84,7 @@ ALIGN="center" VALIGN="middle">
 </TABLE>
 
 
-\section trazer_config Config file "trazer.cfg"
+\section trazer_config Config file trazer.cfg
 
 %Traze is designed to work with all possible target CPU, which requires a wide range of configurability. 
 For example, for any given target CPU, Trazer must "know" the size of object pointers, event size, timestamp size and so on. 
@@ -99,43 +99,87 @@ ALIGN="center" VALIGN="middle">
     <TD><B>&nbsp;Comments</B></TD>
   </TR>
 
-  <TR bgColor="#c0c0c0">
-    <TD>\c #TRAZER_SIZEOF_SIG</TD>
+  <TR bgColor="#f0f0f0">
+    <TD>\c TRAZER_SIZEOF_SIG</TD>
     <TD>1, 2, 4</TD>
     <TD>\c #RKH_SIZEOF_EVENT</TD>
     <TD>Event Signal size in bytes.</TD>
   </TR>
 
+  <TR bgColor="#c0c0c0">
+    <TD>\c TRAZER_SIZEOF_TSTAMP</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_TRC_SIZEOF_TSTAMP</TD>
+    <TD>Bytes quantity used by the trace record timestamp.</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>\c TRAZER_SIZEOF_POINTER</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_TRC_SIZEOF_POINTER</TD>
+    <TD>Size in bytes of void pointer.</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>\c TRAZER_SIZEOF_NTIMER</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_TIM_SIZEOF_NTIMER</TD>
+    <TD>Dynamic range of time delays measured in ticks and expresed in bytes.</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>\c TRAZER_SIZEOF_NBLOCK</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_MP_SIZEOF_NBLOCK</TD>
+    <TD>Size in bytes of number of memory block size.</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>\c TRAZER_SIZEOF_NELEM</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_RQ_SIZEOF_NELEM</TD>
+    <TD>Maximum number of elements in bytes that any queue can contain.</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>\c TRAZER_SIZEOF_ESIZE</TD>
+    <TD>1, 2, 4</TD>
+    <TD>\c #RKH_SIZEOF_ESIZE</TD>
+    <TD>Data type of event size, in bytes.</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>\c TRAZER_EN_NSEQ</TD>
+    <TD>0, 1</TD>
+    <TD>\c #RKH_TRC_EN_NSEQ</TD>
+    <TD> Enable/Disable Number of Sequence use in trace stream.</TD>
+  </TR>
+
+  <TR bgColor="#f0f0f0">
+    <TD>\c TRAZER_EN_CHK</TD>
+    <TD>0, 1</TD>
+    <TD>\c #RKH_TRC_EN_CHK</TD>
+    <TD> Enable/Disable Checksum use in trace stream.</TD>
+  </TR>
+
+  <TR bgColor="#c0c0c0">
+    <TD>\c TRAZER_EN_TSTAMP</TD>
+    <TD>0, 1</TD>
+    <TD>\c #RKH_TRC_EN_TSTAMP</TD>
+    <TD> Enable/Disable Time stamp use in trace stream.</TD>
+  </TR>
+
 </TABLE>
 
 
-The QSPY host application is designed to work with all possible target CPUs
-and data links, which requires a wide range of configurability. For example,
-for any given target CPU the QSPY application must "know" the size of object
-pointers, function pointers, event signals, timestamp size and so on. You
-provide this information to QSPY by means of command-line parameters, which
-are summarized in table above. Please note that the options are case sensitive.
-
-
-Your main concern when invoking QSPY is to match exactly the target system you
-are using. The fourth column of the table above lists the configuration macros
-used by the target system as well as the platform-specific QP header files
-where those macros are defined. You need to use the corresponding QSPY
-command-line option only when the QP macro differs from the default. The
-default values assumed by QSPY are consistent with the defaults used in QP.
-
-\note When you do not match the QSPY host application with the QS target
-component, the QSPY application will be unable to parse correctly the
-mismatched trace records and will start generating the following errors:
+Your must ensure that Trazer configuration match exactly with the target system you are using.
+If you do not match with RKH target, Trazer will be unable to parse the trace stream and start 
+to output follows errors:
 
 \verbatim
-     ********** 028: Error xx bytes unparsed
-     ********** 014: Error -yy bytes unparsed
+***** Stream Checksum Error
+***** May be have lost trace info, sequence are not correlatives
 \endverbatim
-
-The number in front of the error indicates the Record ID of the trace record
-that could not be parsed.
-
 
 <HR>
 
@@ -158,7 +202,7 @@ human-readable textual format. The following listing shows fragments of such
 a data log generated from the DOS/QK version of the DPP application.
 
 \note The QSPY host application supports also exporting data to the powerful
-MATLAB/Octave environment, as described in Section \ref qspy_matlab.
+MATLAB/Octave environment, as described in Section 
 
 \verbatim
 QSPY host application 4.2.00
@@ -645,7 +689,14 @@ width="95%">
 </TABLE>
 
 
-\image html logo_ql_TM.jpg
-Copyright &copy; 2002-2008 Quantum Leaps, LLC. All Rights Reserved.\n
-http://www.state-machine.com
+<HR>
+
+\section trazer_licensing Licensing Trazer
+
+Trazer application is licensed the same way as all other components of
+the RKH framework. See section \ref licensing.
+
+Copyright &copy; 2010-2012 Vortex Technologies. All Rights Reserved.\n
+
+e-mail: dariosb@gmail.com
 */
