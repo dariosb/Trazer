@@ -27,14 +27,16 @@ typedef struct
 
 typedef struct
 {
-	unsigned enable_debug;
+	int enable_debug;
+	int quiet;
+	string outfile;
 	string instream_file;
 	string instream_comport;
 	string baudrate;
 	string parity;
 } OPTIONS_T;
 
-#define CONSOLE_OPTIONS_DEFINITION	"df:c:::hv"
+#define CONSOLE_OPTIONS_DEFINITION	"dqo:f:c:::hv"
 
 #define OPTIONS_FILE				"trazer.evt"
 

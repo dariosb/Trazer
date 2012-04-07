@@ -3,6 +3,7 @@
  */
 
 #include "error.h"
+#include "options.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -17,8 +18,10 @@ lprintf( const char *fmt, ... )
 
     va_start(args,fmt);
 
-    vfprintf( stdout, fmt, args);
-    vfprintf( flog, fmt, args);
+	if( !options.quiet )
+	    vfprintf( stdout, fmt, args);
+	if( flog != NULL )
+	    vfprintf( flog, fmt, args);
 
 	fflush(flog);
 
@@ -28,6 +31,11 @@ lprintf( const char *fmt, ... )
 void
 start_log( const char *fname )
 {
+	flog = NULL;
+
+	if( strlen(fname) == 0 )
+		return;
+		
 	if( ( flog = fopen( fname, "w+" ) ) == NULL )
 	{
 		fatal_error( "Can't open file %s\n", fname );

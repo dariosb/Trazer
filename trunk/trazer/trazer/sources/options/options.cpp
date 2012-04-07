@@ -69,10 +69,7 @@ static char *opts = CONSOLE_OPTIONS_DEFINITION;
  * 	Option structure
  */
 
-OPTIONS_T options =
-{
-	{ DISABLE_OPT }
-};
+OPTIONS_T options;
 
 /*
  * 	Static uninitialized variables
@@ -269,9 +266,6 @@ evaluate_args( int argc, char **argv )
 	while( ( c = getopt( argc, argv, opts ) ) != EOF )
 		switch( c )
 		{
-			case 'd':
-				options.enable_debug = ENABLE_OPT;
-				break;
 			case 'f':
 				options.instream_file.assign(optarg);
 				break;
@@ -279,6 +273,12 @@ evaluate_args( int argc, char **argv )
 				options.instream_comport.assign(optarg);
 				options.baudrate.assign(get_next(argv));
 				options.parity.assign(get_next(argv));
+				break;
+			case 'o':
+				options.outfile.assign( optarg );
+				break;
+			case 'q':
+				options.quiet = 1;
 				break;
 			case 'v':
 				show_version();

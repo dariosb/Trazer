@@ -4,12 +4,11 @@
 # The format of this file is as follows
 # - #'s are comments
 # - Event blocks are are grouped by framework service type.
-# - Each event must be defined as a member of group.
 # - Event definition:
-# 		Event: Event id.
-# 		Name: Alias.
-#		Args: arguments to log, in the order that are traced.
-#		Comment: optional descriptive comment.
+# 		Event: Event id, must be according to RKH_TRC_EVENTS definition in rkhtrc.h.
+#		Group: RKH service that generate the event.
+# 		Name: Custom Alias for the event.
+#		Comment: Optional descriptive comment.
 # - END_OF_EVTBL label must be writed at end of event definitions
 #
 

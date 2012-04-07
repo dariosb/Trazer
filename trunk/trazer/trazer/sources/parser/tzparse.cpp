@@ -782,13 +782,13 @@ trazer_parse( rkhui8_t d )
 	}
 }
 
-
+#include "version.h"
 void
 trazer_init( void )
 {
 	lastnseq = 255;
-	lprintf( "---- RKH trace log session ----\n\n" );
-	lprintf( "Date = "__DATE__" "__TIME__"\n\n" );
+	lprintf(VERSION_STRING_TXT);
+	lprintf( "Date = "__DATE__" "__TIME__"\n" );
 	lprintf( "\nTrace Setup\n\n" );
 	lprintf( "   Trace events quantity = %d\n", TRAZER_NTRE );
 //	lprintf( "Number of trace groups = %d\n", TRAZER_NTRG );

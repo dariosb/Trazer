@@ -4,10 +4,9 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.5.4	//
-ACCEL_T	.\trazer.cpp	/^}ACCEL_T;$/;"	t	file:
 ACTIVE_DEBUG	.\debug\debug.h	7;"	d
 ARGS_OPT	.\options\options.cpp	/^	ARGS_OPT,$/;"	e	file:
-AUXILIAR_BUFFER_SIZE	.\utils\utils.cpp	9;"	d	file:
+AUXILIAR_BUFFER_SIZE	.\utils\utils.cpp	10;"	d	file:
 BG_BLUE	.\utils\console.cpp	22;"	d	file:
 BG_GREEN	.\utils\console.cpp	21;"	d	file:
 BG_INT	.\utils\console.cpp	19;"	d	file:
@@ -16,35 +15,33 @@ BLACK_ON_GRAY	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLA
 BLACK_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 BLUE_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
 BLUE_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
-CBOX_ST	.\trazer.cpp	/^}CBOX_ST;$/;"	t	file:
-CC	.\parser\tzparse.cpp	29;"	d	file:
-CHECK_MASKH	.\stream\tpldefs.h	27;"	d
-CHECK_MASKL	.\stream\tpldefs.h	28;"	d
-CHECK_OFFSET	.\stream\tpldefs.h	29;"	d
+CC	.\parser\tzparse.cpp	25;"	d	file:
 COMMENT	.\config\config.cpp	25;"	d	file:
 COMMENT	.\options\options.cpp	28;"	d	file:
 COMMENT_OPT	.\options\options.cpp	/^	COMMENT_OPT,$/;"	e	file:
 CONFIG_FILE	.\config\config.h	25;"	d
 CONFIG_T	.\config\config.h	/^} CONFIG_T;$/;"	t
-CONSOLE_OPTIONS_DEFINITION	.\options\options.h	37;"	d
-CTE	.\parser\tzparse.cpp	143;"	d	file:
+CONSOLE_OPTIONS_DEFINITION	.\options\options.h	38;"	d
+CTE	.\parser\tzparse.cpp	157;"	d	file:
 CYAN_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
 CYAN_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
 DISABLE_OPT	.\options\options.h	/^	DISABLE_OPT,$/;"	e
 EIGHT	.\common\myevt.h	/^	EIGHT,$/;"	e
 ENABLE_OPT	.\options\options.h	/^	ENABLE_OPT$/;"	e
 ENDOFTBL	.\options\options.cpp	/^	ENDOFTBL,$/;"	e	file:
-ENDOF_AUX_BUFF	.\utils\utils.cpp	11;"	d	file:
+ENDOF_AUX_BUFF	.\utils\utils.cpp	12;"	d	file:
 ENGLISH	.\common\lang.h	/^	ENGLISH, SPANISH,$/;"	e
-EOSIGTBL	.\parser\tzparse.cpp	139;"	d	file:
+EOSIGTBL	.\parser\tzparse.cpp	153;"	d	file:
 ERR	.\utils\getopt.cpp	20;"	d	file:
 ESC	.\common\mydefs.h	9;"	d
+ESC	.\utils\utils.h	15;"	d
 EVENT_INFO_ST	.\parser\evtbl.h	/^}EVENT_INFO_ST;$/;"	t
 EVENT_OPT	.\options\options.cpp	/^	EVENT_OPT,$/;"	e	file:
 FG_BLUE	.\utils\console.cpp	18;"	d	file:
 FG_GREEN	.\utils\console.cpp	17;"	d	file:
 FG_INT	.\utils\console.cpp	15;"	d	file:
 FG_RED	.\utils\console.cpp	16;"	d	file:
+FILE_STREAM	.\trazer.cpp	/^	FILE_STREAM,$/;"	e	file:
 FILTER_OFF	.\common\rkhtrc.h	/^	FILTER_ON, FILTER_OFF,$/;"	e
 FILTER_ON	.\common\rkhtrc.h	/^	FILTER_ON, FILTER_OFF,$/;"	e
 FIVE	.\common\myevt.h	/^	FIVE,$/;"	e
@@ -53,7 +50,6 @@ FOUR	.\common\myevt.h	/^	FOUR,$/;"	e
 GREEN_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
 GREEN_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 GROUP_OPT	.\options\options.cpp	/^	GROUP_OPT,$/;"	e	file:
-GRSENS_T	.\trazer.cpp	/^} GRSENS_T;$/;"	t	file:
 HDLR_T	.\parser\tzparse.h	/^typedef char *(*HDLR_T)( const void *tre );$/;"	t
 HInt	.\common\rkht.h	/^typedef signed int		HInt;$/;"	t
 HSM_INFO_MSK_ST	.\options\options.h	/^}HSM_INFO_MSK_ST;$/;"	t
@@ -62,35 +58,36 @@ ILLEGAL_OPTION	.\utils\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
 MAGENTA_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
 MAGENTA_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
 MAX_CONFIGS	.\config\config.cpp	/^	MAX_CONFIGS$/;"	e	file:
+MAX_EVENT_TBL_SIZE	.\parser\evtbl.cpp	15;"	d	file:
 MAX_OPTS	.\options\options.cpp	/^	MAX_OPTS$/;"	e	file:
 MInt	.\common\mytypes.h	/^typedef int				MInt;$/;"	t
 MInt	.\common\mytypes.h	/^typedef schar			MInt;$/;"	t
-MKFI	.\parser\evtbl.cpp	15;"	d	file:
-MKO	.\parser\tzparse.cpp	134;"	d	file:
-MKS	.\parser\tzparse.cpp	131;"	d	file:
-MKTR	.\parser\tzparse.cpp	128;"	d	file:
+MKFI	.\parser\evtbl.cpp	17;"	d	file:
+MKO	.\parser\tzparse.cpp	148;"	d	file:
+MKS	.\parser\tzparse.cpp	145;"	d	file:
+MKTR	.\parser\tzparse.cpp	142;"	d	file:
 MUInt	.\common\mytypes.h	/^typedef uchar			MUInt;$/;"	t
 MUInt	.\common\mytypes.h	/^typedef uint			MUInt;$/;"	t
 NAME_OPT	.\options\options.cpp	/^	NAME_OPT,$/;"	e	file:
 NINE	.\common\myevt.h	/^	NINE,$/;"	e
+NONE_STREAM	.\trazer.cpp	/^	NONE_STREAM$/;"	e	file:
 NO_ARGUMENT	.\utils\getopt.cpp	/^	ILLEGAL_OPTION, NO_ARGUMENT,$/;"	e	file:
 NUM_ATTRIBS	.\utils\console.h	/^	NUM_ATTRIBS$/;"	e
 NUM_LANG	.\common\lang.h	/^	NUM_LANG$/;"	e
 NUM_MSGS	.\utils\getopt.cpp	/^	NUM_MSGS$/;"	e	file:
 NUM_SERIALS	.\stream\uart\serdefs.h	/^	NUM_SERIALS$/;"	e
 ONE	.\common\myevt.h	/^	ONE,$/;"	e
-OPTIONS_FILE	.\options\options.h	39;"	d
+OPTIONS_FILE	.\options\options.h	40;"	d
 OPTIONS_T	.\options\options.h	/^} OPTIONS_T;$/;"	t
 PARSER_COLLECT	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
 PARSER_ESCAPING	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
-PARSER_MAX_SIZE_BUF	.\parser\tzparse.cpp	293;"	d	file:
+PARSER_MAX_SIZE_BUF	.\parser\tzparse.cpp	307;"	d	file:
 PARSER_WFLAG	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
 PAR_EVEN	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_MARK	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_NONE	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_ODD	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_SPACE	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
-PROCFUNC_T	.\stream\tplfsm.h	/^typedef MUInt(*PROCFUNC_T)(MUInt, uchar);$/;"	t
 RED_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
 RED_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 RKHTR_CTRL	.\common\rkhtrc.h	/^} RKHTR_CTRL;$/;"	t
@@ -448,8 +445,8 @@ RKH_TRC_UI32	.\common\rkhtrc.h	376;"	d
 RKH_TRC_UI8	.\common\rkhtrc.h	370;"	d
 RKH_TRC_UI8_RAW	.\common\rkhtrc.h	367;"	d
 RKH_XOR	.\common\rkhtrc.h	284;"	d
-SAME_EXEC_PATH	.\options\options.h	41;"	d
 SERIAL_CBACK_T	.\stream\uart\serial.h	/^} SERIAL_CBACK_T;$/;"	t
+SERIAL_STREAM	.\trazer.cpp	/^	SERIAL_STREAM,$/;"	e	file:
 SERIAL_T	.\stream\uart\serdefs.h	/^} SERIAL_T;$/;"	t
 SEVEN	.\common\myevt.h	/^	SEVEN,$/;"	e
 SIX	.\common\myevt.h	/^	SIX,$/;"	e
@@ -463,48 +460,6 @@ TERM	.\common\myevt.h	/^	TERM	$/;"	e
 THREE	.\common\myevt.h	/^	THREE,$/;"	e
 TIME_INTER	.\common\timer.h	16;"	d
 TOUT	.\common\myevt.h	/^	TOUT,$/;"	e
-TPLFRM_T	.\stream\tplink.h	/^}TPLFRM_T;$/;"	t
-TPLINK_ADDRESSING_ON	.\stream\tplcfg.h	31;"	d
-TPLINK_BROADCAST_ADDR	.\stream\tpldefs.h	45;"	d
-TPLINK_COMFLOW_MSK	.\stream\tpldefs.h	44;"	d
-TPLINK_DEV_MASTER	.\stream\tpldefs.h	41;"	d
-TPLINK_DEV_SLAVE	.\stream\tpldefs.h	42;"	d
-TPLINK_DEV_TYPE	.\stream\tplcfg.h	28;"	d
-TPLINK_ERR_BUSY	.\stream\tplink.h	/^	TPLINK_ERR_BUSY,$/;"	e
-TPLINK_ERR_PLOAD_SIZE_EXCEED	.\stream\tplink.h	/^	TPLINK_ERR_PLOAD_SIZE_EXCEED$/;"	e
-TPLINK_ESC	.\stream\tplcfg.h	35;"	d
-TPLINK_ESC_ESC	.\stream\tpldefs.h	/^	TPLINK_ESC_ESC,$/;"	e
-TPLINK_ESC_MASK	.\stream\tpldefs.h	22;"	d
-TPLINK_ESC_SOF	.\stream\tpldefs.h	/^	TPLINK_ESC_SOF = 1,$/;"	e
-TPLINK_INPUTS	.\stream\tplfsm.h	/^}TPLINK_INPUTS;$/;"	t
-TPLINK_INTER_BYTE_TIME	.\stream\tplcfg.h	39;"	d
-TPLINK_INTER_FRAME_TIME	.\stream\tplcfg.h	40;"	d
-TPLINK_MAX_PLOAD_SIZE	.\stream\tplcfg.h	37;"	d
-TPLINK_NUM_ESC_CODES	.\stream\tpldefs.h	/^	TPLINK_NUM_ESC_CODES$/;"	e
-TPLINK_NUM_INPUTS	.\stream\tplfsm.h	/^	TPLINK_NUM_INPUTS$/;"	e
-TPLINK_OK	.\stream\tplink.h	/^	TPLINK_OK,$/;"	e
-TPLINK_RCV	.\stream\tplfsm.h	/^	TPLINK_RCV,$/;"	e
-TPLINK_RETESC	.\stream\tplfsm.h	/^	TPLINK_RETESC,$/;"	e
-TPLINK_SLAVE_ADDRESS	.\stream\tplcfg.h	32;"	d
-TPLINK_SOF	.\stream\tplcfg.h	34;"	d
-TPLINK_TOUT	.\stream\tplfsm.h	/^	TPLINK_TOUT,$/;"	e
-TPLINK_XMIT	.\stream\tplfsm.h	/^	TPLINK_XMIT,$/;"	e
-TPL_ESC	.\stream\tpldefs.h	35;"	d
-TPL_IDLE	.\stream\tpltbl.h	/^	TPL_IDLE,$/;"	e
-TPL_IN_DATA	.\stream\tpltbl.h	/^	TPL_IN_DATA,$/;"	e
-TPL_IN_ESC	.\stream\tpltbl.h	/^	TPL_IN_ESC,$/;"	e
-TPL_IN_XMIT	.\stream\tpltbl.h	/^	TPL_IN_XMIT,$/;"	e
-TPL_NUM_STATES	.\stream\tpltbl.h	/^	TPL_NUM_STATES$/;"	e
-TPL_SOF	.\stream\tpldefs.h	34;"	d
-TPL_STATE_T	.\stream\tplfsm.h	/^typedef MUInt TPL_STATE_T;$/;"	t
-TPL_WADDR	.\stream\tpltbl.h	/^	TPL_WADDR,$/;"	e
-TPL_WCHK	.\stream\tpltbl.h	/^	TPL_WCHK,$/;"	e
-TPL_WNDATAH	.\stream\tpltbl.h	/^	TPL_WNDATAH,$/;"	e
-TPL_WNDATAL	.\stream\tpltbl.h	/^	TPL_WNDATAL,$/;"	e
-TPL_WXMIT	.\stream\tpltbl.h	/^	TPL_WXMIT,$/;"	e
-TPL_XCHK	.\stream\tpltbl.h	/^	TPL_XCHK,$/;"	e
-TPL_XMIT_ESC	.\stream\tpltbl.h	/^	TPL_XMIT_ESC,$/;"	e
-TRAZER_EN	.\parser\tzparse.cpp	22;"	d	file:
 TRAZER_EN_CHK	.\config\cfgdep.h	20;"	d
 TRAZER_EN_CHK	.\parser\tzparse.h	46;"	d
 TRAZER_EN_CHK_CFG	.\config\config.cpp	/^	TRAZER_EN_CHK_CFG,$/;"	e	file:
@@ -514,8 +469,7 @@ TRAZER_EN_NSEQ_CFG	.\config\config.cpp	/^	TRAZER_EN_NSEQ_CFG,$/;"	e	file:
 TRAZER_EN_TSTAMP	.\config\cfgdep.h	21;"	d
 TRAZER_EN_TSTAMP	.\parser\tzparse.h	47;"	d
 TRAZER_EN_TSTAMP_CFG	.\config\config.cpp	/^	TRAZER_EN_TSTAMP_CFG,$/;"	e	file:
-TRAZER_NTRE	.\parser\tzparse.cpp	27;"	d	file:
-TRAZER_NTRG	.\parser\tzparse.cpp	28;"	d	file:
+TRAZER_NTRE	.\parser\tzparse.cpp	23;"	d	file:
 TRAZER_SIZEOF_ESIZE	.\config\cfgdep.h	18;"	d
 TRAZER_SIZEOF_ESIZE	.\parser\tzparse.h	44;"	d
 TRAZER_SIZEOF_ESIZE_CFG	.\config\config.cpp	/^	TRAZER_SIZEOF_ESIZE_CFG,$/;"	e	file:
@@ -571,27 +525,14 @@ __RKHT_H__	.\common\rkht.h	32;"	d
 __SERIAL_H__	.\stream\uart\serial.h	2;"	d
 __SIGTBL_H__	.\parser\sigtbl.h	6;"	d
 __SYMBTBL_H__	.\parser\symbtbl.h	6;"	d
-__TPLACT_H__	.\stream\tplact.h	6;"	d
-__TPLCFG_H__	.\stream\tplcfg.h	22;"	d
-__TPLDEFS_H__	.\stream\tpldefs.h	7;"	d
-__TPLFSM_H__	.\stream\tplfsm.h	6;"	d
-__TPLHAL_H__	.\stream\tplhal.h	6;"	d
-__TPLINK_DBG__	.\stream\tplcfg.h	26;"	d
-__TPLINK_H__	.\stream\tplink.h	6;"	d
-__TPLTBL_H__	.\stream\tpltbl.h	5;"	d
+__TZLOG_H__	.\parser\tzlog.h	6;"	d
 __TZPARSE_H__	.\parser\tzparse.h	26;"	d
-__USE_TPLINK_ONCHERR_CBF__	.\stream\tplcfg.h	43;"	d
-__USE_TPLINK_ONXMIT_CMP_CBF__	.\stream\tplcfg.h	42;"	d
 __UTILS_H__	.\utils\utils.h	6;"	d
-a	.\trazer.cpp	/^	ACCEL_T a;$/;"	m	file:
-add_check_sum	.\stream\tplact.cpp	35;"	d	file:
 add_to_evtbl	.\parser\evtbl.cpp	/^add_to_evtbl( EVENT_INFO_ST *p )$/;"	f
 add_to_sigtbl	.\parser\sigtbl.cpp	/^add_to_sigtbl( TRZE_T sig, const char * name)$/;"	f
 add_to_symtbl	.\parser\symbtbl.cpp	/^add_to_symtbl( unsigned long obj, const char *sym )$/;"	f
-addr	.\stream\tplink.h	/^	uchar addr;$/;"	m
 adr	.\parser\tzparse.h	/^	unsigned long adr;$/;"	m	struct:symobj_t
 args	.\parser\evtbl.h	/^	string args;$/;"	m	struct:event_info_st
-args	.\trazer.cpp	/^static char *args = "d:D:hH";$/;"	v	file:
 args	.\utils\getopt.cpp	/^char *args = "b:ijk:";$/;"	v
 assemble	.\parser\tzparse.cpp	/^assemble( int size )$/;"	f	file:
 assemble_str	.\parser\tzparse.cpp	/^assemble_str( void  )$/;"	f	file:
@@ -604,31 +545,20 @@ bitf	.\common\mytypes.h	/^typedef uint			bitf;$/;"	t
 bitf	.\common\mytypes.h	/^typedef ushort			bitf;$/;"	t
 buffer	.\config\config.cpp	/^static char buffer[ 100 ];			\/*	buffer: used for field separation	*\/	$/;"	v	file:
 buffer	.\options\options.cpp	/^static char buffer[ 100 ];			\/*	buffer: used for field separation	*\/	$/;"	v	file:
-calc_check	.\stream\tpldefs.h	31;"	d
-call_tplst	.\stream\tplfsm.cpp	/^call_tplst( TPL_STATE_T dest_st, TPL_STATE_T src_st )$/;"	f
-cb	.\trazer.cpp	/^static CBOX_ST cb;$/;"	v	file:
-check	.\stream\tplact.cpp	/^static ushort curr_dcnt, check;$/;"	v	file:
-check_sum	.\stream\tplact.cpp	/^static uchar check_sum, curr_escape;$/;"	v	file:
+close_all	.\trazer.cpp	/^close_all( void )$/;"	f	file:
+close_mserial	.\stream\uart\myser.cpp	/^close_mserial( void )$/;"	f
 clr2rgb	.\utils\console.cpp	/^clr2rgb( int color )$/;"	f
 clrscr	.\utils\console.cpp	/^clrscr( void )$/;"	f
-cmd	.\trazer.cpp	/^	uchar cmd;$/;"	m	file:
 com	.\stream\uart\serdefs.h	/^	void *com;$/;"	m
 com_name	.\stream\uart\serdefs.h	/^	char com_name[20];$/;"	m
 commands	.\options\options.cpp	/^static const char *commands[ MAX_OPTS ] =$/;"	v	file:
 comment	.\parser\evtbl.h	/^	string comment;$/;"	m	struct:event_info_st
 config	.\config\config.cpp	/^static const char *config[ MAX_CONFIGS ] =$/;"	v	file:
 configs	.\config\config.cpp	/^CONFIG_T configs;$/;"	v
-curr_dcnt	.\stream\tplact.cpp	/^static ushort curr_dcnt, check;$/;"	v	file:
-curr_escape	.\stream\tplact.cpp	/^static uchar check_sum, curr_escape;$/;"	v	file:
-currst	.\stream\tplfsm.cpp	/^static TPL_STATE_T currst, tempst;$/;"	v	file:
 debug	.\common\rerror.c	/^debug( const char *fmt, ... )$/;"	f
 debugging	.\common\rerror.c	/^int debugging;$/;"	v
 dprintf	.\debug\debug.cpp	/^dprintf( const char* fmt, ...)$/;"	f
 dprintf	.\debug\debug.h	15;"	d
-enable_debug	.\options\options.h	/^	unsigned enable_debug;$/;"	m
-enable_xmit	.\stream\tplhal.cpp	/^static int enable_xmit = 0;$/;"	v	file:
-endian_val	.\trazer.cpp	/^int endian_val=1;$/;"	v
-endiannes	.\trazer.cpp	/^char *endiannes= (char *)&endian_val;$/;"	v
 err_fopen	.\errors\messages.cpp	/^extern const char * err_fopen =$/;"	v
 err_redef	.\errors\messages.cpp	/^extern const char * err_redef =$/;"	v
 err_syntax	.\errors\messages.cpp	/^extern const char * err_syntax	=$/;"	v
@@ -639,7 +569,6 @@ error_in_config_file	.\errors\messages.cpp	/^const char * error_in_config_file =
 error_in_options_file	.\errors\messages.cpp	/^const char * error_in_options_file =$/;"	v
 error_incomplete_trace_evt_data	.\errors\messages.cpp	/^const char * error_incomplete_trace_evt_data =$/;"	v
 error_invalid_trace_id	.\errors\messages.cpp	/^const char * error_invalid_trace_id =$/;"	v
-esc_codes	.\stream\tplact.cpp	/^static const uchar esc_codes[TPLINK_NUM_ESC_CODES-1] = { TPL_SOF, TPL_ESC };$/;"	v	file:
 evaluate_args	.\options\options.cpp	/^evaluate_args( int argc, char **argv )$/;"	f
 event	.\parser\evtbl.h	/^	string event;$/;"	m	struct:event_info_st
 event_info_st	.\parser\evtbl.h	/^typedef struct event_info_st$/;"	s
@@ -647,11 +576,9 @@ evinfo	.\parser\evtbl.h	/^	struct event_info_st *evinfo;$/;"	m	struct:fmt_id_t
 f	.\trazer.cpp	/^FILE *f;$/;"	v
 fatal	.\common\rerror.c	/^fatal( const char *fmt, ... )$/;"	f
 fatal_error	.\errors\error.cpp	/^fatal_error( const char* fmt, ...)$/;"	f
-fdbg	.\trazer.cpp	/^FILE *fdbg;$/;"	v
 find_str_into_file	.\utils\utils.cpp	/^find_str_into_file(FILE* pFile, const char* str)$/;"	f
 find_trevt	.\parser\evtbl.cpp	/^find_trevt( unsigned char id )$/;"	f
-fits_in_pload_size	.\stream\tplact.cpp	26;"	d	file:
-flow	.\trazer.cpp	/^	ushort flow;	\/\/ grain volume by second.$/;"	m	file:
+flog	.\parser\tzlog.cpp	/^FILE *flog;$/;"	v
 fmt	.\parser\tzparse.cpp	/^static char fmt[ 128 ];$/;"	v	file:
 fmt	.\parser\tzparse.h	/^	const char *fmt;$/;"	m	struct:tre_t
 fmt_args	.\parser\tzparse.h	/^	HDLR_T fmt_args;$/;"	m	struct:tre_t
@@ -659,30 +586,21 @@ fmt_id_t	.\parser\evtbl.h	/^typedef struct fmt_id_t$/;"	s
 fmt_id_tbl	.\parser\evtbl.cpp	/^static FMT_ID_T fmt_id_tbl[] =$/;"	v	file:
 fmtid	.\parser\evtbl.h	/^	struct fmt_id_t *fmtid;$/;"	m	struct:event_info_st
 forever	.\common\mydefs.h	8;"	d
-get_accel_data	.\trazer.cpp	71;"	d	file:
-get_esc_code	.\stream\tplact.cpp	31;"	d	file:
+get_evt_comment	.\parser\evtbl.cpp	/^get_evt_comment( unsigned char id )$/;"	f
 get_evt_id	.\parser\evtbl.cpp	/^get_evt_id( string *idstr )$/;"	f
-get_humedity_sensor	.\trazer.cpp	73;"	d	file:
-get_movdet	.\trazer.cpp	72;"	d	file:
 get_next	.\utils\getopt.cpp	/^get_next( char **argv )$/;"	f
-get_nseq	.\parser\tzparse.cpp	103;"	d	file:
-get_nseq	.\parser\tzparse.cpp	106;"	d	file:
-get_nseq	.\parser\tzparse.cpp	111;"	d	file:
-get_slave_addr	.\stream\tpldefs.h	67;"	d
-get_tplfsm_state	.\stream\tplfsm.cpp	/^get_tplfsm_state( void )$/;"	f
+get_nseq	.\parser\tzparse.cpp	102;"	d	file:
+get_nseq	.\parser\tzparse.cpp	107;"	d	file:
+get_nseq	.\parser\tzparse.cpp	99;"	d	file:
 get_trheader	.\config\cfgdep.cpp	/^get_trheader( void )$/;"	f
-get_ts	.\parser\tzparse.cpp	118;"	d	file:
-get_ts	.\parser\tzparse.cpp	120;"	d	file:
-get_ts	.\parser\tzparse.cpp	123;"	d	file:
+get_ts	.\parser\tzparse.cpp	132;"	d	file:
+get_ts	.\parser\tzparse.cpp	134;"	d	file:
+get_ts	.\parser\tzparse.cpp	137;"	d	file:
 getopt	.\utils\getopt.cpp	/^getopt( int argc, char **argv, char *opts )$/;"	f
 getting_options_from	.\errors\messages.cpp	/^const char * getting_options_from =$/;"	v
 gotoxy	.\utils\console.cpp	/^gotoxy(int x, int y)$/;"	f
 group	.\parser\evtbl.h	/^	string group;$/;"	m	struct:event_info_st
 group	.\parser\tzparse.h	/^	string group;$/;"	m	struct:tre_t
-grs_read	.\trazer.cpp	70;"	d	file:
-h	.\trazer.cpp	/^	GRSENS_T h;$/;"	m	file:
-h2ns	.\trazer.cpp	/^h2ns( ushort *x )$/;"	f
-h2ns	.\trazer.cpp	102;"	d	file:
 h_1sym	.\parser\tzparse.cpp	/^h_1sym( const void *tre )$/;"	f
 h_2sym	.\parser\tzparse.cpp	/^h_2sym( const void *tre )$/;"	f
 h_2symntick	.\parser\tzparse.cpp	/^h_2symntick( const void *tre )$/;"	f
@@ -702,44 +620,29 @@ h_symsig	.\parser\tzparse.cpp	/^h_symsig( const void *tre )$/;"	f
 h_symtrn	.\parser\tzparse.cpp	/^h_symtrn( const void *tre )$/;"	f
 h_symu8	.\parser\tzparse.cpp	/^h_symu8( const void *tre )$/;"	f
 help_message	.\errors\messages.cpp	/^const char * help_message =$/;"	v
-hoard	.\trazer.cpp	/^	ushort hoard;	\/\/ grain hoard.$/;"	m	file:
-hum	.\trazer.cpp	/^	uchar hum;$/;"	m	file:
 id	.\parser\tzparse.h	/^	unsigned char id;$/;"	m	struct:tre_t
 idstr	.\parser\evtbl.h	/^	string idstr;$/;"	m	struct:fmt_id_t
 inform_error	.\common\rerror.c	/^inform_error( const char *fmt, ... )$/;"	f
 init_options	.\options\options.cpp	/^init_options( int argc, char **argv )$/;"	f
-init_pload	.\stream\tplact.cpp	45;"	d	file:
-init_serial	.\stream\uart\myser.cpp	/^init_serial( void )$/;"	f
+init_serial	.\stream\uart\myser.cpp	/^init_serial( void (*prcv)(unsigned char byte) )$/;"	f
 init_serial	.\stream\uart\serial.cpp	/^init_serial( void )$/;"	f
-init_tpl_hal	.\stream\tplhal.cpp	/^init_tpl_hal( void )$/;"	f
-init_tplfsm	.\stream\tplfsm.cpp	/^init_tplfsm( TPL_STATE_T init_st )$/;"	f
+instr	.\trazer.cpp	/^static int instr = NONE_STREAM;$/;"	v	file:
 instream_comport	.\options\options.h	/^	string instream_comport;$/;"	m
 instream_file	.\options\options.h	/^	string instream_file;$/;"	m
 invalid_com_config	.\errors\messages.cpp	/^const char * invalid_com_config =$/;"	v
-is_esc_code	.\stream\tplact.cpp	/^is_esc_code( uchar data )$/;"	f	file:
-is_from_last_slave	.\stream\tplact.cpp	175;"	d	file:
-is_from_master	.\stream\tplact.cpp	174;"	d	file:
-is_little_endian	.\trazer.cpp	82;"	d	file:
 is_modem	.\stream\uart\serdefs.h	/^	int is_modem;$/;"	m
-is_my_slave_addr	.\stream\tplact.cpp	176;"	d	file:
-is_rcv_inframe	.\stream\tplact.cpp	42;"	d	file:
-is_xmit_inframe	.\stream\tplact.cpp	43;"	d	file:
 lang	.\common\lang.cpp	/^extern unsigned lang = ENGLISH;$/;"	v
-m	.\trazer.cpp	/^	uchar m;$/;"	m	file:
+lastnseq	.\parser\tzparse.cpp	/^static rkhui8_t lastnseq;$/;"	v	file:
+lprintf	.\parser\tzlog.cpp	/^lprintf( const char *fmt, ... )$/;"	f
 main	.\trazer.cpp	/^main(int argc, char **argv)$/;"	f
 main	.\utils\getopt.cpp	/^main( int argc, char **argv )$/;"	f
 map_obj	.\parser\symbtbl.cpp	/^map_obj( unsigned long adr )$/;"	f
 map_sig	.\parser\sigtbl.cpp	/^map_sig( TRZE_T sig )$/;"	f
 messages	.\utils\getopt.cpp	/^static char * const messages[ NUM_MSGS ] =$/;"	v	file:
-mprintf	.\stream\tplhal.h	20;"	d
-mprintf	.\stream\tplhal.h	22;"	d
-n2hs	.\trazer.cpp	101;"	d	file:
-n2hs	.\trazer.cpp	97;"	d	file:
 name	.\parser\evtbl.h	/^	string name;$/;"	m	struct:event_info_st
 name	.\parser\tzparse.h	/^	string name;$/;"	m	struct:symobj_t
 name	.\parser\tzparse.h	/^	string name;$/;"	m	struct:symsig_t
 name	.\parser\tzparse.h	/^	string name;$/;"	m	struct:tre_t
-need_escape	.\stream\tplact.cpp	/^need_escape( uchar data )$/;"	f	file:
 no_config_file	.\errors\messages.cpp	/^const char * no_config_file =$/;"	v
 no_options_file	.\errors\messages.cpp	/^const char * no_options_file =$/;"	v
 no_trace_file	.\errors\messages.cpp	/^const char * no_trace_file =$/;"	v
@@ -748,43 +651,26 @@ num_options_cpy	.\options\options.cpp	/^num_options_cpy( char *ptail )$/;"	f	fil
 optarg	.\utils\getopt.cpp	/^char *optarg;$/;"	v
 opterr	.\utils\getopt.cpp	/^int	opterr = 1;$/;"	v
 optind	.\utils\getopt.cpp	/^int	optind = 1;$/;"	v
-options	.\options\options.cpp	/^OPTIONS_T options =$/;"	v
+options	.\options\options.cpp	/^OPTIONS_T options;$/;"	v
 options_enable	.\options\options.cpp	/^options_enable( unsigned *opt, char *ptail )$/;"	f	file:
 optopt	.\utils\getopt.cpp	/^static int	optopt;$/;"	v	file:
 opts	.\options\options.cpp	/^static char *opts = CONSOLE_OPTIONS_DEFINITION; $/;"	v	file:
+outfile	.\options\options.h	/^	string outfile;$/;"	m
 parity	.\options\options.h	/^	string parity;$/;"	m
 parity	.\stream\uart\serdefs.h	/^	int parity;$/;"	m
 parser	.\parser\tzparse.cpp	/^parser( void )$/;"	f	file:
 parser_chk	.\parser\tzparse.cpp	/^parser_chk( void )$/;"	f	file:
 parser_collect	.\parser\tzparse.cpp	/^parser_collect( rkhui8_t d )$/;"	f	file:
 parser_init	.\parser\tzparse.cpp	/^parser_init( void )$/;"	f	file:
-pl	.\stream\tplact.cpp	/^static uchar *pl;$/;"	v	file:
-pload	.\stream\tplink.h	/^	uchar pload[ TPLINK_MAX_PLOAD_SIZE + 2 ];$/;"	m
-pqty	.\trazer.cpp	/^	ushort pqty;     \/\/ pails quantity.$/;"	m	file:
-proc_tpl_idle	.\stream\tplact.cpp	/^proc_tpl_idle( MUInt input, uchar data )$/;"	f
-proc_tpl_indata	.\stream\tplact.cpp	/^proc_tpl_indata( MUInt input, uchar data )$/;"	f
-proc_tpl_inesc	.\stream\tplact.cpp	/^proc_tpl_inesc( MUInt input, uchar data )$/;"	f
-proc_tpl_inxmit	.\stream\tplact.cpp	/^proc_tpl_inxmit( MUInt input, uchar data )$/;"	f
-proc_tpl_waddr	.\stream\tplact.cpp	/^proc_tpl_waddr( MUInt input, uchar data )$/;"	f
-proc_tpl_wchk	.\stream\tplact.cpp	/^proc_tpl_wchk( MUInt input, uchar data )$/;"	f
-proc_tpl_wndatah	.\stream\tplact.cpp	/^proc_tpl_wndatah( MUInt input, uchar data )$/;"	f
-proc_tpl_wndatal	.\stream\tplact.cpp	/^proc_tpl_wndatal( MUInt input, uchar data )$/;"	f
-proc_tpl_wxmit	.\stream\tplact.cpp	/^proc_tpl_wxmit( MUInt input, uchar data )$/;"	f
-proc_tpl_xchk	.\stream\tplact.cpp	/^proc_tpl_xchk( MUInt input, uchar data )$/;"	f
-proc_tpl_xmitesc	.\stream\tplact.cpp	/^proc_tpl_xmitesc( MUInt input, uchar data )$/;"	f
-proc_tplfsm	.\stream\tplfsm.cpp	/^proc_tplfsm( MUInt input, uchar data )$/;"	f
 process_config	.\config\config.cpp	/^process_config( FILE *f )$/;"	f	file:
 process_event	.\options\options.cpp	/^process_event( FILE *f )$/;"	f	file:
 pstate_props	.\options\options.h	/^	unsigned pstate_props;$/;"	m
 pstate_stimu	.\options\options.h	/^	unsigned pstate_stimu;$/;"	m
-ptpl_fsm	.\stream\tplfsm.cpp	/^static PROCFUNC_T ptpl_fsm;$/;"	v	file:
 ptr	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
-qty	.\stream\tplink.h	/^	ushort qty;$/;"	m
+quiet	.\options\options.h	/^	int quiet;$/;"	m
 rctbl	.\parser\tzparse.cpp	/^static const char *rctbl[] =				\/* dispatch ret code table *\/$/;"	v	file:
-rcv	.\trazer.cpp	/^MUInt rcv;$/;"	v
 read_config_file	.\config\config.cpp	/^read_config_file( char *cfg_file )$/;"	f
 read_option_file	.\options\options.cpp	/^read_option_file( char *option_file )$/;"	f
-ret_tplst	.\stream\tplfsm.cpp	/^ret_tplst( MUInt input, uchar data )$/;"	f
 rgb_printf	.\utils\printrgb.cpp	/^rgb_printf(int color, char* fmt, ...)$/;"	f
 rkh_trc_events	.\common\rkhtrc.h	/^typedef enum rkh_trc_events$/;"	g
 rkh_trc_groups	.\common\rkhtrc.h	/^typedef enum rkh_trc_groups$/;"	g
@@ -795,14 +681,12 @@ rkhui16_t	.\common\rkht.h	/^typedef unsigned short 	rkhui16_t;$/;"	t
 rkhui32_t	.\common\rkht.h	/^typedef unsigned long	rkhui32_t;$/;"	t
 rkhui8_t	.\common\rkht.h	/^typedef unsigned char 	rkhui8_t;$/;"	t
 rx	.\stream\uart\serial.h	/^	void (*rx)( unsigned char byte );$/;"	m
-save_escaped	.\stream\tplact.cpp	30;"	d	file:
 schar	.\common\mytypes.h	/^typedef signed char		schar;$/;"	t
 screensize	.\utils\console.cpp	/^POINT screensize;$/;"	v
 sep	.\config\config.cpp	27;"	d	file:
 sep	.\options\options.cpp	30;"	d	file:
-ser_cback	.\stream\tplhal.cpp	/^static SERIAL_CBACK_T ser_cback =$/;"	v	file:
-ser_rx_isr	.\stream\tplhal.cpp	/^ser_rx_isr( unsigned char byte )$/;"	f	file:
-ser_tx_isr	.\stream\tplhal.cpp	/^ser_tx_isr( void )$/;"	f	file:
+ser_rx_isr	.\stream\uart\myser.cpp	/^ser_rx_isr( unsigned char byte )$/;"	f	file:
+serial_callback	.\stream\uart\myser.cpp	/^static SERIAL_CBACK_T serial_callback;$/;"	v	file:
 serial_cd_off	.\stream\uart\serial.h	/^	void (*serial_cd_off)( void );$/;"	m
 serial_cd_on	.\stream\uart\serial.h	/^	void (*serial_cd_on)( void );$/;"	m
 serial_connect	.\stream\uart\serial.h	/^	void (*serial_connect)( void );$/;"	m
@@ -811,14 +695,14 @@ serial_disconnect	.\stream\uart\serial.h	/^	void (*serial_disconnect)( void );$/
 serial_ring	.\stream\uart\serial.h	/^	void (*serial_ring)( void );$/;"	m
 serials	.\stream\uart\sertbl.c	/^SERIAL_T serials[ NUM_SERIALS ] =$/;"	v
 set_language	.\common\lang.cpp	/^set_language( unsigned language )$/;"	f
-set_to_ts	.\parser\tzparse.cpp	104;"	d	file:
-set_to_ts	.\parser\tzparse.cpp	107;"	d	file:
-set_to_ts	.\parser\tzparse.cpp	112;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	100;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	103;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	108;"	d	file:
 setrgb	.\utils\console.cpp	/^setrgb(int color)$/;"	f
 show_help	.\options\options.cpp	/^show_help( void )$/;"	f
-show_help	.\trazer.cpp	/^show_help( char *name )$/;"	f	file:
 show_version	.\options\options.cpp	/^show_version( void )$/;"	f	file:
 sig	.\parser\tzparse.h	/^	TRZE_T sig;$/;"	m	struct:symsig_t
+sig_handler	.\trazer.cpp	/^sig_handler( int sig )$/;"	f
 sizeof_trze	.\config\cfgdep.h	25;"	d
 sizeof_trzes	.\config\cfgdep.h	30;"	d
 sizeof_trznb	.\config\cfgdep.h	28;"	d
@@ -826,18 +710,11 @@ sizeof_trzne	.\config\cfgdep.h	29;"	d
 sizeof_trznt	.\config\cfgdep.h	27;"	d
 sizeof_trzts	.\config\cfgdep.h	26;"	d
 sizeof_type	.\config\cfgdep.cpp	/^sizeof_type( int type )$/;"	f
-start_rcv	.\stream\tplact.cpp	/^start_rcv( void )$/;"	f	file:
-start_xmit	.\stream\tplact.cpp	/^start_xmit( uchar addr, uchar *pb, ushort qty )$/;"	f
+start_log	.\parser\tzlog.cpp	/^start_log( const char *fname )$/;"	f
 state	.\parser\tzparse.cpp	/^static rkhui8_t state = PARSER_WFLAG;$/;"	v	file:
 state_props	.\options\options.h	/^	unsigned state_props;$/;"	m
 state_stimu	.\options\options.h	/^	unsigned state_stimu;$/;"	m
 stop_num	.\stream\uart\serdefs.h	/^	int stop_num;$/;"	m
-store_addr	.\stream\tplact.cpp	23;"	d	file:
-store_chk_h	.\stream\tplact.cpp	36;"	d	file:
-store_chk_l	.\stream\tplact.cpp	37;"	d	file:
-store_data	.\stream\tplact.cpp	28;"	d	file:
-store_dcnt_h	.\stream\tplact.cpp	24;"	d	file:
-store_dcnt_l	.\stream\tplact.cpp	25;"	d	file:
 str2lower	.\utils\utils.cpp	/^str2lower( const char *src )$/;"	f
 str2upper	.\utils\utils.cpp	/^str2upper( const char *src )$/;"	f
 str_options_cpy	.\config\config.cpp	/^str_options_cpy( string *dest, char *ptail )$/;"	f	file:
@@ -845,27 +722,7 @@ str_options_cpy	.\options\options.cpp	/^str_options_cpy( string *dest, char *pta
 symobj_t	.\parser\tzparse.h	/^typedef struct symobj_t$/;"	s
 symsig_t	.\parser\tzparse.h	/^typedef struct symsig_t$/;"	s
 symstr	.\parser\tzparse.cpp	/^static char symstr[ 16 ];$/;"	v	file:
-tempst	.\stream\tplfsm.cpp	/^static TPL_STATE_T currst, tempst;$/;"	v	file:
-timer_isr	.\stream\tplhal.cpp	/^timer_isr( void )$/;"	f	file:
-tpl	.\stream\tplact.cpp	/^static TPLFRM_T tpl;$/;"	v	file:
-tpl_choke_xmit	.\stream\tplhal.cpp	/^tpl_choke_xmit( uchar data )$/;"	f
-tpl_stop_xmit	.\stream\tplhal.cpp	/^tpl_stop_xmit( void )$/;"	f
-tpl_xmit	.\stream\tplhal.cpp	/^tpl_xmit( uchar data )$/;"	f
-tplfsm_kick_timer	.\stream\tplfsm.cpp	/^tplfsm_kick_timer( unsigned short time )$/;"	f
-tplfsm_rcv_isr	.\stream\tplfsm.cpp	/^tplfsm_rcv_isr( uchar rcv )$/;"	f
-tplfsm_timer	.\stream\tplfsm.cpp	/^static MUInt tplfsm_timer;$/;"	v	file:
-tplfsm_timer_isr	.\stream\tplfsm.cpp	/^tplfsm_timer_isr( void )$/;"	f
-tplfsm_xmit_isr	.\stream\tplfsm.cpp	/^tplfsm_xmit_isr( void )$/;"	f
-tplink_buff	.\trazer.cpp	/^static TPLFRM_T tplink_buff;$/;"	v	file:
-tplink_init	.\stream\tplink.cpp	/^tplink_init( void )$/;"	f
-tplink_onchkerr	.\stream\tplink.h	93;"	d
-tplink_onchkerr	.\trazer.cpp	/^tplink_onchkerr( void )$/;"	f
-tplink_onrcv	.\trazer.cpp	/^tplink_onrcv( TPLFRM_T *p )$/;"	f
-tplink_ontout	.\trazer.cpp	/^tplink_ontout( void )$/;"	f
-tplink_onxmit_cmp	.\stream\tplink.h	107;"	d
-tplink_onxmit_cmp	.\trazer.cpp	/^tplink_onxmit_cmp( void )$/;"	f
-tplink_send_frame	.\stream\tplink.cpp	/^tplink_send_frame( uchar addr, uchar *pl, ushort qty )$/;"	f
-tpltbl	.\stream\tpltbl.cpp	/^const PROCFUNC_T tpltbl[TPL_NUM_STATES] =$/;"	v
+test_key	.\utils\utils.cpp	/^test_key( void )$/;"	f
 tr	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
 trazer_en_chk	.\config\config.h	/^	int trazer_en_chk;$/;"	m
 trazer_en_nseq	.\config\config.h	/^	int trazer_en_nseq;$/;"	m
@@ -884,7 +741,6 @@ tre	.\parser\evtbl.h	/^	TRE_T tre;$/;"	m	struct:fmt_id_t
 tre_t	.\parser\tzparse.h	/^typedef struct tre_t$/;"	s
 trheader	.\config\cfgdep.h	33;"	d
 trix	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
-tst_frame	.\trazer.cpp	/^static TPLFRM_T tst_frame =$/;"	v	file:
 uchar	.\common\mytypes.h	/^typedef unsigned char	uchar;$/;"	t
 uint	.\common\mytypes.h	/^typedef unsigned int	uint;$/;"	t
 ulong	.\common\mytypes.h	/^typedef unsigned long	ulong;$/;"	t
@@ -893,13 +749,4 @@ usage_msg	.\errors\messages.cpp	/^const char * usage_msg =$/;"	v
 ushort	.\common\mytypes.h	/^typedef unsigned short	ushort;$/;"	t
 validate_command	.\options\options.cpp	/^validate_command( const char *pcomm )$/;"	f	file:
 validate_config	.\config\config.cpp	/^validate_config( const char *pcomm )$/;"	f	file:
-verify_check	.\stream\tplact.cpp	40;"	d	file:
-x	.\trazer.cpp	/^	ushort x;$/;"	m	file:
-xmit_buff	.\trazer.cpp	/^static uchar xmit_buff[sizeof(CBOX_ST)];$/;"	v	file:
-xmit_chk_h	.\stream\tplact.cpp	38;"	d	file:
-xmit_chk_l	.\stream\tplact.cpp	39;"	d	file:
-xmit_esc_code	.\stream\tplact.cpp	33;"	d	file:
-xmit_escape	.\stream\tplact.cpp	32;"	d	file:
-xmit_thr	.\stream\tplhal.cpp	/^static char xmit_thr;$/;"	v	file:
-y	.\trazer.cpp	/^	ushort y;$/;"	m	file:
-z	.\trazer.cpp	/^	ushort z;$/;"	m	file:
+verify_nseq	.\parser\tzparse.cpp	/^verify_nseq( rkhui8_t nseq )$/;"	f	file:

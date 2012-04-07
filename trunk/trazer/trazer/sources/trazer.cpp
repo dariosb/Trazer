@@ -67,7 +67,7 @@ main(int argc, char **argv)
 
 	read_config_file( CONFIG_FILE );
 
-	start_log( "tzlog.txt" );
+	start_log( options.outfile.c_str() );
 
 	trazer_init();
 
