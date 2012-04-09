@@ -85,6 +85,7 @@ main(int argc, char **argv)
 		{
 			trazer_parse( c );
 		}
+		return EXIT_SUCCESS;
 	}
 
 	else if( !options.instream_comport.empty() )

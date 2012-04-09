@@ -23,8 +23,8 @@ const char*
 get_trheader( void )
 {
 	if( TRAZER_SIZEOF_TSTAMP == 2 )
-		return "%5d [%3d] %-4s| %-15s : ";
+		return "%5u [%3d] %-4s| %-15s : ";
 	else
-		return "%10d [%3d] %-4s| %-15s : ";
+		return "%10u [%3d] %-4s| %-15s : ";
 }
 

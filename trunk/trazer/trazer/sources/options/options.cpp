@@ -274,6 +274,9 @@ evaluate_args( int argc, char **argv )
 				options.baudrate.assign(get_next(argv));
 				options.parity.assign(get_next(argv));
 				break;
+			case 't':
+				fatal_error( "\nParse from TCP port, not implemented\n");
+				break;
 			case 'o':
 				options.outfile.assign( optarg );
 				break;

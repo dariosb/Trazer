@@ -48,7 +48,9 @@ const char * help_message =
 		"\tc: Parse from COM Port\n"
 		"\t      COM Port setup must be specified ex:\n"
 		"\t      trazer -c COM1 115200 8N1.\n"
-		"\td: Enable Debugg info\n"
+		"\tt: Parse from specified TCP port number\n"
+		"\to: Produce output to the specified file\n"
+		"\tq: Quiet mode\n"
 		"\tv: Version info\n"
 		"\th: This help message\n"
 };
@@ -61,7 +63,9 @@ const char * usage_msg =
 		"\t -c Parse from COM Port\n"
 		"\t      COM Port setup must be specified ex:\n"
 		"\t      trazer -c COM1 115200 8N1.\n"
-		"\t -d Enable Debugg info\n"
+		"\t -t Parse from specified TCP port number\n"
+		"\t -o Produce output to the specified file\n"
+		"\t -q Quiet mode\n"
 		"\t -v Version info\n"
 		"\t -h (help)\n"
 };

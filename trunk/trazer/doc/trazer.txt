@@ -1,6 +1,6 @@
 /**
 \anchor main_page
-\mainpage Trazer Reference Manual
+\mainpage Trazer User Manual
 
 \image html trazer.png
 
@@ -14,7 +14,7 @@
 \section trazer_intro Introduction
 
 %Trazer is a visualization tool that works in conjuntion with the RKH Framework
-built in real time trace facility. Trazer gives the possibility to display selectively the recording of all 
+built in trace facility. Trazer gives the possibility to display selectively the recording of all 
 events of your system, state machines, queues, timers etc.
 %Trazer helps you to faster troubleshooting especially on complex problems where a debugger is not sufficient,
 by providing a simple consolidated, human-readable textual output.
@@ -71,7 +71,7 @@ ALIGN="center" VALIGN="middle">
   <TR bgColor="#c0c0c0">
     <TD>-t</TD>
     <TD>-t 6602</TD>
-    <TD>TCP/IP server and port number. Not compatible with -c, -f</TD>
+    <TD>TCP/IP server and port number. Not compatible with -c, -f (Not implemented)</TD>
   </TR>
 
   <TR bgColor="#f0f0f0">
@@ -184,7 +184,7 @@ ALIGN="center" VALIGN="middle">
 
 \section trazer_evtbl Trace Event Table 
 
-In order to support future events definitions from new RKH releases, and for user defined traces, each event must 
+In order to support future events definitions from new RKH releases, and potential user defined traces, each event must 
 be defined into traze.evt file to be recognized by Trazer.
 Each particular event is defined as shown in the table below: 
 
@@ -224,29 +224,30 @@ ALIGN="center" VALIGN="middle">
 Trazer user may can change Alias, Comment and Group fields to customize the visualization output.
 Two particular trace event can be used to better trace visualization.
 
-RKH_TRCE_OBJ: Allows to asociate any aplication object allocated in a memory address to a user name.
+RKH_TRCE_OBJ: Allows to asociate any aplication object allocated in a memory address to a user defined name.
 
-RKH_TRCE_SIG: Allows to asociate a any framework signal that generate trace events to a user name.
+RKH_TRCE_SIG: Allows to asociate a any framework signal that generate trace events to a user defined name.
 
 RKH user must generate this particulars trace events as described in RKHTRACE and Trazer will take care of reemplacing 
-the numeric values by the user defined names.
+the numeric values by the user definition.
 
 
 \section trazer_human_format Human Readable Output
 
-Trazer is just a console program that converts the trace stream data in a human-readable format.
-human-readable textual format. Following is shown how its output looks like.
-Trazer start showing his version and compatibility with RKH framework, below are displayed the current Trazer configuration.
-For this example the trace.bin is used as trace data source.
-A identified trace event is visualiced with, in orded than they apear:
-   - Time stamp
-   - Sequence Number
-   - System service group name
-   - Trace Event Alias
+Trazer is a console program that converts the trace stream data in a human-readable format.
+Following is shown how its output looks like.\n
+Trazer start showing version and compatibility with RKH framework, below are displayed the current Trazer configuration.
+For this example the trace.bin is used as trace data source.\n
+Each identified trace show:
+   - Time stamp, in cpu ticks.
+   - Sequence Number, correlative number that identify trace event. 
+   - System service group name.
+   - Trace Event Alias, user defined alias from trazer.evt
    - Data asociated with the event.
+   - Comment.
    
-Sequence 4 5 and 6 are examples of RKH_TRCE_OBJ and RKH_TRCE_SIG events, after that in the sequence 16, 17, 32 and 33 is shown how Trazer identify the address of object and the number of signal and was replaced by the symbolic representation.
-In case that no symbolic representation has been defined for a particular object, (null) will be shown and the numeric value for signals.
+Sequences 4, 5 and 6 are examples of RKH_TRCE_OBJ and RKH_TRCE_SIG events. After, sequences 16, 17, 32 and 33, show how Trazer identify object address and signal number replacing them by its symbolic representation.
+In case that no symbolic representation has been defined for a particular object, (null) will be shown, and in same manner the numeric value for signals.
 
 \verbatim
 

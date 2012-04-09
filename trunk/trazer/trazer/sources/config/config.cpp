@@ -24,7 +24,7 @@ using namespace std;
 
 #define COMMENT	'#'
 
-#define sep		",\n"
+#define sep		"=\n"
 
 enum
 {

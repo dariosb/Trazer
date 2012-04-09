@@ -36,7 +36,7 @@ typedef struct
 	string parity;
 } OPTIONS_T;
 
-#define CONSOLE_OPTIONS_DEFINITION	"dqo:f:c:::hv"
+#define CONSOLE_OPTIONS_DEFINITION	"t:dqo:f:c:::hv"
 
 #define OPTIONS_FILE				"trazer.evt"
 
