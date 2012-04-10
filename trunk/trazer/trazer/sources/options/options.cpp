@@ -286,9 +286,13 @@ evaluate_args( int argc, char **argv )
 			case 'v':
 				show_version();
 				break;				
+			case 'd':
+				options.enable_debug = 1;
+				break;
 			case 'h':
 				show_help();
 				exit( EXIT_SUCCESS );
+				break;
 			case '?':
 				usage( argv[0] );
 				break;

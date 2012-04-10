@@ -10,6 +10,7 @@
 //#include "rkh.h"
 //#include "rkhcfg.h"
 //#include "my.h"
+#include "debug.h"
 #include "myevt.h"
 #include "tzparse.h"
 #include "evtbl.h"
@@ -695,6 +696,21 @@ parser_chk( void )
 	return 1;
 }
 
+void
+show_curr_frm( void )
+{
+	rkhui8_t *p;
+	int i;
+	dprintf( "---- |");
+
+	if( TRAZER_EN_CHK == 1 )
+	{
+		for( p = tr, i = trix; i--; ++p )
+			dprintf( "0x%X|", *p );
+	}
+	dprintf( " ----\n" );
+}
+
 
 static
 void
@@ -714,7 +730,7 @@ parser( void )
 			get_nseq();
 
 			if( !verify_nseq( nseq ) )
-				lprintf( "***** May be have lost trace info, sequence are not correlatives\n" );
+				lprintf( "\n***** May be have lost trace info, sequence are not correlatives\n" );
 
 			set_to_ts();		/* from timestamp field */
 			ts = get_ts();
@@ -753,9 +769,15 @@ trazer_parse( rkhui8_t d )
 				if( trix > 0 )
 				{
 					if( parser_chk() )
+					{
+						show_curr_frm();
 						parser();
+					}
 					else
-						lprintf( "***** Stream Checksum Error\n" );
+					{
+						lprintf( "\n***** Stream Checksum Error\n" );
+						show_curr_frm();
+					}
 				}
 
 				parser_init();
