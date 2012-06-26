@@ -22,6 +22,7 @@
 #include "tzparse.h"
 #include "tzlog.h"
 #include "utils.h"
+#include "tcp.h"
 
 FILE *f;
 
@@ -55,7 +56,9 @@ int
 main(int argc, char **argv)
 {
 	char c;
+	int n;
 	size_t r;
+	int tcpPort;
 
 	atexit( close_all );
 	signal( SIGINT, sig_handler );
@@ -71,7 +74,24 @@ main(int argc, char **argv)
 
 	trazer_init();
 
-	if( !options.instream_file.empty() )
+	if( !options.instream_tcpsock.empty() )
+	{
+		tcpPort = atoi(options.instream_tcpsock.c_str());
+
+		if (!tcpOpen(tcpPort))
+			return EXIT_FAILURE;
+		else
+			lprintf( "\n-------- Parsing trace stream from TCP Port %u --------\n\n", tcpPort ); 
+
+		while ((n = tcpRead((unsigned char *)&c, sizeof(c))) != -1)
+			if (n > 0)
+				trazer_parse(c);
+
+		tcpClose();
+		return EXIT_SUCCESS;
+	}
+
+	else if( !options.instream_file.empty() )
 	{
 		lprintf( "\n-------- Parsing trace stream from file %s --------\n\n", 
 				options.instream_file.c_str() );

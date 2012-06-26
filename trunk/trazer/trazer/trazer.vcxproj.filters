@@ -39,6 +39,9 @@
     <Filter Include="Resource Files\config">
       <UniqueIdentifier>{319cdc62-a136-4bc6-b6af-6e02e45bdd26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\stream\tcp">
+      <UniqueIdentifier>{93a0d4ce-c4ab-4169-8aef-98de49dc6d9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -131,6 +134,9 @@
     <ClInclude Include="sources\parser\tzlog.h">
       <Filter>Resource Files\parser</Filter>
     </ClInclude>
+    <ClInclude Include="sources\stream\tcp\tcp.h">
+      <Filter>Resource Files\stream\tcp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lowlevel.lib" />
@@ -198,6 +204,9 @@
     </ClCompile>
     <ClCompile Include="sources\parser\tzlog.cpp">
       <Filter>Resource Files\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stream\tcp\tcp.c">
+      <Filter>Resource Files\stream\tcp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

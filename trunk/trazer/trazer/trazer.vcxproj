@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)sources\errors;$(ProjectDir)sources\debug;$(ProjectDir)sources\config;$(ProjectDir)sources\parser;$(ProjectDir)sources\utils;$(ProjectDir)sources\options;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)sources\errors;$(ProjectDir)sources\debug;$(ProjectDir)sources\config;$(ProjectDir)sources\parser;$(ProjectDir)sources\utils;$(ProjectDir)sources\options;$(ProjectDir)sources\stream\tcp;$(ProjectDir)sources\stream\uart;$(ProjectDir)sources\stream\file;$(ProjectDir)sources\stream;$(ProjectDir)sources\common\;$(ProjectDir)sources\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)sources\;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)libs\;$(LibraryPath)</LibraryPath>
     <ReferencePath>.\sources;$(ReferencePath)</ReferencePath>
@@ -60,6 +60,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>wsock32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,6 +106,7 @@
     <ClInclude Include="sources\parser\tzlog.h" />
     <ClInclude Include="sources\parser\tzparse.h" />
     <ClInclude Include="sources\stdafx.h" />
+    <ClInclude Include="sources\stream\tcp\tcp.h" />
     <ClInclude Include="sources\stream\uart\serdefs.h" />
     <ClInclude Include="sources\stream\uart\serial.h" />
     <ClInclude Include="sources\targetver.h" />
@@ -131,6 +133,7 @@
     <ClCompile Include="sources\parser\tzlog.cpp" />
     <ClCompile Include="sources\parser\tzparse.cpp" />
     <ClCompile Include="sources\stdafx.cpp" />
+    <ClCompile Include="sources\stream\tcp\tcp.c" />
     <ClCompile Include="sources\stream\uart\myser.cpp" />
     <ClCompile Include="sources\stream\uart\sertbl.c" />
     <ClCompile Include="sources\trazer.cpp" />

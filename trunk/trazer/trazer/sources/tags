@@ -15,14 +15,14 @@ BLACK_ON_GRAY	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLA
 BLACK_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 BLUE_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
 BLUE_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
-CC	.\parser\tzparse.cpp	25;"	d	file:
+CC	.\parser\tzparse.cpp	26;"	d	file:
 COMMENT	.\config\config.cpp	25;"	d	file:
 COMMENT	.\options\options.cpp	28;"	d	file:
 COMMENT_OPT	.\options\options.cpp	/^	COMMENT_OPT,$/;"	e	file:
 CONFIG_FILE	.\config\config.h	25;"	d
 CONFIG_T	.\config\config.h	/^} CONFIG_T;$/;"	t
-CONSOLE_OPTIONS_DEFINITION	.\options\options.h	39;"	d
-CTE	.\parser\tzparse.cpp	157;"	d	file:
+CONSOLE_OPTIONS_DEFINITION	.\options\options.h	40;"	d
+CTE	.\parser\tzparse.cpp	158;"	d	file:
 CYAN_ON_BLACK	.\utils\console.h	/^	BLUE_ON_BLACK,		MAGENTA_ON_BLACK,	CYAN_ON_BLACK,		BLACK_ON_GRAY,$/;"	e
 CYAN_ON_WHITE	.\utils\console.h	/^	BLUE_ON_WHITE,		MAGENTA_ON_WHITE,	CYAN_ON_WHITE,		WHITE_ON_WHITE,$/;"	e
 DISABLE_OPT	.\options\options.h	/^	DISABLE_OPT,$/;"	e
@@ -31,7 +31,7 @@ ENABLE_OPT	.\options\options.h	/^	ENABLE_OPT$/;"	e
 ENDOFTBL	.\options\options.cpp	/^	ENDOFTBL,$/;"	e	file:
 ENDOF_AUX_BUFF	.\utils\utils.cpp	12;"	d	file:
 ENGLISH	.\common\lang.h	/^	ENGLISH, SPANISH,$/;"	e
-EOSIGTBL	.\parser\tzparse.cpp	153;"	d	file:
+EOSIGTBL	.\parser\tzparse.cpp	154;"	d	file:
 ERR	.\utils\getopt.cpp	20;"	d	file:
 ESC	.\common\mydefs.h	9;"	d
 ESC	.\utils\utils.h	15;"	d
@@ -50,6 +50,9 @@ FOUR	.\common\myevt.h	/^	FOUR,$/;"	e
 GREEN_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
 GREEN_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 GROUP_OPT	.\options\options.cpp	/^	GROUP_OPT,$/;"	e	file:
+HAL_tcpClose	.\stream\tcp\tcp.c	/^void HAL_tcpClose(void) {$/;"	f
+HAL_tcpOpen	.\stream\tcp\tcp.c	/^int HAL_tcpOpen(int portNum) {$/;"	f
+HAL_tcpRead	.\stream\tcp\tcp.c	/^int HAL_tcpRead(unsigned char *buf, int size) {$/;"	f
 HDLR_T	.\parser\tzparse.h	/^typedef char *(*HDLR_T)( const void *tre );$/;"	t
 HInt	.\common\rkht.h	/^typedef signed int		HInt;$/;"	t
 HSM_INFO_MSK_ST	.\options\options.h	/^}HSM_INFO_MSK_ST;$/;"	t
@@ -63,9 +66,9 @@ MAX_OPTS	.\options\options.cpp	/^	MAX_OPTS$/;"	e	file:
 MInt	.\common\mytypes.h	/^typedef int				MInt;$/;"	t
 MInt	.\common\mytypes.h	/^typedef schar			MInt;$/;"	t
 MKFI	.\parser\evtbl.cpp	17;"	d	file:
-MKO	.\parser\tzparse.cpp	148;"	d	file:
-MKS	.\parser\tzparse.cpp	145;"	d	file:
-MKTR	.\parser\tzparse.cpp	142;"	d	file:
+MKO	.\parser\tzparse.cpp	149;"	d	file:
+MKS	.\parser\tzparse.cpp	146;"	d	file:
+MKTR	.\parser\tzparse.cpp	143;"	d	file:
 MUInt	.\common\mytypes.h	/^typedef uchar			MUInt;$/;"	t
 MUInt	.\common\mytypes.h	/^typedef uint			MUInt;$/;"	t
 NAME_OPT	.\options\options.cpp	/^	NAME_OPT,$/;"	e	file:
@@ -77,11 +80,11 @@ NUM_LANG	.\common\lang.h	/^	NUM_LANG$/;"	e
 NUM_MSGS	.\utils\getopt.cpp	/^	NUM_MSGS$/;"	e	file:
 NUM_SERIALS	.\stream\uart\serdefs.h	/^	NUM_SERIALS$/;"	e
 ONE	.\common\myevt.h	/^	ONE,$/;"	e
-OPTIONS_FILE	.\options\options.h	41;"	d
+OPTIONS_FILE	.\options\options.h	42;"	d
 OPTIONS_T	.\options\options.h	/^} OPTIONS_T;$/;"	t
 PARSER_COLLECT	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
 PARSER_ESCAPING	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
-PARSER_MAX_SIZE_BUF	.\parser\tzparse.cpp	307;"	d	file:
+PARSER_MAX_SIZE_BUF	.\parser\tzparse.cpp	308;"	d	file:
 PARSER_WFLAG	.\parser\tzparse.cpp	/^	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING$/;"	e	file:
 PAR_EVEN	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
 PAR_MARK	.\stream\uart\serial.h	/^	PAR_NONE, PAR_ODD, PAR_EVEN, PAR_MARK, PAR_SPACE$/;"	e
@@ -469,7 +472,7 @@ TRAZER_EN_NSEQ_CFG	.\config\config.cpp	/^	TRAZER_EN_NSEQ_CFG,$/;"	e	file:
 TRAZER_EN_TSTAMP	.\config\cfgdep.h	21;"	d
 TRAZER_EN_TSTAMP	.\parser\tzparse.h	47;"	d
 TRAZER_EN_TSTAMP_CFG	.\config\config.cpp	/^	TRAZER_EN_TSTAMP_CFG,$/;"	e	file:
-TRAZER_NTRE	.\parser\tzparse.cpp	23;"	d	file:
+TRAZER_NTRE	.\parser\tzparse.cpp	24;"	d	file:
 TRAZER_SIZEOF_ESIZE	.\config\cfgdep.h	18;"	d
 TRAZER_SIZEOF_ESIZE	.\parser\tzparse.h	44;"	d
 TRAZER_SIZEOF_ESIZE_CFG	.\config\config.cpp	/^	TRAZER_SIZEOF_ESIZE_CFG,$/;"	e	file:
@@ -590,13 +593,13 @@ forever	.\common\mydefs.h	8;"	d
 get_evt_comment	.\parser\evtbl.cpp	/^get_evt_comment( unsigned char id )$/;"	f
 get_evt_id	.\parser\evtbl.cpp	/^get_evt_id( string *idstr )$/;"	f
 get_next	.\utils\getopt.cpp	/^get_next( char **argv )$/;"	f
-get_nseq	.\parser\tzparse.cpp	102;"	d	file:
-get_nseq	.\parser\tzparse.cpp	107;"	d	file:
-get_nseq	.\parser\tzparse.cpp	99;"	d	file:
+get_nseq	.\parser\tzparse.cpp	100;"	d	file:
+get_nseq	.\parser\tzparse.cpp	103;"	d	file:
+get_nseq	.\parser\tzparse.cpp	108;"	d	file:
 get_trheader	.\config\cfgdep.cpp	/^get_trheader( void )$/;"	f
-get_ts	.\parser\tzparse.cpp	132;"	d	file:
-get_ts	.\parser\tzparse.cpp	134;"	d	file:
-get_ts	.\parser\tzparse.cpp	137;"	d	file:
+get_ts	.\parser\tzparse.cpp	133;"	d	file:
+get_ts	.\parser\tzparse.cpp	135;"	d	file:
+get_ts	.\parser\tzparse.cpp	138;"	d	file:
 getopt	.\utils\getopt.cpp	/^getopt( int argc, char **argv, char *opts )$/;"	f
 getting_options_from	.\errors\messages.cpp	/^const char * getting_options_from =$/;"	v
 gotoxy	.\utils\console.cpp	/^gotoxy(int x, int y)$/;"	f
@@ -630,8 +633,11 @@ init_serial	.\stream\uart\serial.cpp	/^init_serial( void )$/;"	f
 instr	.\trazer.cpp	/^static int instr = NONE_STREAM;$/;"	v	file:
 instream_comport	.\options\options.h	/^	string instream_comport;$/;"	m
 instream_file	.\options\options.h	/^	string instream_file;$/;"	m
+instream_tcpsock	.\options\options.h	/^	string instream_tcpsock;$/;"	m
 invalid_com_config	.\errors\messages.cpp	/^const char * invalid_com_config =$/;"	v
 is_modem	.\stream\uart\serdefs.h	/^	int is_modem;$/;"	m
+l_clentSock	.\stream\tcp\tcp.c	/^SOCKET l_clentSock  = INVALID_SOCKET;$/;"	v
+l_serverSock	.\stream\tcp\tcp.c	/^SOCKET l_serverSock = INVALID_SOCKET;$/;"	v
 lang	.\common\lang.cpp	/^extern unsigned lang = ENGLISH;$/;"	v
 lastnseq	.\parser\tzparse.cpp	/^static rkhui8_t lastnseq;$/;"	v	file:
 lprintf	.\parser\tzlog.cpp	/^lprintf( const char *fmt, ... )$/;"	f
@@ -696,9 +702,9 @@ serial_disconnect	.\stream\uart\serial.h	/^	void (*serial_disconnect)( void );$/
 serial_ring	.\stream\uart\serial.h	/^	void (*serial_ring)( void );$/;"	m
 serials	.\stream\uart\sertbl.c	/^SERIAL_T serials[ NUM_SERIALS ] =$/;"	v
 set_language	.\common\lang.cpp	/^set_language( unsigned language )$/;"	f
-set_to_ts	.\parser\tzparse.cpp	100;"	d	file:
-set_to_ts	.\parser\tzparse.cpp	103;"	d	file:
-set_to_ts	.\parser\tzparse.cpp	108;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	101;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	104;"	d	file:
+set_to_ts	.\parser\tzparse.cpp	109;"	d	file:
 setrgb	.\utils\console.cpp	/^setrgb(int color)$/;"	f
 show_curr_frm	.\parser\tzparse.cpp	/^show_curr_frm( void )$/;"	f
 show_help	.\options\options.cpp	/^show_help( void )$/;"	f

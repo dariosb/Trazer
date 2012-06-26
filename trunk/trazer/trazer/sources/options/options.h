@@ -30,6 +30,7 @@ typedef struct
 	int enable_debug;
 	int quiet;
 	string outfile;
+	string instream_tcpsock;
 	string instream_file;
 	string instream_comport;
 	string baudrate;

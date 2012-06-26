@@ -275,7 +275,7 @@ evaluate_args( int argc, char **argv )
 				options.parity.assign(get_next(argv));
 				break;
 			case 't':
-				fatal_error( "\nParse from TCP port, not implemented\n");
+				options.instream_tcpsock.assign(optarg);
 				break;
 			case 'o':
 				options.outfile.assign( optarg );
