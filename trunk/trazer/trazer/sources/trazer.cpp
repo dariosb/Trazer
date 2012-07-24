@@ -30,6 +30,7 @@ enum
 {
 	FILE_STREAM,
 	SERIAL_STREAM,
+	TCP_STREAM,
 
 	NONE_STREAM
 };
@@ -44,6 +45,8 @@ close_all( void )
 		_fcloseall();
 	else if( instr == SERIAL_STREAM )
 		close_mserial();
+	else if( instr == TCP_STREAM )
+		tcpClose();
 }
 
 void
@@ -83,12 +86,13 @@ main(int argc, char **argv)
 		else
 			lprintf( "\n-------- Parsing trace stream from TCP Port %u --------\n\n", tcpPort ); 
 
+		instr = TCP_STREAM;
+
 		while ((n = tcpRead((unsigned char *)&c, sizeof(c))) != -1)
+		{
 			if (n > 0)
 				trazer_parse(c);
-
-		tcpClose();
-		return EXIT_SUCCESS;
+		}
 	}
 
 	else if( !options.instream_file.empty() )
@@ -105,7 +109,6 @@ main(int argc, char **argv)
 		{
 			trazer_parse( c );
 		}
-		return EXIT_SUCCESS;
 	}
 
 	else if( !options.instream_comport.empty() )
@@ -119,8 +122,6 @@ main(int argc, char **argv)
 
 		instr = SERIAL_STREAM;
 	}
-
-	while( test_key() != ESC );
 
 	return EXIT_SUCCESS;
 }

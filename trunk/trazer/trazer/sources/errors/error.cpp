@@ -19,7 +19,6 @@ fatal_error( const char* fmt, ...)
 
     va_end(args);
 
-	_getch();
 	exit( EXIT_FAILURE );
 }
 

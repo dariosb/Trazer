@@ -72,7 +72,7 @@ const char * usage_msg =
 
 const char * no_options_file =
 {
-		"\nWARNING: Event definition file %s doesn't exists...\n"
+		"\nERROR: Event definition file %s doesn't exists...\n"
 };
 
 const char * getting_options_from =

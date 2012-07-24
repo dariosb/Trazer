@@ -50,9 +50,6 @@ FOUR	.\common\myevt.h	/^	FOUR,$/;"	e
 GREEN_ON_BLACK	.\utils\console.h	/^	WHITE_ON_BLACK,		RED_ON_BLACK,		GREEN_ON_BLACK, 	YELLOW_ON_BLACK,$/;"	e
 GREEN_ON_WHITE	.\utils\console.h	/^	BLACK_ON_WHITE,		RED_ON_WHITE,		GREEN_ON_WHITE,		YELLOW_ON_WHITE,$/;"	e
 GROUP_OPT	.\options\options.cpp	/^	GROUP_OPT,$/;"	e	file:
-HAL_tcpClose	.\stream\tcp\tcp.c	/^void HAL_tcpClose(void) {$/;"	f
-HAL_tcpOpen	.\stream\tcp\tcp.c	/^int HAL_tcpOpen(int portNum) {$/;"	f
-HAL_tcpRead	.\stream\tcp\tcp.c	/^int HAL_tcpRead(unsigned char *buf, int size) {$/;"	f
 HDLR_T	.\parser\tzparse.h	/^typedef char *(*HDLR_T)( const void *tre );$/;"	t
 HInt	.\common\rkht.h	/^typedef signed int		HInt;$/;"	t
 HSM_INFO_MSK_ST	.\options\options.h	/^}HSM_INFO_MSK_ST;$/;"	t
@@ -730,6 +727,9 @@ str_options_cpy	.\options\options.cpp	/^str_options_cpy( string *dest, char *pta
 symobj_t	.\parser\tzparse.h	/^typedef struct symobj_t$/;"	s
 symsig_t	.\parser\tzparse.h	/^typedef struct symsig_t$/;"	s
 symstr	.\parser\tzparse.cpp	/^static char symstr[ 16 ];$/;"	v	file:
+tcpClose	.\stream\tcp\tcp.c	/^void tcpClose(void) {$/;"	f
+tcpOpen	.\stream\tcp\tcp.c	/^int tcpOpen(int portNum) {$/;"	f
+tcpRead	.\stream\tcp\tcp.c	/^int tcpRead(unsigned char *buf, int size) {$/;"	f
 test_key	.\utils\utils.cpp	/^test_key( void )$/;"	f
 tr	.\parser\tzparse.cpp	/^static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;$/;"	v	file:
 trazer_en_chk	.\config\config.h	/^	int trazer_en_chk;$/;"	m
