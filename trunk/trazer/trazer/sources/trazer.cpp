@@ -121,6 +121,8 @@ main(int argc, char **argv)
 		init_serial( &trazer_parse );
 
 		instr = SERIAL_STREAM;
+
+		while( _getch() != ESC );
 	}
 
 	return EXIT_SUCCESS;
