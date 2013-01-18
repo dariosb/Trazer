@@ -31,7 +31,7 @@ static int	optopt;
 int	opterr = 1;
 char *optarg;
 
-static char * const messages[ NUM_MSGS ] =
+static const char * messages[ NUM_MSGS ] =
 {
 	"illegal option", 
 	"option requires an argument"
@@ -45,6 +45,7 @@ getopt( int argc, char **argv, char *opts )
 	register char *cp;
 
 	if(sp == 1)
+	{
 		if(optind >= argc || argv[optind][0] != '-' || argv[optind][1] == '\0')
 			return(EOF);
 		else if( strcmp(argv[optind], "--" ) == 0)
@@ -52,6 +53,7 @@ getopt( int argc, char **argv, char *opts )
 			optind++;
 			return(EOF);
 		}
+	}
 	optopt = c = argv[optind][sp];
 	if( c == ':' || ( cp = strchr(opts, c) ) == NULL )
 	{

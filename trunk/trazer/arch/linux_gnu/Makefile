@@ -6,7 +6,7 @@ TRZSRCPATH=$(PWD)/../../source
 
 DEFINE= -D__LINUX__ -DLINUX_DEBUG -DN__cplusplus -DN_DEBUG -D_CONSOLE -D__W32STVC08__
 CFLAGS = -ansi -Wall -I$(TRZSRCPATH)/include -I$(PWD)
-LDFLAGS	= -lc
+LDFLAGS	= -lc -pthread
 
 trzobjects:=$(patsubst %.cpp,%.o,$(wildcard $(TRZSRCPATH)/*.cpp)) 
 trazer:=$(patsubst $(TRZSRCPATH)/%, %,$(trzobjects)) 

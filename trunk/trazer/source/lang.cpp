@@ -4,7 +4,7 @@
 
 #include "lang.h"
 
-extern unsigned lang = ENGLISH;
+unsigned lang = ENGLISH;
 
 void
 set_language( unsigned language )

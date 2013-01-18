@@ -59,7 +59,7 @@ static const char *commands[ MAX_OPTS ] =
  * 	Command line letter options
  */
 
-static char *opts = CONSOLE_OPTIONS_DEFINITION; 
+static char *opts = (char *)CONSOLE_OPTIONS_DEFINITION; 
 
 /*
  * 	Initialized static 'not constant' tables
@@ -114,6 +114,7 @@ validate_command( const char *pcomm )
 	return -1;
 }
 
+#if 0
 static
 int
 options_enable( unsigned *opt, char *ptail )
@@ -126,6 +127,7 @@ options_enable( unsigned *opt, char *ptail )
 	*opt = (strtol( ptail, &p, 0 ) != 0) ? ENABLE_OPT : DISABLE_OPT;
 	return 0;
 }
+#endif
 
 static
 int
@@ -144,6 +146,7 @@ str_options_cpy( string *dest, char *ptail )
 	return 0;
 }
 
+#if 0
 static
 int
 num_options_cpy( char *ptail )
@@ -153,6 +156,8 @@ num_options_cpy( char *ptail )
 
 	return atoi(ptail);
 }
+#endif
+
 /*
  * 		process_opt:
  * 			Process an option from the option file
@@ -254,7 +259,7 @@ read_option_file( char *option_file )
 void
 show_help( void )
 {
-	printf( help_message );
+	printf( "%s", help_message );
 }
 
 /*
@@ -308,5 +313,5 @@ void
 init_options( int argc, char **argv )
 {
 	evaluate_args( argc, argv );
-	read_option_file( OPTIONS_FILE );
+	read_option_file( (char *)OPTIONS_FILE );
 }

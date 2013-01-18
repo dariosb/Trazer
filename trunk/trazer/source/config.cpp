@@ -102,6 +102,7 @@ validate_config( const char *pcomm )
 	return -1;
 }
 
+#if 0
 static
 int
 str_options_cpy( string *dest, char *ptail )
@@ -118,6 +119,7 @@ str_options_cpy( string *dest, char *ptail )
 	dest->assign( ptail );
 	return 0;
 }
+#endif
 
 static
 int

@@ -143,7 +143,7 @@ add_to_evtbl( EVENT_INFO_ST *p )
 		p->name.empty() 
 	)
 	{
-		printf(error_incomplete_trace_evt_data);
+		printf( "%s", error_incomplete_trace_evt_data);
 		return -1;
 	}
 

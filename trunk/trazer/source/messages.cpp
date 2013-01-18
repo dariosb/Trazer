@@ -11,27 +11,27 @@
  * In Shapes parsing
  */
 
-extern const char * err_syntax	=
+const char * err_syntax	=
 {	
 	"\nSyntax Error in %s: %s, %s\n"
 };
 
-extern const char * err_trans =
+const char * err_trans =
 {
 	"\nError in %s: %s, %s -> %s, %s\n"
 };
 
-extern const char * err_undef =
+const char * err_undef =
 {
 	"\nError in %s: %s, %s property not definition\n"
 };
 
-extern const char * err_redef =
+const char * err_redef =
 {
 	"\nError in %s: %s, %s property redefinition\n"
 };
 
-extern const char * err_fopen =
+const char * err_fopen =
 {
 	"\nCan't open file %s\n"
 };

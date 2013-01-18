@@ -66,7 +66,7 @@ main(int argc, char **argv)
 
 	init_options( argc, argv );
 
-	read_config_file( CONFIG_FILE );
+	read_config_file( (char *)CONFIG_FILE );
 
 	start_log( options.outfile.c_str() );
 
