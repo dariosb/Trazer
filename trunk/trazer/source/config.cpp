@@ -22,6 +22,7 @@
 #include "error.h"
 #include "mdebug.h"
 #include "utils.h"
+#include "tzlog.h"
 
 using namespace std;
 
@@ -66,6 +67,22 @@ static const char *config[ MAX_CONFIGS ] =
 	"TRAZER_EN_CHK",
 	"TRAZER_EN_TSTAMP"
 };
+
+
+static const CONFIG_T configs_dft =
+{
+	TRAZER_SIZEOF_SIG_DFT,
+	TRAZER_SIZEOF_TSTAMP_DFT,
+	TRAZER_SIZEOF_POINTER_DFT,
+	TRAZER_SIZEOF_NTIMER_DFT,
+	TRAZER_SIZEOF_NBLOCK_DFT,
+	TRAZER_SIZEOF_NELEM_DFT,
+	TRAZER_SIZEOF_ESIZE_DFT,
+	TRAZER_EN_NSEQ_DFT,
+	TRAZER_EN_CHK_DFT,
+	TRAZER_EN_TSTAMP_DFT
+};
+
 
 /*
  * 	Initialized static 'not constant' tables
@@ -197,6 +214,16 @@ process_config( FILE *f )
 	return 0;
 }
 
+
+void
+set_default_config( void )
+{
+	lprintf( "\nWarning: No RKH configuration file found\n" );
+	lprintf( "Setting configuration by default\n\n" );
+	configs = configs_dft;
+}
+
+
 /*
  * 		read_conig_file:
  * 			Opens and read configs from the configs
@@ -210,7 +237,7 @@ read_config_file( char *cfg_file )
 
 	if( ( f = fopen( cfg_file, "rt" ) ) == NULL )
 	{
-		fatal_error( no_config_file, cfg_file );
+		set_default_config();
 	}
 	else
 	{

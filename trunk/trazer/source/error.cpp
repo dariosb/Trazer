@@ -3,8 +3,8 @@
  */
 
 #include "error.h"
+#include "utils.h"
 #include <stdio.h>
-//#include <conio.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -18,6 +18,8 @@ fatal_error( const char* fmt, ...)
     vfprintf(stderr, fmt,args);
 
     va_end(args);
+
+	while(!test_key());
 
 	exit( EXIT_FAILURE );
 }

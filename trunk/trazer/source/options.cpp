@@ -9,7 +9,6 @@
 #include <ctype.h>
 #include <fstream>
 #include <iostream>
-//#include <conio.h>
 
 #include "options.h"
 #include "error.h"
@@ -114,20 +113,6 @@ validate_command( const char *pcomm )
 	return -1;
 }
 
-#if 0
-static
-int
-options_enable( unsigned *opt, char *ptail )
-{
-	char *p;
-
-	if( ( ptail = strtok( NULL, sep ) ) == NULL )
-		return -1;
-
-	*opt = (strtol( ptail, &p, 0 ) != 0) ? ENABLE_OPT : DISABLE_OPT;
-	return 0;
-}
-#endif
 
 static
 int
@@ -147,17 +132,6 @@ str_options_cpy( string *dest, char *ptail )
 }
 
 #if 0
-static
-int
-num_options_cpy( char *ptail )
-{
-	if( ( ptail = strtok( NULL, sep ) ) == NULL )
-		return -1;
-
-	return atoi(ptail);
-}
-#endif
-
 /*
  * 		process_opt:
  * 			Process an option from the option file
@@ -236,11 +210,7 @@ read_option_file( char *option_file )
 	FILE *f;
 	int line;
 
-	if( ( f = fopen( option_file, "rt" ) ) == NULL )
-	{
-		fatal_error( no_options_file, option_file );
-	}
-	else
+	if( ( f = fopen( option_file, "rt" ) ) != NULL )
 	{
 		if( ( line = process_event( f ) ) < 0 )
 		{
@@ -250,7 +220,7 @@ read_option_file( char *option_file )
 		fclose( f );
 	}
 }
-
+#endif
 
 /*
  * 	show_help:
@@ -301,6 +271,7 @@ evaluate_args( int argc, char **argv )
 				break;
 			case 'h':
 				show_help();
+				while( !test_key() );
 				exit( EXIT_SUCCESS );
 				break;
 			case '?':
@@ -313,5 +284,5 @@ void
 init_options( int argc, char **argv )
 {
 	evaluate_args( argc, argv );
-	read_option_file( (char *)OPTIONS_FILE );
+//	read_option_file( (char *)OPTIONS_FILE );
 }

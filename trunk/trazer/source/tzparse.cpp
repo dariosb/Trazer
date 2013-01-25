@@ -21,7 +21,7 @@
 //#include "rkhtim.h"
 #include <stdio.h>
 
-#define TRAZER_NTRE			event_tbl.size()
+//#define TRAZER_NTRE			event_tbl.size()
 //#define TRAZER_NTRG			RKH_TRCG_NGROUP
 #define CC(s)				((const char*)(s))
 
@@ -720,7 +720,6 @@ parser( void )
 
 	TRZTS_T ts;
 	rkhui8_t nseq;
-	string *ps;
 
 	if( ( ftr = find_trevt( tr[ 0 ] ) ) != ( TRE_T* )0 )
 	{
@@ -735,14 +734,7 @@ parser( void )
 			set_to_ts();		/* from timestamp field */
 			ts = get_ts();
 			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-			lprintf( "%s", (*ftr->fmt_args)( CTE( ftr ) ) );
-			ps = get_evt_comment( tr[0] );
-			if( !ps->empty() )
-				lprintf( "  : %s\n", ps->c_str() );
-			else
-				lprintf( "\n" );
-
-
+			lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 		}
 		return;
 	}
@@ -812,7 +804,7 @@ trazer_init( void )
 	lprintf(VERSION_STRING_TXT);
 	lprintf( "Date = "__DATE__" "__TIME__"\n" );
 	lprintf( "\nTrace Setup\n\n" );
-	lprintf( "   Trace events quantity = %d\n", TRAZER_NTRE );
+//	lprintf( "   Trace events quantity = %d\n", TRAZER_NTRE );
 //	lprintf( "Number of trace groups = %d\n", TRAZER_NTRG );
 	lprintf( "   TRAZER_SIZEOF_SIG     = %d\n", TRAZER_SIZEOF_SIG );
 	lprintf( "   TRAZER_SIZEOF_TSTAMP  = %d\n", TRAZER_SIZEOF_TSTAMP );

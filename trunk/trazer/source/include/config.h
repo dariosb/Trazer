@@ -19,6 +19,21 @@ typedef struct
 	int trazer_en_tstamp;
 } CONFIG_T;
 
+/*
+ * RKH default configuration
+ */
+
+#define	TRAZER_SIZEOF_SIG_DFT		1
+#define	TRAZER_SIZEOF_TSTAMP_DFT	4
+#define	TRAZER_SIZEOF_POINTER_DFT	4
+#define	TRAZER_SIZEOF_NTIMER_DFT	2
+#define	TRAZER_SIZEOF_NBLOCK_DFT	1
+#define	TRAZER_SIZEOF_NELEM_DFT		1
+#define	TRAZER_SIZEOF_ESIZE_DFT		2
+#define	TRAZER_EN_NSEQ_DFT			1
+#define	TRAZER_EN_CHK_DFT			1
+#define	TRAZER_EN_TSTAMP_DFT		1
+
 #define CONFIG_FILE				"trazer.cfg"
 
 extern CONFIG_T configs;
