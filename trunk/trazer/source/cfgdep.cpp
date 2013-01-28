@@ -28,3 +28,12 @@ get_trheader( void )
 		return "%10u [%3d] %-4s| %-15s : ";
 }
 
+const char*
+get_usr_trheader( void )
+{
+	if( TRAZER_SIZEOF_TSTAMP == 2 )
+		return "%5u [%3d] %-4s| %s_#%d    : ";
+	else
+		return "%10u [%3d] %-4s| %s_#%d    : ";
+}
+

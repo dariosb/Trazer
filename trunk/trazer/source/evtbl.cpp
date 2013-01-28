@@ -133,16 +133,25 @@ static FMT_ID_T fmt_id_tbl[] =
 			"sig=%d, sym=%s", 				h_symsig ),
 	MKFI( 	RKH_TE_FWK_FUN,		"FWK", "SYM_FUN", 
 			"obj=0x%08X, sym=%s", 			h_symobj ),
-	MKFI( 	RKH_TE_FWK_EXE_FUN,		"FWK", "EXE_FUN", 
-			"fun=%s", 						h_1sym )
+	MKFI( 	RKH_TE_FWK_EXE_FUN,	"FWK", "EXE_FUN", 
+			"fun=%s", 						h_1sym ),
+
+	MKFI( 	RKH_TE_USER,	"UTE", "USR_TRACE", 
+			NULL, 	NULL )
 };
+
+TRE_T fmt_usr_tbl = 
+{
+	RKH_TE_USER, "UTE", "USR_TRACE", NULL, usr_fmt
+};
+
 
 FMT_ID_T *
 get_evt_id( string *idstr )
 {
 	FMT_ID_T *p;
 
-	for( p=fmt_id_tbl; p < fmt_id_tbl + RKH_TE_USER; ++p )
+	for( p=fmt_id_tbl; p->tre.id != RKH_TE_USER; ++p )
 		if( idstr->compare(p->idstr) == 0 )
 			return p;
 
@@ -201,7 +210,7 @@ find_trevt( unsigned char id )
 {
 	FMT_ID_T *p;
 
-	for( p=fmt_id_tbl; p < fmt_id_tbl + RKH_TE_USER; ++p )
+	for( p=fmt_id_tbl; p->tre.id != RKH_TE_USER; ++p )
 	{
 		if( id == p->tre.id )
 				return &(p->tre);
@@ -209,3 +218,9 @@ find_trevt( unsigned char id )
 	return ( TRE_T* )0;
 }
 
+const
+TRE_T *
+point_2_trevt( unsigned char ix )
+{
+	return &fmt_id_tbl[ix].tre;
+}

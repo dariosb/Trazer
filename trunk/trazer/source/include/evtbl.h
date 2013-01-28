@@ -35,5 +35,6 @@ string * get_evt_comment( unsigned char id );
 
 //extern vector <EVENT_INFO_ST> event_tbl;
 
+const TRE_T *point_2_trevt( unsigned char id );
 
 #endif

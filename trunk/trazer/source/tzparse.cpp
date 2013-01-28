@@ -658,6 +658,14 @@ h_symsig( const void *tre )
 	return fmt;
 }
 
+char *
+usr_fmt( const void *tre )
+{
+	strcpy( fmt, " " );
+	return fmt;
+}
+
+
 
 static
 void
@@ -711,6 +719,10 @@ show_curr_frm( void )
 	dprintf( " ----\n" );
 }
 
+#define GET_TE_GROUP(e)	(rkhui8_t)(((e) >> NGSH) & 7)
+#define GET_USR_TE(e)	(rkhui8_t)((e) & 7)
+
+extern TRE_T fmt_usr_tbl;
 
 static
 void
@@ -736,6 +748,23 @@ parser( void )
 			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
 			lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 		}
+		return;
+	}
+
+	else if( GET_TE_GROUP( tr[0] ) == RKH_TG_USR )
+	{
+		ftr = &fmt_usr_tbl;
+
+		get_nseq();
+
+		if( !verify_nseq( nseq ) )
+			lprintf( "\n***** May be have lost trace info, sequence are not correlatives\n" );
+
+		set_to_ts();		/* from timestamp field */
+		ts = get_ts();
+		lprintf( usr_trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str(), GET_USR_TE( tr[0] ) );
+		lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+
 		return;
 	}
 	
