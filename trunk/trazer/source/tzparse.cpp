@@ -658,10 +658,150 @@ h_symsig( const void *tre )
 	return fmt;
 }
 
+
+typedef void (*PRNFUNC_T)( char *p, ulong data );
+
+typedef
+struct
+{
+	char fmt;
+	uchar size;
+	PRNFUNC_T pp;
+}USR_FMT_T;
+
+typedef char (*DECOFUNC_T)( const rkhui8_t *p, const USR_FMT_T *pfmt );
+
+typedef 
+struct
+{
+	USR_FMT_T pf;
+	DECOFUNC_T pc;
+}USR_TBL_T;
+
+char usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt );
+void i8prn( char *p, ulong data );
+void i16prn( char *p, ulong data );
+void i32prn( char *p, ulong data );
+void u8prn( char *p, ulong data );
+void u16prn( char *p, ulong data );
+void u32prn( char *p, ulong data );
+
+static const USR_TBL_T usr_tbl[] =
+{
+	{ { 'd', 	1 , i8prn},	usr_integer },	/**< signed 8-bit integer format */
+	{ { 'u',	1 , u8prn},	usr_integer },	/**< unsigned 8-bit integer format */
+	{ { 'd',	2 , i16prn},	usr_integer },	/**< signed 16-bit integer format */
+	{ { 'u',	2 , u16prn},	usr_integer },	/**< unsigned 16-bit integer format */
+	{ { 'd',	4 , i32prn},	usr_integer },	/**< signed 32-bit integer format */
+	{ { 'u',	4 , u32prn},	usr_integer },	/**< unsigned 32-bit integer format */
+	{ { 'X',	4 , u32prn},	usr_integer }	/**< signed 32-bit integer in hex format */
+#if 0
+	's',	0,	usr_integer,	/**< zero-terminated ASCII string format */
+	RKH_MEM_T,		/**< up to 255-bytes memory block format */
+	RKH_OBJ_T,		/**< object pointer format */
+	RKH_FUN_T,		/**< function pointer format */
+	RKH_SIG_T		/**< event signal format */
+#endif
+};
+
+#define USR_TRC_SEPARATOR	", "
+
+void
+i8prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhi8_t)data );
+}
+
+void
+u8prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhui8_t)data );
+}
+
+void
+i16prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhi16_t)data );
+}
+
+void
+u16prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhui16_t)data );
+}
+
+void
+i32prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhi32_t)data );
+}
+
+void
+u32prn( char *p, ulong data )
+{
+	lprintf( (const char *)p, (rkhui32_t)data );
+}
+
+char
+usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt )
+{
+	ulong d;
+	rkhui8_t l;
+	uchar n;
+
+	l = (*p++) >> 4;
+
+	for( d = 0, n = 0; n < pfmt->size; ++n )
+		d |= ( unsigned long )( *p++ << (8 * (n != 0)) );
+	
+	sprintf( fmt, "%%0%d%c", l, pfmt->fmt );
+
+	pfmt->pp( fmt, d );
+
+	return pfmt->size + 1;
+}
+
 char *
 usr_fmt( const void *tre )
 {
-	strcpy( fmt, " " );
+	const rkhui8_t *pt;
+	rkhui8_t tr_size, done;
+	const USR_TBL_T *pfmt;
+
+	pt = (const rkhui8_t *)tre;
+	if( TRAZER_EN_NSEQ == 1 ) 
+	{
+		pt += 2;
+		tr_size = trix - 2;
+	}
+	else
+	{
+		pt += 1;
+		tr_size = trix - 1;
+	}
+
+	pt += TRAZER_SIZEOF_TSTAMP;
+	tr_size -= TRAZER_SIZEOF_TSTAMP;
+	tr_size -= 1; /* because checksum */
+
+	do
+	{
+		pfmt = &usr_tbl[ *pt & 0x0F ];
+
+		done = pfmt->pc( pt, &pfmt->pf );
+
+		tr_size -= done;
+		pt += done;
+ 
+		if( tr_size <= 0 )
+			break;
+
+		lprintf( USR_TRC_SEPARATOR );
+	}
+	while(1);
+
+	lprintf( "\n" );
+
 	return fmt;
 }
 
@@ -763,7 +903,7 @@ parser( void )
 		set_to_ts();		/* from timestamp field */
 		ts = get_ts();
 		lprintf( usr_trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str(), GET_USR_TE( tr[0] ) );
-		lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+		(*ftr->fmt_args)( (const void *)(tr) ); 
 
 		return;
 	}
