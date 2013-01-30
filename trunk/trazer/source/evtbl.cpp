@@ -137,6 +137,9 @@ static FMT_ID_T fmt_id_tbl[] =
 			"fun=%s", 						h_1sym ),
 	MKFI( 	RKH_TE_FWK_TUSR,	"FWK", "SYM_USER", 
 			"uevt=%d, sym=%s", 				h_symuevt ),
+	MKFI( 	RKH_TE_FWK_TCFG,	"FWK", "TCFG", 
+			NULL, 							h_tcfg ),
+
 
 	MKFI( 	RKH_TE_USER,	"USR", "USR#", 
 			NULL, 	NULL )

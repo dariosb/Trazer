@@ -597,6 +597,37 @@ h_symuevt( const void *tre )
 	return fmt;
 }
 
+//static const char *cfg_margin = "%34";
+static const char *cfg_margin = "                                       ";
+
+char *
+h_tcfg( const void *tre )
+{
+	TRAZER_SIZEOF_SIG = (*trb >> 4) & 0x0F;
+	TRAZER_SIZEOF_TSTAMP = (*trb++) & 0x0F;
+	TRAZER_SIZEOF_POINTER = (*trb >> 4) & 0x0F;
+	TRAZER_SIZEOF_NTIMER = (*trb++) & 0x0F;
+	TRAZER_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
+	TRAZER_SIZEOF_NELEM = (*trb++) & 0x0F;
+	TRAZER_SIZEOF_ESIZE = (*trb >> 4) & 0x0F;
+	TRAZER_EN_NSEQ = (*trb++) & 0x0F;
+	TRAZER_EN_CHK = (*trb >> 4) & 0x0F;
+	TRAZER_EN_TSTAMP = (*trb++) & 0x0F;
+
+	lprintf( "Trace Setup received from client\n" );
+
+	lprintf( "%s| TRAZER_SIZEOF_SIG     = %d\n", cfg_margin, TRAZER_SIZEOF_SIG );
+	lprintf( "%s| TRAZER_SIZEOF_TSTAMP  = %d\n", cfg_margin, TRAZER_SIZEOF_TSTAMP );
+	lprintf( "%s| TRAZER_SIZEOF_POINTER = %d\n", cfg_margin, TRAZER_SIZEOF_POINTER );
+	lprintf( "%s| TRAZER_SIZEOF_NTIMER  = %d\n", cfg_margin, TRAZER_SIZEOF_NTIMER );
+	lprintf( "%s| TRAZER_SIZEOF_NBLOCK  = %d\n", cfg_margin, TRAZER_SIZEOF_NBLOCK );
+	lprintf( "%s| TRAZER_SIZEOF_NELEM   = %d\n", cfg_margin, TRAZER_SIZEOF_NELEM );
+	lprintf( "%s| TRAZER_SIZEOF_ESIZE   = %d\n", cfg_margin, TRAZER_SIZEOF_ESIZE );
+	lprintf( "%s| TRAZER_EN_NSEQ        = %d\n", cfg_margin, TRAZER_EN_NSEQ );
+	lprintf( "%s| TRAZER_EN_CHK         = %d\n", cfg_margin, TRAZER_EN_CHK );
+	lprintf( "%s| TRAZER_EN_TSTAMP      = %d", cfg_margin, TRAZER_EN_TSTAMP );
+	return "\n";
+}
 
 typedef void (*PRNFUNC_T)( char *p, ulong data );
 
@@ -1002,13 +1033,6 @@ trazer_init( void )
 	lprintf( "   TRAZER_EN_NSEQ        = %d\n", TRAZER_EN_NSEQ );
 	lprintf( "   TRAZER_EN_CHK         = %d\n", TRAZER_EN_CHK );
 	lprintf( "   TRAZER_EN_TSTAMP      = %d\n", TRAZER_EN_TSTAMP );
-	lprintf( "   RKH_TRC_ALL           = %d\n", RKH_TRC_ALL );
-	lprintf( "   RKH_TRC_EN_MP         = %d\n", RKH_TRC_EN_MP );
-	lprintf( "   RKH_TRC_EN_RQ         = %d\n", RKH_TRC_EN_RQ );
-	lprintf( "   RKH_TRC_EN_SMA        = %d\n", RKH_TRC_EN_SMA );
-	lprintf( "   RKH_TRC_EN_TIM        = %d\n", RKH_TRC_EN_TIM );
-	lprintf( "   RKH_TRC_EN_SM         = %d\n", RKH_TRC_EN_SM );
-	lprintf( "   RKH_TRC_EN_RKH        = %d\n", RKH_TRC_EN_RKH );
 	//lprintf( "\n---- BEGIN TRACE SESSION ----\n\n" );
 	lprintf( "\n" );
 }

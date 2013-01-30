@@ -275,7 +275,8 @@ typedef enum rkh_trc_groups
 #define EUNCHANGE				1
 
 
-#define GRPSH( grp )				(rkhui8_t)(((grp)&7) << NGSH)
+#define GRPLSH( grp )				(rkhui8_t)(((grp) & 7) << NGSH)
+#define EXTE( te, grp )				(rkhui8_t)((te) - GRPLSH(grp))
 #define RKH_NUM_TE_PER_GROUP		32 /* 2^5 = 32 */
 
 #if RKH_NUM_TE_PER_GROUP <= 32
@@ -303,13 +304,13 @@ typedef enum rkh_trc_groups
  * 	Therefore, is able to define 3 groups and 32 events per group.
  */
 
-#define RKH_MP_START				GRPSH( RKH_TG_MP	)
-#define RKH_RQ_START				GRPSH( RKH_TG_RQ 	)
-#define RKH_SMA_START				GRPSH( RKH_TG_SMA 	)
-#define RKH_SM_START				GRPSH( RKH_TG_SM 	)
-#define RKH_TIM_START				GRPSH( RKH_TG_TIM 	)
-#define RKH_FWK_START				GRPSH( RKH_TG_FWK 	)
-#define RKH_USR_START				GRPSH( RKH_TG_USR 	)
+#define RKH_MP_START				GRPLSH( RKH_TG_MP	)
+#define RKH_RQ_START				GRPLSH( RKH_TG_RQ 	)
+#define RKH_SMA_START				GRPLSH( RKH_TG_SMA 	)
+#define RKH_SM_START				GRPLSH( RKH_TG_SM 	)
+#define RKH_TIM_START				GRPLSH( RKH_TG_TIM 	)
+#define RKH_FWK_START				GRPLSH( RKH_TG_FWK 	)
+#define RKH_USR_START				GRPLSH( RKH_TG_USR 	)
 /*@}*/
 
 
@@ -473,7 +474,7 @@ typedef enum rkh_trc_groups
  *		rkhui32_t d3 = 65535;
  *		char *str = "hello";
  *
- *		RKH_TRC_USR_BEGIN( MY_FIRST_TRACE )
+ *		RKH_TRC_USR_BEGIN( LOWPWR_USR_TRACE )
  *			RKH_TUSR_I8( 3, d1 );
  *			RKH_TUSR_UI8( 3, d1 );
  *			RKH_TUSR_I16( 4, d2 );
@@ -559,6 +560,7 @@ typedef enum rkh_trc_events
 	RKH_TE_FWK_FUN,					/**< \copydetails RKH_TR_FWK_FUN */
 	RKH_TE_FWK_EXE_FUN,				/**< \copydetails RKH_TR_FWK_EXE_FUN */
 	RKH_TE_FWK_TUSR,				/**< \copydetails RKH_TR_FWK_TUSR */
+	RKH_TE_FWK_TCFG,				/**< \copydetails RKH_TR_FWK_TCFG */
 
 	RKH_TE_USER = RKH_USR_START,
 
@@ -721,7 +723,7 @@ typedef enum rkh_trc_events
  */
 
 #define RKH_TRC_UI8( d )	\
-			rkh_trc_u8( (d) )
+			rkh_trc_u8( (rkhui8_t)(d) )
 
 /**
  * 	\brief
@@ -1872,7 +1874,7 @@ enum rkh_trc_fmt
 					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_OBJ )				\
 						RKH_TRC_SYM( __o );								\
 						RKH_TRC_STR( __o_n );							\
-					RKH_TRC_END_WOFIL();								\
+					RKH_TRC_END_WOFIL()									\
 					RKH_TRC_FLUSH();									\
 				} while(0)
 
@@ -1914,7 +1916,7 @@ enum rkh_trc_fmt
 					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_SIG )				\
 						RKH_TRC_SIG( __s );								\
 						RKH_TRC_STR( __s_n );							\
-					RKH_TRC_END_WOFIL();								\
+					RKH_TRC_END_WOFIL()									\
 					RKH_TRC_FLUSH();									\
 				} while(0)
 
@@ -1947,10 +1949,10 @@ enum rkh_trc_fmt
 		#define RKH_TR_FWK_FUN( __f )									\
 				do{ 													\
 					static RKHROM char *const __f_n = #__f;				\
-					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_FUN )			\
+					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_FUN )				\
 						RKH_TRC_FUN( __f );								\
 						RKH_TRC_STR( __f_n );							\
-					RKH_TRC_END_WOFIL();								\
+					RKH_TRC_END_WOFIL()									\
 					RKH_TRC_FLUSH();									\
 				} while(0)
 
@@ -1975,7 +1977,7 @@ enum rkh_trc_fmt
 		#define RKH_TR_FWK_EXE_FUN( function )							\
 					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_EXE_FUN, NVS )		\
 						RKH_TRC_FUN( function );						\
-					RKH_TRC_END_WOFIL();
+					RKH_TRC_END_WOFIL()
 
 		/* --- Symbol entry table for user user-defined trace events --------- */
 
@@ -2015,11 +2017,48 @@ enum rkh_trc_fmt
 				do{ 													\
 					static RKHROM char *const __e_n = #__e;				\
 					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_TUSR )				\
-						RKH_TRC_UI8( __e );								\
+						RKH_TRC_UI8( EXTE( __e, RKH_TG_USR ) );			\
 						RKH_TRC_STR( __e_n );							\
-					RKH_TRC_END_WOFIL();								\
+					RKH_TRC_END_WOFIL()									\
 					RKH_TRC_FLUSH();									\
 				} while(0)
+
+		/* --- Trace configuration --------- */
+
+		/**
+		 * 	Desc 	= send trace configuration table\n
+		 * 	Group 	= RKH_TG_FWK\n
+		 * 	Id 		= RKH_TE_FWK_TCFG\n
+		 * 	Args	= configuration table\n
+		 *
+		 * 	\code
+		 * 	void 
+		 * 	rkh_trc_config( void )
+		 * 	{
+		 * 		RKH_TR_FWK_TCFG();
+		 * 	}
+		 * 	\endcode
+		 */
+
+		#define RKH_TR_FWK_TCFG()										\
+					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_TCFG )				\
+						RKH_TRC_UI8( 									\
+							(RKH_SIZEOF_EVENT << 4) | 					\
+							RKH_TRC_SIZEOF_TSTAMP);						\
+						RKH_TRC_UI8( 									\
+							(RKH_TRC_SIZEOF_POINTER << 4) | 			\
+							RKH_TIM_SIZEOF_NTIMER);						\
+						RKH_TRC_UI8( 									\
+							(RKH_MP_SIZEOF_NBLOCK << 4) | 				\
+							RKH_RQ_SIZEOF_NELEM);						\
+						RKH_TRC_UI8( 									\
+							(RKH_SIZEOF_ESIZE << 4) |					\
+							RKH_TRC_EN_NSEQ);							\
+						RKH_TRC_UI8( 									\
+							(RKH_TRC_EN_CHK << 4) |						\
+							RKH_TRC_EN_TSTAMP);							\
+					RKH_TRC_END_WOFIL()									\
+					RKH_TRC_FLUSH()
 	#else
 		#define RKH_TR_FWK_EN()							(void)0
 		#define RKH_TR_FWK_EX()							(void)0
@@ -2034,8 +2073,8 @@ enum rkh_trc_fmt
 		#define RKH_TR_FWK_FUN( __s )					(void)0
 		#define RKH_TR_FWK_EXE_FUN( __f )				(void)0
 		#define RKH_TR_FWK_TUSR( __e )					(void)0
+		#define RKH_TR_FWK_TCFG()						(void)0
 	#endif
-	
 #else
 	/* --- Memory Pool (MP) ------------------ */
 	#define RKH_TR_MP_INIT( mp, nblock )				(void)0
@@ -2101,6 +2140,7 @@ enum rkh_trc_fmt
 	#define RKH_TR_FWK_FUN( __f )						(void)0
 	#define RKH_TR_FWK_EXE_FUN( __f )					(void)0
 	#define RKH_TR_FWK_TUSR( __e )						(void)0
+	#define RKH_TR_FWK_TCFG()							(void)0
 #endif
 
 
@@ -2135,6 +2175,23 @@ typedef rkhui8_t RKH_TE_T;
  */
 
 void rkh_trc_init( void );
+
+
+/**
+ * 	\brief
+ * 	Send the trace facility configuration to host application software Trazer.
+ *
+ * 	Trazer is designed to work with all possible target CPU, which requires a 
+ * 	wide range of configurability. For example, for any given target CPU, 
+ * 	Trazer must "know" the size of object pointers, event size, timestamp 
+ * 	size and so on. This configurations could be provided through 
+ * 	"trazer.cfg" file in the host or invoking rkh_trc_config() function from 
+ * 	the application-specific rkh_trc_open() function.
+ *
+ * 	\sa trtrazer
+ */
+
+void rkh_trc_config( void );
 
 
 /**

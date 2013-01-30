@@ -80,13 +80,6 @@
 #define RKH_TRC_EN						1	/* 	CFG01 */
 #define RKH_TRC_MAX_EVENTS				8	/* 	CFG01 */
 #define RKH_TRC_RUNTIME_FILTER			1	/* 	CFG01 */
-#define RKH_TRC_ALL						1	/* 	CFG01 */
-#define RKH_TRC_EN_MP					0	/* 	CFG01 */
-#define RKH_TRC_EN_RQ					0	/* 	CFG01 */
-#define RKH_TRC_EN_SMA					0	/* 	CFG01 */
-#define RKH_TRC_EN_TIM					0	/* 	CFG01 */
-#define RKH_TRC_EN_SM					0	/* 	CFG01 */
-#define RKH_TRC_EN_RKH					0	/* 	CFG01 */
 #define RKH_TRC_EN_SM_INIT				1	/* 	CFG01 */
 #define RKH_TRC_EN_SM_DCH				1	/* 	CFG01 */
 #define RKH_TRC_EN_SM_CLRH				1	/* 	CFG01 */

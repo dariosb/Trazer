@@ -119,6 +119,7 @@ char * h_symsig( const void *tre );
 char * h_symuevt( const void *tre );
 char * h_2symntick( const void *tre );
 char * h_symntick( const void *tre );
+char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );
 
 
