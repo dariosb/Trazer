@@ -30,9 +30,7 @@ int sizeof_type( int type );
 #define sizeof_trzes()		sizeof_type( TRAZER_SIZEOF_ESIZE )
 
 const char *get_trheader( void );
-const char *get_usr_trheader( void );
 #define trheader	get_trheader()
-#define usr_trheader	get_usr_trheader()
 
 
 #endif

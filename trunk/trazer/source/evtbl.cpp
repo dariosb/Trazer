@@ -135,14 +135,16 @@ static FMT_ID_T fmt_id_tbl[] =
 			"obj=0x%08X, sym=%s", 			h_symobj ),
 	MKFI( 	RKH_TE_FWK_EXE_FUN,	"FWK", "EXE_FUN", 
 			"fun=%s", 						h_1sym ),
+	MKFI( 	RKH_TE_FWK_TUSR,	"FWK", "SYM_USER", 
+			"uevt=%d, sym=%s", 				h_symuevt ),
 
-	MKFI( 	RKH_TE_USER,	"UTE", "USR_TRACE", 
+	MKFI( 	RKH_TE_USER,	"USR", "USR#", 
 			NULL, 	NULL )
 };
 
 TRE_T fmt_usr_tbl = 
 {
-	RKH_TE_USER, "UTE", "USR_TRACE", NULL, usr_fmt
+	RKH_TE_USER, "USR", "USR#", NULL, usr_fmt
 };
 
 

@@ -16,6 +16,7 @@
 #include "evtbl.h"
 #include "symbtbl.h"
 #include "sigtbl.h"
+#include "uevtbl.h"
 #include "cfgdep.h"
 #include "tzlog.h"
 //#include "rkhtim.h"
@@ -314,89 +315,13 @@ enum
 };
 
 
-//static SYMOBJ_T objtbl[ 128 ];		/* object symbol table */
 static rkhui8_t *trb;				/* points to trace event buffer */
 static char fmt[ 128 ];
 extern FILE *fdbg;
 
-//static ushort my_timer;
 static rkhui8_t state = PARSER_WFLAG;
 static rkhui8_t tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
-
-#if 0
-static
-void
-make_symtbl( void )
-{
-	int i = -1;
-
-	MKO( &my, 			"my"		);
-	MKO( &my_equeue,	"my_queue"	);
-	MKO( &my_timer, 	"my_timer"	);
-	MKO( &rkheplist[0], "ep0"		);
-	MKO( &rkheplist[1], "ep1"		);
-	MKO( &S1, 			"S1"		);
-	MKO( &S11, 			"S11"		);
-	MKO( &S111, 		"S111"		);
-	MKO( &S112, 		"S112"		);
-	MKO( &S12, 			"S12"		);
-	MKO( &S2, 			"S2"		);
-	MKO( &S3, 			"S3" 		);
-	MKO( &S31, 			"S31" 		);
-	MKO( &S32, 			"S32"		);
-	MKO( &C1, 			"C1" 		);
-	MKO( &C2, 			"C2" 		);
-	MKO( &J, 			"J" 		);
-	MKO( &DH, 			"DH" 		);
-	MKO( &H, 			"H" 		);
-
-	MKO( 0, 			CC( 0 ) );
-}
-#endif
-
-#if 0
-static
-const char *
-map_obj( unsigned long adr )
-{
-	const SYMOBJ_T *p;
-
-	for( p = objtbl; p->name != 0; ++p )
-		if( p->adr == adr )
-			return p->name;
-	return CC( 0 );
-}
-#endif
-#if 0
-static
-const char *
-map_sig( TRZE_T sig )
-{
-	const SYMSIG_T *p;
-
-	for( p = sigtbl; p->name != 0; ++p )
-		if( p->sig == sig )
-			return p->name;
-	return CC( 0 );
-}
-#endif
-#if 0
-static
-const
-TRE_T *
-find_trevt( unsigned char id )
-{
-	const TRE_T *p;
-
-	for( p = traces; p < traces + RKH_TRCE_USER; ++p )
-		if( p->id == id )
-			return p;
-
-	return ( TRE_T* )0;
-}
-#endif
-
 
 static
 unsigned long
@@ -659,12 +584,26 @@ h_symsig( const void *tre )
 }
 
 
+char *
+h_symuevt( const void *tre )
+{
+	uchar ue;
+	char *s;
+
+	ue = (uchar)assemble( sizeof_trze() );
+	s = assemble_str();
+	sprintf( fmt, CTE( tre )->fmt, ue, s );
+	add_to_uevttbl( ue, s );
+	return fmt;
+}
+
+
 typedef void (*PRNFUNC_T)( char *p, ulong data );
 
 typedef
 struct
 {
-	char fmt;
+	char *fmt;
 	uchar size;
 	PRNFUNC_T pp;
 }USR_FMT_T;
@@ -679,29 +618,32 @@ struct
 }USR_TBL_T;
 
 char usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt );
+char usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt );
+char usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt );
+char usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt );
+char usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt );
 void i8prn( char *p, ulong data );
 void i16prn( char *p, ulong data );
 void i32prn( char *p, ulong data );
 void u8prn( char *p, ulong data );
 void u16prn( char *p, ulong data );
 void u32prn( char *p, ulong data );
+void strprn( char *p, ulong data );
 
 static const USR_TBL_T usr_tbl[] =
 {
-	{ { 'd', 	1 , i8prn},	usr_integer },	/**< signed 8-bit integer format */
-	{ { 'u',	1 , u8prn},	usr_integer },	/**< unsigned 8-bit integer format */
-	{ { 'd',	2 , i16prn},	usr_integer },	/**< signed 16-bit integer format */
-	{ { 'u',	2 , u16prn},	usr_integer },	/**< unsigned 16-bit integer format */
-	{ { 'd',	4 , i32prn},	usr_integer },	/**< signed 32-bit integer format */
-	{ { 'u',	4 , u32prn},	usr_integer },	/**< unsigned 32-bit integer format */
-	{ { 'X',	4 , u32prn},	usr_integer }	/**< signed 32-bit integer in hex format */
-#if 0
-	's',	0,	usr_integer,	/**< zero-terminated ASCII string format */
-	RKH_MEM_T,		/**< up to 255-bytes memory block format */
-	RKH_OBJ_T,		/**< object pointer format */
-	RKH_FUN_T,		/**< function pointer format */
-	RKH_SIG_T		/**< event signal format */
-#endif
+	{ { "%%0%dd", 	1, i8prn},	usr_integer },	/**< signed 8-bit integer format */
+	{ { "%%0%du",	1, u8prn},	usr_integer },	/**< unsigned 8-bit integer format */
+	{ { "%%0%dd",	2, i16prn},	usr_integer },	/**< signed 16-bit integer format */
+	{ { "%%0%du",	2, u16prn},	usr_integer },	/**< unsigned 16-bit integer format */
+	{ { "%%0%dd",	4, i32prn},	usr_integer },	/**< signed 32-bit integer format */
+	{ { "%%0%du",	4, u32prn},	usr_integer },	/**< unsigned 32-bit integer format */
+	{ { "0x%%0%dX",	4, u32prn},	usr_integer },	/**< signed 32-bit integer in hex format */
+	{ { "%s",		0, NULL},	usr_string },	/**< zero-terminated ASCII string format */
+	{ { "%02X ",	0, NULL},	usr_mdump },	/**< up to 255-bytes memory block format */
+	{ {	"obj=%s", 	0, NULL},	usr_object },	/**< object pointer format */
+	{ {	"func=%s", 	0, NULL},	usr_object },	/**< function pointer format */
+	{ {	"event=%s",	0, NULL},	usr_signal },	/**< event signal format */
 };
 
 #define USR_TRC_SEPARATOR	", "
@@ -743,6 +685,68 @@ u32prn( char *p, ulong data )
 }
 
 char
+usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt )
+{
+	int n, sh;
+	unsigned long obj;
+
+	++p; /* point to oject */
+	for( obj = 0, n = TRAZER_SIZEOF_POINTER, sh = 0; n; --n, sh += 8  )
+		obj |= ( unsigned long )( *p++ << sh );
+
+	lprintf( pfmt->fmt, map_obj( obj ) );
+
+	/* +1 size field included */
+	return TRAZER_SIZEOF_POINTER + 1;
+}
+
+char
+usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt )
+{
+	int n, sh;
+	TRZE_T e;
+
+	++p; /* point to oject */
+	for( e = 0, n = sizeof_trze(), sh = 0; n; --n, sh += 8  )
+		e |= (TRZE_T)( *p++ << sh );
+
+	lprintf( pfmt->fmt, map_sig( e ) );
+
+	/* +1 size field included */
+	return sizeof_trze() + 1;
+}
+#define USER_MEMORY_DUMP_START	"[ "
+#define USER_MEMORY_DUMP_END	"]"
+
+char
+usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
+{
+	rkhui8_t size;
+	uchar *pd;
+
+	lprintf( USER_MEMORY_DUMP_START );
+	
+	for( size = *(p+1), pd = (uchar *)(p + 2); size; --size, ++pd ) 
+		lprintf( pfmt->fmt, *pd );
+	
+	lprintf( USER_MEMORY_DUMP_END );
+
+	/* +1 size field included */
+	/* +1 because USR TRACE Format included */
+	return *(p+1) + 2;			
+}
+
+char
+usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt )
+{
+	lprintf( pfmt->fmt, p+1 );
+
+	/* +1 \0 included */
+	/* +1 because USR TRACE Format included */
+	return strlen((const char *)(p+1)) + 2;	
+}
+
+char
 usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt )
 {
 	ulong d;
@@ -752,20 +756,22 @@ usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt )
 	l = (*p++) >> 4;
 
 	for( d = 0, n = 0; n < pfmt->size; ++n )
-		d |= ( unsigned long )( *p++ << (8 * (n != 0)) );
+		d |= ( unsigned long )( *p++ << (8 * n) );
 	
-	sprintf( fmt, "%%0%d%c", l, pfmt->fmt );
+	sprintf( fmt, pfmt->fmt, l );
 
 	pfmt->pp( fmt, d );
 
-	return pfmt->size + 1;
+	/* +1 because USR TRACE Format included */
+	return pfmt->size + 1;	
 }
 
 char *
 usr_fmt( const void *tre )
 {
 	const rkhui8_t *pt;
-	rkhui8_t tr_size, done;
+	rkhi8_t tr_size;
+	rkhui8_t done;
 	const USR_TBL_T *pfmt;
 
 	pt = (const rkhui8_t *)tre;
@@ -786,6 +792,9 @@ usr_fmt( const void *tre )
 
 	do
 	{
+		if( (*pt & 0x0F) > RKH_SIG_T )
+			break;
+
 		pfmt = &usr_tbl[ *pt & 0x0F ];
 
 		done = pfmt->pc( pt, &pfmt->pf );
@@ -872,6 +881,7 @@ parser( void )
 
 	TRZTS_T ts;
 	rkhui8_t nseq;
+	const char *pname;
 
 	if( ( ftr = find_trevt( tr[ 0 ] ) ) != ( TRE_T* )0 )
 	{
@@ -902,7 +912,14 @@ parser( void )
 
 		set_to_ts();		/* from timestamp field */
 		ts = get_ts();
-		lprintf( usr_trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str(), GET_USR_TE( tr[0] ) );
+
+		if( (pname = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
+		{
+			sprintf( fmt, "%s%d", ftr->name.c_str(), GET_USR_TE( tr[0] ) );
+			pname = fmt;
+		}
+
+		lprintf( trheader, ts, nseq, ftr->group.c_str(), pname );
 		(*ftr->fmt_args)( (const void *)(tr) ); 
 
 		return;

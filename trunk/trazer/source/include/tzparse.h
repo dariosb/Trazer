@@ -26,6 +26,7 @@
 #define __TZPARSE_H__
 
 #include "rkhtype.h"
+#include "mytypes.h"
 #include <string>
 
 using namespace std;
@@ -90,6 +91,12 @@ typedef struct symsig_t
 	string name;
 } SYMSIG_T;
 
+typedef struct usrevt_t
+{
+	uchar uevt;
+	string name;
+} SYMUEVT_T;
+
 void trazer_parse( rkhui8_t d );
 void trazer_init( void );
 
@@ -109,6 +116,7 @@ char * h_2symnused( const void *tre );
 char * h_symnused( const void *tre );
 char * h_symobj( const void *tre );
 char * h_symsig( const void *tre );
+char * h_symuevt( const void *tre );
 char * h_2symntick( const void *tre );
 char * h_symntick( const void *tre );
 char * usr_fmt( const void *tre );

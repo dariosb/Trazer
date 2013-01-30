@@ -257,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\source\uevtbl.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\utils.cpp"
 				>
 			</File>
@@ -380,6 +384,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\source\include\tzparse.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\source\include\uevtbl.h"
 				>
 			</File>
 			<File
