@@ -53,7 +53,6 @@ Section "Principal" SEC01
   CreateShortCut "$SMPROGRAMS\Trazer\Trazer.lnk" "$INSTDIR\trazer.exe"
   CreateShortCut "$DESKTOP\Trazer.lnk" "$INSTDIR\trazer.exe"
   File "trazer.cfg"
-  File "trazer.evt"
 SectionEnd
 
 Section "dlls" SEC02
@@ -113,7 +112,6 @@ Section Uninstall
   Delete "$WINDIR\system32\msvcr90.dll"
   Delete "$WINDIR\system32\msvcp90.dll"
   Delete "$WINDIR\system32\dwmapi.dll"
-  Delete "$INSTDIR\trazer.evt"
   Delete "$INSTDIR\trazer.cfg"
   Delete "$INSTDIR\trazer.exe"
 
