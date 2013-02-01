@@ -40,6 +40,7 @@ enum
 	MAX_OPTS
 };
 
+#if 0
 /*
  * 	Available commands for optdef.txt
  */
@@ -53,6 +54,7 @@ static const char *commands[ MAX_OPTS ] =
 	"Comment",
 	"END_OF_EVTBL"
 };
+#endif
 
 /*
  * 	Command line letter options
@@ -74,8 +76,6 @@ OPTIONS_T options;
  * 	Static uninitialized variables
  */
 
-static char buffer[ 100 ];			/*	buffer: used for field separation	*/	
-
 static
 void
 show_version( void )
@@ -94,6 +94,7 @@ usage( char *name )
 }
 
 
+#if 0
 /*
  * 		validate_command:
  * 			Verifies that the command name is 
@@ -113,7 +114,6 @@ validate_command( const char *pcomm )
 	return -1;
 }
 
-
 static
 int
 str_options_cpy( string *dest, char *ptail )
@@ -130,6 +130,7 @@ str_options_cpy( string *dest, char *ptail )
 	dest->assign( ptail );
 	return 0;
 }
+#endif
 
 #if 0
 /*

@@ -626,7 +626,7 @@ h_tcfg( const void *tre )
 	lprintf( "%s| TRAZER_EN_NSEQ        = %d\n", cfg_margin, TRAZER_EN_NSEQ );
 	lprintf( "%s| TRAZER_EN_CHK         = %d\n", cfg_margin, TRAZER_EN_CHK );
 	lprintf( "%s| TRAZER_EN_TSTAMP      = %d", cfg_margin, TRAZER_EN_TSTAMP );
-	return "\n";
+	return (char *)("\n");
 }
 
 typedef void (*PRNFUNC_T)( char *p, ulong data );
@@ -663,18 +663,18 @@ void strprn( char *p, ulong data );
 
 static const USR_TBL_T usr_tbl[] =
 {
-	{ { "%%0%dd", 	1, i8prn},	usr_integer },	/**< signed 8-bit integer format */
-	{ { "%%0%du",	1, u8prn},	usr_integer },	/**< unsigned 8-bit integer format */
-	{ { "%%0%dd",	2, i16prn},	usr_integer },	/**< signed 16-bit integer format */
-	{ { "%%0%du",	2, u16prn},	usr_integer },	/**< unsigned 16-bit integer format */
-	{ { "%%0%dd",	4, i32prn},	usr_integer },	/**< signed 32-bit integer format */
-	{ { "%%0%du",	4, u32prn},	usr_integer },	/**< unsigned 32-bit integer format */
-	{ { "0x%%0%dX",	4, u32prn},	usr_integer },	/**< signed 32-bit integer in hex format */
-	{ { "%s",		0, NULL},	usr_string },	/**< zero-terminated ASCII string format */
-	{ { "%02X ",	0, NULL},	usr_mdump },	/**< up to 255-bytes memory block format */
-	{ {	"obj=%s", 	0, NULL},	usr_object },	/**< object pointer format */
-	{ {	"func=%s", 	0, NULL},	usr_object },	/**< function pointer format */
-	{ {	"event=%s",	0, NULL},	usr_signal },	/**< event signal format */
+	{ { (char *)"%%0%dd", 	1, i8prn},	usr_integer },	/**< signed 8-bit integer format */
+	{ { (char *)"%%0%du",	1, u8prn},	usr_integer },	/**< unsigned 8-bit integer format */
+	{ { (char *)"%%0%dd",	2, i16prn},	usr_integer },	/**< signed 16-bit integer format */
+	{ { (char *)"%%0%du",	2, u16prn},	usr_integer },	/**< unsigned 16-bit integer format */
+	{ { (char *)"%%0%dd",	4, i32prn},	usr_integer },	/**< signed 32-bit integer format */
+	{ { (char *)"%%0%du",	4, u32prn},	usr_integer },	/**< unsigned 32-bit integer format */
+	{ { (char *)"0x%%0%dX",	4, u32prn},	usr_integer },	/**< signed 32-bit integer in hex format */
+	{ { (char *)"%s",		0, NULL},	usr_string },	/**< zero-terminated ASCII string format */
+	{ { (char *)"%02X ",	0, NULL},	usr_mdump },	/**< up to 255-bytes memory block format */
+	{ {	(char *)"obj=%s", 	0, NULL},	usr_object },	/**< object pointer format */
+	{ {	(char *)"func=%s", 	0, NULL},	usr_object },	/**< function pointer format */
+	{ {	(char *)"event=%s",	0, NULL},	usr_signal }	/**< event signal format */
 };
 
 #define USR_TRC_SEPARATOR	", "
