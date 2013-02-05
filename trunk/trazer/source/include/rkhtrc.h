@@ -296,12 +296,13 @@ typedef enum rkh_trc_groups
  * 	event number = | G | G | G | E | E | E | E | E |\n
  *
  * 	G's:	group number.\n
- * 	X's:	event's group.\n
+ * 	E's:	event's group.\n
  *
  * 	The lower 5 bits (E's) of the event ID are used to determine 
  * 	the trace event, while the next three most significant bits 
  * 	(G's) are used to determine the corresponding group.
- * 	Therefore, is able to define 3 groups and 32 events per group.
+ * 	Therefore, is able to define 7 groups and 32 events per group.
+ *  
  */
 
 #define RKH_MP_START				GRPLSH( RKH_TG_MP	)
@@ -312,6 +313,29 @@ typedef enum rkh_trc_groups
 #define RKH_FWK_START				GRPLSH( RKH_TG_FWK 	)
 #define RKH_USR_START				GRPLSH( RKH_TG_USR 	)
 /*@}*/
+
+
+/**@{
+ * 	Max. number of used trace events in a particular group in octets, thus 
+ * 	the desired value must be divided by 8 (1 -> 8 events).
+ */
+
+#define RKH_MP_TTBL_RANGE			1
+#define RKH_RQ_TTBL_RANGE			1
+#define RKH_SMA_TTBL_RANGE			1
+#define RKH_SM_TTBL_RANGE			3
+#define RKH_TIM_TTBL_RANGE			1
+#define RKH_FWK_TTBL_RANGE			3
+#define RKH_USR_TTBL_RANGE			1
+/*@}*/
+
+#define RKH_MP_TTBL_OFFSET			0
+#define RKH_RQ_TTBL_OFFSET			(RKH_MP_TTBL_OFFSET + RKH_MP_TTBL_RANGE)
+#define RKH_SMA_TTBL_OFFSET			(RKH_RQ_TTBL_OFFSET + RKH_RQ_TTBL_RANGE)
+#define RKH_SM_TTBL_OFFSET			(RKH_SMA_TTBL_OFFSET + RKH_SMA_TTBL_RANGE)
+#define RKH_TIM_TTBL_OFFSET			(RKH_SM_TTBL_OFFSET + RKH_SM_TTBL_RANGE)
+#define RKH_FWK_TTBL_OFFSET			(RKH_TIM_TTBL_OFFSET + RKH_TIM_TTBL_RANGE)
+#define RKH_USR_TTBL_OFFSET			(RKH_FWK_TTBL_OFFSET + RKH_FWK_TTBL_RANGE)
 
 
 /**
@@ -541,7 +565,6 @@ typedef enum rkh_trc_events
 	/* --- Timer events (TIM group) ----------------------- */
 	RKH_TE_TIM_INIT = RKH_TIM_START,/**< \copydetails RKH_TR_TIM_INIT */
 	RKH_TE_TIM_START,				/**< \copydetails RKH_TR_TIM_START */
-	RKH_TE_TIM_RESTART,				/**< \copydetails RKH_TR_TIM_RESTART */
 	RKH_TE_TIM_STOP,				/**< \copydetails RKH_TR_TIM_STOP */
 	RKH_TE_TIM_TOUT,				/**< \copydetails RKH_TR_TIM_TOUT */
 	RKH_TE_TIM_REM,					/**< \copydetails RKH_TR_TIM_REM */
@@ -561,6 +584,7 @@ typedef enum rkh_trc_events
 	RKH_TE_FWK_EXE_FUN,				/**< \copydetails RKH_TR_FWK_EXE_FUN */
 	RKH_TE_FWK_TUSR,				/**< \copydetails RKH_TR_FWK_TUSR */
 	RKH_TE_FWK_TCFG,				/**< \copydetails RKH_TR_FWK_TCFG */
+	RKH_TE_FWK_ASSERT,				/**< \copydetails RKH_TR_FWK_ASSERT */
 
 	RKH_TE_USER = RKH_USR_START,
 
@@ -1688,19 +1712,6 @@ enum rkh_trc_fmt
 					RKH_TRC_END()
 	
 		/**
-		 * 	Desc 	= restart a timer\n
-		 * 	Group 	= RKH_TG_TIM\n
-		 * 	Id 		= RKH_TE_TIM_RESTART\n
-		 * 	Args	= timer, nticks\n
-		 */
-
-		#define RKH_TR_TIM_RESTART( t, nt )								\
-					RKH_TRC_BEGIN( RKH_TE_TIM_RESTART, NVS )			\
-						RKH_TRC_SYM( t ); 								\
-						RKH_TRC_NTICK( nt ); 							\
-					RKH_TRC_END()
-
-		/**
 		 * 	Desc 	= stop a timer\n
 		 * 	Group 	= RKH_TG_TIM\n
 		 * 	Id 		= RKH_TE_TIM_STOP\n
@@ -1738,14 +1749,13 @@ enum rkh_trc_fmt
 	#else
 		#define RKH_TR_TIM_INIT( t, sig )					(void)0
 		#define RKH_TR_TIM_START( t, nt, sma )				(void)0
-		#define RKH_TR_TIM_RESTART( t, nt )					(void)0
 		#define RKH_TR_TIM_STOP( t )						(void)0
 		#define RKH_TR_TIM_TOUT( t )						(void)0
 		#define RKH_TR_TIM_REM( t )							(void)0
 	#endif
 
 	/* --- Framework (RKH) ----------------------- */
-	#if RKH_TRC_ALL == 1 || RKH_TRC_EN_RKH == 1
+	#if RKH_TRC_ALL == 1 || RKH_TRC_EN_FWK == 1
 
 		/**
 		 * 	Desc 	= initialize the RKH\n
@@ -2029,7 +2039,7 @@ enum rkh_trc_fmt
 		 * 	Desc 	= send trace configuration table\n
 		 * 	Group 	= RKH_TG_FWK\n
 		 * 	Id 		= RKH_TE_FWK_TCFG\n
-		 * 	Args	= configuration table\n
+		 * 	Args	= configuration parameters\n
 		 *
 		 * 	\code
 		 * 	void 
@@ -2043,21 +2053,37 @@ enum rkh_trc_fmt
 		#define RKH_TR_FWK_TCFG()										\
 					RKH_TRC_BEGIN_WOFIL( RKH_TE_FWK_TCFG )				\
 						RKH_TRC_UI8( 									\
-							(RKH_SIZEOF_EVENT << 4) | 					\
-							RKH_TRC_SIZEOF_TSTAMP);						\
+							(rkhui8_t)((RKH_SIZEOF_EVENT/8 << 4) | 		\
+							(rkhui8_t)RKH_TRC_SIZEOF_TSTAMP/8));		\
 						RKH_TRC_UI8( 									\
-							(RKH_TRC_SIZEOF_POINTER << 4) | 			\
-							RKH_TIM_SIZEOF_NTIMER);						\
+							(rkhui8_t)((RKH_TRC_SIZEOF_POINTER/8 << 4) |\
+							RKH_TIM_SIZEOF_NTIMER/8));					\
 						RKH_TRC_UI8( 									\
-							(RKH_MP_SIZEOF_NBLOCK << 4) | 				\
-							RKH_RQ_SIZEOF_NELEM);						\
+							(rkhui8_t)((RKH_MP_SIZEOF_NBLOCK/8 << 4) | 	\
+							RKH_RQ_SIZEOF_NELEM/8));					\
 						RKH_TRC_UI8( 									\
-							(RKH_SIZEOF_ESIZE << 4) |					\
-							RKH_TRC_EN_NSEQ);							\
+							(rkhui8_t)((RKH_SIZEOF_ESIZE/8 << 4) |		\
+							RKH_TRC_EN_NSEQ));							\
 						RKH_TRC_UI8( 									\
-							(RKH_TRC_EN_CHK << 4) |						\
-							RKH_TRC_EN_TSTAMP);							\
+							(rkhui8_t)((RKH_TRC_EN_CHK << 4) |			\
+							RKH_TRC_EN_TSTAMP));						\
 					RKH_TRC_END_WOFIL()									\
+					RKH_TRC_FLUSH()
+
+		/* --- Assertion --------- */
+
+		/**
+		 * 	Desc 	= assertion expression was evaluated to false.\n
+		 * 	Group 	= RKH_TG_FWK\n
+		 * 	Id 		= RKH_TE_FWK_ASSERT\n
+		 * 	Args	= module name, and line number\n
+		 */
+
+		#define RKH_TR_FWK_ASSERT( mod_, ln_ )							\
+					RKH_TRC_BEGIN( RKH_TE_FWK_ASSERT, NVS )				\
+						RKH_TRC_STR( (RKHROM char *)mod_ );				\
+						RKH_TRC_UI16( (rkhui16_t)ln_ );					\
+					RKH_TRC_END()										\
 					RKH_TRC_FLUSH()
 	#else
 		#define RKH_TR_FWK_EN()							(void)0
@@ -2074,6 +2100,7 @@ enum rkh_trc_fmt
 		#define RKH_TR_FWK_EXE_FUN( __f )				(void)0
 		#define RKH_TR_FWK_TUSR( __e )					(void)0
 		#define RKH_TR_FWK_TCFG()						(void)0
+		#define RKH_TR_FWK_ASSERT( mod_, ln_ )			(void)0
 	#endif
 #else
 	/* --- Memory Pool (MP) ------------------ */
@@ -2121,7 +2148,6 @@ enum rkh_trc_fmt
 	/* --- Timer (TIM) ----------------------- */
 	#define RKH_TR_TIM_INIT( t, sig )					(void)0
 	#define RKH_TR_TIM_START( t, nt, sma )				(void)0
-	#define RKH_TR_TIM_RESTART( t, nt )					(void)0
 	#define RKH_TR_TIM_STOP( t )						(void)0
 	#define RKH_TR_TIM_TOUT( t )						(void)0
 	#define RKH_TR_TIM_REM( t )							(void)0
@@ -2141,6 +2167,7 @@ enum rkh_trc_fmt
 	#define RKH_TR_FWK_EXE_FUN( __f )					(void)0
 	#define RKH_TR_FWK_TUSR( __e )						(void)0
 	#define RKH_TR_FWK_TCFG()							(void)0
+	#define RKH_TR_FWK_ASSERT( mod_, ln_ )				(void)0
 #endif
 
 

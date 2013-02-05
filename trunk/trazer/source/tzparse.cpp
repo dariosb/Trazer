@@ -96,18 +96,8 @@
 	typedef unsigned long TRZES_T;
 #endif
 
-#if 0
-#if TRAZER_EN_NSEQ == 1
-	#define get_nseq()		nseq = tr[ 1 ]
-	#define set_to_ts()		trb = tr + 2
-#else
-	#define get_nseq()		nseq = 0
-	#define set_to_ts()		trb = tr + 1
-#endif
-#else
-
-	#define get_nseq()		nseq = ( TRAZER_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
-	#define set_to_ts()		trb = ( TRAZER_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
+#define get_nseq()		nseq = ( TRAZER_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
+#define set_to_ts()		trb = ( TRAZER_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
 
 static rkhui8_t lastnseq;
 
@@ -127,165 +117,9 @@ verify_nseq( rkhui8_t nseq )
 	return r;
 }
 
-#endif
-
-#if 0
-#if TRAZER_EN_TSTAMP == 1
-	#define get_ts()		( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP )
-#else
-	#define get_ts()		0
-#endif
-#else
-	#define get_ts()		( TRAZER_EN_TSTAMP == 1 ) ? ( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP ) : 0
-#endif
-
-#if 0
-
-#define MKTR( id, gn, nm, fmt, fargs )	\
-				{ id, gn, nm, fmt, fargs }
-
-#define MKS( sig, name )	\
-				{ sig, name }
-
-#define MKO( obj, nm )									\
-				++i;									\
-				objtbl[i].adr = (unsigned long)(obj);	\
-				objtbl[i].name = nm
-
-#define EOSIGTBL	\
-				{ 0, CC( 0 ) }
-#endif
+#define get_ts()		( TRAZER_EN_TSTAMP == 1 ) ? ( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP ) : 0
 
 #define CTE( te )		((const struct tre_t*)(te))
-
-#if 0
-static const TRE_T traces[] =
-{
-
-	/* --- Memory Pool (MP) ------------------ */
-	MKTR(	RKH_TRCE_MP_INIT,	"MP", "INIT", 
-			"mp=%s, nblock=%d",				h_symnblk ),
-	MKTR(	 RKH_TRCE_MP_GET, 	"MP", "GET", 
-			"mp=%s, nfree=%d", 				h_symnblk ),
-	MKTR( 	RKH_TRCE_MP_PUT, 	"MP", "PUT", 
-			"mp=%s, nfree=%d", 				h_symnblk ),
-	
-	/* --- Queue (RQ) ------------------------ */
-	MKTR( 	RKH_TRCE_RQ_INIT,	"RQ", "INIT", 
-			"rq=%s, sma=%s, nelem=%d",		h_2symnused ),
-	MKTR( 	RKH_TRCE_RQ_GET, 	"RQ", "GET", 
-			"rq=%s, nused=%d", 				h_symnused ),
-	MKTR( 	RKH_TRCE_RQ_FIFO,	"RQ", "POST_FIFO", 
-			"rq=%s, nused=%d", 				h_symnused ),
-	MKTR( 	RKH_TRCE_RQ_LIFO,	"RQ", "POST_LIFO", 
-			"rq=%s, nused=%d", 				h_symnused ),
-	MKTR( 	RKH_TRCE_RQ_FULL,	"RQ", "FULL", 
-			"rq=%s", 						h_1sym ),
-	MKTR( 	RKH_TRCE_RQ_DPT,	"RQ", "DEPLETE", 
-			"rq=%s", 						h_1sym ),
-	MKTR( 	RKH_TRCE_RQ_GET_LAST,	"RQ", "GET_LAST", 
-			"rq=%s", 						h_1sym ),
-
-	/* --- State Machine Application (SMA) --- */
-	MKTR( 	RKH_TRCE_SMA_ACT,	"SMA", "ACTIVATE", 
-			"sma=%s", 						h_1sym ),
-	MKTR( 	RKH_TRCE_SMA_TERM,	"SMA", "TERMINATE", 
-			"sma=%s", 						h_1sym ),
-	MKTR( 	RKH_TRCE_SMA_GET,	"SMA", "GET_EVENT", 
-			"sma=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_SMA_FIFO,	"SMA", "POST_FIFO", 
-			"sma=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_SMA_LIFO,	"SMA", "POST_LIFO", 
-			"sma=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_SMA_REG,	"SMA", "REGISTER", 
-			"sma=%s, prio=%d", 				h_symu8 ),
-	MKTR( 	RKH_TRCE_SMA_UNREG,	"SMA", "UNREGISTER", 
-			"sma=%s, prio=%d", 				h_symu8 ),
-
-	/* --- State machine (SM) ---------------- */
-	MKTR( 	RKH_TRCE_SM_INIT,	"SM", "INIT", 
-			"sma=%s, istate=%s", 			h_2sym ),
-	MKTR( 	RKH_TRCE_SM_CLRH,	"SM", "CLEAR_HIST", 
-			"sma=%s, hist=%s", 				h_2sym ),
-	MKTR( 	RKH_TRCE_SM_DCH,	"SM", "DISPATCH", 
-			"sma=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_SM_TRN,	"SM", "TRANSITION", 
-			"sma=%s, sstate=%s, tstate=%s", h_symtrn ),
-	MKTR( 	RKH_TRCE_SM_STATE,	"SM", "CURRENT_STATE", 
-			"sma=%s, state=%s", 			h_2sym ),
-	MKTR( 	RKH_TRCE_SM_ENSTATE,"SM", "ENTRY_STATE", 
-			"sma=%s, state=%s", 			h_2sym ),
-	MKTR( 	RKH_TRCE_SM_EXSTATE,"SM", "EXIT_STATE", 
-			"sma=%s, state=%s", 			h_2sym ),
-	MKTR( 	RKH_TRCE_SM_NENEX,	"SM", "NUM_EN_EX", 
-			"sma=%s, nentry=%d, nexit=%d",	h_sym2u8 ),
-	MKTR( 	RKH_TRCE_SM_NTRNACT,"SM", "NUM_TRN_ACT", 
-			"sma=%s, ntrnaction=%d", 		h_symu8 ),
-	MKTR( 	RKH_TRCE_SM_CSTATE,	"SM", "COMP_STATE", 
-			"sma=%s, state=%s", 			h_2sym ),
-	MKTR( 	RKH_TRCE_SM_DCH_RC,	"SM", "DISPATCH_RCODE", 
-			"sma=%s, retcode=%s", 			h_symrc ),
-
-	/* --- Timer (TIM) ----------------------- */
-	MKTR( 	RKH_TRCE_TIM_INIT,	"TIM", "INIT", 
-			"timer=%s, sig=%s", 			h_symevt ),
-	MKTR( 	RKH_TRCE_TIM_START,	"TIM", "START", 
-			"timer=%s, sma=%s, ntick=%d", 	h_2symntick ),
-	MKTR( 	RKH_TRCE_TIM_RESTART,"TIM", "RESTART", 
-			"timer=%s, ntick=%5d", 			h_symntick ),
-	MKTR( 	RKH_TRCE_TIM_STOP,	"TIM", "STOP", 
-			"timer=%s", 					h_1sym ),
-	MKTR( 	RKH_TRCE_TIM_TOUT,	"TIM", "TIMEOUT", 
-			"timer=%s", 					h_1sym ),
-	MKTR( 	RKH_TRCE_TIM_REM,	"TIM", "REMOVED", 
-			"timer=%s", 					h_1sym ),
-	MKTR( 	RKH_TRCE_TIM_ATTEMPT_STOP,	"TIM", "ATTEMPT_STOP", 
-			"timer=%s", 					h_1sym ),
-
-	/* --- Framework (RKH) ------------------- */
-	MKTR( 	RKH_TRCE_RKH_EN,	"RKH", "ENTER", 
-			"", 							h_none ),
-	MKTR( 	RKH_TRCE_RKH_EX,	"RKH", "EXIT", 
-			"", 							h_none ),
-	MKTR( 	RKH_TRCE_RKH_EPREG,	"RKH", "EPOOL_REG", 
-			"epix =%d, ssize=%d, esize=%d",	h_epreg ),
-	MKTR( 	RKH_TRCE_RKH_AE,	"RKH", "ALLOC_EVENT", 
-			"esize=%d, sig=%s", 			h_ae ),
-	MKTR( 	RKH_TRCE_RKH_GC,	"RKH", "GC", 
-			"sig=%s", 						h_evt ),
-	MKTR( 	RKH_TRCE_RKH_GCR,	"RKH", "GC_RECYCLE", 
-			"sig=%s", 						h_evt ),
-	MKTR( 	RKH_TRCE_RKH_DEFER,	"RKH", "DEFER", 
-			"rq=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_RKH_RCALL,	"RKH", "RECALL", 
-			"sma=%s, sig=%s", 				h_symevt ),
-	MKTR( 	RKH_TRCE_OBJ,		"RKH", "SYM_OBJ", 
-			"obj=0x%08X, sym=%s", 			h_symobj ),
-	MKTR( 	RKH_TRCE_SIG,		"RKH", "SYM_SIG", 
-			"sig=%d, sym=%s", 				h_symsig )
-
-};
-#endif
-
-#if 0
-static const SYMSIG_T sigtbl[] = 			/* signal symbol table */
-{
-	MKS( ZERO,	"ZERO"	),
-	MKS( ONE,	"ONE"	),
-	MKS( TWO,	"TWO"	),
-	MKS( THREE,	"THREE"	),
-	MKS( FOUR,	"FOUR"	),
-	MKS( FIVE,	"FIVE"	),
-	MKS( SIX,	"SIX"	),
-	MKS( SEVEN,	"SEVEN"	),
-	MKS( EIGHT,	"EIGHT"	),
-	MKS( NINE,	"NINE"	),
-	MKS( TOUT,	"TOUT"	),
-	MKS( TERM,	"TERM"	),
-
-	EOSIGTBL
-};
-#endif
 
 static const char *rctbl[] =				/* dispatch ret code table */
 {
@@ -297,14 +131,6 @@ static const char *rctbl[] =				/* dispatch ret code table */
 	"RKH_EXCEED_HCAL_LEVEL",
 	"RKH_EXCEED_TRC_SEGS"
 };
-
-#if 0
-#if TRAZER_SIZEOF_TSTAMP == 2
-	static const char *trheader = "%5d [%3d] %-4s| %-15s : ";
-#else
-	static const char *trheader = "%10d [%3d] %-4s| %-15s : ";
-#endif
-#endif
 
 #define PARSER_MAX_SIZE_BUF			64
 
@@ -597,8 +423,23 @@ h_symuevt( const void *tre )
 	return fmt;
 }
 
-//static const char *cfg_margin = "%34";
-static const char *cfg_margin = "                                       ";
+char *
+h_assert( const void *tre )
+{
+	char *pfname;
+	rkhui16_t line;
+
+	pfname = (char *)trb;
+
+	while( *trb++ != '\0' );
+
+	line = (rkhui16_t)assemble( sizeof(rkhui16_t) );
+
+	sprintf( fmt, CTE( tre )->fmt, pfname, line );
+
+	return fmt;
+}
+
 
 char *
 h_tcfg( const void *tre )
@@ -616,16 +457,17 @@ h_tcfg( const void *tre )
 
 	lprintf( "Trace Setup received from client\n" );
 
-	lprintf( "%s| TRAZER_SIZEOF_SIG     = %d\n", cfg_margin, TRAZER_SIZEOF_SIG );
-	lprintf( "%s| TRAZER_SIZEOF_TSTAMP  = %d\n", cfg_margin, TRAZER_SIZEOF_TSTAMP );
-	lprintf( "%s| TRAZER_SIZEOF_POINTER = %d\n", cfg_margin, TRAZER_SIZEOF_POINTER );
-	lprintf( "%s| TRAZER_SIZEOF_NTIMER  = %d\n", cfg_margin, TRAZER_SIZEOF_NTIMER );
-	lprintf( "%s| TRAZER_SIZEOF_NBLOCK  = %d\n", cfg_margin, TRAZER_SIZEOF_NBLOCK );
-	lprintf( "%s| TRAZER_SIZEOF_NELEM   = %d\n", cfg_margin, TRAZER_SIZEOF_NELEM );
-	lprintf( "%s| TRAZER_SIZEOF_ESIZE   = %d\n", cfg_margin, TRAZER_SIZEOF_ESIZE );
-	lprintf( "%s| TRAZER_EN_NSEQ        = %d\n", cfg_margin, TRAZER_EN_NSEQ );
-	lprintf( "%s| TRAZER_EN_CHK         = %d\n", cfg_margin, TRAZER_EN_CHK );
-	lprintf( "%s| TRAZER_EN_TSTAMP      = %d", cfg_margin, TRAZER_EN_TSTAMP );
+	cfg_printf( TRAZER_SIZEOF_SIG );
+	cfg_printf( TRAZER_SIZEOF_TSTAMP );
+	cfg_printf( TRAZER_SIZEOF_POINTER );
+	cfg_printf( TRAZER_SIZEOF_NTIMER );
+	cfg_printf( TRAZER_SIZEOF_NBLOCK );
+	cfg_printf( TRAZER_SIZEOF_NELEM );
+	cfg_printf( TRAZER_SIZEOF_ESIZE );
+	cfg_printf( TRAZER_EN_NSEQ );
+	cfg_printf( TRAZER_EN_CHK );
+	cfg_printf( TRAZER_EN_TSTAMP );
+
 	return (char *)("\n");
 }
 
@@ -643,7 +485,7 @@ typedef char (*DECOFUNC_T)( const rkhui8_t *p, const USR_FMT_T *pfmt );
 
 typedef 
 struct
-{
+{ 
 	USR_FMT_T pf;
 	DECOFUNC_T pc;
 }USR_TBL_T;
@@ -679,40 +521,47 @@ static const USR_TBL_T usr_tbl[] =
 
 #define USR_TRC_SEPARATOR	", "
 
+#define usrtrz_printf(p,d)	\
+					{		\
+						lprintf( "%-39c| ", ' ' );	\
+						lprintf( p, d );	\
+						lprintf( "\n" );	\
+					}
+
 void
 i8prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhi8_t)data );
+	usrtrz_printf( (const char *)p, (rkhi8_t)data );
 }
 
 void
 u8prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhui8_t)data );
+	usrtrz_printf( (const char *)p, (rkhui8_t)data );
 }
 
 void
 i16prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhi16_t)data );
+	usrtrz_printf( (const char *)p, (rkhi16_t)data );
 }
 
 void
 u16prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhui16_t)data );
+	usrtrz_printf( (const char *)p, (rkhui16_t)data );
 }
 
 void
 i32prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhi32_t)data );
+	usrtrz_printf( (const char *)p, (rkhi32_t)data );
 }
 
 void
 u32prn( char *p, ulong data )
 {
-	lprintf( (const char *)p, (rkhui32_t)data );
+	usrtrz_printf( (const char *)p, (rkhui32_t)data );
 }
 
 char
@@ -725,7 +574,8 @@ usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt )
 	for( obj = 0, n = TRAZER_SIZEOF_POINTER, sh = 0; n; --n, sh += 8  )
 		obj |= ( unsigned long )( *p++ << sh );
 
-	lprintf( pfmt->fmt, map_obj( obj ) );
+//	lprintf( pfmt->fmt, map_obj( obj ) );
+	usrtrz_printf( pfmt->fmt, map_obj( obj ) );
 
 	/* +1 size field included */
 	return TRAZER_SIZEOF_POINTER + 1;
@@ -741,24 +591,36 @@ usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt )
 	for( e = 0, n = sizeof_trze(), sh = 0; n; --n, sh += 8  )
 		e |= (TRZE_T)( *p++ << sh );
 
-	lprintf( pfmt->fmt, map_sig( e ) );
+	//lprintf( pfmt->fmt, map_sig( e ) );
+	usrtrz_printf( pfmt->fmt, map_sig( e ) );
 
 	/* +1 size field included */
 	return sizeof_trze() + 1;
 }
-#define USER_MEMORY_DUMP_START	"[ "
-#define USER_MEMORY_DUMP_END	"]"
-
+#define USER_MEMORY_DUMP_START		"%-39c| [ "
+#define USER_MEMORY_DUMP_CONTINUE	"%-50c"
+#define USER_MEMORY_DUMP_END		"]\n"
+#define USER_MEMDUMP_LEN_PER_LINE 	10
 char
 usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
 {
 	rkhui8_t size;
+	int i;
 	uchar *pd;
 
-	lprintf( USER_MEMORY_DUMP_START );
+	lprintf( USER_MEMORY_DUMP_START, ' ' );
 	
-	for( size = *(p+1), pd = (uchar *)(p + 2); size; --size, ++pd ) 
+	for( i = 0, size = *(p+1), pd = (uchar *)(p + 2); size; --size, ++pd, ++i ) 
+	{
+		if( i >= USER_MEMDUMP_LEN_PER_LINE )
+		{
+			i = 0;
+			lprintf( USER_MEMORY_DUMP_CONTINUE, ' ' );
+		}
+		
 		lprintf( pfmt->fmt, *pd );
+	}
+
 	
 	lprintf( USER_MEMORY_DUMP_END );
 
@@ -770,7 +632,8 @@ usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
 char
 usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt )
 {
-	lprintf( pfmt->fmt, p+1 );
+	//lprintf( pfmt->fmt, p+1 );
+	usrtrz_printf( pfmt->fmt, p+1 );
 
 	/* +1 \0 included */
 	/* +1 because USR TRACE Format included */
@@ -820,6 +683,7 @@ usr_fmt( const void *tre )
 	pt += TRAZER_SIZEOF_TSTAMP;
 	tr_size -= TRAZER_SIZEOF_TSTAMP;
 	tr_size -= 1; /* because checksum */
+	lprintf( "User trace information\n" );
 
 	do
 	{
@@ -836,11 +700,9 @@ usr_fmt( const void *tre )
 		if( tr_size <= 0 )
 			break;
 
-		lprintf( USR_TRC_SEPARATOR );
+///		lprintf( USR_TRC_SEPARATOR );
 	}
 	while(1);
-
-	lprintf( "\n" );
 
 	return fmt;
 }

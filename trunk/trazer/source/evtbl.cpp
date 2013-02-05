@@ -101,8 +101,6 @@ static FMT_ID_T fmt_id_tbl[] =
 			"timer=%s, sig=%s", 			h_symevt ),
 	MKFI( 	RKH_TE_TIM_START,	"TIM", "START", 
 			"timer=%s, sma=%s, ntick=%d", 	h_2symntick ),
-	MKFI( 	RKH_TE_TIM_RESTART,"TIM", "RESTART", 
-			"timer=%s, ntick=%5d", 			h_symntick ),
 	MKFI( 	RKH_TE_TIM_STOP,	"TIM", "STOP", 
 			"timer=%s", 					h_1sym ),
 	MKFI( 	RKH_TE_TIM_TOUT,	"TIM", "TIMEOUT", 
@@ -139,7 +137,8 @@ static FMT_ID_T fmt_id_tbl[] =
 			"uevt=%d, sym=%s", 				h_symuevt ),
 	MKFI( 	RKH_TE_FWK_TCFG,	"FWK", "TCFG", 
 			NULL, 							h_tcfg ),
-
+	MKFI( 	RKH_TE_FWK_ASSERT,	"FWK", "ASSERT", 
+			"%s.c (%d)", 					h_assert ),
 
 	MKFI( 	RKH_TE_USER,	"USR", "USR#", 
 			NULL, 	NULL )
