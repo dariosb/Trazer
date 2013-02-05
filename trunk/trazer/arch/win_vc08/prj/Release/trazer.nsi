@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Trazer"
-!define PRODUCT_VERSION "1.2"
+!define PRODUCT_VERSION "2.0"
 !define PRODUCT_PUBLISHER "Vortex Technology Solutions"
 !define PRODUCT_WEB_SITE "http://www.vxtsolutions.com.ar"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\trazer.exe"
@@ -39,7 +39,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "SetupTrazer.exe"
+OutFile "Trazer_2_0_install.exe"
 InstallDir "$PROGRAMFILES\Trazer"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
