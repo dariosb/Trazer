@@ -390,6 +390,10 @@ h_symobj( const void *tre )
 
 	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
 	s = assemble_str();
+	
+	if( *s == '&' )
+		++s;
+
 	sprintf( fmt, CTE( tre )->fmt, obj, s );
 	add_to_symtbl( obj, s );
 	return fmt;
