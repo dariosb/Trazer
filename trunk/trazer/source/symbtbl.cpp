@@ -43,10 +43,13 @@ const char *
 map_obj( unsigned long adr )
 {
 	vector<SYMOBJ_T>::iterator i;
+	char buff [2+sizeof(long)*8+1];
 
 	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
 		if( i->adr == adr )
 			return i->name.c_str();
 
-	return NULL;
+	sprintf( buff, "0X%X", adr );
+	add_to_symtbl( adr, buff );
+	return symb_tbl.back().name.c_str();
 }

@@ -45,10 +45,13 @@ const char *
 map_sig( TRZE_T sig )
 {
 	vector<SYMSIG_T>::iterator i;
+	char buff [2+sizeof(long)*8+1];	
 
 	for( i = sig_tbl.begin(); i < sig_tbl.end(); ++i )
 		if( i->sig == sig )
 			return i->name.c_str();
 
-	return NULL;
+	sprintf( buff, "0X%X", sig );
+	add_to_sigtbl( sig, buff );
+	return sig_tbl.back().name.c_str();	
 }

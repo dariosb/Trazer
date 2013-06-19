@@ -106,22 +106,26 @@ fcpy_from_line( ofstream *ft, const char *sname, int nl )
 	return -1;
 }
 
-vector <TRN_ST> trntbl;
+static char trbuff[ 100 ];
+
+static vector <string> seqdiag;
 
 void
 seqdiag_insert( ofstream *ft, TRN_ST *p )
 {
-	vector<TRN_ST>::iterator i;
-	char trbuff[ 100 ];
-	
-	trntbl.push_back( *p );
-	for( i = trntbl.begin(); i < trntbl.end(); ++i )
-	{
-		sprintf( trbuff, "%s -> %s [label=\"%s\"];\n",
-			  		map_obj(i->sobj), map_obj(i->tobj), map_sig(i->e) );
+	string cs;
 
-		ft->write( trbuff, strlen(trbuff) );
-	}
+	vector<string>::iterator i;
+
+	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
+				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
+
+	cs.assign( trbuff );
+
+	seqdiag.push_back( cs );
+
+	for( i = seqdiag.begin(); i < seqdiag.end(); ++i )
+		ft->write( i->c_str(), strlen(i->c_str()) );
 }
 
 
@@ -152,13 +156,4 @@ add_to_trntbl( TRN_ST *p )
 void
 start_seqdiag( const char *fname )
 {
-	fseq = NULL;
-
-	if( strlen(fname) == 0 )
-		return;
-		
-	if( ( fseq = fopen( fname, "w+" ) ) == NULL )
-	{
-		fatal_error( "Can't open file %s\n", fname );
-	}
 }

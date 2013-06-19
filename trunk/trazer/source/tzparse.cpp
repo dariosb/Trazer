@@ -71,7 +71,7 @@ enum
 
 
 static rkhui8_t *trb;				/* points to trace event buffer */
-static char fmt[ 128 ];
+static char fmt[ 500 ];
 extern FILE *fdbg;
 
 static rkhui8_t state = PARSER_WFLAG;
