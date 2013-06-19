@@ -295,7 +295,7 @@ h_aosymevt( const void *tre )
 	if( configs.trazer_en_sender == 1 )
 	{
 		trn.sobj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
-		sprintf( fmt+strlen(fmt), ", sndr=%s", map_obj( trn.sobj ) );
+		sprintf( fmt+strlen(fmt), ", snr=%s", map_obj( trn.sobj ) );
 		add_to_trntbl( &trn );
 	}
 
