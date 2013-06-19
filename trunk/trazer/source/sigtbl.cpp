@@ -7,6 +7,7 @@
 #include "rkhtrc.h"
 #include "tzparse.h"
 #include "messages.h"
+#include "seqdiag.h"
 
 using namespace std;
 

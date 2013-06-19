@@ -15,6 +15,7 @@
 #include "tzparse.h"
 #include "tzlog.h"
 #include "utils.h"
+#include "seqdiag.h"
 #include "tcp.h"
 
 FILE *f;
@@ -69,6 +70,8 @@ main(int argc, char **argv)
 	read_config_file( (char *)CONFIG_FILE );
 
 	start_log( options.outfile.c_str() );
+
+	start_seqdiag( "trazer.diag" );
 
 	trazer_init();
 

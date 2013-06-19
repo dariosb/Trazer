@@ -7,9 +7,6 @@
 
 #include "mytypes.h"
 #include "rkhtrc.h"
-//#include "rkh.h"
-//#include "rkhcfg.h"
-//#include "my.h"
 #include "mdebug.h"
 #include "myevt.h"
 #include "tzparse.h"
@@ -19,82 +16,14 @@
 #include "uevtbl.h"
 #include "cfgdep.h"
 #include "tzlog.h"
-//#include "rkhtim.h"
+#include "seqdiag.h"
 #include <stdio.h>
 
-//#define TRAZER_NTRE			event_tbl.size()
-//#define TRAZER_NTRG			RKH_TRCG_NGROUP
-#define CC(s)				((const char*)(s))
-
-#if 0
-#if TRAZER_SIZEOF_TSTAMP == 1
-	typedef unsigned char TRZTS_T;
-#elif TRAZER_SIZEOF_TSTAMP == 2
-	typedef unsigned short TRZTS_T;
-#elif TRAZER_SIZEOF_TSTAMP == 4
-	typedef unsigned long TRZTS_T;
-#else
-	typedef unsigned char TRZTS_T;
-#endif
-#else
-	typedef unsigned long TRZTS_T;
-#endif
-
-#if 0
-#if TRAZER_SIZEOF_NBLOCK == 1
-	typedef unsigned char TRZNB_T;
-#elif TRAZER_SIZEOF_NBLOCK == 2
-	typedef unsigned short TRZNB_T;
-#elif TRAZER_SIZEOF_NBLOCK == 4
-	typedef unsigned long TRZNB_T;
-#else
-	typedef unsigned char TRZNB_T;
-#endif
-#else
-	typedef unsigned long TRZNB_T;
-#endif
-
-#if 0
-#if TRAZER_SIZEOF_NELEM == 1
-	typedef unsigned char TRZNE_T;
-#elif TRAZER_SIZEOF_NELEM == 2
-	typedef unsigned short TRZNE_T;
-#elif TRAZER_SIZEOF_NELEM == 4
-	typedef unsigned long TRZNE_T;
-#else
-	typedef unsigned char TRZNE_T;
-#endif
-#else
-	typedef unsigned long TRZNE_T;
-#endif
-
-#if 0
-#if TRAZER_SIZEOF_NTIMER == 1
-	typedef unsigned char TRZNT_T;
-#elif TRAZER_SIZEOF_NTIMER == 2
-	typedef unsigned short TRZNT_T;
-#elif TRAZER_SIZEOF_NTIMER == 4
-	typedef unsigned long TRZNT_T;
-#else
-	typedef unsigned char TRZNT_T;
-#endif
-#else
-	typedef unsigned long TRZNT_T;
-#endif
-
-#if 0
-#if TRAZER_SIZEOF_ESIZE == 1
-	typedef unsigned char TRZES_T;
-#elif TRAZER_SIZEOF_ESIZE == 2
-	typedef unsigned short TRZES_T;
-#elif TRAZER_SIZEOF_ESIZE == 4
-	typedef unsigned long TRZES_T;
-#else
-	typedef unsigned char TRZES_T;
-#endif
-#else
-	typedef unsigned long TRZES_T;
-#endif
+typedef unsigned long TRZTS_T;
+typedef unsigned long TRZNB_T;
+typedef unsigned long TRZNE_T;
+typedef unsigned long TRZNT_T;
+typedef unsigned long TRZES_T;
 
 #define get_nseq()		nseq = ( TRAZER_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
 #define set_to_ts()		trb = ( TRAZER_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
@@ -355,6 +284,26 @@ h_symevt( const void *tre )
 
 
 char *
+h_aosymevt( const void *tre )
+{
+	TRN_ST trn;
+
+	trn.tobj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
+	trn.e = (TRZE_T)assemble( sizeof_trze() );
+	sprintf( fmt, CTE( tre )->fmt, map_obj( trn.tobj ), map_sig( trn.e ) );
+
+	if( configs.trazer_en_sender == 1 )
+	{
+		trn.sobj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
+		sprintf( fmt+strlen(fmt), ", sndr=%s", map_obj( trn.sobj ) );
+		add_to_trntbl( &trn );
+	}
+
+	return fmt;
+}
+
+
+char *
 h_epreg( const void *tre )
 {
 	unsigned long u32;
@@ -399,6 +348,36 @@ h_symobj( const void *tre )
 	return fmt;
 }
 
+char *
+h_symst( const void *tre )
+{
+	unsigned long obj;
+	char *s;
+	const char *ao;
+
+	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
+
+	ao = map_obj( obj );
+/*
+	if( configs.trazer_en_sender == 1 )
+	{
+		ao = map_obj( obj );
+	}
+	else
+		ao = "null";*/
+
+	obj = (unsigned long)assemble( TRAZER_SIZEOF_POINTER );
+	s = assemble_str();
+	
+	if( *s == '&' )
+		++s;
+	if( *ao == '&' )
+		++ao;
+
+	sprintf( fmt, CTE( tre )->fmt, ao, obj, s );
+	add_to_symtbl( obj, s );
+	return fmt;
+}
 
 char *
 h_symsig( const void *tre )
@@ -445,9 +424,48 @@ h_assert( const void *tre )
 }
 
 
+/*
+* String describing the RKH version.
+*/
+
+#define RKH_VERSION_CODE_STRLEN	6
+
+static char RKH_VERSION[ RKH_VERSION_CODE_STRLEN+1 ];
+
+static
+rkhui8_t *
+proc_version_code( rkhui8_t *p )
+{
+	RKH_VERSION[6] = '\0';
+	RKH_VERSION[5] = (*p & 0x0F) + '0';
+	RKH_VERSION[4] = ((*p++ >> 4) & 0x0F) + '0';
+	RKH_VERSION[3] = '.';
+	RKH_VERSION[2] = (*p & 0x0F) + '0';
+	RKH_VERSION[1] = '.';
+	RKH_VERSION[0] = ((*p++ >> 4) & 0x0F) + '0';
+
+	return p;
+}
+
+
 char *
 h_tcfg( const void *tre )
 {
+	trb = proc_version_code( trb );
+
+	TRAZER_EN_SENDER = (*trb >> 0) & 0x01;
+	TRAZER_RUNTIME_FILTER = (*trb >> 1) & 0x01;
+	TRAZER_EN_USER_TRACE = (*trb >> 2) & 0x01;
+	TRAZER_ALL = (*trb >> 3) & 0x01;
+	TRAZER_EN_MP = (*trb >> 4) & 0x01;
+	TRAZER_EN_RQ = (*trb >> 5) & 0x01;
+	TRAZER_EN_SMA = (*trb >> 6) & 0x01;
+	TRAZER_EN_TIM = (*trb++ >> 7) & 0x01;
+
+	TRAZER_EN_SM = (*trb >> 0) & 0x01;
+	TRAZER_EN_FWK = (*trb >> 1) & 0x01;
+	TRAZER_EN_ASSERT = (*trb++ >> 2) & 0x01;
+
 	TRAZER_SIZEOF_SIG = (*trb >> 4) & 0x0F;
 	TRAZER_SIZEOF_TSTAMP = (*trb++) & 0x0F;
 	TRAZER_SIZEOF_POINTER = (*trb >> 4) & 0x0F;
@@ -461,6 +479,18 @@ h_tcfg( const void *tre )
 
 	lprintf( "Trace Setup received from client\n" );
 
+	rkhver_printf( RKH_VERSION );
+	cfg_printf( TRAZER_EN_SENDER );
+	cfg_printf( TRAZER_RUNTIME_FILTER );
+	cfg_printf( TRAZER_EN_USER_TRACE );
+	cfg_printf( TRAZER_ALL );
+	cfg_printf( TRAZER_EN_MP );
+	cfg_printf( TRAZER_EN_RQ );
+	cfg_printf( TRAZER_EN_SMA );
+	cfg_printf( TRAZER_EN_TIM );
+	cfg_printf( TRAZER_EN_SM );
+	cfg_printf( TRAZER_EN_FWK );
+	cfg_printf( TRAZER_EN_ASSERT );
 	cfg_printf( TRAZER_SIZEOF_SIG );
 	cfg_printf( TRAZER_SIZEOF_TSTAMP );
 	cfg_printf( TRAZER_SIZEOF_POINTER );
@@ -889,6 +919,18 @@ trazer_init( void )
 	lprintf( "\nTrace Setup\n\n" );
 //	lprintf( "   Trace events quantity = %d\n", TRAZER_NTRE );
 //	lprintf( "Number of trace groups = %d\n", TRAZER_NTRG );
+
+	lprintf( "   TRAZER_EN_SENDER      = %d\n", TRAZER_EN_SENDER );
+	lprintf( "   TRAZER_RUNTIME_FILTER = %d\n", TRAZER_RUNTIME_FILTER );
+	lprintf( "   TRAZER_EN_USER_TRACE  = %d\n", TRAZER_EN_USER_TRACE );
+	lprintf( "   TRAZER_ALL            = %d\n", TRAZER_ALL );
+	lprintf( "   TRAZER_EN_MP          = %d\n", TRAZER_EN_MP );
+	lprintf( "   TRAZER_EN_RQ          = %d\n", TRAZER_EN_RQ );
+	lprintf( "   TRAZER_EN_SMA         = %d\n", TRAZER_EN_SMA );
+	lprintf( "   TRAZER_EN_TIM         = %d\n", TRAZER_EN_TIM );
+	lprintf( "   TRAZER_EN_SM          = %d\n", TRAZER_EN_SM );
+	lprintf( "   TRAZER_EN_FWK         = %d\n", TRAZER_EN_FWK );
+	lprintf( "   TRAZER_EN_ASSERT      = %d\n", TRAZER_EN_ASSERT );
 	lprintf( "   TRAZER_SIZEOF_SIG     = %d\n", TRAZER_SIZEOF_SIG );
 	lprintf( "   TRAZER_SIZEOF_TSTAMP  = %d\n", TRAZER_SIZEOF_TSTAMP );
 	lprintf( "   TRAZER_SIZEOF_POINTER = %d\n", TRAZER_SIZEOF_POINTER );

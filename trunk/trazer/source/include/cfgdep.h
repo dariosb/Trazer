@@ -9,6 +9,17 @@
 
 extern CONFIG_T configs;
 
+#define TRAZER_EN_SENDER			configs.trazer_en_sender
+#define TRAZER_RUNTIME_FILTER		configs.trazer_runtime_filter
+#define TRAZER_EN_USER_TRACE		configs.trazer_en_user_trace
+#define TRAZER_ALL					configs.trazer_all
+#define TRAZER_EN_MP				configs.trazer_en_mp
+#define TRAZER_EN_RQ				configs.trazer_en_rq
+#define TRAZER_EN_SMA				configs.trazer_en_sma
+#define TRAZER_EN_TIM				configs.trazer_en_tim
+#define TRAZER_EN_SM				configs.trazer_en_sm
+#define TRAZER_EN_FWK				configs.trazer_en_fwk
+#define TRAZER_EN_ASSERT			configs.trazer_en_assert
 #define TRAZER_SIZEOF_SIG			configs.trazer_sizeof_sig
 #define TRAZER_SIZEOF_TSTAMP		configs.trazer_sizeof_tstamp
 #define TRAZER_SIZEOF_POINTER		configs.trazer_sizeof_pointer

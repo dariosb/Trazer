@@ -225,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\source\seqdiag.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\sertbl.c"
 				>
 			</File>
@@ -343,6 +347,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\source\include\seqdiag.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\serdefs.h"
 				>
 			</File>
@@ -363,11 +371,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\source\include\targetver.h"
+				RelativePath="..\..\targetver.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\targetver.h"
+				RelativePath="..\..\..\..\source\include\targetver.h"
 				>
 			</File>
 			<File

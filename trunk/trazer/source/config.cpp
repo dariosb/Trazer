@@ -36,6 +36,17 @@ using namespace std;
 
 enum
 {
+	TRAZER_EN_SENDER_CFG,
+	TRAZER_RUNTIME_FILTER_CFG,
+	TRAZER_EN_USER_TRACE_CFG,
+	TRAZER_ALL_CFG,
+	TRAZER_EN_MP_CFG,
+	TRAZER_EN_RQ_CFG,
+	TRAZER_EN_SMA_CFG,
+	TRAZER_EN_TIM_CFG,
+	TRAZER_EN_SM_CFG,
+	TRAZER_EN_FWK_CFG,
+	TRAZER_EN_ASSERT_CFG,
 	TRAZER_SIZEOF_SIG_CFG,
 	TRAZER_SIZEOF_TSTAMP_CFG,
 	TRAZER_SIZEOF_POINTER_CFG,
@@ -56,6 +67,17 @@ enum
 
 static const char *config[ MAX_CONFIGS ] =
 {
+	"TRAZER_EN_SENDER",
+	"TRAZER_RUNTIME_FILTER",
+	"TRAZER_EN_USER_TRACE",
+	"TRAZER_ALL",
+	"TRAZER_EN_MP",
+	"TRAZER_EN_RQ",
+	"TRAZER_EN_SMA",
+	"TRAZER_EN_TIM",
+	"TRAZER_EN_SM",
+	"TRAZER_EN_FWK",
+	"TRAZER_EN_ASSERT",
 	"TRAZER_SIZEOF_SIG",
 	"TRAZER_SIZEOF_TSTAMP",
 	"TRAZER_SIZEOF_POINTER",
@@ -71,6 +93,17 @@ static const char *config[ MAX_CONFIGS ] =
 
 static const CONFIG_T configs_dft =
 {
+	TRAZER_EN_SENDER_DFT,
+	TRAZER_RUNTIME_FILTER_DFT,
+	TRAZER_EN_USER_TRACE_DFT,
+	TRAZER_ALL_DFT,	
+	TRAZER_EN_MP_DFT,
+	TRAZER_EN_RQ_DFT,
+	TRAZER_EN_SMA_DFT,
+	TRAZER_EN_TIM_DFT,
+	TRAZER_EN_SM_DFT,
+	TRAZER_EN_FWK_DFT,	
+	TRAZER_EN_ASSERT_DFT,
 	TRAZER_SIZEOF_SIG_DFT,
 	TRAZER_SIZEOF_TSTAMP_DFT,
 	TRAZER_SIZEOF_POINTER_DFT,
@@ -167,6 +200,51 @@ process_config( FILE *f )
 
 		switch( validate_config( p ) )
 		{
+			case TRAZER_EN_SENDER_CFG:
+				if( (configs.trazer_en_sender = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_RUNTIME_FILTER_CFG:
+				if( (configs.trazer_runtime_filter = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_USER_TRACE_CFG:
+				if( (configs.trazer_en_user_trace = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_ALL_CFG:
+				if( (configs.trazer_all = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_MP_CFG:
+				if( (configs.trazer_en_mp = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_RQ_CFG:
+				if( (configs.trazer_en_rq = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_SMA_CFG:
+				if( (configs.trazer_en_sma = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_TIM_CFG:
+				if( (configs.trazer_en_tim = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_SM_CFG:
+				if( (configs.trazer_en_sm = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_FWK_CFG:
+				if( (configs.trazer_en_fwk = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+			case TRAZER_EN_ASSERT_CFG:
+				if( (configs.trazer_en_assert = num_config_cpy( p ) ) < 0 )
+					return -line;
+				break;
+
 			case TRAZER_SIZEOF_SIG_CFG:
 				if( (configs.trazer_sizeof_sig = num_config_cpy( p ) ) < 0 )
 					return -line;
