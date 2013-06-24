@@ -71,8 +71,6 @@ main(int argc, char **argv)
 
 	start_log( options.outfile.c_str() );
 
-	start_seqdiag( "trazer.diag" );
-
 	trazer_init();
 
 	if( !options.instream_tcpsock.empty() )

@@ -447,6 +447,7 @@ proc_version_code( rkhui8_t *p )
 	return p;
 }
 
+static int first_cfg = 1;
 
 char *
 h_tcfg( const void *tre )
@@ -477,6 +478,10 @@ h_tcfg( const void *tre )
 	TRAZER_EN_CHK = (*trb >> 4) & 0x0F;
 	TRAZER_EN_TSTAMP = (*trb++) & 0x0F;
 
+	if( !first_cfg )
+		add_seqdiag_text( (char *)SEQDIAG_SEPARATOR_TEXT );
+	
+	first_cfg = 0;
 	lprintf( "Trace Setup received from client\n" );
 
 	rkhver_printf( RKH_VERSION );
@@ -557,7 +562,7 @@ static const USR_TBL_T usr_tbl[] =
 
 #define usrtrz_printf(p,d)	\
 					{		\
-						lprintf( "%-39c| ", ' ' );	\
+						lprintf( "%-34c| ", ' ' );	\
 						lprintf( p, d );	\
 						lprintf( "\n" );	\
 					}
@@ -631,10 +636,13 @@ usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt )
 	/* +1 size field included */
 	return sizeof_trze() + 1;
 }
-#define USER_MEMORY_DUMP_START		"%-39c| [ "
+
+
+#define USER_MEMORY_DUMP_START		"%-34c| [ "
 #define USER_MEMORY_DUMP_CONTINUE	"%-50c"
 #define USER_MEMORY_DUMP_END		"]\n"
 #define USER_MEMDUMP_LEN_PER_LINE 	10
+
 char
 usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
 {

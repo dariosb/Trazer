@@ -23,4 +23,5 @@ This version is compatible to use with RKH V2.0
 -Compatibility with RKH V2.4
 -If enabled, show sender information on post fifo/lifo
  trace events.
+-seqdiag file generation.
 */

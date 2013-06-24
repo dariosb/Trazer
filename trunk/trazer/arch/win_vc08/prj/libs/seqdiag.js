@@ -342,7 +342,7 @@
 
     Drawer.SVG.prototype.drawSequences = function() {
         var y = this.marginTop + this.nodeHeight;
-        var svgHeight = parseInt(this.svg.getAttribute("height")) || this.defaultDiagramHeight;
+        var svgHeight = parseInt(this.svg.getAttribute("height")); //|| this.defaultDiagramHeight;
         var seqMargin = ( svgHeight - y ) / ( this.diagram.sequences.length + 1 );
         y += seqMargin;
         var seqs = this.diagram.sequences;
@@ -545,9 +545,9 @@
         var rect = this.getNodeRect(node.id);
         var rectCenterX = parseInt(rect.getAttribute("x")) + parseInt(rect.getAttribute("width")) / 2.0;
         var rectBottomY = parseInt(rect.getAttribute("y")) + parseInt(rect.getAttribute("height"));
-
+        var svgHeight = parseInt(this.svg.getAttribute("height")) || this.defaultDiagramHeight;
         var line = this.createSVGElement('path');
-        line.setAttribute("d", "M " + rectCenterX + " " + rectBottomY + "L " + rectCenterX + " " + this.defaultDiagramHeight);
+        line.setAttribute("d", "M " + rectCenterX + " " + rectBottomY + "L " + rectCenterX + " " + svgHeight);
         line.setAttribute("stroke", this.defaultStrokeColor);
         line.setAttribute("stroke-dasharray", 5);
         this.svg.appendChild(line);

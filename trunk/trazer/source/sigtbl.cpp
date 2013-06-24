@@ -3,6 +3,11 @@
  */
 #include <string>
 #include <vector>
+#include <cstdio>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
 #include "sigtbl.h"
 #include "rkhtrc.h"
 #include "tzparse.h"
@@ -51,7 +56,7 @@ map_sig( TRZE_T sig )
 		if( i->sig == sig )
 			return i->name.c_str();
 
-	sprintf( buff, "0X%X", sig );
+	sprintf( buff, "0X%X", (unsigned int)sig );
 	add_to_sigtbl( sig, buff );
 	return sig_tbl.back().name.c_str();	
 }

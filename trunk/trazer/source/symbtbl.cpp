@@ -3,6 +3,7 @@
  */
 #include <string>
 #include <vector>
+#include <cstdio>
 #include "symbtbl.h"
 #include "rkhtrc.h"
 #include "tzparse.h"
@@ -49,7 +50,7 @@ map_obj( unsigned long adr )
 		if( i->adr == adr )
 			return i->name.c_str();
 
-	sprintf( buff, "0X%X", adr );
+	sprintf( buff, "0X%X", (unsigned int)adr );
 	add_to_symtbl( adr, buff );
 	return symb_tbl.back().name.c_str();
 }
