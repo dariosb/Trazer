@@ -18,6 +18,8 @@ typedef struct
 	int trazer_en_sm;
 	int trazer_en_fwk;
 	int trazer_en_assert;
+	int trazer_rq_en_get_lwmark;
+	int trazer_mp_en_get_lwm;
 	int trazer_sizeof_sig;
 	int trazer_sizeof_tstamp;
 	int trazer_sizeof_pointer;	
@@ -28,6 +30,8 @@ typedef struct
 	int trazer_en_nseq;
 	int trazer_en_chk;
 	int trazer_en_tstamp;
+	int trazer_sizeof_bsize;
+	int trazer_max_epool;
 } CONFIG_T;
 
 /*
@@ -44,6 +48,8 @@ typedef struct
 #define TRAZER_EN_SM_DFT			0
 #define TRAZER_EN_FWK_DFT			1
 #define TRAZER_EN_ASSERT_DFT		1
+#define TRAZER_RQ_EN_GET_LWMARK_DFT	0
+#define TRAZER_MP_EN_GET_LWM_DFT	0
 #define	TRAZER_SIZEOF_SIG_DFT		1
 #define	TRAZER_SIZEOF_TSTAMP_DFT	4
 #define	TRAZER_SIZEOF_POINTER_DFT	4
@@ -54,6 +60,8 @@ typedef struct
 #define	TRAZER_EN_NSEQ_DFT			1
 #define	TRAZER_EN_CHK_DFT			1
 #define	TRAZER_EN_TSTAMP_DFT		1
+#define	TRAZER_SIZEOF_BSIZE_DFT		1
+#define	TRAZER_MAX_EPOOL_DFT		4
 
 #define CONFIG_FILE				"trazer.cfg"
 

@@ -28,6 +28,7 @@
 #include "rkhtype.h"
 #include "mytypes.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -70,12 +71,17 @@ typedef	unsigned long TRZE_T;
 
 typedef char *(*HDLR_T)( const void *tre );
 
+typedef struct vargs_t
+{
+	vector<char *>args;
+}VARGS_T;
+
 typedef struct tre_t
 {
 	unsigned char id;
 	string group;
 	string name;
-	const char *fmt;
+	VARGS_T va;
 	HDLR_T fmt_args;
 } TRE_T;
 
@@ -110,17 +116,23 @@ char * h_symtrn( const void *tre );
 char * h_symrc( const void *tre );
 char * h_symu8( const void *tre );
 char * h_sym2u8( const void *tre );
+char * h_sig2u8( const void *tre );
 char * h_symevt( const void *tre );
-char * h_aosymevt( const void *tre );
+char * h_sma_get( const void *tre );
+char * h_sma_ffll( const void *tre );
 char * h_symnblk( const void *tre );
+char * h_mp_init( const void *tre );
+char * h_mp_get( const void *tre );
 char * h_2symnused( const void *tre );
 char * h_symnused( const void *tre );
+char * h_rq_ffll( const void *tre );
 char * h_symobj( const void *tre );
 char * h_symst( const void *tre );
 char * h_symsig( const void *tre );
 char * h_symuevt( const void *tre );
-char * h_2symntick( const void *tre );
-char * h_symntick( const void *tre );
+char * h_tstart( const void *tre );
+char * h_tstop( const void *tre );
+char * h_tout( const void *tre );
 char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );

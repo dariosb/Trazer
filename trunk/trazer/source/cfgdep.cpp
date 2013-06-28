@@ -22,7 +22,7 @@ sizeof_type( int type )
 const char*
 get_trheader( void )
 {
-	if( TRAZER_SIZEOF_TSTAMP == 2 )
+	if( RKH_TRC_SIZEOF_TSTAMP == 2 )
 		return "%5u [%3d] %-4s| %-10s : ";
 	else
 		return "%10u [%3d] %-4s| %-10s : ";

@@ -37,4 +37,8 @@ string * get_evt_comment( unsigned char id );
 
 const TRE_T *point_2_trevt( unsigned char id );
 
+
+#define TR_EVT_PRN_ARG_SEP	", "
+#define TR_EVT_PRNBUFF_SIZE	100
+
 #endif
