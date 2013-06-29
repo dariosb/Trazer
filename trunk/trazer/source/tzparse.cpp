@@ -673,7 +673,7 @@ h_tcfg( const void *tre )
 	RKH_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
 	RKH_MAX_EPOOL = (*trb++) & 0x0F;
 
-	add_seqdiag_text( (char *)SEQDIAG_SEPARATOR_TEXT );
+	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
 	
 	lprintf( "Update RKH Configuration from client\n" );
 

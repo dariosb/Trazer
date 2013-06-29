@@ -11,7 +11,10 @@
 #define SEQDIAG_SEPARATOR_TEXT	"... RKH START ..."
 #define SEQDIAG_TEMPLATE_FILE	"sdiag_html.sk"
 #define SEQDIAG_OUT_FNAME 		"sd%s.html"
+#define SEQDIAG_FNAME 			"%s.diag"
 #define SEQDIAG_FNAME_LENGTH	25
+#define SEQDIAG_CLOSE_MARK		"\n}\n"
+#define SEQDIAG_TEMPLATE		"seqdiag\n{\n" SEQDIAG_CLOSE_MARK
 
 #define SEQDIAG_TMP_INSERTION 	"// INSERT SEQUENCE HERE"
 #define SEQDIAG_TMP_HEIGHT	  	"svg.setAttribute(\"height\", \""
@@ -26,7 +29,7 @@ typedef struct
 }TRN_ST;
 
 void add_to_trntbl( TRN_ST *p );
-void add_seqdiag_text( char *s );
+void add_seqdiag_text( const char *s );
 
 void seqdiag_init( void );
 

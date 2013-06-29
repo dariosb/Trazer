@@ -24,12 +24,21 @@
 
 //#define SEQDIAG_OUT_FILE		"seqdiag.html"
 static char foname[ SEQDIAG_FNAME_LENGTH ];
+static char sdfname[ SEQDIAG_FNAME_LENGTH ];
+static long seqdiag_len = 0;
 
 
 using namespace std;
 
-FILE *fseq;
 
+bool
+fexists(const char *filename)
+{
+	ifstream ifile(filename);
+	return ifile;
+}
+
+#if 0
 void
 seq_printf( const char *fmt, ... )
 {
@@ -44,31 +53,60 @@ seq_printf( const char *fmt, ... )
 
     va_end(args);
 }
+#endif
+
 
 void
-start_seqdiag( const char *fname )
+start_rawsdiag( const char *fname )
 {
-	fseq = NULL;
+	FILE *fseq;
 
-	if( strlen(fname) == 0 )
-		return;
-		
+	++seqdiag_len = 0;
+
 	if( ( fseq = fopen( fname, "w+" ) ) == NULL )
-	{
 		fatal_error( "Can't open file %s\n", fname );
-	}
-	seq_printf( "seqdiag{\n\n" );
+
+	fprintf( fseq, SEQDIAG_TEMPLATE );
+
+	fclose( fseq );
 }
 
+
+void
+insert_rawsdiag( const char *fname, const char *s )
+{
+	FILE *fseq;
+	ofstream ft;
+	int i, nl;
+	static long p;
+
+
+	if( !fexists( fname ) )
+		return;
+
+	++seqdiag_len;
+	fseq = fopen( fname, "r+" );
+	fseek( fseq, 0, SEEK_END );
+	p = ftell( fseq );
+	fseek( fseq, p-strlen(SEQDIAG_CLOSE_MARK), SEEK_SET );
+	
+	fprintf( fseq, "%s", s );
+	fprintf( fseq, "%s", SEQDIAG_CLOSE_MARK );
+
+	fclose( fseq );
+}
+
+#if 0
 void
 end_seqdiag( void )
 {
 	if( fseq != NULL ) 
 	{
-		seq_printf("\n}\n");
+		//seq_printf("\n}\n");
 		fclose( fseq );
 	}
 }
+#endif
 
 
 
@@ -144,11 +182,14 @@ fcpy_from_line( ofstream *ft, const char *sname, int nl, int qty )
 	return -1;
 }
 
+
+#if 0
 static char seqlbuff[100]; 
+
 static vector <string> seqdiag;
 
 void
-seqdiag_text_insert( ofstream *ft, char *s )
+seqdiag_text_insert( ofstream *ft, const char *s )
 {
 	string cs;
 
@@ -160,29 +201,30 @@ seqdiag_text_insert( ofstream *ft, char *s )
 
 	seqdiag.push_back( cs );
 
-	start_seqdiag( "trazer.diag" );
+	//start_seqdiag( "trazer.diag" );
 
 	for( i = seqdiag.begin(); i < seqdiag.end(); ++i )
 	{
 		ft->write( i->c_str(), strlen(i->c_str()) );
-		seq_printf( "\t%s", i->c_str() );
+		//seq_printf( "\t%s", i->c_str() );
 	}
-	end_seqdiag();
+	//end_seqdiag();
 }
 
 
 void
 seqdiag_trn_insert( ofstream *ft, TRN_ST *p )
 {
-	string cs;
 	char trbuff[ 100 ];
 
 	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
 				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
 
+	insert_rawsdiag( sdfname, trbuff );
 	seqdiag_text_insert( ft, trbuff );
 }
 
+#endif
 
 static char factor[20];
 static int hfact;
@@ -214,77 +256,61 @@ get_seqdiag_high_factor( const char *fname )
 	return -1;
 }
 
-bool
-fexists(const char *filename)
+static
+void
+update_fout_html( void )
 {
-	ifstream ifile(filename);
-	return ifile;
+	ofstream fout;
+	int loff, loffh;
+	char hbuff[50];
+
+	if( !fexists(SEQDIAG_TEMPLATE_FILE) )
+		return;
+
+	fout.open( foname );
+
+	loff = find_infile( SEQDIAG_TEMPLATE_FILE, SEQDIAG_TMP_INSERTION );
+
+	fcpy_until_line( &fout, SEQDIAG_TEMPLATE_FILE, loff-1 );
+
+	fcpy_from_line( &fout, sdfname, 0, 0 );
+
+	loffh = get_seqdiag_high_factor( SEQDIAG_TEMPLATE_FILE );
+
+	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loff+1, (loffh-loff-1) );
+
+	fout.write( SEQDIAG_TMP_HEIGHT, strlen(SEQDIAG_TMP_HEIGHT) );
+	sprintf( hbuff, "%d\");", (seqdiag_len*hfact) + SEQDIAG_TMP_HEIGHT_BASE );
+
+	fout.write( hbuff, strlen(hbuff) );
+	
+	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loffh+1, 0 );
+
+	fout.close();
 }
+
 
 void
 add_to_trntbl( TRN_ST *p )
 {
-	int loff, loffh;
-	ofstream fout;
-	char hbuff[50];
+	char trbuff[ 100 ];
 
-	if( !fexists(SEQDIAG_TEMPLATE_FILE) )
-		return;
+	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
+				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
 
-	fout.open( foname );
+	insert_rawsdiag( sdfname, trbuff );
 
-	loff = find_infile( SEQDIAG_TEMPLATE_FILE, SEQDIAG_TMP_INSERTION );
-
-	fcpy_until_line( &fout, SEQDIAG_TEMPLATE_FILE, loff-1 );
-
-	seqdiag_trn_insert( &fout, p );
-
-	loffh = get_seqdiag_high_factor( SEQDIAG_TEMPLATE_FILE );
-
-	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loff+1, (loffh-loff-1) );
-
-	fout.write( SEQDIAG_TMP_HEIGHT, strlen(SEQDIAG_TMP_HEIGHT) );
-	sprintf( hbuff, "%d\");", (seqdiag.size()*hfact) + SEQDIAG_TMP_HEIGHT_BASE );
-
-	fout.write( hbuff, strlen(hbuff) );
-	
-	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loffh+1, 0 );
-
-	fout.close();
+	update_fout_html();
 }
 
 
 
 void
-add_seqdiag_text( char *s )
+add_seqdiag_text( const char *s )
 {
-	int loff, loffh;
-	ofstream fout;
-	char hbuff[50];
+	insert_rawsdiag( sdfname, s );
 
-	if( !fexists(SEQDIAG_TEMPLATE_FILE) )
-		return;
-
-	fout.open( foname );
-
-	loff = find_infile( SEQDIAG_TEMPLATE_FILE, SEQDIAG_TMP_INSERTION );
-
-	fcpy_until_line( &fout, SEQDIAG_TEMPLATE_FILE, loff-1 );
-
-	seqdiag_text_insert( &fout, s );
-
-	loffh = get_seqdiag_high_factor( SEQDIAG_TEMPLATE_FILE );
-
-	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loff+1, (loffh-loff-1) );
-
-	fout.write( SEQDIAG_TMP_HEIGHT, strlen(SEQDIAG_TMP_HEIGHT) );
-	sprintf( hbuff, "%d\");", (seqdiag.size()*hfact) + SEQDIAG_TMP_HEIGHT_BASE );
-
-	fout.write( hbuff, strlen(hbuff) );
-	
-	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loffh+1, 0 );
-
-	fout.close();
+	update_fout_html();
 }
 
 
@@ -298,4 +324,7 @@ seqdiag_init( void )
 	tm = gmtime(&t);
 	strftime(tstamp, sizeof(tstamp), "%y%m%d%H%M%S", tm);
 	sprintf(foname, SEQDIAG_OUT_FNAME, tstamp);
+	sprintf( sdfname, SEQDIAG_FNAME, tstamp );
+
+	start_rawsdiag( sdfname );
 }
