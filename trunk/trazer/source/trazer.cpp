@@ -73,6 +73,8 @@ main(int argc, char **argv)
 
 	trazer_init();
 
+	seqdiag_init();
+
 	if( !options.instream_tcpsock.empty() )
 	{
 		tcpPort = atoi(options.instream_tcpsock.c_str());

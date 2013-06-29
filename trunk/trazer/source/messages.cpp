@@ -122,3 +122,19 @@ const char * invalid_com_config =
 };
 
 
+const char * lost_trace_info =
+{
+	"\n***** May be have lost trace info, sequence are not correlatives\n"
+};
+
+const char * unknown_te =
+{
+	"***** Unknown trace event = (%d)\n"
+};
+
+
+const char * stream_chkerr =
+{
+	"\n***** Stream Checksum Error\n"
+};
+

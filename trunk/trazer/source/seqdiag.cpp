@@ -20,6 +20,10 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <time.h>
+
+//#define SEQDIAG_OUT_FILE		"seqdiag.html"
+static char foname[ SEQDIAG_FNAME_LENGTH ];
 
 
 using namespace std;
@@ -173,8 +177,6 @@ seqdiag_trn_insert( ofstream *ft, TRN_ST *p )
 	string cs;
 	char trbuff[ 100 ];
 
-	vector<string>::iterator i;
-
 	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
 				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
 
@@ -215,8 +217,8 @@ get_seqdiag_high_factor( const char *fname )
 bool
 fexists(const char *filename)
 {
-  ifstream ifile(filename);
-  return ifile;
+	ifstream ifile(filename);
+	return ifile;
 }
 
 void
@@ -229,7 +231,7 @@ add_to_trntbl( TRN_ST *p )
 	if( !fexists(SEQDIAG_TEMPLATE_FILE) )
 		return;
 
-	fout.open( SEQDIAG_OUT_FILE );
+	fout.open( foname );
 
 	loff = find_infile( SEQDIAG_TEMPLATE_FILE, SEQDIAG_TMP_INSERTION );
 
@@ -263,7 +265,7 @@ add_seqdiag_text( char *s )
 	if( !fexists(SEQDIAG_TEMPLATE_FILE) )
 		return;
 
-	fout.open( SEQDIAG_OUT_FILE );
+	fout.open( foname );
 
 	loff = find_infile( SEQDIAG_TEMPLATE_FILE, SEQDIAG_TMP_INSERTION );
 
@@ -285,3 +287,15 @@ add_seqdiag_text( char *s )
 	fout.close();
 }
 
+
+void
+seqdiag_init( void )
+{
+	char tstamp[20];
+	time_t t = time(0);
+	struct tm *tm;
+
+	tm = gmtime(&t);
+	strftime(tstamp, sizeof(tstamp), "%y%m%d%H%M%S", tm);
+	sprintf(foname, SEQDIAG_OUT_FNAME, tstamp);
+}

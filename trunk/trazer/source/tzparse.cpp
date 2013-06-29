@@ -1,7 +1,5 @@
 /*
  *	file: trazer.c
- *	Last updated for version: 2.0
- *	Date of the last update:  Apr 03, 2012
  */
 
 
@@ -9,9 +7,11 @@
 #include "rkhtrc.h"
 #include "mdebug.h"
 #include "myevt.h"
+#include "messages.h"
 #include "tzparse.h"
 #include "evtbl.h"
 #include "symbtbl.h"
+#include "version.h"
 #include "sigtbl.h"
 #include "uevtbl.h"
 #include "cfgdep.h"
@@ -48,11 +48,17 @@ verify_nseq( rkhui8_t nseq )
 	return r;
 }
 
-#define get_ts()		( RKH_TRC_EN_TSTAMP == 1 ) ? ( TRZTS_T )assemble( RKH_TRC_SIZEOF_TSTAMP ) : 0
+#define get_ts()												\
+			( RKH_TRC_EN_TSTAMP == 1 ) ? 						\
+			( TRZTS_T )assemble( RKH_TRC_SIZEOF_TSTAMP ) : 0
 
-#define CTE( te )		((const struct tre_t*)(te))
+#define CTE( te )	((const struct tre_t*)(te))
 
-static const char *rctbl[] =				/* dispatch ret code table */
+
+/*
+ *  dispatch ret code table
+ */
+static const char *rctbl[] =	
 {
 	"RKH_OK",
 	"RKH_INPUT_NOT_FOUND",
@@ -72,7 +78,7 @@ enum
 };
 
 
-static rkhui8_t *trb;				/* points to trace event buffer */
+static rkhui8_t *trb;				
 static char fmt[ 500 ];
 extern FILE *fdbg;
 
@@ -552,16 +558,7 @@ h_symst( const void *tre )
 	const char *ao;
 
 	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-
 	ao = map_obj( obj );
-/*
-	if( configs.trazer_en_sender == 1 )
-	{
-		ao = map_obj( obj );
-	}
-	else
-		ao = "null";*/
-
 	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
 	s = assemble_str();
 	
@@ -642,7 +639,6 @@ proc_version_code( rkhui8_t *p )
 	return p;
 }
 
-static int first_cfg = 1;
 
 char *
 h_tcfg( const void *tre )
@@ -677,10 +673,8 @@ h_tcfg( const void *tre )
 	RKH_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
 	RKH_MAX_EPOOL = (*trb++) & 0x0F;
 
-	if( !first_cfg )
-		add_seqdiag_text( (char *)SEQDIAG_SEPARATOR_TEXT );
+	add_seqdiag_text( (char *)SEQDIAG_SEPARATOR_TEXT );
 	
-	first_cfg = 0;
 	lprintf( "Update RKH Configuration from client\n" );
 
 	rkhver_printf( RKH_VERSION );
@@ -1031,7 +1025,7 @@ parser( void )
 			get_nseq();
 
 			if( !verify_nseq( nseq ) )
-				lprintf( "\n***** May be have lost trace info, sequence are not correlatives\n" );
+				lprintf( lost_trace_info );
 
 			set_to_ts();		/* from timestamp field */
 			ts = get_ts();
@@ -1048,7 +1042,7 @@ parser( void )
 		get_nseq();
 
 		if( !verify_nseq( nseq ) )
-			lprintf( "\n***** May be have lost trace info, sequence are not correlatives\n" );
+			lprintf( lost_trace_info );
 
 		set_to_ts();		/* from timestamp field */
 		ts = get_ts();
@@ -1065,7 +1059,7 @@ parser( void )
 		return;
 	}
 	
-	lprintf( "***** Unknown trace event = (%d)\n", tr[0] );
+	lprintf( unknown_te, tr[0] );
 }
 
 
@@ -1093,7 +1087,7 @@ trazer_parse( rkhui8_t d )
 					}
 					else
 					{
-						lprintf( "\n***** Stream Checksum Error\n" );
+						lprintf( stream_chkerr );
 						show_curr_frm();
 					}
 				}
@@ -1122,7 +1116,6 @@ trazer_parse( rkhui8_t d )
 	}
 }
 
-#include "version.h"
 void
 trazer_init( void )
 {

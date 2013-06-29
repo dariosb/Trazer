@@ -332,10 +332,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\source\include\rkhcfg.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\source\include\rkht.h"
 				>
 			</File>

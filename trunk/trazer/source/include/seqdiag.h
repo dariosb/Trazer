@@ -8,9 +8,10 @@
 #include "mytypes.h"
 #include "tzparse.h"
 
-#define SEQDIAG_SEPARATOR_TEXT	"=== SESSION START ==="
+#define SEQDIAG_SEPARATOR_TEXT	"... RKH START ..."
 #define SEQDIAG_TEMPLATE_FILE	"sdiag_html.sk"
-#define SEQDIAG_OUT_FILE		"seqdiag.html"
+#define SEQDIAG_OUT_FNAME 		"sd%s.html"
+#define SEQDIAG_FNAME_LENGTH	25
 
 #define SEQDIAG_TMP_INSERTION 	"// INSERT SEQUENCE HERE"
 #define SEQDIAG_TMP_HEIGHT	  	"svg.setAttribute(\"height\", \""
@@ -27,6 +28,8 @@ typedef struct
 void add_to_trntbl( TRN_ST *p );
 void add_seqdiag_text( char *s );
 
-void start_seqdiag( const char *fname );
+void seqdiag_init( void );
+
+
 
 #endif

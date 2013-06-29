@@ -17,17 +17,20 @@ extern const char * err_fopen;
  * 	In file options.c
  */
 
-extern const char * help_message;
-extern const char * usage_msg;
-extern const char * option_line_command;
-extern const char * no_options_file;
-extern const char * getting_options_from;
-extern const char * error_in_options_file;
-extern const char * error_incomplete_trace_evt_data;
-extern const char * error_invalid_trace_id;
-extern const char * msg_comm_channel;
-extern const char * error_event_id_unknown;
-extern const char * no_trace_file;
-extern const char * no_config_file;
-extern const char * error_in_config_file;
-extern const char * invalid_com_config;
+extern const char   * help_message,
+					* usage_msg,
+					* option_line_command,
+					* no_options_file,
+					* getting_options_from,
+					* error_in_options_file,
+					* error_incomplete_trace_evt_data,
+					* error_invalid_trace_id,
+					* msg_comm_channel,
+					* error_event_id_unknown,
+					* no_trace_file,
+					* no_config_file,
+					* error_in_config_file,
+					* invalid_com_config,
+					* lost_trace_info,
+					* unknown_te,
+					* stream_chkerr;
