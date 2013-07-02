@@ -26,44 +26,44 @@ using namespace std;
 
 #define TRE_ST(id)		&st_##id
 
-#define q_s			"q=%s"
-#define mp_s		"mp=%s"
-#define nblock_d	"nb=%d"
-#define bsize_d		"bs=%d"
-#define nfree_d		"nfree=%d"
-#define nelem_d		"nelem=%d"
-#define nmin_d		"nmin=%d"
-#define snr_s		"snr=%s"
-#define pid_d		"pid=%d"
-#define refc_d		"rc=%d"
-#define ao_s		"ao=%s"
-#define sig_s		"sig=%s"
-#define sig_d		"sig=%d"
-#define prio_d		"prio=%d"
-#define ist_s		"ist=%s"
-#define h_s			"h=%s"
-#define st_s		"st=%s"
-#define sst_s		"sst=%s"
-#define tst_s		"tst=%s"
-#define nxtst_s		"nxtst=%s"
-#define nen_d		"nen=%d"
-#define nex_d		"nex=%d"
-#define nta_d		"nta=%d"
-#define nts_d		"nts=%d"
-#define t_s			"t=%s"
-#define ntick_d		"nt=%d"
-#define per_d		"per=%d"
-#define obj_x		"obj=0x%08X"
-#define nm_s		"nm=%s"
-#define func_x		"fn=0x%08X"
-#define func_s		"fn=%s"
-#define file_s		"%s.c"
-#define line_d		"(%d)"
-#define usrtrc_d	"ut=%d"
-#define ep_d		"ep=%d"
-#define ss_d		"ss=%d"
-#define es_d		"es=%d"
-#define p_d			"p=%d"
+#define q_s			(char *)"q=%s"
+#define mp_s		(char *)"mp=%s"
+#define nblock_d	(char *)"nb=%d"
+#define bsize_d		(char *)"bs=%d"
+#define nfree_d		(char *)"nfree=%d"
+#define nelem_d		(char *)"nelem=%d"
+#define nmin_d		(char *)"nmin=%d"
+#define snr_s		(char *)"snr=%s"
+#define pid_d		(char *)"pid=%d"
+#define refc_d		(char *)"rc=%d"
+#define ao_s		(char *)"ao=%s"
+#define sig_s		(char *)"sig=%s"
+#define sig_d		(char *)"sig=%d"
+#define prio_d		(char *)"prio=%d"
+#define ist_s		(char *)"ist=%s"
+#define h_s			(char *)"h=%s"
+#define st_s		(char *)"st=%s"
+#define sst_s		(char *)"sst=%s"
+#define tst_s		(char *)"tst=%s"
+#define nxtst_s		(char *)"nxtst=%s"
+#define nen_d		(char *)"nen=%d"
+#define nex_d		(char *)"nex=%d"
+#define nta_d		(char *)"nta=%d"
+#define nts_d		(char *)"nts=%d"
+#define t_s			(char *)"t=%s"
+#define ntick_d		(char *)"nt=%d"
+#define per_d		(char *)"per=%d"
+#define obj_x		(char *)"obj=0x%08X"
+#define nm_s		(char *)"nm=%s"
+#define func_x		(char *)"fn=0x%08X"
+#define func_s		(char *)"fn=%s"
+#define file_s		(char *)"%s.c"
+#define line_d		(char *)"(%d)"
+#define usrtrc_d	(char *)"ut=%d"
+#define ep_d		(char *)"ep=%d"
+#define ss_d		(char *)"ss=%d"
+#define es_d		(char *)"es=%d"
+#define p_d			(char *)"p=%d"
 
 
 /* --- Memory Pool (MP) ------------------------ */
@@ -304,7 +304,7 @@ static FMT_ID_T fmt_id_tbl[] =
 
 TRE_T fmt_usr_tbl = 
 {
-	RKH_TE_USER, "USR", "USR#", {vector<char *>(1, "2")},  usr_fmt
+	RKH_TE_USER, "USR", "USR#", {vector<char *>(1, (char *)"2")},  usr_fmt
 };
 
 
@@ -326,14 +326,7 @@ TRE_T *
 find_trevt( unsigned char id )
 {
 	static FMT_ID_T **p;
-	static char i;
 
-/*	for( i=0, p=fmt_id_tbl[i]; p->tre.id != RKH_TE_USER; ++i )
-	{
-		p=fmt_id_tbl[i];
-		if( id == p->tre.id )
-				return &(p->tre);
-	}*/
 	for( p=&fmt_id_tbl[0]; (*p)->tre.id != RKH_TE_USER; ++p )
 	{
 		if( id == (*p)->tre.id )

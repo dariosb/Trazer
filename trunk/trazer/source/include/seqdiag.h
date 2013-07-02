@@ -14,7 +14,8 @@
 #define SEQDIAG_FNAME 			"%s.diag"
 #define SEQDIAG_FNAME_LENGTH	25
 #define SEQDIAG_CLOSE_MARK		"\n}\n"
-#define SEQDIAG_TEMPLATE		"seqdiag\n{\n" SEQDIAG_CLOSE_MARK
+#define SEQDIAG_TEMPLATE		"seqdiag\n{\n"	\
+								SEQDIAG_CLOSE_MARK
 
 #define SEQDIAG_TMP_INSERTION 	"// INSERT SEQUENCE HERE"
 #define SEQDIAG_TMP_HEIGHT	  	"svg.setAttribute(\"height\", \""

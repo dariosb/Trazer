@@ -38,23 +38,6 @@ fexists(const char *filename)
 	return ifile;
 }
 
-#if 0
-void
-seq_printf( const char *fmt, ... )
-{
-    va_list args;
-
-    va_start(args,fmt);
-
-	if( fseq != NULL )
-	    vfprintf( fseq, fmt, args);
-
-	fflush(fseq);
-
-    va_end(args);
-}
-#endif
-
 
 void
 start_rawsdiag( const char *fname )
@@ -77,7 +60,6 @@ insert_rawsdiag( const char *fname, const char *s )
 {
 	FILE *fseq;
 	ofstream ft;
-	int i, nl;
 	static long p;
 
 
@@ -280,7 +262,7 @@ update_fout_html( void )
 	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loff+1, (loffh-loff-1) );
 
 	fout.write( SEQDIAG_TMP_HEIGHT, strlen(SEQDIAG_TMP_HEIGHT) );
-	sprintf( hbuff, "%d\");", (seqdiag_len*hfact) + SEQDIAG_TMP_HEIGHT_BASE );
+	sprintf( hbuff, "%d\");", (int)((seqdiag_len*hfact) + SEQDIAG_TMP_HEIGHT_BASE) );
 
 	fout.write( hbuff, strlen(hbuff) );
 	
