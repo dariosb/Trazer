@@ -4,8 +4,8 @@
 	<title>TRAZER Sequence Diagram Generator</title>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-    <script type="text/javascript" src="../libs/seqdiag/parser.js" ></script>
-    <script type="text/javascript" src="../libs/seqdiag.js" ></script>
+    <script type="text/javascript" src="seqdiag/parser.js" ></script>
+    <script type="text/javascript" src="seqdiag/seqdiag.js" ></script>
 </head>
 <body>
 	<h2>TRAZER SEQUENCE DIAGRAM</h2>
