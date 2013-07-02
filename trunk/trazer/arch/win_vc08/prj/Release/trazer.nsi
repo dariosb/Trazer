@@ -2,9 +2,9 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Trazer"
-!define PRODUCT_VERSION "2.1"
+!define PRODUCT_VERSION "2.2"
 !define PRODUCT_PUBLISHER "Vortex Technology Solutions"
-!define PRODUCT_WEB_SITE "http://www.vxtsolutions.com.ar"
+!define PRODUCT_WEB_SITE "http://sourceforge.net/projects/rkh-reactivesys/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\trazer.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -39,7 +39,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "Trazer_2_1_w32install.exe"
+OutFile "Trazer_2_2_w32install.exe"
 InstallDir "$PROGRAMFILES\Trazer"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -53,6 +53,7 @@ Section "Principal" SEC01
   CreateShortCut "$SMPROGRAMS\Trazer\Trazer.lnk" "$INSTDIR\trazer.exe"
   CreateShortCut "$DESKTOP\Trazer.lnk" "$INSTDIR\trazer.exe"
   File "trazer.cfg"
+  File "sdiag_html.sk"
 SectionEnd
 
 Section "dlls" SEC02
@@ -73,6 +74,14 @@ SectionEnd
 Section "install" SEC04
   SetOutPath "$INSTDIR\install"
   File "dll\vcredist_x86.exe"
+  File "seqdiag\seqdiag.js"
+  File "seqdiag\parser.js"
+SectionEnd
+
+Section "install" SEC05
+  SetOutPath "$INSTDIR\seqdiag"
+  File "seqdiag\seqdiag.js"
+  File "seqdiag\parser.js"
 SectionEnd
 
 Section -AdditionalIcons
