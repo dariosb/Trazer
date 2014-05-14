@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TRAZER Sequence Diagram Generator</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+    <script type="text/javascript" src="seqdiag/parser.js" ></script>
+    <script type="text/javascript" src="seqdiag/seqdiag.js" ></script>
+</head>
+<body>
+	<h2>TRAZER SEQUENCE DIAGRAM</h2>
+    <figure id="diag"></figure>
+    <script type="text/x-seqdiag" id="seqdiag-text">
+		// INSERT SEQUENCE HERE (don't delete this line)
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var target = document.getElementById("seqdiag-text");
+            var ast = SeqdiagParser.parse(target.innerText);
+            var diagram = Seqdiag.DiagramBuilder.build(ast);
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "1024");
+            svg.setAttribute("height", "200");
+            var drawer = new Seqdiag.Drawer.SVG(diagram, svg, document);
+            drawer.draw();
+            var figure = document.getElementById('diag');
+            figure.appendChild(svg);
+        };
+    </script>
+</body>
+</html>
+
