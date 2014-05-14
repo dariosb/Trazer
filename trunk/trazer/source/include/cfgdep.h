@@ -34,6 +34,8 @@ extern CONFIG_T configs;
 #define RKH_TRC_EN_TSTAMP			configs.trazer_en_tstamp
 #define RKH_MP_SIZEOF_BSIZE			configs.trazer_sizeof_bsize
 #define RKH_MAX_EPOOL				configs.trazer_max_epool
+#define RKH_TRC_RTFIL_SMA_EN			configs.trazer_rtfil_sma_en
+#define RKH_TRC_RTFIL_SIGNAL_EN			configs.trazer_rtfil_signal_en
 
 int sizeof_type( int type );
 

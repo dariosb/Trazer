@@ -32,6 +32,8 @@ typedef struct
 	int trazer_en_tstamp;
 	int trazer_sizeof_bsize;
 	int trazer_max_epool;
+	int trazer_rtfil_sma_en;
+	int trazer_rtfil_signal_en;
 } CONFIG_T;
 
 /*
@@ -62,6 +64,8 @@ typedef struct
 #define	TRAZER_EN_TSTAMP_DFT		1
 #define	TRAZER_SIZEOF_BSIZE_DFT		1
 #define	TRAZER_MAX_EPOOL_DFT		4
+#define	RKH_TRC_RTFIL_SMA_EN_DFT	1
+#define	RKH_TRC_RTFIL_SIGNAL_EN_DFT	1
 
 #define CONFIG_FILE				"trazer.cfg"
 
