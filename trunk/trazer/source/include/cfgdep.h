@@ -7,6 +7,17 @@
 
 #include "config.h"
 
+
+/**
+ * Trace Config Event default stream format
+ */
+
+#define TRAZER_TCFG_EN_NSEQ_DFT			0
+#define TRAZER_TCFG_EN_CHK_DFT			1
+#define TRAZER_TCFG_EN_TSTAMP_DFT		0
+#define TRAZER_TCFG_SIZEOF_TSTAMP_DFT	4	/* 1, 2, 4 in bytes */
+
+
 extern CONFIG_T configs;
 
 #define RKH_SMA_EN_TRC_SENDER		configs.trazer_en_sender
@@ -47,7 +58,8 @@ int sizeof_type( int type );
 #define sizeof_trzes()		sizeof_type( RKH_SIZEOF_ESIZE )
 
 const char *get_trheader( void );
-#define trheader	get_trheader()
+#define trheader		get_trheader()
+#define trheader_nts	" - [%3d] %-4s| %-10s : "
 
 
 #endif

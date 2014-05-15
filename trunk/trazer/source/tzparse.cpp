@@ -648,44 +648,7 @@ h_tcfg( const void *tre )
 
 	trb = proc_version_code( trb );
 	trb_32 = (rkhui32_t *)trb;
-#if 0
-	RKH_SMA_EN_TRC_SENDER =	(*trb >> 0) & 0x01;
-	RKH_TRC_RUNTIME_FILTER =(*trb >> 1) & 0x01;
-	RKH_TRC_EN_USER_TRACE = (*trb >> 2) & 0x01;
-	RKH_TRC_ALL = 		(*trb >> 3) & 0x01;
-	RKH_TRC_EN_MP = 	(*trb >> 4) & 0x01;
-	RKH_TRC_EN_RQ = 	(*trb >> 5) & 0x01;
-	RKH_TRC_EN_SMA = 	(*trb >> 6) & 0x01;
-	RKH_TRC_EN_TIM = 	(*trb++ >> 7) & 0x01;
 
-	RKH_TRC_EN_SM = 	(*trb >> 0) & 0x01;
-	RKH_TRC_EN_FWK = 	(*trb >> 1) & 0x01;
-	RKH_TRC_EN_ASSERT = 	(*trb >> 2) & 0x01;
-	RKH_RQ_EN_GET_LWMARK = 	(*trb >> 3) & 0x01;
-	RKH_MP_EN_GET_LWM =	(*trb >> 4) & 0x01;
-	RKH_TRC_RTFIL_SMA_EN =	(*trb >> 5) & 0x01;
-	RKH_TRC_RTFIL_SIGNAL_EN = (*trb >> 6) & 0x01;
-	RKH_TRC_EN_NSEQ =	(*trb++ >> 7) & 0x01;
-
-	RKH_TRC_EN_TSTAMP = (*trb >> 0) & 0x01;
-	RKH_TRC_EN_CHK = (*trb++ >> 1) & 0x01;
-	++trb;
-
-
-	RKH_SIZEOF_EVENT = (*trb >> 4) & 0x0F;
-	RKH_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
-	RKH_TRC_SIZEOF_POINTER = (*trb >> 4) & 0x0F;
-	RKH_TIM_SIZEOF_NTIMER = (*trb++) & 0x0F;
-	RKH_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
-	RKH_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
-	RKH_SIZEOF_ESIZE = (*trb++ >> 4) & 0x0F;
-
-	/* get ticksss base */
-	++trb;
-
-	RKH_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
-	RKH_MAX_EPOOL = (*trb++) & 0x0F;
-#else
 	RKH_SMA_EN_TRC_SENDER =	(*trb_32 >> 0) & 0x01;
 	RKH_TRC_RUNTIME_FILTER =(*trb_32 >> 1) & 0x01;
 	RKH_TRC_EN_USER_TRACE = (*trb_32 >> 2) & 0x01;
@@ -719,16 +682,11 @@ h_tcfg( const void *tre )
 
 	RKH_SIZEOF_ESIZE = (*trb++) & 0x0F;
 
-	/* get ticksss base */
-	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
-	++trb;
-	++trb;
-
 	RKH_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
 	RKH_MAX_EPOOL = (*trb++) & 0x0F;
 	
+	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
 
-#endif
 	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
 	
 	lprintf( "Update RKH Configuration from client\n" );
@@ -759,10 +717,9 @@ h_tcfg( const void *tre )
 	cfg_printf_sz( RKH_MP_SIZEOF_NBLOCK, 8 );
 	cfg_printf_sz( RKH_RQ_SIZEOF_NELEM, 8 );
 	cfg_printf_sz( RKH_SIZEOF_ESIZE, 8 );
-	cfg_printf( TSTAMP_TICK_HZ );
 	cfg_printf_sz( RKH_MP_SIZEOF_BSIZE, 8 );
 	cfg_printf( RKH_MAX_EPOOL );
-
+	cfg_printf( TSTAMP_TICK_HZ );
 
 	return (char *)("\n");
 }
@@ -1060,6 +1017,31 @@ show_curr_frm( void )
 	dprintf( " ----\n" );
 }
 
+
+static
+void
+proc_tcfg_evt( const TRE_T *ftr )
+{
+	rkhui8_t nseq;
+	TRZTS_T ts;
+
+	nseq = ( TRAZER_TCFG_EN_NSEQ_DFT == 1 ) ? tr[ 1 ] : 0;
+
+	trb = ( TRAZER_TCFG_EN_NSEQ_DFT == 1 ) ? tr + 2 : tr + 1;
+
+	ts = ( TRAZER_TCFG_EN_TSTAMP_DFT == 1 ) ?
+			( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP_DFT ) : 0;
+
+	if( TRAZER_TCFG_EN_TSTAMP_DFT == 1 )
+		lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+	else
+		lprintf( trheader_nts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+
+	lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+}
+
+
+
 #define GET_TE_GROUP(e)	(rkhui8_t)(((e) >> NGSH) & 7)
 #define GET_USR_TE(e)	(rkhui8_t)((e) & 7)
 
@@ -1075,23 +1057,38 @@ parser( void )
 	rkhui8_t nseq;
 	const char *pname;
 
-	
 
 	if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
 	{
-		if( ftr->fmt_args != ( HDLR_T )0 )
+		if( ftr->fmt_args == ( HDLR_T )0 )		/* Trace event not valid */
 		{
-
-			get_nseq();
-
-			if( !verify_nseq( nseq ) )
-				lprintf( lost_trace_info );
-
-			set_to_ts();		/* from timestamp field */
-			ts = get_ts();
-			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-			lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+			lprintf( unknown_te, tr[0] );
+			return;
 		}
+
+		if( tr[ 0 ] == RKH_TE_FWK_TCFG )		/* Trace Config event */
+		{
+			proc_tcfg_evt( ftr );
+			return;
+		}
+
+		/* Runtime trace events */
+
+		get_nseq();
+
+		if( !verify_nseq( nseq ) )
+			lprintf( lost_trace_info );
+
+		set_to_ts();		/* from timestamp field */
+		ts = get_ts();
+
+		if( RKH_TRC_EN_TSTAMP == 1 )
+			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+		else
+			lprintf( trheader_nts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+
+		lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+
 		return;
 	}
 
@@ -1113,7 +1110,11 @@ parser( void )
 			pname = fmt;
 		}
 
-		lprintf( trheader, ts, nseq, ftr->group.c_str(), pname );
+		if( RKH_TRC_EN_TSTAMP == 1 )
+			lprintf( trheader, ts, nseq, ftr->group.c_str(), pname );
+		else
+			lprintf( trheader, nseq, ftr->group.c_str(), pname );
+
 		(*ftr->fmt_args)( (const void *)(tr) ); 
 
 		return;

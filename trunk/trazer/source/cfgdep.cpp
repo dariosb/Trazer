@@ -22,9 +22,18 @@ sizeof_type( int type )
 const char*
 get_trheader( void )
 {
-	if( RKH_TRC_SIZEOF_TSTAMP == 2 )
-		return "%5u [%3d] %-4s| %-10s : ";
-	else
-		return "%10u [%3d] %-4s| %-10s : ";
+	switch( RKH_TRC_SIZEOF_TSTAMP )
+	{
+		case 1:		// RKH_TRC_SIZEOF_TSTAMP 8bit
+			return "%3u [%3d] %-4s| %-10s : ";
+
+		case 2:		// RKH_TRC_SIZEOF_TSTAMP 16bit
+			return "%5u [%3d] %-4s| %-10s : ";
+
+		case 4:		// RKH_TRC_SIZEOF_TSTAMP 32bit
+		default: 
+			return "%10u [%3d] %-4s| %-10s : ";
+
+	}
 }
 

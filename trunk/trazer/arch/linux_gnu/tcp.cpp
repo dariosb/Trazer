@@ -98,7 +98,7 @@ tcpRead(unsigned char *buf, int size)
 
         if (select(0, &readSet, 0, 0, &delay) < 0)
 		{
-            printf("Server socket select failed.\n");
+            printf("Server socket select failed.\n\n");
             return -1;                                         /* terminate */
         }
 
@@ -111,10 +111,10 @@ tcpRead(unsigned char *buf, int size)
                                  &fromLen);
             if (l_clentSock == INVALID_SOCKET)
 			{
-                printf("Server socket accept failed.\n");
+                printf("Server socket accept failed.\n\n");
                 return -1;                                     /* terminate */
             }
-            printf("Accepted connection from %s, port %d\n",
+            printf("Accepted connection from %s, port %d\n\n",
                    inet_ntoa(fromAddr.sin_addr),
                    (int)ntohs(fromAddr.sin_port));
         }
@@ -127,7 +127,7 @@ tcpRead(unsigned char *buf, int size)
         
         if (select(0, &readSet, 0, 0, &delay) < 0)			/* selective blocking */
 		{
-            printf("Client socket select failed.\n" );
+            printf("Client socket select failed.\n\n" );
             return -1;                                         /* terminate */
         }
         if (FD_ISSET(l_clentSock, &readSet))
