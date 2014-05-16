@@ -33,6 +33,12 @@
 using namespace std;
 
 
+typedef unsigned long TRZTS_T;
+typedef unsigned long TRZNB_T;
+typedef unsigned long TRZNE_T;
+typedef unsigned long TRZNT_T;
+typedef unsigned long TRZES_T;
+
 /*
  * 	Application dependent macros and typedefs
  */

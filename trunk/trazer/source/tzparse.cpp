@@ -21,38 +21,21 @@
 #include <stdarg.h>
 
 
-typedef unsigned long TRZTS_T;
-typedef unsigned long TRZNB_T;
-typedef unsigned long TRZNE_T;
-typedef unsigned long TRZNT_T;
-typedef unsigned long TRZES_T;
 
+/*
 #define get_nseq()		nseq = ( RKH_TRC_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
 #define set_to_ts()		trb = ( RKH_TRC_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
+*/
 
 static rkhui8_t lastnseq;
 rkhui16_t TSTAMP_TICK_HZ;
 
-static
-int
-verify_nseq( rkhui8_t nseq )
-{
-	int r;
 
-	if( RKH_TRC_EN_NSEQ == 0 )
-		return 1;
-
-	r = ( (rkhui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
-
-	lastnseq = nseq;
-
-	return r;
-}
-
+/*
 #define get_ts()												\
 			( RKH_TRC_EN_TSTAMP == 1 ) ? 						\
 			( TRZTS_T )assemble( RKH_TRC_SIZEOF_TSTAMP ) : 0
-
+*/
 #define CTE( te )	((const struct tre_t*)(te))
 
 
@@ -87,6 +70,7 @@ static rkhui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
 
+
 static
 unsigned long
 assemble( int size )
@@ -111,6 +95,47 @@ assemble_str( void  )
 	
 	*p = '\0';
 	return symstr;
+}
+
+
+static
+int
+get_nseq( int en_nseq )
+{
+	if( en_nseq == 1 ) 
+	{
+		trb = tr + 2;
+		return tr[ 1 ];
+	}
+	else
+	{
+		trb = tr + 1;
+		return 0;
+	}
+}
+
+
+static
+int
+get_ts( int en_ts, int sz_ts )
+{
+	return ( en_ts == 1 ) ?	( TRZTS_T )assemble( sz_ts ) : 0;
+}
+
+
+int
+verify_nseq( rkhui8_t nseq )
+{
+	int r;
+
+	if( RKH_TRC_EN_NSEQ == 0 )
+		return 1;
+
+	r = ( (rkhui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
+
+	lastnseq = nseq;
+
+	return r;
 }
 
 
@@ -1022,20 +1047,19 @@ static
 void
 proc_tcfg_evt( const TRE_T *ftr )
 {
-	rkhui8_t nseq;
-	TRZTS_T ts;
+	TRAZER_DATA_T tz_data;
+	int tz_flg;
 
-	nseq = ( TRAZER_TCFG_EN_NSEQ_DFT == 1 ) ? tr[ 1 ] : 0;
+	tz_flg = PREPARE_TZOUT_FLGS(	TRAZER_TCFG_EN_TSTAMP_DFT, 
+									TRAZER_TCFG_SIZEOF_TSTAMP_DFT,
+									TRAZER_TCFG_EN_NSEQ_DFT );
 
-	trb = ( TRAZER_TCFG_EN_NSEQ_DFT == 1 ) ? tr + 2 : tr + 1;
+	tz_data.nseq = get_nseq( TRAZER_TCFG_EN_NSEQ_DFT );
+	tz_data.ts = get_ts( TRAZER_TCFG_EN_TSTAMP_DFT, TRAZER_SIZEOF_TSTAMP_DFT );
+	tz_data.group = ftr->group.c_str();
+	tz_data.name = ftr->name.c_str();
 
-	ts = ( TRAZER_TCFG_EN_TSTAMP_DFT == 1 ) ?
-			( TRZTS_T )assemble( TRAZER_SIZEOF_TSTAMP_DFT ) : 0;
-
-	if( TRAZER_TCFG_EN_TSTAMP_DFT == 1 )
-		lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-	else
-		lprintf( trheader_nts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+	trazer_output(	tz_flg, &tz_data );
 
 	lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 }
@@ -1052,10 +1076,8 @@ void
 parser( void )
 {
 	static const TRE_T *ftr;			/* received trace event */
-
-	TRZTS_T ts;
-	rkhui8_t nseq;
-	const char *pname;
+	TRAZER_DATA_T tz_data;
+	int tz_flg;
 
 
 	if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
@@ -1073,19 +1095,21 @@ parser( void )
 		}
 
 		/* Runtime trace events */
+	
+		tz_flg = PREPARE_TZOUT_FLGS( RKH_TRC_EN_TSTAMP, 
+										RKH_TRC_SIZEOF_TSTAMP,
+										RKH_TRC_EN_NSEQ );
 
-		get_nseq();
-
-		if( !verify_nseq( nseq ) )
+		tz_data.nseq = get_nseq( RKH_TRC_EN_NSEQ );
+		
+		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		set_to_ts();		/* from timestamp field */
-		ts = get_ts();
+		tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, RKH_TRC_SIZEOF_TSTAMP );
+		tz_data.group = ftr->group.c_str();
+		tz_data.name = ftr->name.c_str();
 
-		if( RKH_TRC_EN_TSTAMP == 1 )
-			lprintf( trheader, ts, nseq, ftr->group.c_str(), ftr->name.c_str() );
-		else
-			lprintf( trheader_nts, nseq, ftr->group.c_str(), ftr->name.c_str() );
+		trazer_output(	tz_flg, &tz_data );
 
 		lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 
@@ -1096,25 +1120,26 @@ parser( void )
 	{
 		ftr = &fmt_usr_tbl;
 
-		get_nseq();
+		tz_flg = PREPARE_TZOUT_FLGS( RKH_TRC_EN_TSTAMP, 
+										RKH_TRC_SIZEOF_TSTAMP,
+										RKH_TRC_EN_NSEQ );
 
-		if( !verify_nseq( nseq ) )
+		tz_data.nseq = get_nseq( RKH_TRC_EN_NSEQ );
+		
+		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		set_to_ts();		/* from timestamp field */
-		ts = get_ts();
+		tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, RKH_TRC_SIZEOF_TSTAMP );
+		tz_data.group = ftr->group.c_str();
 
-		if( (pname = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
+		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
 		{
 			sprintf( fmt, "%s%d", ftr->name.c_str(), GET_USR_TE( tr[0] ) );
-			pname = fmt;
+			tz_data.name = fmt;
 		}
 
-		if( RKH_TRC_EN_TSTAMP == 1 )
-			lprintf( trheader, ts, nseq, ftr->group.c_str(), pname );
-		else
-			lprintf( trheader, nseq, ftr->group.c_str(), pname );
-
+		trazer_output(	tz_flg, &tz_data );
+		
 		(*ftr->fmt_args)( (const void *)(tr) ); 
 
 		return;
