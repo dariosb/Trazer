@@ -266,6 +266,8 @@ evaluate_args( int argc, char **argv )
 				break;
 			case 'v':
 				show_version();
+				while( !test_key() );
+				exit( EXIT_SUCCESS );
 				break;				
 			case 'd':
 				options.enable_debug = 1;
