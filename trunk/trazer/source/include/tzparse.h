@@ -29,6 +29,7 @@
 #include "mytypes.h"
 #include <string>
 #include <vector>
+#include <deque>
 
 using namespace std;
 
@@ -91,10 +92,17 @@ typedef struct tre_t
 	HDLR_T fmt_args;
 } TRE_T;
 
+typedef struct sym_evt_q
+{
+	unsigned long tstamp;
+	unsigned long id;	
+}SYM_EVT_Q;
+
 typedef struct symobj_t
 {
 	unsigned long adr;
 	string name;
+	deque <SYM_EVT_Q> se_q;
 } SYMOBJ_T;
 
 typedef struct symsig_t
@@ -125,7 +133,9 @@ char * h_sym2u8( const void *tre );
 char * h_sig2u8( const void *tre );
 char * h_symevt( const void *tre );
 char * h_sma_get( const void *tre );
-char * h_sma_ffll( const void *tre );
+char * h_sma_ff( const void *tre );
+char * h_sma_lf( const void *tre );
+char * h_sma_dch( const void *tre );
 char * h_symnblk( const void *tre );
 char * h_mp_init( const void *tre );
 char * h_mp_get( const void *tre );

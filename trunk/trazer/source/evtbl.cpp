@@ -64,6 +64,7 @@ using namespace std;
 #define ss_d		(char *)"ss=%d"
 #define es_d		(char *)"es=%d"
 #define p_d			(char *)"p=%d"
+#define rt_d		(char *)"rt=%d"
 
 
 /* --- Memory Pool (MP) ------------------------ */
@@ -86,8 +87,8 @@ DCLR_TRE( RKH_TE_RQ_GET_LAST,	"RQ", "GET_LAST",   h_1sym,		q_s );
 DCLR_TRE( RKH_TE_SMA_ACT,		"SMA", "ACT",		h_symu8,	ao_s, p_d );
 DCLR_TRE( RKH_TE_SMA_TERM,		"SMA", "TERM",		h_symu8,	ao_s, p_d );
 DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ffll, ao_s, sig_s, snr_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_ffll, ao_s, sig_s, snr_s, pid_d, refc_d );
+DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_d, refc_d );
+DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
 
@@ -95,7 +96,7 @@ DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
 /* --- State machine (SM) ---------------- */
 DCLR_TRE( RKH_TE_SM_INIT,       "SM",  "INIT",       h_2sym,	ao_s, ist_s );
 DCLR_TRE( RKH_TE_SM_CLRH,       "SM",  "CLRH",       h_2sym,	ao_s, h_s );
-DCLR_TRE( RKH_TE_SM_DCH,        "SM",  "DCH",        h_symevt,	ao_s, sig_s );
+DCLR_TRE( RKH_TE_SM_DCH,        "SM",  "DCH",        h_sma_dch,	ao_s, sig_s, rt_d );
 DCLR_TRE( RKH_TE_SM_TRN,        "SM",  "TRN",        h_symtrn,	ao_s, sst_s, tst_s );
 DCLR_TRE( RKH_TE_SM_STATE,      "SM",  "STATE",	     h_2sym,	ao_s, nxtst_s );
 DCLR_TRE( RKH_TE_SM_ENSTATE,    "SM",  "ENSTATE",    h_2sym,	ao_s, st_s );

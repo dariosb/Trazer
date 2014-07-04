@@ -69,6 +69,7 @@ extern FILE *fdbg;
 static rkhui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
+static unsigned long curr_tstamp;
 
 
 static
@@ -488,8 +489,9 @@ h_sma_get( const void *tre )
 
 }
 
+static
 char *
-h_sma_ffll( const void *tre )
+h_sma_ffll( const void *tre, TRN_ST *ptrn )
 {
 	TRN_ST trn;
 	unsigned char pid, refc;
@@ -524,6 +526,59 @@ h_sma_ffll( const void *tre )
 			  		refc );
 	}
 
+	*ptrn = trn;
+
+	return fmt;
+}
+
+
+char *
+h_sma_ff( const void *tre )
+{
+	TRN_ST trn;
+	char *p;
+
+	p = h_sma_ffll( tre, &trn );
+	
+	post_fifo_symevt( trn.tobj, trn.e, curr_tstamp );
+
+	return p;
+}
+
+
+char *
+h_sma_lf( const void *tre )
+{
+	TRN_ST trn;
+	char *p;
+
+	p = h_sma_ffll( tre, &trn );
+	
+	post_lifo_symevt( trn.tobj, trn.e, curr_tstamp );
+	
+	return p;	
+}
+
+
+char *
+h_sma_dch( const void *tre )
+{
+	unsigned long obj;
+	TRZE_T e;
+	unsigned long post_tstamp;
+	long rt;
+		
+
+	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	e = (TRZE_T)assemble( sizeof_trze() );
+
+	if( remove_symevt_tstamp( obj, e, &post_tstamp ) < 0 )
+		rt = -1;
+	else
+		rt = ( (curr_tstamp - post_tstamp) > 0 ) ?
+						( curr_tstamp - post_tstamp ) : -1 ;
+
+	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ), 12345 );
 	return fmt;
 }
 
@@ -1105,7 +1160,8 @@ parser( void )
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, RKH_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, 
+											RKH_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 		tz_data.name = ftr->name.c_str();
 
@@ -1129,7 +1185,8 @@ parser( void )
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, RKH_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, 
+											RKH_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 
 		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )

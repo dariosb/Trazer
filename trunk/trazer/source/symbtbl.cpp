@@ -58,3 +58,24 @@ map_obj( unsigned long adr )
 	add_to_symtbl( adr, buff );
 	return symb_tbl.back().name.c_str();
 }
+
+
+void
+post_fifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
+{
+
+}
+
+void
+post_lifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
+{
+
+}
+
+
+int
+remove_symevt_tstamp( unsigned long adr, TRZE_T e, unsigned long *pt )
+{
+	*pt = 0;
+	return 0;
+}
