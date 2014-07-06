@@ -575,10 +575,10 @@ h_sma_dch( const void *tre )
 	if( remove_symevt_tstamp( obj, e, &post_tstamp ) < 0 )
 		rt = -1;
 	else
-		rt = ( (curr_tstamp - post_tstamp) > 0 ) ?
+		rt = ( (curr_tstamp - post_tstamp) >= 0 ) ?
 						( curr_tstamp - post_tstamp ) : -1 ;
 
-	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ), 12345 );
+	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), map_sig( e ), rt );
 	return fmt;
 }
 

@@ -63,19 +63,63 @@ map_obj( unsigned long adr )
 void
 post_fifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
 {
+	vector<SYMOBJ_T>::iterator i;
+	SYM_EVT_Q evt;
 
+	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
+	{
+		if( i->adr == adr )
+		{
+			evt.tstamp = ts;
+			evt.id = e;
+			i->se_q.push_back( evt );
+			return;
+		}
+	}
 }
 
 void
 post_lifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
 {
+	vector<SYMOBJ_T>::iterator i;
+	SYM_EVT_Q evt;
 
+	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
+	{
+		if( i->adr == adr )
+		{
+			evt.tstamp = ts;
+			evt.id = e;
+			i->se_q.push_front( evt );
+			return;
+		}
+	}
 }
 
 
 int
 remove_symevt_tstamp( unsigned long adr, TRZE_T e, unsigned long *pt )
 {
-	*pt = 0;
-	return 0;
+	static vector<SYMOBJ_T>::iterator i;
+	static SYM_EVT_Q evt;
+
+	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
+	{
+		if( i->adr == adr )
+		{
+			if( i->se_q.size() == 0 )
+				return 0xFF00;
+
+			evt = i->se_q.front();
+			i->se_q.pop_front();
+
+			if( evt.id != e )
+				break;
+			
+			*pt = evt.tstamp;
+
+			return 0;
+		}
+	}
+	return -1;
 }

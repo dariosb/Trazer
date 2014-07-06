@@ -587,11 +587,11 @@ typedef enum rkh_trc_events
 	RKH_TE_SMA_LIFO,				/**< \copydetails RKH_TR_SMA_LIFO */
 	RKH_TE_SMA_REG,					/**< \copydetails RKH_TR_SMA_REG */
 	RKH_TE_SMA_UNREG,				/**< \copydetails RKH_TR_SMA_UNREG */
+	RKH_TE_SMA_DCH,					/**< \copydetails RKH_TR_SM_DCH */
 
 	/* --- State machine events (SM group) ---------------- */
 	RKH_TE_SM_INIT = RKH_SM_START,	/**< \copydetails RKH_TR_SM_INIT */
 	RKH_TE_SM_CLRH,					/**< \copydetails RKH_TR_SM_CLRH */
-	RKH_TE_SM_DCH,					/**< \copydetails RKH_TR_SM_DCH */
 	RKH_TE_SM_TRN,					/**< \copydetails RKH_TR_SM_TRN */
 	RKH_TE_SM_STATE,				/**< \copydetails RKH_TR_SM_STATE */
 	RKH_TE_SM_ENSTATE,				/**< \copydetails RKH_TR_SM_ENSTATE */

@@ -91,12 +91,12 @@ DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_
 DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
+DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, rt_d );
 
 
 /* --- State machine (SM) ---------------- */
 DCLR_TRE( RKH_TE_SM_INIT,       "SM",  "INIT",       h_2sym,	ao_s, ist_s );
 DCLR_TRE( RKH_TE_SM_CLRH,       "SM",  "CLRH",       h_2sym,	ao_s, h_s );
-DCLR_TRE( RKH_TE_SM_DCH,        "SM",  "DCH",        h_sma_dch,	ao_s, sig_s, rt_d );
 DCLR_TRE( RKH_TE_SM_TRN,        "SM",  "TRN",        h_symtrn,	ao_s, sst_s, tst_s );
 DCLR_TRE( RKH_TE_SM_STATE,      "SM",  "STATE",	     h_2sym,	ao_s, nxtst_s );
 DCLR_TRE( RKH_TE_SM_ENSTATE,    "SM",  "ENSTATE",    h_2sym,	ao_s, st_s );
@@ -171,12 +171,12 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_SMA_LIFO),
 	TRE_ST( RKH_TE_SMA_REG),
 	TRE_ST( RKH_TE_SMA_UNREG),
+	TRE_ST( RKH_TE_SMA_DCH),
 
 
 	/* --- State machine (SM) ---------------- */
 	TRE_ST( RKH_TE_SM_INIT),
 	TRE_ST( RKH_TE_SM_CLRH),
-	TRE_ST( RKH_TE_SM_DCH),
 	TRE_ST( RKH_TE_SM_TRN),
 	TRE_ST( RKH_TE_SM_STATE),
 	TRE_ST( RKH_TE_SM_ENSTATE),
