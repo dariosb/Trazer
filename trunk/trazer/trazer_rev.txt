@@ -25,9 +25,21 @@ This version is compatible to use with RKH V2.0
  trace events.
 -seqdiag file generation.
 
-\section trazer_2_3 Version 2.3 Release date: May 16, 2014
+\section trazer_2_3 Version 2.3 Release date: Jul 07, 2014
 -Compatibility with RKH V2.4.04
 -Changes in trace config event (RKH_TR_FWK_TCFG) format.
 -Timestamp and sequence number visibility according 
  to current configuration.
+-Sync with lates RKH trace events ordering.
+-Add Signal Responce Time measurement functionality.
+  To run properly, RKH Application must:
+  - define in rkhcfg.h:
+                        RKH_CFG_TRC_TSTAMP_EN	RKH_ENABLED
+                        RKH_CFG_TRC_SMA_EN		RKH_ENABLED
+                        RKH_CFG_TRC_SM_DCH_EN   RKH_ENABLED
+
+  - if RKH_CFG_TRC_RTFIL_EN are RKH_ENABLED, set to OFF filters:
+                        RKH_FILTER_OFF_EVENT( RKH_TE_SMA_LIFO );
+                        RKH_FILTER_OFF_EVENT( RKH_TE_SMA_FIFO );
+                        RKH_FILTER_OFF_EVENT( RKH_TE_SMA_DCH );
 */

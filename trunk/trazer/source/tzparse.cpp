@@ -23,8 +23,8 @@
 
 
 /*
-#define get_nseq()		nseq = ( RKH_TRC_EN_NSEQ == 1 ) ? tr[ 1 ] : 0;
-#define set_to_ts()		trb = ( RKH_TRC_EN_NSEQ == 1 ) ? tr + 2 : tr + 1;
+#define get_nseq()		nseq = ( RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr[ 1 ] : 0;
+#define set_to_ts()		trb = ( RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
 */
 
 static rkhui8_t lastnseq;
@@ -129,7 +129,7 @@ verify_nseq( rkhui8_t nseq )
 {
 	int r;
 
-	if( RKH_TRC_EN_NSEQ == 0 )
+	if( RKH_CFG_TRC_NSEQ_EN == 0 )
 		return 1;
 
 	r = ( (rkhui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
@@ -214,7 +214,7 @@ h_1sym( const void *tre )
 {
 	unsigned long obj;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE(tre), 1, map_obj( obj ) );
 	return fmt;
 }
@@ -225,8 +225,8 @@ h_2sym( const void *tre )
 {
 	unsigned long obj1, obj2;
 
-	obj1 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	obj2 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj1 ), map_obj( obj2 ) );
 	return fmt;
 }
@@ -237,9 +237,9 @@ h_symtrn( const void *tre )
 {
 	unsigned long smaobj, ssobj, tsobj;
 
-	smaobj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	ssobj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	tsobj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	smaobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	ssobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	tsobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( smaobj ), map_obj( ssobj ), 
 					tsobj == 0 ? map_obj( ssobj ) : map_obj( tsobj ) );
 	return fmt;
@@ -252,7 +252,7 @@ h_symrc( const void *tre )
 	unsigned long obj;
 	unsigned char u8;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), rctbl[ u8 ] );
 	return fmt;
@@ -265,7 +265,7 @@ h_symu8( const void *tre )
 	unsigned long obj;
 	unsigned char u8;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), u8 );
 	return fmt;
@@ -279,7 +279,7 @@ h_mp_init( const void *tre )
 	TRZNB_T nblock;
 	unsigned long bsize;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	bsize = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, bsize  );
@@ -294,12 +294,12 @@ h_mp_get( const void *tre )
 	TRZNB_T nblock;
 	unsigned long nmin;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 
-	if( RKH_MP_EN_GET_LWM == 1 )
+	if( RKH_CFG_MP_GET_LWM_EN == 1 )
 	{
-		nmin = assemble( RKH_MP_SIZEOF_NBLOCK );
+		nmin = assemble( RKH_CFG_MP_SIZEOF_NBLOCK );
 		tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, nmin  );
 	}
 	else
@@ -315,7 +315,7 @@ h_symnblk( const void *tre )
 	unsigned long obj;
 	TRZNB_T nblock;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 2, map_obj( obj ), nblock  );
 	return fmt;
@@ -328,8 +328,8 @@ h_2symnused( const void *tre )
 	unsigned long obj1, obj2;
 	TRZNE_T nelem;
 
-	obj1 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	obj2 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 
 	tre_fmt( fmt, CTE( tre ), 1, map_obj( obj1 ) );
@@ -344,7 +344,7 @@ h_symnused( const void *tre )
 	unsigned long obj;
 	TRZNE_T nelem;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), nelem );
 	return fmt;
@@ -358,9 +358,9 @@ h_rq_ffll( const void *tre )
 	unsigned long obj, nmin;
 	TRZNE_T nelem;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
-	if( RKH_RQ_EN_GET_LWMARK == 1 )
+	if( RKH_CFG_RQ_GET_LWMARK_EN == 1 )
 	{
 		nmin = (unsigned long)assemble( sizeof_trzne() );
 		tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), nelem, nmin );
@@ -377,8 +377,8 @@ h_tstart( const void *tre )
 	unsigned long obj1, obj2;
 	TRZNT_T ntick, per;
 
-	obj1 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	obj2 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	per = (TRZNT_T)assemble( sizeof_trznt() );
 
@@ -394,7 +394,7 @@ h_tstop( const void *tre )
 	unsigned long obj1;
 	TRZNT_T ntick, per;
 
-	obj1 = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	per = (TRZNT_T)assemble( sizeof_trznt() );
 
@@ -410,9 +410,9 @@ h_tout( const void *tre )
 	TRZE_T sig;
 
 
-	t = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	t = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	sig = (TRZE_T)assemble( sizeof_trze() );
-	ao = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	ao = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( t ), map_sig(sig) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 2, 1, map_obj( ao ) );
@@ -427,7 +427,7 @@ h_sym2u8( const void *tre )
 	unsigned long obj;
 	unsigned char u8_1, u8_2;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8_1 = (unsigned char)assemble( sizeof( char ) );
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), u8_1, u8_2 );
@@ -466,7 +466,7 @@ h_symevt( const void *tre )
 	unsigned long obj;
 	TRZE_T e;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
 	return fmt;
@@ -480,7 +480,7 @@ h_sma_get( const void *tre )
 	TRZE_T e;
 	unsigned char pid, refc;
 
-	ao = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	ao = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	pid = (unsigned char)assemble( sizeof( char ) );
 	refc = (unsigned char)assemble( sizeof( char ) );
@@ -496,12 +496,12 @@ h_sma_ffll( const void *tre, TRN_ST *ptrn )
 	TRN_ST trn;
 	unsigned char pid, refc;
 
-	trn.tobj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	trn.tobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	trn.e = (TRZE_T)assemble( sizeof_trze() );
 
-	if( RKH_SMA_EN_TRC_SENDER == 1 )
+	if( RKH_CFG_SMA_TRC_SNDR_EN == 1 )
 	{
-		trn.sobj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+		trn.sobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 		pid = (unsigned char)assemble( sizeof( char ) );
 		refc = (unsigned char)assemble( sizeof( char ) );
 		tre_fmt( fmt, CTE( tre ), 5,
@@ -563,24 +563,27 @@ h_sma_lf( const void *tre )
 char *
 h_sma_dch( const void *tre )
 {
-	unsigned long obj;
-	TRZE_T e;
+	unsigned long obj, stobj;
+	static TRZE_T curr_e;
 	unsigned long post_tstamp;
 	long rt;
 		
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
-	e = (TRZE_T)assemble( sizeof_trze() );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	curr_e = (TRZE_T)assemble( sizeof_trze() );
+	stobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 
-	if( remove_symevt_tstamp( obj, e, &post_tstamp ) < 0 )
+	if( remove_symevt_tstamp( obj, curr_e, &post_tstamp ) < 0 )
 		rt = -1;
 	else
 		rt = ( (curr_tstamp - post_tstamp) >= 0 ) ?
 						( curr_tstamp - post_tstamp ) : -1 ;
 
-	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), map_sig( e ), rt );
+	tre_fmt( fmt, CTE( tre ), 4, map_obj( obj ), map_sig( curr_e ), 
+			map_obj(stobj), rt );
 	return fmt;
 }
+
 
 
 char *
@@ -620,7 +623,7 @@ h_symobj( const void *tre )
 	unsigned long obj;
 	char *s;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	s = assemble_str();
 	
 	if( *s == '&' )
@@ -638,9 +641,9 @@ h_symst( const void *tre )
 	char *s;
 	const char *ao;
 
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ao = map_obj( obj );
-	obj = (unsigned long)assemble( RKH_TRC_SIZEOF_POINTER );
+	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
 	s = assemble_str();
 	
 	if( *s == '&' )
@@ -729,41 +732,41 @@ h_tcfg( const void *tre )
 	trb = proc_version_code( trb );
 	trb_32 = (rkhui32_t *)trb;
 
-	RKH_SMA_EN_TRC_SENDER =	(*trb_32 >> 0) & 0x01;
-	RKH_TRC_RUNTIME_FILTER =(*trb_32 >> 1) & 0x01;
-	RKH_TRC_EN_USER_TRACE = (*trb_32 >> 2) & 0x01;
-	RKH_TRC_ALL = 		(*trb_32 >> 3) & 0x01;
-	RKH_TRC_EN_MP = 	(*trb_32 >> 4) & 0x01;
-	RKH_TRC_EN_RQ = 	(*trb_32 >> 5) & 0x01;
-	RKH_TRC_EN_SMA = 	(*trb_32 >> 6) & 0x01;
-	RKH_TRC_EN_TIM = 	(*trb_32 >> 7) & 0x01;
-	RKH_TRC_EN_SM = 	(*trb_32 >> 8) & 0x01;
-	RKH_TRC_EN_FWK = 	(*trb_32 >> 9) & 0x01;
-	RKH_TRC_EN_ASSERT = 	(*trb_32 >> 10) & 0x01;
-	RKH_RQ_EN_GET_LWMARK = 	(*trb_32 >> 11) & 0x01;
-	RKH_MP_EN_GET_LWM =	(*trb_32 >> 12) & 0x01;
-	RKH_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
-	RKH_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
-	RKH_TRC_EN_NSEQ =	(*trb_32 >> 15) & 0x01;
-	RKH_TRC_EN_TSTAMP =	(*trb_32 >> 16) & 0x01;
-	RKH_TRC_EN_CHK =	(*trb_32 >> 17) & 0x01;
+	RKH_CFG_SMA_TRC_SNDR_EN =	(*trb_32 >> 0) & 0x01;
+	RKH_CFG_TRC_RTFIL_EN =(*trb_32 >> 1) & 0x01;
+	RKH_CFG_TRC_USER_TRACE_EN = (*trb_32 >> 2) & 0x01;
+	RKH_CFG_TRC_ALL_EN = 		(*trb_32 >> 3) & 0x01;
+	RKH_CFG_TRC_MP_EN = 	(*trb_32 >> 4) & 0x01;
+	RKH_CFG_TRC_RQ_EN = 	(*trb_32 >> 5) & 0x01;
+	RKH_CFG_TRC_SMA_EN = 	(*trb_32 >> 6) & 0x01;
+	RKH_CFG_TRC_TMR_EN = 	(*trb_32 >> 7) & 0x01;
+	RKH_CFG_TRC_SM_EN = 	(*trb_32 >> 8) & 0x01;
+	RKH_CFG_TRC_FWK_EN = 	(*trb_32 >> 9) & 0x01;
+	RKH_CFG_TRC_ASSERT_EN = 	(*trb_32 >> 10) & 0x01;
+	RKH_CFG_RQ_GET_LWMARK_EN = 	(*trb_32 >> 11) & 0x01;
+	RKH_CFG_MP_GET_LWM_EN =	(*trb_32 >> 12) & 0x01;
+	RKH_CFG_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
+	RKH_CFG_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
+	RKH_CFG_TRC_NSEQ_EN =	(*trb_32 >> 15) & 0x01;
+	RKH_CFG_TRC_TSTAMP_EN =	(*trb_32 >> 16) & 0x01;
+	RKH_CFG_TRC_CHK_EN =	(*trb_32 >> 17) & 0x01;
 
 	++trb_32;
 	trb = (rkhui8_t *)trb_32;
 
-	RKH_SIZEOF_EVENT = (*trb >> 4) & 0x0F;
-	RKH_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
+	RKH_CFG_FWK_SIZEOF_EVT = (*trb >> 4) & 0x0F;
+	RKH_CFGPORT_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
 
-	RKH_TRC_SIZEOF_POINTER = (*trb >> 4) & 0x0F;
-	RKH_TIM_SIZEOF_NTIMER = (*trb++) & 0x0F;
+	RKH_CFGPORT_TRC_SIZEOF_PTR = (*trb >> 4) & 0x0F;
+	RKH_CFG_TMR_SIZEOF_NTIMER = (*trb++) & 0x0F;
 	
-	RKH_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
-	RKH_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
+	RKH_CFG_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
+	RKH_CFG_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
 
-	RKH_SIZEOF_ESIZE = (*trb++) & 0x0F;
+	RKH_CFG_FWK_SIZEOF_EVT_SIZE = (*trb++) & 0x0F;
 
-	RKH_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
-	RKH_MAX_EPOOL = (*trb++) & 0x0F;
+	RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
+	RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
 	
 	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
 
@@ -771,34 +774,34 @@ h_tcfg( const void *tre )
 	
 	lprintf( "Update RKH Configuration from client\n" );
 
-	rkhver_printf( RKH_VERSION );
-	cfg_printf( RKH_SMA_EN_TRC_SENDER );
-	cfg_printf( RKH_TRC_RUNTIME_FILTER );
-	cfg_printf( RKH_TRC_EN_USER_TRACE );
-	cfg_printf( RKH_TRC_ALL );
-	cfg_printf( RKH_TRC_EN_MP );
-	cfg_printf( RKH_TRC_EN_RQ );
-	cfg_printf( RKH_TRC_EN_SMA );
-	cfg_printf( RKH_TRC_EN_TIM );
-	cfg_printf( RKH_TRC_EN_SM );
-	cfg_printf( RKH_TRC_EN_FWK );
-	cfg_printf( RKH_TRC_EN_ASSERT );
-	cfg_printf( RKH_RQ_EN_GET_LWMARK );
-	cfg_printf( RKH_MP_EN_GET_LWM );
-	cfg_printf( RKH_TRC_RTFIL_SMA_EN );
-	cfg_printf( RKH_TRC_RTFIL_SIGNAL_EN );
-	cfg_printf( RKH_TRC_EN_NSEQ );
-	cfg_printf( RKH_TRC_EN_TSTAMP );
-	cfg_printf( RKH_TRC_EN_CHK );
-	cfg_printf_sz( RKH_SIZEOF_EVENT, 8 );
-	cfg_printf_sz( RKH_TRC_SIZEOF_TSTAMP, 8 );
-	cfg_printf_sz( RKH_TRC_SIZEOF_POINTER, 8 );
-	cfg_printf_sz( RKH_TIM_SIZEOF_NTIMER, 8 );
-	cfg_printf_sz( RKH_MP_SIZEOF_NBLOCK, 8 );
-	cfg_printf_sz( RKH_RQ_SIZEOF_NELEM, 8 );
-	cfg_printf_sz( RKH_SIZEOF_ESIZE, 8 );
-	cfg_printf_sz( RKH_MP_SIZEOF_BSIZE, 8 );
-	cfg_printf( RKH_MAX_EPOOL );
+	rkhver_printf(	RKH_VERSION );
+	cfg_printf_sz(	RKH_CFGPORT_TRC_SIZEOF_TSTAMP, 8 );
+	cfg_printf_sz(	RKH_CFGPORT_TRC_SIZEOF_PTR, 8 );
+	cfg_printf_sz(	RKH_CFG_FWK_SIZEOF_EVT, 8 );
+	cfg_printf_sz(	RKH_CFG_FWK_SIZEOF_EVT_SIZE, 8 );
+	cfg_printf( 	RKH_CFG_FWK_MAX_EVT_POOL );
+	cfg_printf( 	RKH_CFG_RQ_GET_LWMARK_EN );
+	cfg_printf_sz( 	RKH_CFG_RQ_SIZEOF_NELEM, 8 );
+	cfg_printf( 	RKH_CFG_MP_GET_LWM_EN );
+	cfg_printf_sz( 	RKH_CFG_MP_SIZEOF_NBLOCK, 8 );
+	cfg_printf_sz( 	RKH_CFG_MP_SIZEOF_BSIZE, 8 );
+	cfg_printf( 	RKH_CFG_SMA_TRC_SNDR_EN );
+	cfg_printf_sz( 	RKH_CFG_TMR_SIZEOF_NTIMER, 8 );
+	cfg_printf( 	RKH_CFG_TRC_RTFIL_EN );
+	cfg_printf( 	RKH_CFG_TRC_USER_TRACE_EN );
+	cfg_printf( 	RKH_CFG_TRC_ALL_EN );
+	cfg_printf( 	RKH_CFG_TRC_MP_EN );
+	cfg_printf( 	RKH_CFG_TRC_RQ_EN );
+	cfg_printf( 	RKH_CFG_TRC_SMA_EN );
+	cfg_printf( 	RKH_CFG_TRC_TMR_EN );
+	cfg_printf( 	RKH_CFG_TRC_SM_EN );
+	cfg_printf( 	RKH_CFG_TRC_FWK_EN );
+	cfg_printf( 	RKH_CFG_TRC_ASSERT_EN );
+	cfg_printf( 	RKH_CFG_TRC_RTFIL_SMA_EN );
+	cfg_printf( 	RKH_CFG_TRC_RTFIL_SIGNAL_EN );
+	cfg_printf( 	RKH_CFG_TRC_NSEQ_EN );
+	cfg_printf( 	RKH_CFG_TRC_TSTAMP_EN );
+	cfg_printf( 	RKH_CFG_TRC_CHK_EN );
 	cfg_printf( TSTAMP_TICK_HZ );
 
 	return (char *)("\n");
@@ -904,14 +907,14 @@ usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt )
 	unsigned long obj;
 
 	++p; /* point to oject */
-	for( obj = 0, n = RKH_TRC_SIZEOF_POINTER, sh = 0; n; --n, sh += 8  )
+	for( obj = 0, n = RKH_CFGPORT_TRC_SIZEOF_PTR, sh = 0; n; --n, sh += 8  )
 		obj |= ( unsigned long )( *p++ << sh );
 
 //	lprintf( pfmt->fmt, map_obj( obj ) );
 	usrtrz_printf( pfmt->fmt, map_obj( obj ) );
 
 	/* +1 size field included */
-	return RKH_TRC_SIZEOF_POINTER + 1;
+	return RKH_CFGPORT_TRC_SIZEOF_PTR + 1;
 }
 
 char
@@ -1005,7 +1008,7 @@ usr_fmt( const void *tre )
 	const USR_TBL_T *pfmt;
 
 	pt = (const rkhui8_t *)tre;
-	if( RKH_TRC_EN_NSEQ == 1 ) 
+	if( RKH_CFG_TRC_NSEQ_EN == 1 ) 
 	{
 		pt += 2;
 		tr_size = trix - 2;
@@ -1016,14 +1019,14 @@ usr_fmt( const void *tre )
 		tr_size = trix - 1;
 	}
 
-	pt += RKH_TRC_SIZEOF_TSTAMP;
-	tr_size -= RKH_TRC_SIZEOF_TSTAMP;
+	pt += RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
+	tr_size -= RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
 	tr_size -= 1; /* because checksum */
 	lprintf( "User trace information\n" );
 
 	do
 	{
-		if( (*pt & 0x0F) > RKH_SIG_T )
+		if( (*pt & 0x0F) > RKH_ESIG_T )
 			break;
 
 		pfmt = &usr_tbl[ *pt & 0x0F ];
@@ -1073,7 +1076,7 @@ parser_chk( void )
 {
 	rkhui8_t *p, chk;
 	int i;
-	if( RKH_TRC_EN_CHK == 1 )
+	if( RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( chk = 0, p = tr, i = trix; i--; ++p )
 			chk = (rkhui8_t)( chk + *p );
@@ -1089,7 +1092,7 @@ show_curr_frm( void )
 	int i;
 	dprintf( "---- |");
 
-	if( RKH_TRC_EN_CHK == 1 )
+	if( RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( p = tr, i = trix; i--; ++p )
 			dprintf( "0x%X|", *p );
@@ -1117,6 +1120,8 @@ proc_tcfg_evt( const TRE_T *ftr )
 	trazer_output(	tz_flg, &tz_data );
 
 	lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
+
+	clear_symtbl();
 }
 
 
@@ -1151,17 +1156,17 @@ parser( void )
 
 		/* Runtime trace events */
 	
-		tz_flg = PREPARE_TZOUT_FLGS( RKH_TRC_EN_TSTAMP, 
-										RKH_TRC_SIZEOF_TSTAMP,
-										RKH_TRC_EN_NSEQ );
+		tz_flg = PREPARE_TZOUT_FLGS( RKH_CFG_TRC_TSTAMP_EN, 
+										RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
+										RKH_CFG_TRC_NSEQ_EN );
 
-		tz_data.nseq = get_nseq( RKH_TRC_EN_NSEQ );
+		tz_data.nseq = get_nseq( RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		curr_tstamp = tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, 
-											RKH_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( RKH_CFG_TRC_TSTAMP_EN, 
+											RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 		tz_data.name = ftr->name.c_str();
 
@@ -1176,17 +1181,17 @@ parser( void )
 	{
 		ftr = &fmt_usr_tbl;
 
-		tz_flg = PREPARE_TZOUT_FLGS( RKH_TRC_EN_TSTAMP, 
-										RKH_TRC_SIZEOF_TSTAMP,
-										RKH_TRC_EN_NSEQ );
+		tz_flg = PREPARE_TZOUT_FLGS( RKH_CFG_TRC_TSTAMP_EN, 
+										RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
+										RKH_CFG_TRC_NSEQ_EN );
 
-		tz_data.nseq = get_nseq( RKH_TRC_EN_NSEQ );
+		tz_data.nseq = get_nseq( RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		curr_tstamp = tz_data.ts = get_ts( RKH_TRC_EN_TSTAMP, 
-											RKH_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( RKH_CFG_TRC_TSTAMP_EN, 
+											RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 
 		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
@@ -1265,33 +1270,33 @@ trazer_init( void )
 	lastnseq = 255;
 	lprintf( VERSION_STRING_TXT );
 	lprintf( "\nUsing local RKH configuration\n\n" );
-	lprintf( "   RKH_SMA_EN_TRC_SENDER  = %d\n", RKH_SMA_EN_TRC_SENDER );
-	lprintf( "   RKH_TRC_RUNTIME_FILTER = %d\n", RKH_TRC_RUNTIME_FILTER );
-	lprintf( "   RKH_TRC_EN_USER_TRACE  = %d\n", RKH_TRC_EN_USER_TRACE );
-	lprintf( "   RKH_TRC_ALL            = %d\n", RKH_TRC_ALL );
-	lprintf( "   RKH_TRC_EN_MP          = %d\n", RKH_TRC_EN_MP );
-	lprintf( "   RKH_TRC_EN_RQ          = %d\n", RKH_TRC_EN_RQ );
-	lprintf( "   RKH_TRC_EN_SMA         = %d\n", RKH_TRC_EN_SMA );
-	lprintf( "   RKH_TRC_EN_TIM         = %d\n", RKH_TRC_EN_TIM );
-	lprintf( "   RKH_TRC_EN_SM          = %d\n", RKH_TRC_EN_SM );
-	lprintf( "   RKH_TRC_EN_FWK         = %d\n", RKH_TRC_EN_FWK );
-	lprintf( "   RKH_TRC_EN_ASSERT      = %d\n", RKH_TRC_EN_ASSERT );
-	lprintf( "   RKH_RQ_EN_GET_LWMARK   = %d\n", RKH_RQ_EN_GET_LWMARK );
-	lprintf( "   RKH_MP_EN_GET_LWM      = %d\n", RKH_MP_EN_GET_LWM );
-	lprintf( "   RKH_TRC_RTFIL_SMA_EN   = %d\n", RKH_TRC_RTFIL_SMA_EN );
-	lprintf( "   RKH_TRC_RTFIL_SIGNAL_EN= %d\n", RKH_TRC_RTFIL_SIGNAL_EN );
-	lprintf( "   RKH_TRC_EN_NSEQ        = %d\n", RKH_TRC_EN_NSEQ );
-	lprintf( "   RKH_TRC_EN_TSTAMP      = %d\n", RKH_TRC_EN_TSTAMP );
-	lprintf( "   RKH_TRC_EN_CHK         = %d\n", RKH_TRC_EN_CHK );
-	lprintf( "   RKH_SIZEOF_EVENT       = %d\n", RKH_SIZEOF_EVENT*8 );
-	lprintf( "   RKH_TRC_SIZEOF_TSTAMP  = %d\n", RKH_TRC_SIZEOF_TSTAMP*8 );
-	lprintf( "   RKH_TRC_SIZEOF_POINTER = %d\n", RKH_TRC_SIZEOF_POINTER*8 );
-	lprintf( "   RKH_TIM_SIZEOF_NTIMER  = %d\n", RKH_TIM_SIZEOF_NTIMER*8 );
-	lprintf( "   RKH_MP_SIZEOF_NBLOCK   = %d\n", RKH_MP_SIZEOF_NBLOCK*8 );
-	lprintf( "   RKH_RQ_SIZEOF_NELEM    = %d\n", RKH_RQ_SIZEOF_NELEM*8 );
-	lprintf( "   RKH_SIZEOF_ESIZE       = %d\n", RKH_SIZEOF_ESIZE*8 );
-	lprintf( "   RKH_MP_SIZEOF_BSIZE    = %d\n", RKH_MP_SIZEOF_BSIZE*8 );
-	lprintf( "   RKH_MAX_EPOOL          = %d\n", RKH_MAX_EPOOL );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_TSTAMP = %d\n", RKH_CFGPORT_TRC_SIZEOF_TSTAMP*8 );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_PTR    = %d\n", RKH_CFGPORT_TRC_SIZEOF_PTR*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT        = %d\n", RKH_CFG_FWK_SIZEOF_EVT*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT_SIZE   = %d\n", RKH_CFG_FWK_SIZEOF_EVT_SIZE*8 );
+	lprintf( "   RKH_CFG_FWK_MAX_EVT_POOL      = %d\n", RKH_CFG_FWK_MAX_EVT_POOL );
+	lprintf( "   RKH_CFG_RQ_GET_LWMARK_EN      = %d\n", RKH_CFG_RQ_GET_LWMARK_EN );
+	lprintf( "   RKH_CFG_RQ_SIZEOF_NELEM       = %d\n", RKH_CFG_RQ_SIZEOF_NELEM*8 );
+	lprintf( "   RKH_CFG_MP_GET_LWM_EN         = %d\n", RKH_CFG_MP_GET_LWM_EN );
+	lprintf( "   RKH_CFG_MP_SIZEOF_NBLOCK      = %d\n", RKH_CFG_MP_SIZEOF_NBLOCK*8 );
+	lprintf( "   RKH_CFG_MP_SIZEOF_BSIZE       = %d\n", RKH_CFG_MP_SIZEOF_BSIZE*8 );
+	lprintf( "   RKH_CFG_SMA_TRC_SNDR_EN       = %d\n", RKH_CFG_SMA_TRC_SNDR_EN );
+	lprintf( "   RKH_CFG_TMR_SIZEOF_NTIMER     = %d\n", RKH_CFG_TMR_SIZEOF_NTIMER*8 );
+	lprintf( "   RKH_CFG_TRC_RTFIL_EN          = %d\n", RKH_CFG_TRC_RTFIL_EN );
+	lprintf( "   RKH_CFG_TRC_USER_TRACE_EN     = %d\n", RKH_CFG_TRC_USER_TRACE_EN );
+	lprintf( "   RKH_CFG_TRC_ALL_EN            = %d\n", RKH_CFG_TRC_ALL_EN );
+	lprintf( "   RKH_CFG_TRC_MP_EN             = %d\n", RKH_CFG_TRC_MP_EN );
+	lprintf( "   RKH_CFG_TRC_RQ_EN             = %d\n", RKH_CFG_TRC_RQ_EN );
+	lprintf( "   RKH_CFG_TRC_SMA_EN            = %d\n", RKH_CFG_TRC_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_TMR_EN            = %d\n", RKH_CFG_TRC_TMR_EN );
+	lprintf( "   RKH_CFG_TRC_SM_EN             = %d\n", RKH_CFG_TRC_SM_EN );
+	lprintf( "   RKH_CFG_TRC_FWK_EN            = %d\n", RKH_CFG_TRC_FWK_EN );
+	lprintf( "   RKH_CFG_TRC_ASSERT_EN         = %d\n", RKH_CFG_TRC_ASSERT_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SMA_EN      = %d\n", RKH_CFG_TRC_RTFIL_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SIGNAL_EN   = %d\n", RKH_CFG_TRC_RTFIL_SIGNAL_EN );
+	lprintf( "   RKH_CFG_TRC_NSEQ_EN           = %d\n", RKH_CFG_TRC_NSEQ_EN );
+	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", RKH_CFG_TRC_TSTAMP_EN );
+	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", RKH_CFG_TRC_CHK_EN );
 	lprintf( "\n" );
 }
 

@@ -14,6 +14,13 @@ using namespace std;
 vector <SYMOBJ_T> symb_tbl;
 
 void
+clear_symtbl( void )
+{
+	symb_tbl.clear();
+}
+
+
+void
 add_to_symtbl( unsigned long obj, const char *sym )
 {
 	SYMOBJ_T symbol;
@@ -100,15 +107,15 @@ post_lifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
 int
 remove_symevt_tstamp( unsigned long adr, TRZE_T e, unsigned long *pt )
 {
-	static vector<SYMOBJ_T>::iterator i;
-	static SYM_EVT_Q evt;
-
+	vector<SYMOBJ_T>::iterator i;
+	SYM_EVT_Q evt;
+	
 	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
 	{
 		if( i->adr == adr )
 		{
 			if( i->se_q.size() == 0 )
-				return 0xFF00;
+				break;
 
 			evt = i->se_q.front();
 			i->se_q.pop_front();

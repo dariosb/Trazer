@@ -23,7 +23,7 @@ sizeof_type( int type )
 const char*
 get_trheader( int en_tstamp, int sz_tstamp, int en_nseq )
 {
-	switch( RKH_TRC_SIZEOF_TSTAMP )
+	switch( RKH_CFGPORT_TRC_SIZEOF_TSTAMP )
 	{
 		case 1:		// RKH_TRC_SIZEOF_TSTAMP 8bit
 			return "%3u [%3d] %-4s| %-10s : ";

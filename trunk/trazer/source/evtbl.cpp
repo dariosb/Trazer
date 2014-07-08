@@ -91,7 +91,7 @@ DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_
 DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
-DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, rt_d );
+DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s, rt_d );
 
 
 /* --- State machine (SM) ---------------- */
@@ -105,7 +105,7 @@ DCLR_TRE( RKH_TE_SM_NENEX,      "SM",  "NENEX",	     h_sym2u8,	ao_s, nen_d, nex_
 DCLR_TRE( RKH_TE_SM_NTRNACT,    "SM",  "NTRNACT",    h_sym2u8,	ao_s, nta_d, nts_d );
 DCLR_TRE( RKH_TE_SM_TS_STATE,   "SM",  "TS_STATE",	 h_2sym,	ao_s, st_s );
 DCLR_TRE( RKH_TE_SM_EVT_PROC,   "SM",  "EVT_PROC",	 h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_EVT_NFOUND, "SM",  "EVT_NFOUND", h_1sym,	ao_s );
+DCLR_TRE( RKH_TE_SM_EVT_NFOUND, "SM",  "EVT_NFOUND", h_symevt,	ao_s, sig_s );
 DCLR_TRE( RKH_TE_SM_GRD_FALSE,  "SM",  "GRD_FALSE",  h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_CND_NFOUND, "SM",  "CND_NFOUND", h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_UNKN_STATE, "SM",  "UNKN_STATE", h_1sym,	ao_s );
@@ -114,11 +114,11 @@ DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_1sym,	ao_s );
 
 
 /* --- Timer (TIM) ----------------------- */
-DCLR_TRE( RKH_TE_TIM_INIT,		"TIM", "INIT",		h_symevt,	t_s, sig_s );
-DCLR_TRE( RKH_TE_TIM_START,		"TIM", "START",		h_tstart,	t_s, ao_s, ntick_d, per_d );
-DCLR_TRE( RKH_TE_TIM_STOP,		"TIM", "STOP",		h_tstop,	t_s, ntick_d, per_d );
-DCLR_TRE( RKH_TE_TIM_TOUT,		"TIM", "TOUT",		h_tout,		t_s, sig_s, ao_s );
-DCLR_TRE( RKH_TE_TIM_REM,		"TIM", "REM",		h_1sym,		t_s );
+DCLR_TRE( RKH_TE_TMR_INIT,		"TIM", "INIT",		h_symevt,	t_s, sig_s );
+DCLR_TRE( RKH_TE_TMR_START,		"TIM", "START",		h_tstart,	t_s, ao_s, ntick_d, per_d );
+DCLR_TRE( RKH_TE_TMR_STOP,		"TIM", "STOP",		h_tstop,	t_s, ntick_d, per_d );
+DCLR_TRE( RKH_TE_TMR_TOUT,		"TIM", "TOUT",		h_tout,		t_s, sig_s, ao_s );
+DCLR_TRE( RKH_TE_TMR_REM,		"TIM", "REM",		h_1sym,		t_s );
 
 
 /* --- Framework (RKH) ------------------- */
@@ -194,11 +194,11 @@ static FMT_ID_T *fmt_id_tbl[] =
 
 
 	/* --- Timer (TIM) ----------------------- */
-	TRE_ST( RKH_TE_TIM_INIT),
-	TRE_ST( RKH_TE_TIM_START),
-	TRE_ST( RKH_TE_TIM_STOP),
-	TRE_ST( RKH_TE_TIM_TOUT),
-	TRE_ST( RKH_TE_TIM_REM),
+	TRE_ST( RKH_TE_TMR_INIT),
+	TRE_ST( RKH_TE_TMR_START),
+	TRE_ST( RKH_TE_TMR_STOP),
+	TRE_ST( RKH_TE_TMR_TOUT),
+	TRE_ST( RKH_TE_TMR_REM),
 
 
 	/* --- Framework (RKH) ------------------- */

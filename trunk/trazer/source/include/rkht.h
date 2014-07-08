@@ -47,14 +47,22 @@
  */
 
 typedef signed char 	rkhi8_t;
+typedef signed char 	ri8_t;
 typedef signed short 	rkhi16_t;
+typedef signed short 	ri16_t;
 typedef signed long		rkhi32_t;
+typedef signed long		ri32_t;
 typedef unsigned char 	rkhui8_t;
+typedef unsigned char 	rui8_t;
 typedef unsigned short 	rkhui16_t;
+typedef unsigned short 	rui16_t;
 typedef unsigned long	rkhui32_t;
+typedef unsigned long	rui32_t;
 
 typedef unsigned int	HUInt;
+typedef unsigned int	ruInt;
 typedef signed int		HInt;
+typedef signed int		rint;
 
-
+typedef unsigned int	rbool_t;
 #endif
