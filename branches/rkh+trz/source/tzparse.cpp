@@ -27,8 +27,8 @@
 #define set_to_ts()		trb = ( RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
 */
 
-static rkhui8_t lastnseq;
-rkhui16_t TSTAMP_TICK_HZ;
+static rui8_t lastnseq;
+rui16_t TSTAMP_TICK_HZ;
 
 
 /*
@@ -62,11 +62,11 @@ enum
 };
 
 
-static rkhui8_t *trb;				
+static rui8_t *trb;				
 static char fmt[ 500 ];
 extern FILE *fdbg;
 
-static rkhui8_t state = PARSER_WFLAG;
+static rui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
 static unsigned long curr_tstamp;
@@ -125,14 +125,14 @@ get_ts( int en_ts, int sz_ts )
 
 
 int
-verify_nseq( rkhui8_t nseq )
+verify_nseq( rui8_t nseq )
 {
 	int r;
 
 	if( RKH_CFG_TRC_NSEQ_EN == 0 )
 		return 1;
 
-	r = ( (rkhui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
+	r = ( (rui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
 
 	lastnseq = nseq;
 
@@ -687,13 +687,13 @@ char *
 h_assert( const void *tre )
 {
 	char *pfname;
-	rkhui16_t line;
+	rui16_t line;
 
 	pfname = (char *)trb;
 
 	while( *trb++ != '\0' );
 
-	line = (rkhui16_t)assemble( sizeof(rkhui16_t) );
+	line = (rui16_t)assemble( sizeof(rui16_t) );
 
 	tre_fmt( fmt, CTE( tre ), 2, pfname, line );
 
@@ -709,8 +709,8 @@ h_assert( const void *tre )
 static char RKH_VERSION[ RKH_VERSION_CODE_STRLEN+1 ];
 
 static
-rkhui8_t *
-proc_version_code( rkhui8_t *p )
+rui8_t *
+proc_version_code( rui8_t *p )
 {
 	RKH_VERSION[6] = '\0';
 	RKH_VERSION[5] = (*p & 0x0F) + '0';
@@ -727,48 +727,11 @@ proc_version_code( rkhui8_t *p )
 char *
 h_tcfg( const void *tre )
 {
-	rkhui32_t *trb_32;
+	rui32_t *trb_32;
 
 	trb = proc_version_code( trb );
-	trb_32 = (rkhui32_t *)trb;
+	trb_32 = (rui32_t *)trb;
 
-	RKH_CFG_SMA_TRC_SNDR_EN =	(*trb_32 >> 0) & 0x01;
-	RKH_CFG_TRC_RTFIL_EN =(*trb_32 >> 1) & 0x01;
-	RKH_CFG_TRC_USER_TRACE_EN = (*trb_32 >> 2) & 0x01;
-	RKH_CFG_TRC_ALL_EN = 		(*trb_32 >> 3) & 0x01;
-	RKH_CFG_TRC_MP_EN = 	(*trb_32 >> 4) & 0x01;
-	RKH_CFG_TRC_RQ_EN = 	(*trb_32 >> 5) & 0x01;
-	RKH_CFG_TRC_SMA_EN = 	(*trb_32 >> 6) & 0x01;
-	RKH_CFG_TRC_TMR_EN = 	(*trb_32 >> 7) & 0x01;
-	RKH_CFG_TRC_SM_EN = 	(*trb_32 >> 8) & 0x01;
-	RKH_CFG_TRC_FWK_EN = 	(*trb_32 >> 9) & 0x01;
-	RKH_CFG_TRC_ASSERT_EN = 	(*trb_32 >> 10) & 0x01;
-	RKH_CFG_RQ_GET_LWMARK_EN = 	(*trb_32 >> 11) & 0x01;
-	RKH_CFG_MP_GET_LWM_EN =	(*trb_32 >> 12) & 0x01;
-	RKH_CFG_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
-	RKH_CFG_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
-	RKH_CFG_TRC_NSEQ_EN =	(*trb_32 >> 15) & 0x01;
-	RKH_CFG_TRC_TSTAMP_EN =	(*trb_32 >> 16) & 0x01;
-	RKH_CFG_TRC_CHK_EN =	(*trb_32 >> 17) & 0x01;
-
-	++trb_32;
-	trb = (rkhui8_t *)trb_32;
-
-	RKH_CFG_FWK_SIZEOF_EVT = (*trb >> 4) & 0x0F;
-	RKH_CFGPORT_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
-
-	RKH_CFGPORT_TRC_SIZEOF_PTR = (*trb >> 4) & 0x0F;
-	RKH_CFG_TMR_SIZEOF_NTIMER = (*trb++) & 0x0F;
-	
-	RKH_CFG_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
-	RKH_CFG_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
-
-	RKH_CFG_FWK_SIZEOF_EVT_SIZE = (*trb++) & 0x0F;
-
-	RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
-	RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
-	
-	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
 
 	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
 	
@@ -817,7 +780,7 @@ struct
 	PRNFUNC_T pp;
 }USR_FMT_T;
 
-typedef char (*DECOFUNC_T)( const rkhui8_t *p, const USR_FMT_T *pfmt );
+typedef char (*DECOFUNC_T)( const rui8_t *p, const USR_FMT_T *pfmt );
 
 typedef 
 struct
@@ -826,11 +789,11 @@ struct
 	DECOFUNC_T pc;
 }USR_TBL_T;
 
-char usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt );
-char usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt );
-char usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt );
-char usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt );
-char usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt );
+char usr_integer( const rui8_t *p, const USR_FMT_T *pfmt );
+char usr_string( const rui8_t *p, const USR_FMT_T *pfmt );
+char usr_mdump( const rui8_t *p, const USR_FMT_T *pfmt );
+char usr_object( const rui8_t *p, const USR_FMT_T *pfmt );
+char usr_signal( const rui8_t *p, const USR_FMT_T *pfmt );
 void i8prn( char *p, ulong data );
 void i16prn( char *p, ulong data );
 void i32prn( char *p, ulong data );
@@ -867,41 +830,41 @@ static const USR_TBL_T usr_tbl[] =
 void
 i8prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhi8_t)data );
+	usrtrz_printf( (const char *)p, (ri8_t)data );
 }
 
 void
 u8prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhui8_t)data );
+	usrtrz_printf( (const char *)p, (rui8_t)data );
 }
 
 void
 i16prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhi16_t)data );
+	usrtrz_printf( (const char *)p, (ri16_t)data );
 }
 
 void
 u16prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhui16_t)data );
+	usrtrz_printf( (const char *)p, (rui16_t)data );
 }
 
 void
 i32prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhi32_t)data );
+	usrtrz_printf( (const char *)p, (ri32_t)data );
 }
 
 void
 u32prn( char *p, ulong data )
 {
-	usrtrz_printf( (const char *)p, (rkhui32_t)data );
+	usrtrz_printf( (const char *)p, (rui32_t)data );
 }
 
 char
-usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt )
+usr_object( const rui8_t *p, const USR_FMT_T *pfmt )
 {
 	int n, sh;
 	unsigned long obj;
@@ -918,7 +881,7 @@ usr_object( const rkhui8_t *p, const USR_FMT_T *pfmt )
 }
 
 char
-usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt )
+usr_signal( const rui8_t *p, const USR_FMT_T *pfmt )
 {
 	int n, sh;
 	TRZE_T e;
@@ -941,9 +904,9 @@ usr_signal( const rkhui8_t *p, const USR_FMT_T *pfmt )
 #define USER_MEMDUMP_LEN_PER_LINE 	10
 
 char
-usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
+usr_mdump( const rui8_t *p, const USR_FMT_T *pfmt )
 {
-	rkhui8_t size;
+	rui8_t size;
 	int i;
 	uchar *pd;
 
@@ -969,7 +932,7 @@ usr_mdump( const rkhui8_t *p, const USR_FMT_T *pfmt )
 }
 
 char
-usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt )
+usr_string( const rui8_t *p, const USR_FMT_T *pfmt )
 {
 	//lprintf( pfmt->fmt, p+1 );
 	usrtrz_printf( pfmt->fmt, p+1 );
@@ -980,10 +943,10 @@ usr_string( const rkhui8_t *p, const USR_FMT_T *pfmt )
 }
 
 char
-usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt )
+usr_integer( const rui8_t *p, const USR_FMT_T *pfmt )
 {
 	ulong d;
-	rkhui8_t l;
+	rui8_t l;
 	uchar n;
 
 	l = (*p++) >> 4;
@@ -1002,12 +965,12 @@ usr_integer( const rkhui8_t *p, const USR_FMT_T *pfmt )
 char *
 usr_fmt( const void *tre )
 {
-	const rkhui8_t *pt;
-	rkhi8_t tr_size;
-	rkhui8_t done;
+	const rui8_t *pt;
+	ri8_t tr_size;
+	rui8_t done;
 	const USR_TBL_T *pfmt;
 
-	pt = (const rkhui8_t *)tre;
+	pt = (const rui8_t *)tre;
 	if( RKH_CFG_TRC_NSEQ_EN == 1 ) 
 	{
 		pt += 2;
@@ -1059,7 +1022,7 @@ parser_init( void )
 
 static
 void
-parser_collect( rkhui8_t d )
+parser_collect( rui8_t d )
 {
 	if( ++trix > PARSER_MAX_SIZE_BUF )
 	{
@@ -1074,12 +1037,12 @@ static
 int
 parser_chk( void )
 {
-	rkhui8_t *p, chk;
+	rui8_t *p, chk;
 	int i;
 	if( RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( chk = 0, p = tr, i = trix; i--; ++p )
-			chk = (rkhui8_t)( chk + *p );
+			chk = (rui8_t)( chk + *p );
 		return chk == 0;	
 	}
 	return 1;
@@ -1088,7 +1051,7 @@ parser_chk( void )
 void
 show_curr_frm( void )
 {
-	rkhui8_t *p;
+	rui8_t *p;
 	int i;
 	dprintf( "---- |");
 
@@ -1126,8 +1089,8 @@ proc_tcfg_evt( const TRE_T *ftr )
 
 
 
-#define GET_TE_GROUP(e)	(rkhui8_t)(((e) >> NGSH) & 7)
-#define GET_USR_TE(e)	(rkhui8_t)((e) & 7)
+#define GET_TE_GROUP(e)	(rui8_t)(((e) >> NGSH) & 7)
+#define GET_USR_TE(e)	(rui8_t)((e) & 7)
 
 extern TRE_T fmt_usr_tbl;
 
@@ -1210,9 +1173,8 @@ parser( void )
 	lprintf( unknown_te, tr[0] );
 }
 
-
 void 
-trazer_parse( rkhui8_t d )
+trazer_parse( rui8_t d )
 {
 	switch( state )
 	{
@@ -1255,7 +1217,7 @@ trazer_parse( rkhui8_t d )
 			}
 			else
 			{
-				parser_collect( (rkhui8_t)(d ^ RKH_XOR) );
+				parser_collect( (rui8_t)(d ^ RKH_XOR) );
 				state = PARSER_COLLECT;
 			}
 			break;

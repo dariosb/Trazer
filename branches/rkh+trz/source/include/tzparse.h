@@ -25,7 +25,7 @@
 #ifndef __TZPARSE_H__
 #define __TZPARSE_H__
 
-#include "rkhtype.h"
+#include "rkh.h"
 #include "mytypes.h"
 #include <string>
 #include <vector>
@@ -117,8 +117,15 @@ typedef struct usrevt_t
 	string name;
 } SYMUEVT_T;
 
-void trazer_parse( rkhui8_t d );
-void trazer_init( void );
+
+#ifdef __cplusplus
+#define EXTERNC extern "C"
+#else
+#define EXTERNC
+#endif
+
+EXTERNC void trazer_parse( rui8_t d );
+EXTERNC void trazer_init( void );
 
 char * h_none( const void *tre );
 char * h_epreg( const void *tre );

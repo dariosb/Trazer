@@ -70,7 +70,17 @@ static char *opts = (char *)CONSOLE_OPTIONS_DEFINITION;
  * 	Option structure
  */
 
-OPTIONS_T options;
+OPTIONS_T options =
+{
+	0,
+	0,
+	"",
+	"",
+	"",
+	"",
+	"",
+	""
+};
 
 /*
  * 	Static uninitialized variables
@@ -233,6 +243,7 @@ show_help( void )
 	printf( "%s", help_message );
 }
 
+#if 0
 /*
  * 	evaluate_args
  */
@@ -289,3 +300,4 @@ init_options( int argc, char **argv )
 	evaluate_args( argc, argv );
 //	read_option_file( (char *)OPTIONS_FILE );
 }
+#endif
