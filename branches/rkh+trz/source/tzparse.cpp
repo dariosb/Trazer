@@ -78,7 +78,9 @@ assemble( int size )
 {
 	int n, sh;
 	unsigned long d;
-
+#ifndef __TRAZER__
+	size = size >> 3;
+#endif
 	for( d = 0, n = size, sh = 0; n; --n, sh += 8  )
 		d |= ( unsigned long )( *trb++ << sh );
 	return d;
@@ -732,6 +734,45 @@ h_tcfg( const void *tre )
 	trb = proc_version_code( trb );
 	trb_32 = (rui32_t *)trb;
 
+#ifdef __TRAZER__
+	RKH_CFG_SMA_TRC_SNDR_EN =	(*trb_32 >> 0) & 0x01;
+	RKH_CFG_TRC_RTFIL_EN =(*trb_32 >> 1) & 0x01;
+	RKH_CFG_TRC_USER_TRACE_EN = (*trb_32 >> 2) & 0x01;
+	RKH_CFG_TRC_ALL_EN = 		(*trb_32 >> 3) & 0x01;
+	RKH_CFG_TRC_MP_EN = 	(*trb_32 >> 4) & 0x01;
+	RKH_CFG_TRC_RQ_EN = 	(*trb_32 >> 5) & 0x01;
+	RKH_CFG_TRC_SMA_EN = 	(*trb_32 >> 6) & 0x01;
+	RKH_CFG_TRC_TMR_EN = 	(*trb_32 >> 7) & 0x01;
+	RKH_CFG_TRC_SM_EN = 	(*trb_32 >> 8) & 0x01;
+	RKH_CFG_TRC_FWK_EN = 	(*trb_32 >> 9) & 0x01;
+	RKH_CFG_TRC_ASSERT_EN = 	(*trb_32 >> 10) & 0x01;
+	RKH_CFG_RQ_GET_LWMARK_EN = 	(*trb_32 >> 11) & 0x01;
+	RKH_CFG_MP_GET_LWM_EN =	(*trb_32 >> 12) & 0x01;
+	RKH_CFG_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
+	RKH_CFG_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
+	RKH_CFG_TRC_NSEQ_EN =	(*trb_32 >> 15) & 0x01;
+	RKH_CFG_TRC_TSTAMP_EN =	(*trb_32 >> 16) & 0x01;
+	RKH_CFG_TRC_CHK_EN =	(*trb_32 >> 17) & 0x01;
+
+	++trb_32;
+	trb = (rkhui8_t *)trb_32;
+
+	RKH_CFG_FWK_SIZEOF_EVT = (*trb >> 4) & 0x0F;
+	RKH_CFGPORT_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
+
+	RKH_CFGPORT_TRC_SIZEOF_PTR = (*trb >> 4) & 0x0F;
+	RKH_CFG_TMR_SIZEOF_NTIMER = (*trb++) & 0x0F;
+	
+	RKH_CFG_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
+	RKH_CFG_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
+
+	RKH_CFG_FWK_SIZEOF_EVT_SIZE = (*trb++) & 0x0F;
+
+	RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
+	RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
+	
+	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
+#endif
 
 	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
 	

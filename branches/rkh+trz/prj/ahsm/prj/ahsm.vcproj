@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\&quot;;&quot;$(ProjectDir)..\..\..\rkh\source\include&quot;;&quot;$(ProjectDir)..\..\..\source\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\&quot;;&quot;$(ProjectDir)..\..\..\rkh\source\include&quot;;&quot;$(ProjectDir)..\..\..\source\include&quot;;&quot;$(ProjectDir)..\..\..\arch\win_vc08&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;__W32STVC08__"
 				GeneratePreprocessedFile="0"
 				MinimalRebuild="true"
@@ -292,10 +292,14 @@
 					RelativePath="..\..\..\source\uevtbl.cpp"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\source\utils.cpp"
+				<Filter
+					Name="portable"
 					>
-				</File>
+					<File
+						RelativePath="..\..\..\..\TRAZER\trazer\arch\win_vc08\utils.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

@@ -69,7 +69,9 @@ static char *opts = (char *)CONSOLE_OPTIONS_DEFINITION;
 /*
  * 	Option structure
  */
-
+#ifdef __TRAZER__
+OPTIONS_T options;
+#else
 OPTIONS_T options =
 {
 	0,
@@ -81,6 +83,7 @@ OPTIONS_T options =
 	"",
 	""
 };
+#endif
 
 /*
  * 	Static uninitialized variables
@@ -243,7 +246,7 @@ show_help( void )
 	printf( "%s", help_message );
 }
 
-#if 0
+#ifdef __TRAZER__
 /*
  * 	evaluate_args
  */

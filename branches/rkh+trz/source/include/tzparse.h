@@ -25,7 +25,11 @@
 #ifndef __TZPARSE_H__
 #define __TZPARSE_H__
 
+#ifdef __TRAZER__
+#include "rkhtype.h"
+#else
 #include "rkh.h"
+#endif
 #include "mytypes.h"
 #include <string>
 #include <vector>
