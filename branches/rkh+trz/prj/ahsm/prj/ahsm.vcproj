@@ -245,6 +245,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\config.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\debug.cpp"
 					>
 				</File>
@@ -296,7 +300,7 @@
 					Name="portable"
 					>
 					<File
-						RelativePath="..\..\..\..\TRAZER\trazer\arch\win_vc08\utils.cpp"
+						RelativePath="..\..\..\arch\win_vc08\utils.cpp"
 						>
 					</File>
 				</Filter>

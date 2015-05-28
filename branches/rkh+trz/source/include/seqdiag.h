@@ -29,10 +29,16 @@ typedef struct
 	TRZE_T e;
 }TRN_ST;
 
-void add_to_trntbl( TRN_ST *p );
-void add_seqdiag_text( const char *s );
+#ifdef __cplusplus
+#define EXTERNC extern "C"
+#else
+#define EXTERNC
+#endif
 
-void seqdiag_init( void );
+EXTERNC void add_to_trntbl( TRN_ST *p );
+EXTERNC void add_seqdiag_text( const char *s );
+
+EXTERNC void seqdiag_init( void );
 
 
 

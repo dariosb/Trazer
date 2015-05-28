@@ -53,7 +53,7 @@
 
 
 #define BIN_TRACE					0
-#define SOCKET_TRACE				0
+#define SOCKET_TRACE				1
 #define ESC							0x1B
 #define kbmap( c )					( (c) - '0' )
 
@@ -256,11 +256,16 @@ print_banner( void )
 
 #if RKH_CFG_TRC_EN == 1
 
+void trazer_parse( rui8_t d );
+void trazer_init( void );
+
 void 
 rkh_trc_open( void )
 {
 	rkh_trc_init();
 
+	trazer_init();
+	seqdiag_init();
 	FTBIN_OPEN();
 	TCP_TRACE_OPEN();
 	RKH_TRC_SEND_CFG( BSP_TS_RATE_HZ );
@@ -281,9 +286,6 @@ rkh_trc_getts( void )
 	return ( RKH_TS_T )clock();
 }
 
-
-
-void trazer_parse( rui8_t d );
 
 void 
 rkh_trc_flush( void )

@@ -23,8 +23,8 @@
 
 
 /*
-#define get_nseq()		nseq = ( RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr[ 1 ] : 0;
-#define set_to_ts()		trb = ( RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
+#define get_nseq()		nseq = ( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr[ 1 ] : 0;
+#define set_to_ts()		trb = ( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
 */
 
 static rui8_t lastnseq;
@@ -78,9 +78,7 @@ assemble( int size )
 {
 	int n, sh;
 	unsigned long d;
-#ifndef __TRAZER__
-	size = size >> 3;
-#endif
+
 	for( d = 0, n = size, sh = 0; n; --n, sh += 8  )
 		d |= ( unsigned long )( *trb++ << sh );
 	return d;
@@ -131,7 +129,7 @@ verify_nseq( rui8_t nseq )
 {
 	int r;
 
-	if( RKH_CFG_TRC_NSEQ_EN == 0 )
+	if( TRZ_RKH_CFG_TRC_NSEQ_EN == 0 )
 		return 1;
 
 	r = ( (rui8_t)( lastnseq + 1 ) == nseq ) ? 1 : 0;
@@ -216,7 +214,7 @@ h_1sym( const void *tre )
 {
 	unsigned long obj;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE(tre), 1, map_obj( obj ) );
 	return fmt;
 }
@@ -227,8 +225,8 @@ h_2sym( const void *tre )
 {
 	unsigned long obj1, obj2;
 
-	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
-	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj1 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj1 ), map_obj( obj2 ) );
 	return fmt;
 }
@@ -239,9 +237,9 @@ h_symtrn( const void *tre )
 {
 	unsigned long smaobj, ssobj, tsobj;
 
-	smaobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
-	ssobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
-	tsobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	smaobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	ssobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	tsobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( smaobj ), map_obj( ssobj ), 
 					tsobj == 0 ? map_obj( ssobj ) : map_obj( tsobj ) );
 	return fmt;
@@ -254,7 +252,7 @@ h_symrc( const void *tre )
 	unsigned long obj;
 	unsigned char u8;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), rctbl[ u8 ] );
 	return fmt;
@@ -267,7 +265,7 @@ h_symu8( const void *tre )
 	unsigned long obj;
 	unsigned char u8;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), u8 );
 	return fmt;
@@ -281,7 +279,7 @@ h_mp_init( const void *tre )
 	TRZNB_T nblock;
 	unsigned long bsize;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	bsize = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, bsize  );
@@ -296,12 +294,12 @@ h_mp_get( const void *tre )
 	TRZNB_T nblock;
 	unsigned long nmin;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 
-	if( RKH_CFG_MP_GET_LWM_EN == 1 )
+	if( TRZ_RKH_CFG_MP_GET_LWM_EN == 1 )
 	{
-		nmin = assemble( RKH_CFG_MP_SIZEOF_NBLOCK );
+		nmin = assemble( TRZ_RKH_CFG_MP_SIZEOF_NBLOCK );
 		tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, nmin  );
 	}
 	else
@@ -317,7 +315,7 @@ h_symnblk( const void *tre )
 	unsigned long obj;
 	TRZNB_T nblock;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 2, map_obj( obj ), nblock  );
 	return fmt;
@@ -330,8 +328,8 @@ h_2symnused( const void *tre )
 	unsigned long obj1, obj2;
 	TRZNE_T nelem;
 
-	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
-	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj1 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 
 	tre_fmt( fmt, CTE( tre ), 1, map_obj( obj1 ) );
@@ -346,7 +344,7 @@ h_symnused( const void *tre )
 	unsigned long obj;
 	TRZNE_T nelem;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), nelem );
 	return fmt;
@@ -360,9 +358,9 @@ h_rq_ffll( const void *tre )
 	unsigned long obj, nmin;
 	TRZNE_T nelem;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
-	if( RKH_CFG_RQ_GET_LWMARK_EN == 1 )
+	if( TRZ_RKH_CFG_RQ_GET_LWMARK_EN == 1 )
 	{
 		nmin = (unsigned long)assemble( sizeof_trzne() );
 		tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), nelem, nmin );
@@ -379,8 +377,8 @@ h_tstart( const void *tre )
 	unsigned long obj1, obj2;
 	TRZNT_T ntick, per;
 
-	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
-	obj2 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj1 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj2 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	per = (TRZNT_T)assemble( sizeof_trznt() );
 
@@ -396,7 +394,7 @@ h_tstop( const void *tre )
 	unsigned long obj1;
 	TRZNT_T ntick, per;
 
-	obj1 = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj1 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ntick = (TRZNT_T)assemble( sizeof_trznt() );
 	per = (TRZNT_T)assemble( sizeof_trznt() );
 
@@ -412,9 +410,9 @@ h_tout( const void *tre )
 	TRZE_T sig;
 
 
-	t = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	t = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	sig = (TRZE_T)assemble( sizeof_trze() );
-	ao = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	ao = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( t ), map_sig(sig) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 2, 1, map_obj( ao ) );
@@ -429,7 +427,7 @@ h_sym2u8( const void *tre )
 	unsigned long obj;
 	unsigned char u8_1, u8_2;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	u8_1 = (unsigned char)assemble( sizeof( char ) );
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), u8_1, u8_2 );
@@ -468,7 +466,7 @@ h_symevt( const void *tre )
 	unsigned long obj;
 	TRZE_T e;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
 	return fmt;
@@ -482,7 +480,7 @@ h_sma_get( const void *tre )
 	TRZE_T e;
 	unsigned char pid, refc;
 
-	ao = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	ao = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	pid = (unsigned char)assemble( sizeof( char ) );
 	refc = (unsigned char)assemble( sizeof( char ) );
@@ -498,12 +496,12 @@ h_sma_ffll( const void *tre, TRN_ST *ptrn )
 	TRN_ST trn;
 	unsigned char pid, refc;
 
-	trn.tobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	trn.tobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	trn.e = (TRZE_T)assemble( sizeof_trze() );
 
-	if( RKH_CFG_SMA_TRC_SNDR_EN == 1 )
+	if( TRZ_RKH_CFG_SMA_TRC_SNDR_EN == 1 )
 	{
-		trn.sobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+		trn.sobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 		pid = (unsigned char)assemble( sizeof( char ) );
 		refc = (unsigned char)assemble( sizeof( char ) );
 		tre_fmt( fmt, CTE( tre ), 5,
@@ -571,9 +569,9 @@ h_sma_dch( const void *tre )
 	long rt;
 		
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	curr_e = (TRZE_T)assemble( sizeof_trze() );
-	stobj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	stobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 
 	if( remove_symevt_tstamp( obj, curr_e, &post_tstamp ) < 0 )
 		rt = -1;
@@ -625,7 +623,7 @@ h_symobj( const void *tre )
 	unsigned long obj;
 	char *s;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	s = assemble_str();
 	
 	if( *s == '&' )
@@ -643,9 +641,9 @@ h_symst( const void *tre )
 	char *s;
 	const char *ao;
 
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	ao = map_obj( obj );
-	obj = (unsigned long)assemble( RKH_CFGPORT_TRC_SIZEOF_PTR );
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	s = assemble_str();
 	
 	if( *s == '&' )
@@ -734,78 +732,76 @@ h_tcfg( const void *tre )
 	trb = proc_version_code( trb );
 	trb_32 = (rui32_t *)trb;
 
-#ifdef __TRAZER__
-	RKH_CFG_SMA_TRC_SNDR_EN =	(*trb_32 >> 0) & 0x01;
-	RKH_CFG_TRC_RTFIL_EN =(*trb_32 >> 1) & 0x01;
-	RKH_CFG_TRC_USER_TRACE_EN = (*trb_32 >> 2) & 0x01;
-	RKH_CFG_TRC_ALL_EN = 		(*trb_32 >> 3) & 0x01;
-	RKH_CFG_TRC_MP_EN = 	(*trb_32 >> 4) & 0x01;
-	RKH_CFG_TRC_RQ_EN = 	(*trb_32 >> 5) & 0x01;
-	RKH_CFG_TRC_SMA_EN = 	(*trb_32 >> 6) & 0x01;
-	RKH_CFG_TRC_TMR_EN = 	(*trb_32 >> 7) & 0x01;
-	RKH_CFG_TRC_SM_EN = 	(*trb_32 >> 8) & 0x01;
-	RKH_CFG_TRC_FWK_EN = 	(*trb_32 >> 9) & 0x01;
-	RKH_CFG_TRC_ASSERT_EN = 	(*trb_32 >> 10) & 0x01;
-	RKH_CFG_RQ_GET_LWMARK_EN = 	(*trb_32 >> 11) & 0x01;
-	RKH_CFG_MP_GET_LWM_EN =	(*trb_32 >> 12) & 0x01;
-	RKH_CFG_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
-	RKH_CFG_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
-	RKH_CFG_TRC_NSEQ_EN =	(*trb_32 >> 15) & 0x01;
-	RKH_CFG_TRC_TSTAMP_EN =	(*trb_32 >> 16) & 0x01;
-	RKH_CFG_TRC_CHK_EN =	(*trb_32 >> 17) & 0x01;
+	TRZ_RKH_CFG_SMA_TRC_SNDR_EN =	(*trb_32 >> 0) & 0x01;
+	TRZ_RKH_CFG_TRC_RTFIL_EN =(*trb_32 >> 1) & 0x01;
+	TRZ_RKH_CFG_TRC_USER_TRACE_EN = (*trb_32 >> 2) & 0x01;
+	TRZ_RKH_CFG_TRC_ALL_EN = 		(*trb_32 >> 3) & 0x01;
+	TRZ_RKH_CFG_TRC_MP_EN = 	(*trb_32 >> 4) & 0x01;
+	TRZ_RKH_CFG_TRC_RQ_EN = 	(*trb_32 >> 5) & 0x01;
+	TRZ_RKH_CFG_TRC_SMA_EN = 	(*trb_32 >> 6) & 0x01;
+	TRZ_RKH_CFG_TRC_TMR_EN = 	(*trb_32 >> 7) & 0x01;
+	TRZ_RKH_CFG_TRC_SM_EN = 	(*trb_32 >> 8) & 0x01;
+	TRZ_RKH_CFG_TRC_FWK_EN = 	(*trb_32 >> 9) & 0x01;
+	TRZ_RKH_CFG_TRC_ASSERT_EN = 	(*trb_32 >> 10) & 0x01;
+	TRZ_RKH_CFG_RQ_GET_LWMARK_EN = 	(*trb_32 >> 11) & 0x01;
+	TRZ_RKH_CFG_MP_GET_LWM_EN =	(*trb_32 >> 12) & 0x01;
+	TRZ_RKH_CFG_TRC_RTFIL_SMA_EN =	(*trb_32 >> 13) & 0x01;
+	TRZ_RKH_CFG_TRC_RTFIL_SIGNAL_EN = (*trb_32 >> 14) & 0x01;
+	TRZ_RKH_CFG_TRC_NSEQ_EN =	(*trb_32 >> 15) & 0x01;
+	TRZ_RKH_CFG_TRC_TSTAMP_EN =	(*trb_32 >> 16) & 0x01;
+	TRZ_RKH_CFG_TRC_CHK_EN =	(*trb_32 >> 17) & 0x01;
 
 	++trb_32;
-	trb = (rkhui8_t *)trb_32;
+	trb = (rui8_t *)trb_32;
 
-	RKH_CFG_FWK_SIZEOF_EVT = (*trb >> 4) & 0x0F;
-	RKH_CFGPORT_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
+	TRZ_RKH_CFG_FWK_SIZEOF_EVT = (*trb >> 4) & 0x0F;
+	TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP = (*trb++) & 0x0F;
 
-	RKH_CFGPORT_TRC_SIZEOF_PTR = (*trb >> 4) & 0x0F;
-	RKH_CFG_TMR_SIZEOF_NTIMER = (*trb++) & 0x0F;
+	TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR = (*trb >> 4) & 0x0F;
+	TRZ_RKH_CFG_TMR_SIZEOF_NTIMER = (*trb++) & 0x0F;
 	
-	RKH_CFG_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
-	RKH_CFG_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
+	TRZ_RKH_CFG_MP_SIZEOF_NBLOCK = (*trb >> 4) & 0x0F;
+	TRZ_RKH_CFG_RQ_SIZEOF_NELEM = (*trb++) & 0x0F;
 
-	RKH_CFG_FWK_SIZEOF_EVT_SIZE = (*trb++) & 0x0F;
+	TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE = (*trb++) & 0x0F;
 
-	RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
-	RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
+	TRZ_RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
+	TRZ_RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
 	
-	TSTAMP_TICK_HZ = *(rkhui16_t *)trb;
-#endif
+	TSTAMP_TICK_HZ = *(rui16_t *)trb;
 
 	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
 	
 	lprintf( "Update RKH Configuration from client\n" );
 
 	rkhver_printf(	RKH_VERSION );
-	cfg_printf_sz(	RKH_CFGPORT_TRC_SIZEOF_TSTAMP, 8 );
-	cfg_printf_sz(	RKH_CFGPORT_TRC_SIZEOF_PTR, 8 );
-	cfg_printf_sz(	RKH_CFG_FWK_SIZEOF_EVT, 8 );
-	cfg_printf_sz(	RKH_CFG_FWK_SIZEOF_EVT_SIZE, 8 );
-	cfg_printf( 	RKH_CFG_FWK_MAX_EVT_POOL );
-	cfg_printf( 	RKH_CFG_RQ_GET_LWMARK_EN );
-	cfg_printf_sz( 	RKH_CFG_RQ_SIZEOF_NELEM, 8 );
-	cfg_printf( 	RKH_CFG_MP_GET_LWM_EN );
-	cfg_printf_sz( 	RKH_CFG_MP_SIZEOF_NBLOCK, 8 );
-	cfg_printf_sz( 	RKH_CFG_MP_SIZEOF_BSIZE, 8 );
-	cfg_printf( 	RKH_CFG_SMA_TRC_SNDR_EN );
-	cfg_printf_sz( 	RKH_CFG_TMR_SIZEOF_NTIMER, 8 );
-	cfg_printf( 	RKH_CFG_TRC_RTFIL_EN );
-	cfg_printf( 	RKH_CFG_TRC_USER_TRACE_EN );
-	cfg_printf( 	RKH_CFG_TRC_ALL_EN );
-	cfg_printf( 	RKH_CFG_TRC_MP_EN );
-	cfg_printf( 	RKH_CFG_TRC_RQ_EN );
-	cfg_printf( 	RKH_CFG_TRC_SMA_EN );
-	cfg_printf( 	RKH_CFG_TRC_TMR_EN );
-	cfg_printf( 	RKH_CFG_TRC_SM_EN );
-	cfg_printf( 	RKH_CFG_TRC_FWK_EN );
-	cfg_printf( 	RKH_CFG_TRC_ASSERT_EN );
-	cfg_printf( 	RKH_CFG_TRC_RTFIL_SMA_EN );
-	cfg_printf( 	RKH_CFG_TRC_RTFIL_SIGNAL_EN );
-	cfg_printf( 	RKH_CFG_TRC_NSEQ_EN );
-	cfg_printf( 	RKH_CFG_TRC_TSTAMP_EN );
-	cfg_printf( 	RKH_CFG_TRC_CHK_EN );
+	cfg_printf_sz(	TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP, 8 );
+	cfg_printf_sz(	TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR, 8 );
+	cfg_printf_sz(	TRZ_RKH_CFG_FWK_SIZEOF_EVT, 8 );
+	cfg_printf_sz(	TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE, 8 );
+	cfg_printf( 	TRZ_RKH_CFG_FWK_MAX_EVT_POOL );
+	cfg_printf( 	TRZ_RKH_CFG_RQ_GET_LWMARK_EN );
+	cfg_printf_sz( 	TRZ_RKH_CFG_RQ_SIZEOF_NELEM, 8 );
+	cfg_printf( 	TRZ_RKH_CFG_MP_GET_LWM_EN );
+	cfg_printf_sz( 	TRZ_RKH_CFG_MP_SIZEOF_NBLOCK, 8 );
+	cfg_printf_sz( 	TRZ_RKH_CFG_MP_SIZEOF_BSIZE, 8 );
+	cfg_printf( 	TRZ_RKH_CFG_SMA_TRC_SNDR_EN );
+	cfg_printf_sz( 	TRZ_RKH_CFG_TMR_SIZEOF_NTIMER, 8 );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_RTFIL_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_USER_TRACE_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_ALL_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_MP_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_RQ_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_SMA_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_TMR_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_SM_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_FWK_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_ASSERT_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_RTFIL_SMA_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_RTFIL_SIGNAL_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_NSEQ_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_TSTAMP_EN );
+	cfg_printf( 	TRZ_RKH_CFG_TRC_CHK_EN );
 	cfg_printf( TSTAMP_TICK_HZ );
 
 	return (char *)("\n");
@@ -911,14 +907,14 @@ usr_object( const rui8_t *p, const USR_FMT_T *pfmt )
 	unsigned long obj;
 
 	++p; /* point to oject */
-	for( obj = 0, n = RKH_CFGPORT_TRC_SIZEOF_PTR, sh = 0; n; --n, sh += 8  )
+	for( obj = 0, n = TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR, sh = 0; n; --n, sh += 8  )
 		obj |= ( unsigned long )( *p++ << sh );
 
 //	lprintf( pfmt->fmt, map_obj( obj ) );
 	usrtrz_printf( pfmt->fmt, map_obj( obj ) );
 
 	/* +1 size field included */
-	return RKH_CFGPORT_TRC_SIZEOF_PTR + 1;
+	return TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR + 1;
 }
 
 char
@@ -1012,7 +1008,7 @@ usr_fmt( const void *tre )
 	const USR_TBL_T *pfmt;
 
 	pt = (const rui8_t *)tre;
-	if( RKH_CFG_TRC_NSEQ_EN == 1 ) 
+	if( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) 
 	{
 		pt += 2;
 		tr_size = trix - 2;
@@ -1023,8 +1019,8 @@ usr_fmt( const void *tre )
 		tr_size = trix - 1;
 	}
 
-	pt += RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
-	tr_size -= RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
+	pt += TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
+	tr_size -= TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
 	tr_size -= 1; /* because checksum */
 	lprintf( "User trace information\n" );
 
@@ -1080,7 +1076,7 @@ parser_chk( void )
 {
 	rui8_t *p, chk;
 	int i;
-	if( RKH_CFG_TRC_CHK_EN == 1 )
+	if( TRZ_RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( chk = 0, p = tr, i = trix; i--; ++p )
 			chk = (rui8_t)( chk + *p );
@@ -1096,7 +1092,7 @@ show_curr_frm( void )
 	int i;
 	dprintf( "---- |");
 
-	if( RKH_CFG_TRC_CHK_EN == 1 )
+	if( TRZ_RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( p = tr, i = trix; i--; ++p )
 			dprintf( "0x%X|", *p );
@@ -1160,17 +1156,17 @@ parser( void )
 
 		/* Runtime trace events */
 	
-		tz_flg = PREPARE_TZOUT_FLGS( RKH_CFG_TRC_TSTAMP_EN, 
-										RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
-										RKH_CFG_TRC_NSEQ_EN );
+		tz_flg = PREPARE_TZOUT_FLGS( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+										TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
+										TRZ_RKH_CFG_TRC_NSEQ_EN );
 
-		tz_data.nseq = get_nseq( RKH_CFG_TRC_NSEQ_EN );
+		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		curr_tstamp = tz_data.ts = get_ts( RKH_CFG_TRC_TSTAMP_EN, 
-											RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 		tz_data.name = ftr->name.c_str();
 
@@ -1185,17 +1181,17 @@ parser( void )
 	{
 		ftr = &fmt_usr_tbl;
 
-		tz_flg = PREPARE_TZOUT_FLGS( RKH_CFG_TRC_TSTAMP_EN, 
-										RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
-										RKH_CFG_TRC_NSEQ_EN );
+		tz_flg = PREPARE_TZOUT_FLGS( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+										TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
+										TRZ_RKH_CFG_TRC_NSEQ_EN );
 
-		tz_data.nseq = get_nseq( RKH_CFG_TRC_NSEQ_EN );
+		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
 			lprintf( lost_trace_info );
 
-		curr_tstamp = tz_data.ts = get_ts( RKH_CFG_TRC_TSTAMP_EN, 
-											RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
+		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
 		tz_data.group = ftr->group.c_str();
 
 		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
@@ -1273,33 +1269,33 @@ trazer_init( void )
 	lastnseq = 255;
 	lprintf( VERSION_STRING_TXT );
 	lprintf( "\nUsing local RKH configuration\n\n" );
-	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_TSTAMP = %d\n", RKH_CFGPORT_TRC_SIZEOF_TSTAMP*8 );
-	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_PTR    = %d\n", RKH_CFGPORT_TRC_SIZEOF_PTR*8 );
-	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT        = %d\n", RKH_CFG_FWK_SIZEOF_EVT*8 );
-	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT_SIZE   = %d\n", RKH_CFG_FWK_SIZEOF_EVT_SIZE*8 );
-	lprintf( "   RKH_CFG_FWK_MAX_EVT_POOL      = %d\n", RKH_CFG_FWK_MAX_EVT_POOL );
-	lprintf( "   RKH_CFG_RQ_GET_LWMARK_EN      = %d\n", RKH_CFG_RQ_GET_LWMARK_EN );
-	lprintf( "   RKH_CFG_RQ_SIZEOF_NELEM       = %d\n", RKH_CFG_RQ_SIZEOF_NELEM*8 );
-	lprintf( "   RKH_CFG_MP_GET_LWM_EN         = %d\n", RKH_CFG_MP_GET_LWM_EN );
-	lprintf( "   RKH_CFG_MP_SIZEOF_NBLOCK      = %d\n", RKH_CFG_MP_SIZEOF_NBLOCK*8 );
-	lprintf( "   RKH_CFG_MP_SIZEOF_BSIZE       = %d\n", RKH_CFG_MP_SIZEOF_BSIZE*8 );
-	lprintf( "   RKH_CFG_SMA_TRC_SNDR_EN       = %d\n", RKH_CFG_SMA_TRC_SNDR_EN );
-	lprintf( "   RKH_CFG_TMR_SIZEOF_NTIMER     = %d\n", RKH_CFG_TMR_SIZEOF_NTIMER*8 );
-	lprintf( "   RKH_CFG_TRC_RTFIL_EN          = %d\n", RKH_CFG_TRC_RTFIL_EN );
-	lprintf( "   RKH_CFG_TRC_USER_TRACE_EN     = %d\n", RKH_CFG_TRC_USER_TRACE_EN );
-	lprintf( "   RKH_CFG_TRC_ALL_EN            = %d\n", RKH_CFG_TRC_ALL_EN );
-	lprintf( "   RKH_CFG_TRC_MP_EN             = %d\n", RKH_CFG_TRC_MP_EN );
-	lprintf( "   RKH_CFG_TRC_RQ_EN             = %d\n", RKH_CFG_TRC_RQ_EN );
-	lprintf( "   RKH_CFG_TRC_SMA_EN            = %d\n", RKH_CFG_TRC_SMA_EN );
-	lprintf( "   RKH_CFG_TRC_TMR_EN            = %d\n", RKH_CFG_TRC_TMR_EN );
-	lprintf( "   RKH_CFG_TRC_SM_EN             = %d\n", RKH_CFG_TRC_SM_EN );
-	lprintf( "   RKH_CFG_TRC_FWK_EN            = %d\n", RKH_CFG_TRC_FWK_EN );
-	lprintf( "   RKH_CFG_TRC_ASSERT_EN         = %d\n", RKH_CFG_TRC_ASSERT_EN );
-	lprintf( "   RKH_CFG_TRC_RTFIL_SMA_EN      = %d\n", RKH_CFG_TRC_RTFIL_SMA_EN );
-	lprintf( "   RKH_CFG_TRC_RTFIL_SIGNAL_EN   = %d\n", RKH_CFG_TRC_RTFIL_SIGNAL_EN );
-	lprintf( "   RKH_CFG_TRC_NSEQ_EN           = %d\n", RKH_CFG_TRC_NSEQ_EN );
-	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", RKH_CFG_TRC_TSTAMP_EN );
-	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", RKH_CFG_TRC_CHK_EN );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_TSTAMP = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP*8 );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_PTR    = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT        = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT_SIZE   = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE*8 );
+	lprintf( "   RKH_CFG_FWK_MAX_EVT_POOL      = %d\n", TRZ_RKH_CFG_FWK_MAX_EVT_POOL );
+	lprintf( "   RKH_CFG_RQ_GET_LWMARK_EN      = %d\n", TRZ_RKH_CFG_RQ_GET_LWMARK_EN );
+	lprintf( "   RKH_CFG_RQ_SIZEOF_NELEM       = %d\n", TRZ_RKH_CFG_RQ_SIZEOF_NELEM*8 );
+	lprintf( "   RKH_CFG_MP_GET_LWM_EN         = %d\n", TRZ_RKH_CFG_MP_GET_LWM_EN );
+	lprintf( "   RKH_CFG_MP_SIZEOF_NBLOCK      = %d\n", TRZ_RKH_CFG_MP_SIZEOF_NBLOCK*8 );
+	lprintf( "   RKH_CFG_MP_SIZEOF_BSIZE       = %d\n", TRZ_RKH_CFG_MP_SIZEOF_BSIZE*8 );
+	lprintf( "   RKH_CFG_SMA_TRC_SNDR_EN       = %d\n", TRZ_RKH_CFG_SMA_TRC_SNDR_EN );
+	lprintf( "   RKH_CFG_TMR_SIZEOF_NTIMER     = %d\n", TRZ_RKH_CFG_TMR_SIZEOF_NTIMER*8 );
+	lprintf( "   RKH_CFG_TRC_RTFIL_EN          = %d\n", TRZ_RKH_CFG_TRC_RTFIL_EN );
+	lprintf( "   RKH_CFG_TRC_USER_TRACE_EN     = %d\n", TRZ_RKH_CFG_TRC_USER_TRACE_EN );
+	lprintf( "   RKH_CFG_TRC_ALL_EN            = %d\n", TRZ_RKH_CFG_TRC_ALL_EN );
+	lprintf( "   RKH_CFG_TRC_MP_EN             = %d\n", TRZ_RKH_CFG_TRC_MP_EN );
+	lprintf( "   RKH_CFG_TRC_RQ_EN             = %d\n", TRZ_RKH_CFG_TRC_RQ_EN );
+	lprintf( "   RKH_CFG_TRC_SMA_EN            = %d\n", TRZ_RKH_CFG_TRC_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_TMR_EN            = %d\n", TRZ_RKH_CFG_TRC_TMR_EN );
+	lprintf( "   RKH_CFG_TRC_SM_EN             = %d\n", TRZ_RKH_CFG_TRC_SM_EN );
+	lprintf( "   RKH_CFG_TRC_FWK_EN            = %d\n", TRZ_RKH_CFG_TRC_FWK_EN );
+	lprintf( "   RKH_CFG_TRC_ASSERT_EN         = %d\n", TRZ_RKH_CFG_TRC_ASSERT_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SMA_EN      = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SIGNAL_EN   = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SIGNAL_EN );
+	lprintf( "   RKH_CFG_TRC_NSEQ_EN           = %d\n", TRZ_RKH_CFG_TRC_NSEQ_EN );
+	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", TRZ_RKH_CFG_TRC_TSTAMP_EN );
+	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", TRZ_RKH_CFG_TRC_CHK_EN );
 	lprintf( "\n" );
 }
 
