@@ -65,6 +65,8 @@
 				AdditionalDependencies="&quot;ws2_32.lib&quot;"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
+				MapFileName="ahsmmap"
 				SubSystem="1"
 				TargetMachine="1"
 			/>
@@ -296,6 +298,10 @@
 					RelativePath="..\..\..\source\uevtbl.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\source\unittrz.cpp"
+					>
+				</File>
 				<Filter
 					Name="portable"
 					>
@@ -337,6 +343,10 @@
 			</File>
 			<File
 				RelativePath="..\tcptrc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\include\unittrz.h"
 				>
 			</File>
 			<Filter

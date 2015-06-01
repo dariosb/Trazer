@@ -23,7 +23,9 @@ enum
 	FOUR,		/* press the key '4' on the keyboard */
 	FIVE,		/* press the key '5' on the keyboard */
 	SIX,		/* press the key '6' on the keyboard */
-	TERM		/* press the key escape on the keyboard */
+	UCLEAN,		/* press the key '7' on the keyboard */
+	UTEST,		/* press the key '8' on the keyboard */
+	TERM,		/* press the key escape on the keyboard */
 };
 
 
@@ -53,7 +55,7 @@ RKH_SMA_DCLR( my );
  *	Declare states and pseudostates.
  */
 
-RKH_DCLR_COMP_STATE		S1,S3,S11;
+RKH_DCLR_COMP_STATE		UTST,S1,S3,S11;
 RKH_DCLR_BASIC_STATE	S2,S31,S32,S111,S112,S12;
 RKH_DCLR_COND_STATE		C1,C2;
 RKH_DCLR_CHOICE_STATE	CH;

@@ -50,6 +50,8 @@ void set_y_1( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
 void dummy_act( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
 void show_data( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
 void terminate( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
+void unit_clean( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
+void unit_test( const struct RKH_SMA_T *sma, RKH_EVT_T *pe );
 
 
 /*

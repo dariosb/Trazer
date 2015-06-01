@@ -8,6 +8,10 @@
 #include "mytypes.h"
 #include "tzparse.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SEQDIAG_SEPARATOR_TEXT	"... RKH START ..."
 #define SEQDIAG_TEMPLATE_FILE	"sdiag_html.sk"
 #define SEQDIAG_OUT_FNAME 		"sd%s.html"
@@ -29,11 +33,6 @@ typedef struct
 	TRZE_T e;
 }TRN_ST;
 
-#ifdef __cplusplus
-#define EXTERNC extern "C"
-#else
-#define EXTERNC
-#endif
 
 EXTERNC void add_to_trntbl( TRN_ST *p );
 EXTERNC void add_seqdiag_text( const char *s );
@@ -41,5 +40,8 @@ EXTERNC void add_seqdiag_text( const char *s );
 EXTERNC void seqdiag_init( void );
 
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

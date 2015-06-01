@@ -39,6 +39,7 @@ main( int argc, char *argv[] )
 	rkh_fwk_init();
 	RKH_TRC_OPEN();
 
+	RKH_TR_FWK_OBJ( &UTST );
 	RKH_TR_FWK_OBJ( &S1 );
 	RKH_TR_FWK_OBJ( my );
 	RKH_TR_FWK_OBJ( &my->equeue );
@@ -64,6 +65,8 @@ main( int argc, char *argv[] )
 	RKH_TR_FWK_SIG( FOUR );
 	RKH_TR_FWK_SIG( FIVE );
 	RKH_TR_FWK_SIG( SIX	);
+	RKH_TR_FWK_SIG( UCLEAN );
+	RKH_TR_FWK_SIG( UTEST );
 	RKH_TR_FWK_SIG( TERM );
 
 	RKH_TR_FWK_TUSR( MY_TRACE );

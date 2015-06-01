@@ -53,7 +53,7 @@
 
 
 #define BIN_TRACE					0
-#define SOCKET_TRACE				1
+#define SOCKET_TRACE				0
 #define ESC							0x1B
 #define kbmap( c )					( (c) - '0' )
 

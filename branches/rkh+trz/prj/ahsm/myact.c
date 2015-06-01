@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "rkh.h"
 #include "my.h"
+#include "unittrz.h"
 
 
 #define CMY( s )		(( MYSM_T* )(s))
@@ -19,6 +20,7 @@ void
 my_init( const void *sma )
 {
 	CMY( sma )->x = CMY( sma )->y = 0;
+	RKH_TRC_CLEANUP();
 }
 
 
@@ -123,6 +125,30 @@ terminate( const struct RKH_SMA_T *sma, RKH_EVT_T *pe )
 	(void)sma;
 	(void)pe;
 	rkh_fwk_exit();
+}
+
+
+void
+unit_clean( const struct RKH_SMA_T *sma, RKH_EVT_T *pe )
+{
+	(void)sma;
+	(void)pe;
+	RKH_TRC_CLEANUP();
+	printf("\n\tunit_clean\n\n");
+}
+
+
+void
+unit_test( const struct RKH_SMA_T *sma, RKH_EVT_T *pe )
+{
+	ri8_t r;
+
+	(void)sma;
+	(void)pe;
+
+	r = TEST_ASSERT_TRUE(RKH_TRC_IS_FINAL_STATE( my, &S111 ));
+
+	printf("\n\tunit_test: %s\n\n", r < 0 ? "FAIL":"OK");
 }
 
 
