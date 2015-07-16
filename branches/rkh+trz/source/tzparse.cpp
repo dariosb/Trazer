@@ -521,9 +521,9 @@ h_sma_get( const void *tre )
 
 static
 char *
-h_sma_ffll( const void *tre, TRN_ST *ptrn )
+h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 {
-	TRN_ST trn;
+	EVENT_ST trn;
 	unsigned char pid, refc;
 
 	trn.tobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
@@ -542,7 +542,7 @@ h_sma_ffll( const void *tre, TRN_ST *ptrn )
 			  		refc );
 		UTRZEVT_INSERT( 5, trn.tobj, trn.e, trn.sobj, pid, refc );
 
-		add_to_trntbl( &trn );
+		sdiag_async_evt( &trn );
 	}
 	else
 	{
@@ -568,7 +568,7 @@ h_sma_ffll( const void *tre, TRN_ST *ptrn )
 char *
 h_sma_ff( const void *tre )
 {
-	TRN_ST trn;
+	EVENT_ST trn;
 	char *p;
 
 	p = h_sma_ffll( tre, &trn );
@@ -583,7 +583,7 @@ h_sma_ff( const void *tre )
 char *
 h_sma_lf( const void *tre )
 {
-	TRN_ST trn;
+	EVENT_ST trn;
 	char *p;
 
 	p = h_sma_ffll( tre, &trn );
@@ -814,7 +814,7 @@ h_tcfg( const void *tre )
 	
 	TSTAMP_TICK_HZ = *(rui16_t *)trb;
 
-	add_seqdiag_text( SEQDIAG_SEPARATOR_TEXT );
+	sdiag_text( MSC_TARGET_START );
 	
 	lprintf( "Update RKH Configuration from client\n" );
 

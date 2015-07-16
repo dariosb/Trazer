@@ -258,6 +258,7 @@ print_banner( void )
 
 void trazer_parse( rui8_t d );
 void trazer_init( void );
+void seqdiag_init( void );
 
 void 
 rkh_trc_open( void )

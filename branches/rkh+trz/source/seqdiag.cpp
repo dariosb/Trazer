@@ -39,45 +39,6 @@ fexists(const char *filename)
 }
 
 
-void
-start_rawsdiag( const char *fname )
-{
-	FILE *fseq;
-
-	++seqdiag_len = 0;
-
-	if( ( fseq = fopen( fname, "w+" ) ) == NULL )
-		fatal_error( "Can't open file %s\n", fname );
-
-	fprintf( fseq, SEQDIAG_TEMPLATE );
-
-	fclose( fseq );
-}
-
-
-void
-insert_rawsdiag( const char *fname, const char *s )
-{
-	FILE *fseq;
-	ofstream ft;
-	static long p;
-
-
-	if( !fexists( fname ) )
-		return;
-
-	++seqdiag_len;
-	fseq = fopen( fname, "r+" );
-	fseek( fseq, 0, SEEK_END );
-	p = ftell( fseq );
-	fseek( fseq, p-strlen(SEQDIAG_CLOSE_MARK), SEEK_SET );
-	
-	fprintf( fseq, "%s", s );
-	fprintf( fseq, "%s", SEQDIAG_CLOSE_MARK );
-
-	fclose( fseq );
-}
-
 #if 0
 void
 end_seqdiag( void )
@@ -124,6 +85,9 @@ fcpy_until_line( ofstream *ft, const char *sname, int nl )
 	int i; 
 
 	fs.open( sname );
+
+	if ( nl = 0 )
+		nl = fs.eof();
 
 	for( i = 0; !fs.eof() && i <= nl; ++i )
 	{
@@ -242,6 +206,7 @@ static
 void
 update_fout_html( void )
 {
+#if 0
 	ofstream fout;
 	int loff, loffh;
 	char hbuff[50];
@@ -269,15 +234,55 @@ update_fout_html( void )
 	fcpy_from_line( &fout, SEQDIAG_TEMPLATE_FILE, loffh+1, 0 );
 
 	fout.close();
+#endif
+/*	char cmd[100];
+
+	sprintf(cmd, "msc-gen -T svg %s", sdfname );
+	system(cmd);*/
 }
 
 
 void
-add_to_trntbl( TRN_ST *p )
+start_rawsdiag( const char *fname )
+{
+	ofstream fseq;
+
+	++seqdiag_len = 0;
+	
+	fseq.open( fname );
+
+	fcpy_until_line( &fseq, MSC_OPTIONS_FILE, 0 );
+
+	fseq.close();
+}
+
+
+void
+insert_rawsdiag( const char *fname, const char *s )
+{
+	FILE *fseq;
+	ofstream ft;
+	static long p;
+
+
+	if( !fexists( fname ) )
+		return;
+
+	++seqdiag_len;
+	fseq = fopen( fname, "r+" );
+	fseek( fseq, 0, SEEK_END );
+	fprintf( fseq, "%s", s );
+
+	fclose( fseq );
+}
+
+
+void
+sdiag_async_evt( EVENT_ST *p )
 {
 	char trbuff[ 100 ];
 
-	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
+	sprintf( trbuff, "%s->%s: %s[arrow.type=line];\n",
 				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
 
 	insert_rawsdiag( sdfname, trbuff );
@@ -286,9 +291,22 @@ add_to_trntbl( TRN_ST *p )
 }
 
 
+void
+sdiag_state( ulong smobj, ulong stobj )
+{
+	char trbuff[ 100 ];
+
+	sprintf( trbuff, "%s--%s: %s;\n", 
+				map_obj(smobj), map_obj(smobj), map_obj(stobj) );
+
+	insert_rawsdiag( sdfname, trbuff );
+
+	update_fout_html();
+}
+
 
 void
-add_seqdiag_text( const char *s )
+sdiag_text( const char *s )
 {
 	insert_rawsdiag( sdfname, s );
 
