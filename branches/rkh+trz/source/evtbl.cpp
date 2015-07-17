@@ -65,6 +65,7 @@ using namespace std;
 #define es_d		(char *)"es=%d"
 #define p_d			(char *)"p=%d"
 #define rt_d		(char *)"rt=%d"
+#define aty_s		(char *)"%s"
 
 
 /* --- Memory Pool (MP) ------------------------ */
@@ -111,10 +112,11 @@ DCLR_TRE( RKH_TE_SM_CND_NFOUND, "SM",  "CND_NFOUND", h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_UNKN_STATE, "SM",  "UNKN_STATE", h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_EX_HLEVEL,  "SM",  "EX_HLEVEL",  h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_1sym,	ao_s );
+DCLR_TRE( RKH_TE_SM_EXE_ACT,    "SM",  "EXE_ACT",    h_exact,	aty_s, ao_s, st_s, func_s );
 
 
 /* --- Timer (TIM) ----------------------- */
-DCLR_TRE( RKH_TE_TMR_INIT,		"TIM", "INIT",		h_symevt,	t_s, sig_s );
+DCLR_TRE( RKH_TE_TMR_INIT,		"TIM", "INIT",		h_tinit,	t_s, sig_s );
 DCLR_TRE( RKH_TE_TMR_START,		"TIM", "START",		h_tstart,	t_s, ao_s, ntick_d, per_d );
 DCLR_TRE( RKH_TE_TMR_STOP,		"TIM", "STOP",		h_tstop,	t_s, ntick_d, per_d );
 DCLR_TRE( RKH_TE_TMR_TOUT,		"TIM", "TOUT",		h_tout,		t_s, sig_s, ao_s );
@@ -134,6 +136,7 @@ DCLR_TRE( RKH_TE_FWK_OBJ,       "FWK", "OBJ",        h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_SIG,       "FWK", "SIG",        h_symsig,	sig_d, nm_s );
 DCLR_TRE( RKH_TE_FWK_FUN,		"FWK", "FUN",        h_symobj,	func_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_EXE_FUN,	"FWK", "EXE_FUN",    h_1sym,	func_s );
+DCLR_TRE( RKH_TE_FWK_SYNC_EVT,	"FWK", "SYNC_EVT",   h_sync,	func_s, snr_s, ao_s );
 DCLR_TRE( RKH_TE_FWK_TUSR,      "FWK", "TUSR",       h_symuevt,	usrtrc_d, nm_s );
 DCLR_TRE( RKH_TE_FWK_TCFG,      "FWK", "TCFG",       h_tcfg,	NULL );
 DCLR_TRE( RKH_TE_FWK_ASSERT,    "FWK", "ASSERT",     h_assert,	file_s, line_d );
@@ -191,6 +194,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_SM_UNKN_STATE),
 	TRE_ST( RKH_TE_SM_EX_HLEVEL),
 	TRE_ST( RKH_TE_SM_EX_TSEG),
+	TRE_ST( RKH_TE_SM_EXE_ACT),
 
 
 	/* --- Timer (TIM) ----------------------- */
@@ -214,6 +218,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_FWK_SIG),
 	TRE_ST( RKH_TE_FWK_FUN),
 	TRE_ST( RKH_TE_FWK_EXE_FUN),
+	TRE_ST( RKH_TE_FWK_SYNC_EVT),
 	TRE_ST( RKH_TE_FWK_TUSR),
 	TRE_ST( RKH_TE_FWK_TCFG),
 	TRE_ST( RKH_TE_FWK_ASSERT),

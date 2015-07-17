@@ -64,7 +64,7 @@ enum
 
 
 static rui8_t *trb;				
-static char fmt[ 500 ];
+static char fmt[ 1024 ];
 extern FILE *fdbg;
 
 static rui8_t state = PARSER_WFLAG;
@@ -231,6 +231,10 @@ h_2sym( const void *tre )
 	obj2 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj1 ), map_obj( obj2 ) );
 	UTRZEVT_INSERT( 2, obj1, obj2 );
+
+	if( CTE(tre)->id == RKH_TE_SM_STATE )
+		sdiag_state( obj1, obj2 );
+
 	return fmt;
 }
 
@@ -250,6 +254,24 @@ h_symtrn( const void *tre )
 	return fmt;
 }
 
+
+char *
+h_sync( const void *tre )
+{
+	unsigned long f, snr, dest;
+
+	f = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	snr = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	dest = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	tre_fmt( fmt, CTE( tre ), 3, 
+			map_obj( f ), map_obj( snr ), map_obj( dest ));
+
+	UTRZEVT_INSERT( 3, smaobj, ssobj, tsobj == 0 ? ssobj : tsobj );
+
+	sdiag_sync( f, snr, dest );
+
+	return fmt;
+}
 
 char *
 h_symrc( const void *tre )
@@ -394,6 +416,21 @@ h_rq_ffll( const void *tre )
 
 
 char *
+h_tinit( const void *tre )
+{
+	unsigned long obj;
+	TRZE_T e;
+
+	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	e = (TRZE_T)assemble( sizeof_trze() );
+	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
+	UTRZEVT_INSERT( 2, obj, e );
+	tmrtbl_init( obj, e );
+	return fmt;
+}
+
+
+char *
 h_tstart( const void *tre )
 {
 	unsigned long obj1, obj2;
@@ -407,6 +444,7 @@ h_tstart( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 1, map_obj( obj1 ) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 1, 3, map_obj( obj2 ), ntick, per );
 	UTRZEVT_INSERT( 4, obj1, obj2, ntick, per );
+	tmrtbl_start( obj1, obj2 );
 	return fmt;
 }
 
@@ -441,6 +479,7 @@ h_tout( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( t ), map_sig(sig) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 2, 1, map_obj( ao ) );
 	UTRZEVT_INSERT( 3, t, sig, ao );
+	sdiag_tmrevt( t );
 
 	return fmt;
 }
@@ -726,6 +765,35 @@ h_symuevt( const void *tre )
 	return fmt;
 }
 
+
+char * atype_str[] =
+{
+	"Effect",
+	"Entry",
+	"Exit",
+	"Init",
+	"Prepro",
+	"Guard"
+};
+
+char *
+h_exact( const void *tre )
+{
+	unsigned long atype, ao, st, act;
+
+	atype = (unsigned long)assemble( sizeof(rui8_t) );
+	ao = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	st = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	act = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );	
+
+	tre_fmt( fmt, CTE(tre), 4, atype_str[atype], map_obj(ao), map_obj(st), map_obj(act) );
+	
+	sdiag_exec_act( ao, act );
+
+	return fmt;
+}
+
+
 char *
 h_assert( const void *tre )
 {
@@ -743,6 +811,7 @@ h_assert( const void *tre )
 
 	return fmt;
 }
+
 
 /*
 * String describing the RKH version.

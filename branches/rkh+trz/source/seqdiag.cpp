@@ -35,7 +35,7 @@ bool
 fexists(const char *filename)
 {
 	ifstream ifile(filename);
-	return ifile;
+	return (ifile != NULL);
 }
 
 
@@ -76,8 +76,27 @@ find_infile( const char *fname, const char *ps )
 	return -1;
 }
 
+void
+fcpy_file( ofstream *ft, const char *sname )
+{
+	ifstream fs;
+	string line;
+	int i; 
 
-int
+	fs.open( sname );
+
+	for( i = 0; !fs.eof(); ++i )
+	{
+		getline( fs, line );
+		ft->write( line.c_str(), line.size()  );
+		ft->write( "\n", 1 );
+	}
+
+	fs.close();
+}
+
+
+void
 fcpy_until_line( ofstream *ft, const char *sname, int nl )
 {
 	ifstream fs;
@@ -86,9 +105,6 @@ fcpy_until_line( ofstream *ft, const char *sname, int nl )
 
 	fs.open( sname );
 
-	if ( nl = 0 )
-		nl = fs.eof();
-
 	for( i = 0; !fs.eof() && i <= nl; ++i )
 	{
 		getline( fs, line );
@@ -96,7 +112,6 @@ fcpy_until_line( ofstream *ft, const char *sname, int nl )
 	}
 
 	fs.close();
-	return -1;
 }
 
 
@@ -251,7 +266,7 @@ start_rawsdiag( const char *fname )
 	
 	fseq.open( fname );
 
-	fcpy_until_line( &fseq, MSC_OPTIONS_FILE, 0 );
+	fcpy_file( &fseq, MSC_OPTIONS_FILE );
 
 	fseq.close();
 }
@@ -282,6 +297,9 @@ sdiag_async_evt( EVENT_ST *p )
 {
 	char trbuff[ 100 ];
 
+	if( tmrtbl_find_sig( p->e) )
+		return;
+
 	sprintf( trbuff, "%s->%s: %s[arrow.type=line];\n",
 				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
 
@@ -304,6 +322,54 @@ sdiag_state( ulong smobj, ulong stobj )
 	update_fout_html();
 }
 
+
+void
+sdiag_tmrevt( ulong t )
+{
+	char trbuff[ 100 ];
+	TMREVT_T tmr;
+
+	if( !tmrtbl_find( t, &tmr ) )
+		return;
+
+	sprintf( trbuff, "%s->%s: \\-tm(%s)"
+				"[arrow.type=solid,arrow.starttype=empty_diamond];\n",
+				map_obj(tmr.smobj), map_obj(tmr.smobj), map_sig(tmr.sobj) );
+
+	insert_rawsdiag( sdfname, trbuff );
+
+	update_fout_html();
+}
+
+
+void
+sdiag_exec_act( ulong ao, ulong act )
+{
+	char trbuff[ 100 ];
+
+	sprintf( trbuff, "%s->%s: \\-%s[arrow.type=solid];\n",
+				map_obj(ao), map_obj(ao), map_obj(act));
+
+	insert_rawsdiag( sdfname, trbuff );
+
+	update_fout_html();	
+	
+}
+
+
+void
+sdiag_sync( ulong f, ulong snr, ulong dest )
+{
+	char trbuff[ 100 ];
+
+	sprintf( trbuff, "%s->%s: \\-%s[arrow.type=solid];\n",
+				map_obj(snr), map_obj(dest), map_obj(f));
+
+	insert_rawsdiag( sdfname, trbuff );
+
+	update_fout_html();	
+	
+}
 
 void
 sdiag_text( const char *s )

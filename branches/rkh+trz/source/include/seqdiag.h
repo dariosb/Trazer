@@ -30,6 +30,13 @@ typedef struct
 	TRZE_T e;
 }EVENT_ST;
 
+typedef struct
+{
+	ulong tobj;
+	ulong smobj;
+	ulong sobj;
+}TMREVT_T;
+
 #ifdef __cplusplus
 #define EXTERNC extern "C"
 #else
@@ -39,7 +46,10 @@ typedef struct
 
 EXTERNC void sdiag_async_evt( EVENT_ST *p );
 EXTERNC void sdiag_state( ulong smobj, ulong stobj );
+EXTERNC void sdiag_tmrevt( ulong t );
 EXTERNC void sdiag_text( const char *s );
+EXTERNC void sdiag_exec_act( ulong ao, ulong act );
+EXTERNC void sdiag_sync( ulong f, ulong snr, ulong dest );
 
 EXTERNC void seqdiag_init( void );
 
