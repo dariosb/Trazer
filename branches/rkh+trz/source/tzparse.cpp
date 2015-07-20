@@ -266,8 +266,7 @@ h_sync( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 3, 
 			map_obj( f ), map_obj( snr ), map_obj( dest ));
 
-	UTRZEVT_INSERT( 3, smaobj, ssobj, tsobj == 0 ? ssobj : tsobj );
-
+	UTRZEVT_INSERT( 3, f, snr, dest );
 	sdiag_sync( f, snr, dest );
 
 	return fmt;

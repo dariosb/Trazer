@@ -264,6 +264,9 @@ start_rawsdiag( const char *fname )
 
 	++seqdiag_len = 0;
 	
+	if( !fexists(MSC_OPTIONS_FILE))
+		return;
+
 	fseq.open( fname );
 
 	fcpy_file( &fseq, MSC_OPTIONS_FILE );

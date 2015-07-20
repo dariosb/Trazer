@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\bsp.c" />
+    <ClCompile Include="..\tcptrc.c" />
+    <ClCompile Include="..\..\..\rkh\source\rkh.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhdyn.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhmp.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhrq.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhs.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhsma.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhtbl.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhtim.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\rkhtrc.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.c">
+      <Filter>rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\cfgdep.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\config.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\debug.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\error.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\evtbl.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\getopt.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\lang.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\messages.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\options.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\printrgb.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\rerror.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\seqdiag.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\sigtbl.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\symbtbl.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tzlog.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tzparse.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\uevtbl.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\unittrz.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\arch\win_vc08\utils.cpp">
+      <Filter>trazer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\bsp.h" />
+    <ClInclude Include="..\tcptrc.h" />
+    <ClInclude Include="..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.h">
+      <Filter>rkh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkht.h">
+      <Filter>rkh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkh.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhassert.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhdef.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhevt.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhitl.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhmp.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhplat.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhrdy.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhrq.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhs.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhtim.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhtrc.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\rkh\source\include\rkhtype.h">
+      <Filter>rkh\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\include\symbtbl.h">
+      <Filter>trazer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\include\targetver.h">
+      <Filter>trazer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="rkh">
+      <UniqueIdentifier>{772d9236-4dbb-433e-b202-26509d35466b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rkh\include">
+      <UniqueIdentifier>{3aeeefbc-627e-4633-a558-60dd05196c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="trazer">
+      <UniqueIdentifier>{605b77cf-2ac7-4f36-b611-8c9b522ed14d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

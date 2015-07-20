@@ -15,7 +15,10 @@ static RKH_EVT_T *qsto[ QSTO_SIZE ];
 
 enum
 {
-	MY_TRACE = RKH_TE_USER
+	MY_TRACE = RKH_TE_USER,
+	TRZ_SDIAG,
+	TRZ_SDIAG_START,
+	TRZ_SDIAG_STOP,
 };
 
 
@@ -85,6 +88,24 @@ main( int argc, char *argv[] )
 		RKH_TUSR_FUN( main );
 		RKH_TUSR_SIG( ZERO );
 	RKH_TRC_USR_END();
+
+
+
+	RKH_FILTER_OFF_EVENT( TRZ_SDIAG );
+	RKH_FILTER_OFF_EVENT( TRZ_SDIAG_STOP );
+	RKH_TR_FWK_TUSR( TRZ_SDIAG );
+	RKH_TR_FWK_TUSR( TRZ_SDIAG_STOP );
+
+	RKH_TRC_USR_BEGIN( TRZ_SDIAG )
+	{
+		RKH_TUSR_STR( "ahsm.sdiag" );
+	}RKH_TRC_USR_END();
+
+	RKH_TRC_USR_BEGIN( TRZ_SDIAG_STOP )
+	{
+		RKH_TUSR_STR( "SVG" );
+	}RKH_TRC_USR_END();
+
 
 	RKH_SMA_ACTIVATE( my, qsto, QSTO_SIZE, 0, 0 );
 	rkh_fwk_enter();
