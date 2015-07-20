@@ -109,11 +109,11 @@
 		typedef rui8_t RKH_TRC_FSLOT;
 	#endif
 #else
-	#if (RKH_TRC_MAX_SIGNALS * 8) <= RKH_BIT(8)
+	#if (RKH_TRC_MAX_SIGNALS * 8) <= 0x100/*RKH_BIT(8)*/
 		typedef rui8_t RKH_TRC_FSLOT;
-	#elif (RKH_TRC_MAX_SIGNALS * 8) <= RKH_BIT(16)
+	#elif (RKH_TRC_MAX_SIGNALS * 8) <= 0x10000/*RKH_BIT(16)*/
 		typedef rui16_t RKH_TRC_FSLOT;
-	#elif (RKH_TRC_MAX_SIGNALS * 8) <= RKH_BIT(32)
+	#elif (RKH_TRC_MAX_SIGNALS * 8) <= 0x1000000/*RKH_BIT(32)*/
 		typedef rui32_t RKH_TRC_FSLOT;
 	#else
 		typedef rui8_t RKH_TRC_FSLOT;

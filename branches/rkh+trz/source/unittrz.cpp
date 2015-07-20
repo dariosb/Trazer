@@ -2,6 +2,8 @@
  *	file: unittrz.cpp
  */
 
+#ifndef __TRAZER__
+
 #include <vector>
 #include "rkh.h"
 #include "unittrz.h"
@@ -79,3 +81,4 @@ utrz_check( rui8_t id, rui8_t nargs, ... )
 	return -1;
 }
 
+#endif

@@ -347,7 +347,7 @@ sdiag_exec_act( ulong ao, ulong act )
 {
 	char trbuff[ 100 ];
 
-	sprintf( trbuff, "%s->%s: \\-%s[arrow.type=solid];\n",
+	sprintf( trbuff, "%s->%s: \\-%s()[arrow.type=solid];\n",
 				map_obj(ao), map_obj(ao), map_obj(act));
 
 	insert_rawsdiag( sdfname, trbuff );
@@ -362,7 +362,7 @@ sdiag_sync( ulong f, ulong snr, ulong dest )
 {
 	char trbuff[ 100 ];
 
-	sprintf( trbuff, "%s->%s: \\-%s[arrow.type=solid];\n",
+	sprintf( trbuff, "%s->%s: \\-%s()[arrow.type=solid];\n",
 				map_obj(snr), map_obj(dest), map_obj(f));
 
 	insert_rawsdiag( sdfname, trbuff );

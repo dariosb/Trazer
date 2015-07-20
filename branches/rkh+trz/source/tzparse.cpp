@@ -780,13 +780,20 @@ char *
 h_exact( const void *tre )
 {
 	unsigned long atype, ao, st, act;
+	char ao_s[200]; 
+	char st_s[200];
+	char act_s[200];
 
 	atype = (unsigned long)assemble( sizeof(rui8_t) );
 	ao = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	st = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	act = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );	
 
-	tre_fmt( fmt, CTE(tre), 4, atype_str[atype], map_obj(ao), map_obj(st), map_obj(act) );
+	strncpy( ao_s, map_obj(ao), sizeof(ao_s) );
+	strncpy( st_s, map_obj(st), sizeof(st_s) );
+	strncpy( act_s, map_obj(act), sizeof(act_s) );
+
+	tre_fmt( fmt, CTE(tre), 4, atype_str[atype], ao_s, st_s, act_s );
 	
 	sdiag_exec_act( ao, act );
 
