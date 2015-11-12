@@ -28,7 +28,7 @@
 #define set_to_ts()		trb = ( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
 */
 
-static rui8_t lastnseq;
+static uint lastnseq;
 rui16_t TSTAMP_TICK_HZ;
 
 
@@ -126,7 +126,7 @@ get_ts( int en_ts, int sz_ts )
 
 
 int
-verify_nseq( rui8_t nseq )
+verify_nseq( uint nseq )
 {
 	int r;
 
@@ -848,6 +848,8 @@ h_tcfg( const void *tre )
 {
 	rui32_t *trb_32;
 
+	(void)tre;
+
 	trb = proc_version_code( trb );
 	trb_32 = (rui32_t *)trb;
 
@@ -1033,7 +1035,7 @@ usr_object( const rui8_t *p, const USR_FMT_T *pfmt )
 	usrtrz_printf( pfmt->fmt, map_obj( obj ) );
 
 	/* +1 size field included */
-	return TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR + 1;
+	return (char)(TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR + 1);
 }
 
 char
@@ -1050,7 +1052,7 @@ usr_signal( const rui8_t *p, const USR_FMT_T *pfmt )
 	usrtrz_printf( pfmt->fmt, map_sig( e ) );
 
 	/* +1 size field included */
-	return sizeof_trze() + 1;
+	return (char)(sizeof_trze() + 1);
 }
 
 
@@ -1095,7 +1097,7 @@ usr_string( const rui8_t *p, const USR_FMT_T *pfmt )
 
 	/* +1 \0 included */
 	/* +1 because USR TRACE Format included */
-	return strlen((const char *)(p+1)) + 2;	
+	return (char)(strlen((const char *)(p+1)) + 2);	
 }
 
 char
@@ -1139,8 +1141,8 @@ usr_fmt( const void *tre )
 	}
 
 	pt += TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
-	tr_size -= TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP;
-	tr_size -= 1; /* because checksum */
+	tr_size = (ri8_t)(tr_size - TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP);
+	tr_size = (ri8_t)(tr_size - 1); /* because checksum */
 	lprintf( "User trace information\n" );
 
 	do

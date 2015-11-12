@@ -25,7 +25,7 @@
 typedef struct
 {
 	TRZTS_T ts;
-	rui8_t nseq;
+	uint nseq;
 	const char *group;
 	const char *name;
 } TRAZER_DATA_T;

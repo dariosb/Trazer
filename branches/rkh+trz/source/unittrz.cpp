@@ -23,10 +23,53 @@ typedef struct utrz_evt
 
 vector <UTRZ_EVT_ST> utrz_tbl;
 
+typedef struct utrz_arg_t
+{
+	rui8_t	ignored;
+	rui32_t	value;
+}UTRZ_ARG_T;
+
+typedef struct v_utrz_arg_t
+{
+	vector <utrz_arg_t> args;
+}V_UTRZ_ARG_T;
+
+typedef struct utrz_expect_evt
+{
+	unsigned int line;
+	rui8_t id;
+	V_UTRZ_ARG_T va;
+}UTRZ_EXPECT_EVT;
+
+vector <UTRZ_EXPECT_EVT> utrz_expect_evttbl;
+vector <rui8_t> utrz_ignore_evttbl;
+
+
 void
 utrz_clean( void )
 {
 	utrz_tbl.clear();
+}
+
+
+void
+utrz_expect( unsigned int line, rui8_t id, rui8_t nargs, ... )
+{
+
+}
+
+
+void
+sm_init_ignore( rui8_t id )
+{
+
+}
+
+
+void
+sm_init_ignoreArg_initState( unsigned int line, rui8_t id, rui8_t arg_ix )
+{
+
 }
 
 
@@ -80,5 +123,6 @@ utrz_check( rui8_t id, rui8_t nargs, ... )
 	va_end( args );
 	return -1;
 }
+
 
 #endif
