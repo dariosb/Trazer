@@ -189,7 +189,7 @@ seqdiag_trn_insert( ofstream *ft, TRN_ST *p )
 
 static char factor[20];
 static int hfact;
-static	int offs;
+static uint offs;
 
 int
 get_seqdiag_high_factor( const char *fname )
