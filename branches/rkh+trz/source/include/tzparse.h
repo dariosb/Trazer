@@ -166,6 +166,7 @@ char * h_sync( const void *tre );
 char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );
+char * h_ExpAnyArgs( const void *tre );
 
 
 #endif

@@ -68,13 +68,12 @@ using namespace std;
 #define aty_s		(char *)"%s"
 
 
-/* --- Memory Pool (MP) ------------------------ */
+/* --- Memory Pool events (MP group) ----------------------------------- */
 DCLR_TRE( RKH_TE_MP_INIT,		"MP", "INIT",		h_mp_init,	mp_s, nblock_d, bsize_d );
 DCLR_TRE( RKH_TE_MP_GET,		"MP", "GET",		h_mp_get,	mp_s, nfree_d, nmin_d  );
 DCLR_TRE( RKH_TE_MP_PUT,		"MP", "PUT",		h_symnblk,	mp_s, nfree_d  );
 
-
-/* --- Queue (RQ) ------------------------ */
+/* --- Queue events (RQ group) ----------------------------------------- */
 DCLR_TRE( RKH_TE_RQ_INIT,		"RQ", "INIT",       h_2symnused,q_s, ao_s, nelem_d );
 DCLR_TRE( RKH_TE_RQ_GET,		"RQ", "GET",        h_symnused,	q_s, nelem_d );
 DCLR_TRE( RKH_TE_RQ_FIFO,		"RQ", "FIFO",       h_rq_ffll,	q_s, nelem_d, nmin_d );
@@ -83,8 +82,7 @@ DCLR_TRE( RKH_TE_RQ_FULL,		"RQ", "FULL",       h_1sym,		q_s );
 DCLR_TRE( RKH_TE_RQ_DPT,		"RQ", "DPT",        h_1sym,		q_s );
 DCLR_TRE( RKH_TE_RQ_GET_LAST,	"RQ", "GET_LAST",   h_1sym,		q_s );
 
-
-/* --- State Machine Application (SMA) --- */
+/* --- State Machine Application events (SMA group) -------------------- */
 DCLR_TRE( RKH_TE_SMA_ACT,		"SMA", "ACT",		h_symu8,	ao_s, p_d );
 DCLR_TRE( RKH_TE_SMA_TERM,		"SMA", "TERM",		h_symu8,	ao_s, p_d );
 DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_d, refc_d );
@@ -94,8 +92,7 @@ DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s, rt_d );
 
-
-/* --- State machine (SM) ---------------- */
+/* --- State machine events (SM group) --------------------------------- */
 DCLR_TRE( RKH_TE_SM_INIT,       "SM",  "INIT",       h_2sym,	ao_s, ist_s );
 DCLR_TRE( RKH_TE_SM_CLRH,       "SM",  "CLRH",       h_2sym,	ao_s, h_s );
 DCLR_TRE( RKH_TE_SM_TRN,        "SM",  "TRN",        h_symtrn,	ao_s, sst_s, tst_s );
@@ -114,16 +111,14 @@ DCLR_TRE( RKH_TE_SM_EX_HLEVEL,  "SM",  "EX_HLEVEL",  h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_1sym,	ao_s );
 DCLR_TRE( RKH_TE_SM_EXE_ACT,    "SM",  "EXE_ACT",    h_exact,	aty_s, ao_s, st_s, func_s );
 
-
-/* --- Timer (TIM) ----------------------- */
+/* --- Timer events (TIM group) ---------------------------------------- */
 DCLR_TRE( RKH_TE_TMR_INIT,		"TIM", "INIT",		h_tinit,	t_s, sig_s );
 DCLR_TRE( RKH_TE_TMR_START,		"TIM", "START",		h_tstart,	t_s, ao_s, ntick_d, per_d );
 DCLR_TRE( RKH_TE_TMR_STOP,		"TIM", "STOP",		h_tstop,	t_s, ntick_d, per_d );
 DCLR_TRE( RKH_TE_TMR_TOUT,		"TIM", "TOUT",		h_tout,		t_s, sig_s, ao_s );
 DCLR_TRE( RKH_TE_TMR_REM,		"TIM", "REM",		h_1sym,		t_s );
 
-
-/* --- Framework (RKH) ------------------- */
+/* --- Framework and misc. events (FWK group) -------------------------- */
 DCLR_TRE( RKH_TE_FWK_EN,        "FWK", "EN",         h_none,	NULL );
 DCLR_TRE( RKH_TE_FWK_EX,        "FWK", "EX",         h_none,	NULL );
 DCLR_TRE( RKH_TE_FWK_EPREG,     "FWK", "EPREG",      h_epreg,	ep_d, ss_d, es_d );
@@ -146,17 +141,30 @@ DCLR_TRE( RKH_TE_FWK_PSTATE,    "FWK", "PSTATE",     h_symst,	ao_s, obj_x, nm_s 
 DCLR_TRE( RKH_TE_FWK_TIMER,     "FWK", "TIMER",      h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_EPOOL,     "FWK", "EPOOL",      h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_QUEUE,     "FWK", "QUEUE",      h_symobj,	obj_x, nm_s );
+
+/* --- User events (USR group) ----------------------------------------- */
 DCLR_TRE( RKH_TE_USER,          "USR", "USR#",       NULL,		NULL );
+
+/* --- Unit test harness events (UT group) ----------------------------- */
+DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",		NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",	NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",		NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",	NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT",		NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArgs, line_d, aty_s );
+DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	NULL,	NULL );
+
 
 
 static FMT_ID_T *fmt_id_tbl[] =
 {
+	/* --- Memory Pool events (MP group) ----------------------------------- */
 	TRE_ST(RKH_TE_MP_INIT),
 	TRE_ST( RKH_TE_MP_GET),
 	TRE_ST( RKH_TE_MP_PUT),
 
-
-	/* --- Queue (RQ) ------------------------ */
+    /* --- Queue events (RQ group) ----------------------------------------- */
 	TRE_ST( RKH_TE_RQ_INIT),
 	TRE_ST( RKH_TE_RQ_GET),
 	TRE_ST( RKH_TE_RQ_FIFO),
@@ -165,8 +173,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_RQ_DPT),
 	TRE_ST( RKH_TE_RQ_GET_LAST),
 
-
-	/* --- State Machine Application (SMA) --- */
+    /* --- State Machine Application events (SMA group) -------------------- */	
 	TRE_ST( RKH_TE_SMA_ACT),
 	TRE_ST( RKH_TE_SMA_TERM),
 	TRE_ST( RKH_TE_SMA_GET),
@@ -176,8 +183,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_SMA_UNREG),
 	TRE_ST( RKH_TE_SMA_DCH),
 
-
-	/* --- State machine (SM) ---------------- */
+    /* --- State machine events (SM group) --------------------------------- */
 	TRE_ST( RKH_TE_SM_INIT),
 	TRE_ST( RKH_TE_SM_CLRH),
 	TRE_ST( RKH_TE_SM_TRN),
@@ -196,8 +202,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_SM_EX_TSEG),
 	TRE_ST( RKH_TE_SM_EXE_ACT),
 
-
-	/* --- Timer (TIM) ----------------------- */
+    /* --- Timer events (TIM group) ---------------------------------------- */
 	TRE_ST( RKH_TE_TMR_INIT),
 	TRE_ST( RKH_TE_TMR_START),
 	TRE_ST( RKH_TE_TMR_STOP),
@@ -205,7 +210,7 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_TMR_REM),
 
 
-	/* --- Framework (RKH) ------------------- */
+    /* --- Framework and misc. events (FWK group) -------------------------- */
 	TRE_ST( RKH_TE_FWK_EN),
 	TRE_ST( RKH_TE_FWK_EX),
 	TRE_ST( RKH_TE_FWK_EPREG),
@@ -228,7 +233,19 @@ static FMT_ID_T *fmt_id_tbl[] =
 	TRE_ST( RKH_TE_FWK_TIMER),
 	TRE_ST( RKH_TE_FWK_EPOOL),
 	TRE_ST( RKH_TE_FWK_QUEUE),
-	TRE_ST( RKH_TE_USER)
+
+    /* --- User events (USR group) ----------------------------------------- */	
+	TRE_ST( RKH_TE_USER),
+
+    /* --- Unit test harness events (UT group) ----------------------------- */
+    TRE_ST( RKH_TE_UT_INIT ),
+    TRE_ST( RKH_TE_UT_CLEANUP ),
+    TRE_ST( RKH_TE_UT_VERIFY ),
+    TRE_ST( RKH_TE_UT_IGNORE_GROUP ),
+    TRE_ST( RKH_TE_UT_EXPECT ),
+    TRE_ST( RKH_TE_UT_EXPECT_ANYARGS ),
+    TRE_ST( RKH_TE_UT_IGNORE ),
+    TRE_ST( RKH_TE_UT_IGNORE_ARG )
 };
 
 TRE_T fmt_usr_tbl = 
@@ -269,4 +286,10 @@ TRE_T *
 point_2_trevt( unsigned char ix )
 {
 	return &fmt_id_tbl[ix]->tre;
+}
+
+string
+trevt_name( unsigned int ix )
+{
+	return fmt_id_tbl[ix]->idstr;
 }
