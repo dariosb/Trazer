@@ -34,10 +34,10 @@
  *	By                       : LF
  *  --------------------------------------------------------------------------
  *  \endcond
- * 
+ *
  * 	\file
  *
- *	\brief		RKH user configuration.
+ * 	\brief 		RKH user configuration
  */
 
 
@@ -196,7 +196,6 @@
 
 #define RKH_CFG_HOOK_PUT_TRCEVT_EN        RKH_DISABLED
 
-
 /**
  * 	Specify the frequency of the framework tick interrupt (number of ticks 
  * 	in one second). It's the rate at which the rkh_tmr_tick() function is 
@@ -205,7 +204,7 @@
  * 	services, converting ticks to time. See RKH_TICK_RATE_MS constant.
  */
 
-#define RKH_CFG_FWK_TICK_RATE_HZ			100u
+#define RKH_CFG_FWK_TICK_RATE_HZ		100u
 
 
 /* --- Configuration options related to state machine applications -------- */
@@ -261,35 +260,35 @@
  *	pseudostates usage.
  */
 
-#define RKH_CFG_SMA_PSEUDOSTATE_EN		RKH_ENABLED
+#define RKH_CFG_SMA_PSEUDOSTATE_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_SMA_DEEP_HIST_EN and #RKH_CFG_SMA_PSEUDOSTATE_EN are 
  *	set to 1, the RKH allows deep history pseudostate usage.
  */
 
-#define RKH_CFG_SMA_DEEP_HIST_EN		RKH_ENABLED
+#define RKH_CFG_SMA_DEEP_HIST_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_SMA_SHALLOW_HIST_EN and #RKH_CFG_SMA_PSEUDOSTATE_EN 
  *	are set to 1, the RKH allows shallow history pseudostate usage.
  */
 
-#define RKH_CFG_SMA_SHALLOW_HIST_EN		RKH_ENABLED
+#define RKH_CFG_SMA_SHALLOW_HIST_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_SMA_CHOICE_EN and #RKH_CFG_SMA_PSEUDOSTATE_EN are set to 
  *	1, the RKH allows choice pseudostate usage.
  */
 
-#define RKH_CFG_SMA_CHOICE_EN			RKH_ENABLED
+#define RKH_CFG_SMA_CHOICE_EN			RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_SMA_CONDITIONAL_EN and #RKH_CFG_SMA_PSEUDOSTATE_EN are 
  *	set to 1, the RKH allows branch (or conditional) pseudostate usage.
  */
 
-#define RKH_CFG_SMA_CONDITIONAL_EN		RKH_ENABLED
+#define RKH_CFG_SMA_CONDITIONAL_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_SMA_SUBMACHINE_EN and #RKH_CFG_SMA_PSEUDOSTATE_EN are 
@@ -303,7 +302,7 @@
  *	when posting an event the RKH inserts a pointer to the sender object.
  */
 
-#define RKH_CFG_SMA_TRC_SNDR_EN			RKH_DISABLED
+#define RKH_CFG_SMA_TRC_SNDR_EN			RKH_ENABLED
 
 /**
  *	If the #RKH_CFG_SMA_INIT_EVT_EN is set to 1 then an initial event could 
@@ -396,7 +395,7 @@
  *	RKH_SMA_T. See RKH_PPRO_T definition.
  */
 
-#define RKH_CFG_SMA_PPRO_ARG_SMA_EN		RKH_ENABLED
+#define RKH_CFG_SMA_PPRO_ARG_SMA_EN		RKH_ENABLED	
 
 
 /* --- Configuration options related to trace facility -------------------- */
@@ -415,7 +414,7 @@
  * 	automatically define RKH_FILTER_ON_GROUP(), RKH_FILTER_OFF_GROUP(), 
  * 	RKH_FILTER_ON_EVENT(), RKH_FILTER_OFF_EVENT(), 
  * 	RKH_FILTER_ON_GROUP_ALL_EVENTS(), RKH_FILTER_OFF_GROUP_ALL_EVENTS(), 
- *	RKH_FILTER_ON_SMA(), and RKH_FILTER_OFF_SMA() macros.
+ * 	RKH_FILTER_ON_SMA(), and RKH_FILTER_OFF_SMA() macros.
  */
 
 #define RKH_CFG_TRC_RTFIL_EN			RKH_ENABLED
@@ -442,7 +441,7 @@
  *	This trace records are application-specific.
  */
 
-#define RKH_CFG_TRC_USER_TRACE_EN		RKH_ENABLED
+#define RKH_CFG_TRC_USER_TRACE_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_TRC_ALL_EN is set to 1 then RKH will include all its own 
@@ -586,7 +585,7 @@
  *	record.
  */
 
-#define RKH_CFG_TRC_SM_EXE_ACT_EN		RKH_ENABLED
+#define RKH_CFG_TRC_SM_EXE_ACT_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_TRC_NSEQ_EN is set to 1 then RKH will add to the trace 
@@ -616,7 +615,7 @@
  *	this number, the lower the RAM consumption.
  */
 
-#define RKH_CFG_TRC_SIZEOF_STREAM		256u
+#define RKH_CFG_TRC_SIZEOF_STREAM		512u
 
 
 /* --- Configuration options related to queue (by reference) facility ----- */
@@ -643,7 +642,7 @@
  * 	See rkh_rq_get_lwm() function.
  */
 
-#define RKH_CFG_RQ_GET_LWMARK_EN		RKH_ENABLED
+#define RKH_CFG_RQ_GET_LWMARK_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_RQ_GET_INFO_EN is set to 1 then RKH allows to collect and 
@@ -659,7 +658,7 @@
  *	remove it. See rkh_rq_read() function.
  */
 
-#define	RKH_CFG_RQ_READ_EN				RKH_ENABLED
+#define	RKH_CFG_RQ_READ_EN				RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_RQ_DEPLETE_EN is set to 1 then RKH will include the 
@@ -668,7 +667,7 @@
  *	See rkh_rq_deplete() function.
  */
 
-#define	RKH_CFG_RQ_DEPLETE_EN			RKH_ENABLED
+#define	RKH_CFG_RQ_DEPLETE_EN			RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_RQ_IS_FULL_EN is set to 1 then RKH will include the 
@@ -676,7 +675,7 @@
  *	See rkh_rq_is_full() function.
  */
 
-#define	RKH_CFG_RQ_IS_FULL_EN			RKH_ENABLED
+#define	RKH_CFG_RQ_IS_FULL_EN			RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_RQ_GET_NELEMS_EN is set to 1 then RKH will include the 
@@ -685,7 +684,7 @@
  *	See rkh_rq_get_num() function.
  */
 
-#define	RKH_CFG_RQ_GET_NELEMS_EN		RKH_ENABLED
+#define	RKH_CFG_RQ_GET_NELEMS_EN		RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_RQ_PUT_LIFO_EN is set to 1 then RKH will include the 
@@ -742,7 +741,7 @@
  *	See rkh_mp_get_nfree() function.
  */
 
-#define RKH_CFG_MP_GET_NFREE_EN			RKH_ENABLED
+#define RKH_CFG_MP_GET_NFREE_EN			RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_MP_GET_LWM_EN is set to 1 then RKH will include the 
@@ -752,7 +751,7 @@
  *	See rkh_mp_get_low_wmark() function.
  */
 
-#define RKH_CFG_MP_GET_LWM_EN			RKH_ENABLED
+#define RKH_CFG_MP_GET_LWM_EN			RKH_DISABLED
 
 /**
  *	If the #RKH_CFG_MP_GET_INFO_EN is set to 1 then RKH will include the 
@@ -766,8 +765,8 @@
 /* --- Configuration options related to software timer facility ----------- */
 
 /**
- *	If the #RKH_CFG_TMR_EN is set to 1 then RKH will include the native 
- *	software timer facility.
+ *	If the #RKH_CFG_RQ_EN is set to 1 then RKH will include the native software 
+ *	timer facility.
  */
 
 #define RKH_CFG_TMR_EN					RKH_ENABLED

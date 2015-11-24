@@ -1433,3 +1433,19 @@ h_ExpAnyArgs( const void *tre )
 
 	return fmt;
 }
+
+
+char *
+h_Expect( const void *tre )
+{
+	unsigned long line, trc_e;
+
+	line = (unsigned long)assemble( 16 );
+	trc_e = (unsigned long)assemble( RKH_CFG_TRC_SIZEOF_TE_ID );
+
+	tre_fmt( fmt, CTE( tre ), 2, line, trevt_name(trc_e).c_str() );
+
+
+
+	return fmt;
+}
