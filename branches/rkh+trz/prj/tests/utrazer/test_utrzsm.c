@@ -31,6 +31,18 @@
 TEST_GROUP(utrzsm);
 
 /* ---------------------------- Local variables ---------------------------- */
+
+static RKH_ROM_STATIC_EVENT( eA, A );
+static RKH_ROM_STATIC_EVENT( eB, B );
+static RKH_ROM_STATIC_EVENT( eC, C );
+static RKH_ROM_STATIC_EVENT( eD, D );
+static RKH_ROM_STATIC_EVENT( eE, E );
+static RKH_ROM_STATIC_EVENT( eF, F );
+static RKH_ROM_STATIC_EVENT( eG, G );
+static RKH_ROM_STATIC_EVENT( eH, H );
+static RKH_ROM_STATIC_EVENT( eI, I );
+static RKH_ROM_STATIC_EVENT( eTerm, TERMINATE );
+
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
@@ -43,12 +55,12 @@ TEST_SETUP(utrzsm)
     unitrazer_init();
     sm_ignore();        /* Ignore every trace event of SM group */
 
-    RKH_TR_FWK_AO(blinky);
-    RKH_TR_FWK_STATE(blinky, &s0);
-    RKH_TR_FWK_STATE(blinky, &s1);
-    RKH_TR_FWK_SIG(evAlpha);
+    RKH_TR_FWK_AO(aotest);
+    RKH_TR_FWK_STATE(aotest, &s);
+    RKH_TR_FWK_STATE(aotest, &s1);
+    RKH_TR_FWK_SIG(A);
 
-    rkh_sma_init_hsm(aoTest);
+    rkh_sma_init_hsm(aotest);
 }
 
 TEST_TEAR_DOWN(utrzsm)
@@ -68,7 +80,8 @@ TEST(utrzsm, simpleTransition)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-    sm_trn_expect(&s0, &s1);
+    //sm_trn_expect(&s11, &s211);
+	sm_trn_expect(CST(&s11), CST(&s211));
 
     /* -------- Exercise ------------ 
      * Do something to the system 
@@ -77,7 +90,7 @@ TEST(utrzsm, simpleTransition)
     /* Each recorded trace event is checked to see that it matches */
     /* the expected trace event exactly. If calls are out of order or */
     /* parameters are wrong, the test immediately fails. */
-    ret = rkh_sma_dispatch(aoTest, evAlpha);
+    ret = rkh_sma_dispatch(aotest, CE(&eA));
 
     /* -------- Verify --------------
      * Check the expected outcome 

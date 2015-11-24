@@ -1439,13 +1439,14 @@ char *
 h_Expect( const void *tre )
 {
 	unsigned long line, trc_e;
+	const TRE_T * p;
+	
+	line = assemble( sizeof_utline() );
+	trc_e = (unsigned long)assemble( sizeof_trze() );
 
-	line = (unsigned long)assemble( 16 );
-	trc_e = (unsigned long)assemble( RKH_CFG_TRC_SIZEOF_TE_ID );
+	p = find_trevt( trc_e );
 
-	tre_fmt( fmt, CTE( tre ), 2, line, trevt_name(trc_e).c_str() );
-
-
-
+	tre_fmt( fmt, CTE( tre ), 3, line, p->group.c_str(), p->name.c_str() );
+	
 	return fmt;
 }

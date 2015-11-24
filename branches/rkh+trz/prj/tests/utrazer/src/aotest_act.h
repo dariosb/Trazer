@@ -38,13 +38,19 @@ extern "C" {
 /* -------------------------- Function prototypes -------------------------- */
 
 /* Defines HSM init function */
-void blinky_init(const Blinky *const me);
+void aotest_init(aoTest *const me);
 
-/* 
+/*
  * Defines transition action functions
  */
-void blinky_led_on(const Blinky *const me, RKH_EVT_T *pe);
-void blinky_led_off(const Blinky *const me, RKH_EVT_T *pe);
+void foo_set2zero(aoTest *const me, RKH_EVT_T *pe);
+void foo_set2one(aoTest *const me, RKH_EVT_T *pe);
+
+/*
+ * Defines guards functions
+ */
+rbool_t foo_isn_zero(aoTest*const me, RKH_EVT_T *pe);
+rbool_t foo_is_zero(aoTest *const me, RKH_EVT_T *pe);
 
 /* -------------------- External C language linkage end -------------------- */
 

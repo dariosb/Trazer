@@ -150,11 +150,12 @@ DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",		NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",	NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",		NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",	NULL,	NULL );
-DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT",		h_Expect,	line_d, aty_s );
+DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT",		h_Expect,	line_d, aty_s, aty_s );
 DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArgs, line_d, aty_s );
 DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	NULL,	NULL );
 
+DCLR_TRE( RKH_TE_NEVENT,          "ERR", "ERR#",       NULL,		NULL );
 
 
 static FMT_ID_T *fmt_id_tbl[] =
@@ -245,7 +246,9 @@ static FMT_ID_T *fmt_id_tbl[] =
     TRE_ST( RKH_TE_UT_EXPECT ),
     TRE_ST( RKH_TE_UT_EXPECT_ANYARGS ),
     TRE_ST( RKH_TE_UT_IGNORE ),
-    TRE_ST( RKH_TE_UT_IGNORE_ARG )
+    TRE_ST( RKH_TE_UT_IGNORE_ARG ),
+
+    TRE_ST( RKH_TE_NEVENT )
 };
 
 TRE_T fmt_usr_tbl = 
@@ -259,7 +262,7 @@ get_evt_id( string *idstr )
 {
 	FMT_ID_T *p;
 
-	for( p=fmt_id_tbl[0]; p->tre.id != RKH_TE_USER; ++p )
+	for( p=fmt_id_tbl[0]; p->tre.id != RKH_TE_NEVENT; ++p )
 		if( idstr->compare(p->idstr) == 0 )
 			return p;
 
@@ -273,7 +276,7 @@ find_trevt( unsigned char id )
 {
 	static FMT_ID_T **p;
 
-	for( p=&fmt_id_tbl[0]; (*p)->tre.id != RKH_TE_USER; ++p )
+	for( p=&fmt_id_tbl[0]; (*p)->tre.id != RKH_TE_NEVENT; ++p )
 	{
 		if( id == (*p)->tre.id )
 				return &((*p)->tre);

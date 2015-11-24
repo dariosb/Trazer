@@ -64,7 +64,6 @@ extern "C" {
 #endif
 
 /* --------------------------------- Macros -------------------------------- */
-
 /* ============================= Expect macros ============================= */
 
 /* RKH_TE_SM_TRN */
@@ -93,7 +92,7 @@ extern "C" {
 /* ... */
 
 #define sm_ignore() \
-    unitrazer_ignoreGroup(__LINE__, group)
+    unitrazer_ignoreGroup(__LINE__, RKH_SM_START)
 
 /* -------------------------------- Constants ------------------------------ */
 

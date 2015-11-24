@@ -84,6 +84,8 @@ int sizeof_type( int type );
 #define sizeof_trzne()		sizeof_type( TRZ_RKH_CFG_RQ_SIZEOF_NELEM )
 #define sizeof_trzes()		sizeof_type( TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE )
 
+#define sizeof_utline()		sizeof_type( 4 )
+
 
 void trazer_output( int flg, TRAZER_DATA_T* tz );
 /*

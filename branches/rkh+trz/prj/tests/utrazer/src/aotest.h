@@ -34,31 +34,28 @@ extern "C" {
 /* --------------------------------- Macros -------------------------------- */
 /* -------------------------------- Constants ------------------------------ */
 
-#define LED_OFF_TIME            RKH_TIME_SEC(2)
-#define LED_ON_TIME             RKH_TIME_SEC(2)
-
 /* Signals */
 enum
 {
-    TIMEOUT,        /* 'blktim' timeout */
-    TERMINATE,      /* press the key escape on the keyboard */
-    BKY_NUM_EVENTS
+    A, B, C, D, E, F, G, H, I,
+    TERMINATE,
+    AOTEST_NUM_EVENTS
 };
 
-
 /* Declare HSM */
-RKH_SMA_DCLR(blinky);
+RKH_SMA_DCLR(aotest);
 
 /* Declare states and pseudostates */
-RKH_DCLR_BASIC_STATE led_off, led_on;
+RKH_DCLR_COMP_STATE s, s1, s2, s21;
+RKH_DCLR_BASIC_STATE s11, s211;
 
 /* ------------------------------- Data types ------------------------------ */
 
-typedef struct Blinky Blinky;
-struct Blinky      /* SMA derived from RKH_SMA_T structure */
+typedef struct aoTest aoTest;
+struct aoTest      /* SMA derived from RKH_SMA_T structure */
 {
     RKH_SMA_T sma;  /* base structure */
-    rui8_t cnt;     /* private member */
+    rui8_t foo;     /* private member */
 };
 
 /* -------------------------- External variables --------------------------- */
