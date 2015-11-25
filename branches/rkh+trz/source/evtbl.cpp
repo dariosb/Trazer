@@ -149,7 +149,7 @@ DCLR_TRE( RKH_TE_USER,          "USR", "USR#",       NULL,		NULL );
 DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",		NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",	NULL,	NULL );
 DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",		NULL,	NULL );
-DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",	NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",	h_IgnGroup,	NULL );
 DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT",		h_Expect,	line_d, aty_s, aty_s );
 DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArgs, line_d, aty_s );
 DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		NULL,	NULL );
@@ -272,7 +272,7 @@ get_evt_id( string *idstr )
 
 const
 TRE_T *
-find_trevt( unsigned char id )
+find_trevt( unsigned int id )
 {
 	static FMT_ID_T **p;
 
@@ -286,7 +286,7 @@ find_trevt( unsigned char id )
 
 const
 TRE_T *
-point_2_trevt( unsigned char ix )
+point_2_trevt( unsigned int ix )
 {
 	return &fmt_id_tbl[ix]->tre;
 }
@@ -295,4 +295,54 @@ string
 trevt_name( unsigned int ix )
 {
 	return fmt_id_tbl[ix]->idstr;
+}
+
+
+/********* Groups tables *******/
+
+#define DCLR_TRG( id, st, nm )		\
+	static TRG_T st_##id = 			\
+	{ 							    \
+	    id, st, nm, 	 			\
+	};
+
+#define TRG_ST(id)		&st_##id
+
+
+DCLR_TRG( RKH_TG_MP,    RKH_MP_START,   "MP" );
+DCLR_TRG( RKH_TG_RQ,        RKH_RQ_START,   "RQ" );
+DCLR_TRG( RKH_TG_SMA,       RKH_SMA_START,  "SMA" );
+DCLR_TRG( RKH_TG_SM,        RKH_SM_START,   "SM" );
+DCLR_TRG( RKH_TG_TMR,       RKH_TMR_START,  "TMR" );
+DCLR_TRG( RKH_TG_FWK,       RKH_FWK_START,  "FWK" );
+DCLR_TRG( RKH_TG_USR,       RKH_USR_START,  "USR" );
+DCLR_TRG( RKH_TG_UT,        RKH_UT_START,   "UT" );
+DCLR_TRG( RKH_TG_NGROUP,    0,              "NONE" );
+
+static TRG_T *grp_tbl[] =
+{
+    TRG_ST(RKH_TG_MP),
+    TRG_ST(RKH_TG_RQ),
+    TRG_ST(RKH_TG_SMA),
+    TRG_ST(RKH_TG_SM),
+    TRG_ST(RKH_TG_TMR),
+    TRG_ST(RKH_TG_FWK),
+    TRG_ST(RKH_TG_USR),
+    TRG_ST(RKH_TG_UT),
+
+    TRG_ST(RKH_TG_NGROUP) 
+};
+
+const
+TRG_T *
+find_trgroup( unsigned int id )
+{
+	static TRG_T **p;
+
+	for( p=&grp_tbl[0]; (*p)->id != RKH_TG_NGROUP; ++p )
+	{
+		if( id == (*p)->id )
+			return (*p);
+	}
+	return (TRG_T *)0;
 }

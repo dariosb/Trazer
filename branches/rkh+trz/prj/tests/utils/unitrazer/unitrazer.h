@@ -67,8 +67,8 @@ extern "C" {
 /* ============================= Expect macros ============================= */
 
 /* RKH_TE_SM_TRN */
-#define sm_trn_expect(sourceState, targetState) \
-    unitrazer_sm_trn_expect(__LINE__, sourceState, targetState)
+#define sm_trn_expect(ao, sourceState, targetState) \
+    unitrazer_sm_trn_expect(__LINE__, ao, sourceState, targetState)
 
 #define sm_trn_expectAnyArgs() \
     unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_TRN)
@@ -91,8 +91,17 @@ extern "C" {
 
 /* ... */
 
+#define mp_ignore() \
+    unitrazer_ignoreGroup(__LINE__, RKH_TG_MP)
+
+#define sma_ignore() \
+    unitrazer_ignoreGroup(__LINE__, RKH_TG_SMA)
+
+#define fwk_ignore() \
+    unitrazer_ignoreGroup(__LINE__, RKH_TG_FWK)
+
 #define sm_ignore() \
-    unitrazer_ignoreGroup(__LINE__, RKH_SM_START)
+    unitrazer_ignoreGroup(__LINE__, RKH_TG_SM)
 
 /* -------------------------------- Constants ------------------------------ */
 
@@ -118,6 +127,7 @@ extern "C" {
  *  \param[in] exp_targetState  expected target state of transition
  */
 void unitrazer_sm_trn_expect(UNITY_LINE_TYPE cmock_line, 
+                             const RKH_SMA_T *ao,
                              const RKH_ST_T *exp_sourceState, 
                              const RKH_ST_T *exp_targetState);
 
@@ -127,7 +137,7 @@ void unitrazer_sm_trn_expect(UNITY_LINE_TYPE cmock_line,
  *
  *  \param[in] cmock_line   line number from which this function is called
  */
-void unitrazer_evtProc_expect(UNITY_LINE_TYPE cmock_line);
+void unitrazer_sm_evtProc_expect(UNITY_LINE_TYPE cmock_line);
 
 /* ... */
 

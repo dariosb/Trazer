@@ -53,11 +53,15 @@ TEST_SETUP(utrzsm)
      * Establish the preconditions to the test 
      */
     unitrazer_init();
-    sm_ignore();        /* Ignore every trace event of SM group */
+    fwk_ignore();        /* Ignore every trace event of FWK group */
 
     RKH_TR_FWK_AO(aotest);
     RKH_TR_FWK_STATE(aotest, &s);
     RKH_TR_FWK_STATE(aotest, &s1);
+    RKH_TR_FWK_STATE(aotest, &s11);
+    RKH_TR_FWK_STATE(aotest, &s2);
+    RKH_TR_FWK_STATE(aotest, &s21);
+    RKH_TR_FWK_STATE(aotest, &s211);
     RKH_TR_FWK_SIG(A);
 
     rkh_sma_init_hsm(aotest);
@@ -80,8 +84,8 @@ TEST(utrzsm, simpleTransition)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-    //sm_trn_expect(&s11, &s211);
-	sm_trn_expect(CST(&s11), CST(&s211));
+	sm_trn_expect(aotest, CST(&s11), CST(&s211));
+	sm_evtProc_expect();
 
     /* -------- Exercise ------------ 
      * Do something to the system 

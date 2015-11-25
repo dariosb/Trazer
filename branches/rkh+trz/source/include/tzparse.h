@@ -96,6 +96,13 @@ typedef struct tre_t
 	HDLR_T fmt_args;
 } TRE_T;
 
+typedef struct trg_t
+{
+	unsigned char id;
+	unsigned int start;
+	char * name;
+} TRG_T;
+
 typedef struct sym_evt_q
 {
 	unsigned long tstamp;
@@ -167,6 +174,7 @@ char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );
 char * h_ExpAnyArgs( const void *tre );
+char * h_IgnGroup( const void *tre );
 char * h_Expect( const void *tre );
 
 #endif

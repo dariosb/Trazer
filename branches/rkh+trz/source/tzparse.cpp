@@ -1424,29 +1424,43 @@ trazer_init( void )
 char *
 h_ExpAnyArgs( const void *tre )
 {
-	unsigned long line, trc_e;
-
-	line = (unsigned long)assemble( 16 );
-	trc_e = (unsigned long)assemble( RKH_CFG_TRC_SIZEOF_TE_ID );
-
-	tre_fmt( fmt, CTE( tre ), 2, line, trevt_name(trc_e).c_str() );
 
 	return fmt;
 }
 
 
 char *
-h_Expect( const void *tre )
+h_IgnGroup( const void *tre )
 {
-	unsigned long line, trc_e;
-	const TRE_T * p;
+	unsigned long line; 
+	unsigned int trc_gr;
+	const TRG_T * p;
 	
 	line = assemble( sizeof_utline() );
-	trc_e = (unsigned long)assemble( sizeof_trze() );
+	trc_gr = (unsigned int)assemble( 1 );
+
+	p = find_trgroup( trc_gr );
+
+    sprintf( fmt, "(%d) %s", line, p->name );
+	return fmt;
+}
+
+char *
+h_Expect( const void *tre )
+{
+	unsigned long line; 
+	unsigned int trc_e;
+	const TRE_T * p;
+	string s_evt;
+	
+	line = assemble( sizeof_utline() );
+	trc_e = (unsigned int)assemble( sizeof_trze() );
 
 	p = find_trevt( trc_e );
 
-	tre_fmt( fmt, CTE( tre ), 3, line, p->group.c_str(), p->name.c_str() );
-	
-	return fmt;
+	s_evt = p->group + "_" + p->name;
+
+	lprintf( "(%d) %-10s: ", line, s_evt.c_str() );
+
+	return p->fmt_args( p );
 }
