@@ -1422,9 +1422,22 @@ trazer_init( void )
 
 
 char *
-h_ExpAnyArgs( const void *tre )
+h_utInit( const void *tre )
 {
+	return fmt;
+}
 
+
+char *
+h_utCleanup( const void *tre )
+{
+	return fmt;
+}
+
+
+char *
+h_utVerify( const void *tre )
+{
 	return fmt;
 }
 
@@ -1445,6 +1458,7 @@ h_IgnGroup( const void *tre )
 	return fmt;
 }
 
+
 char *
 h_Expect( const void *tre )
 {
@@ -1464,3 +1478,13 @@ h_Expect( const void *tre )
 
 	return p->fmt_args( p );
 }
+
+char *
+h_ExpAnyArgs( const void *tre )
+{
+
+	return fmt;
+}
+
+
+

@@ -176,5 +176,8 @@ char * usr_fmt( const void *tre );
 char * h_ExpAnyArgs( const void *tre );
 char * h_IgnGroup( const void *tre );
 char * h_Expect( const void *tre );
+char * h_utInit( const void *tre );
+char * h_utCleanup( const void *tre );
+char * h_utVerify( const void *tre );
 
 #endif

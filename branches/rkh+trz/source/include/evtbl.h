@@ -36,9 +36,6 @@ string * get_evt_comment( unsigned int id );
 
 //extern vector <EVENT_INFO_ST> event_tbl;
 
-const TRE_T *point_2_trevt( unsigned int id );
-string trevt_name( unsigned int ix );
-
 #define TR_EVT_PRN_ARG_SEP	", "
 #define TR_EVT_PRNBUFF_SIZE	100
 

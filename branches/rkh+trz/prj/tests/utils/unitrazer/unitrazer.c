@@ -97,16 +97,35 @@ unitrazer_sm_evtProc_expect(UNITY_LINE_TYPE cmock_line)
 void 
 unitrazer_init(void)
 {
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_INIT);
+    RKH_TRC_END_WOFIL();
+    RKH_TRC_FLUSH();    
 }
 
 void 
 unitrazer_cleanup(void)
 {
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_CLEANUP);
+    RKH_TRC_END_WOFIL();
+    RKH_TRC_FLUSH();        
 }
 
 void 
 unitrazer_verify(void)
 {
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_VERIFY);
+    RKH_TRC_END_WOFIL();
+    RKH_TRC_FLUSH();            
+}
+
+void 
+unitrazer_ignoreGroup(UNITY_LINE_TYPE cmock_line, RKH_TRC_GROUPS group)
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_IGNORE_GROUP)
+    RKH_TRC_UI32(cmock_line);
+    RKH_TRC_UI8(group);
+    RKH_TRC_END_WOFIL();
+    RKH_TRC_FLUSH();    
 }
 
 void
@@ -140,14 +159,6 @@ unitrazer_ignoreArg(UNITY_LINE_TYPE cmock_line, rui8_t trcEvt, rui8_t noArg)
     RKH_TRC_FLUSH();    
 }
 
-void 
-unitrazer_ignoreGroup(UNITY_LINE_TYPE cmock_line, RKH_TRC_GROUPS group)
-{
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_IGNORE_GROUP)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(group);
-    RKH_TRC_END_WOFIL();
-    RKH_TRC_FLUSH();    
-}
+
 
 /* ------------------------------ File footer ------------------------------ */
