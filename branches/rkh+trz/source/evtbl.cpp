@@ -7,6 +7,7 @@
 #include "rkhtrc.h"
 #include "tzparse.h"
 #include "messages.h"
+#include "trzfrmt.h"
 
 using namespace std;
 
@@ -308,24 +309,24 @@ find_trevt( unsigned int id )
 
 /********* Groups tables *******/
 
-#define DCLR_TRG( id, st, nm )		\
-	static TRG_T st_##id = 			\
-	{ 							    \
-	    id, st, nm, 	 			\
+#define DCLR_TRG( id, nm )		\
+	static TRG_T st_##id = 	    \
+	{ 							\
+	    id, nm, 	 			\
 	};
 
 #define TRG_ST(id)		&st_##id
 
 
-DCLR_TRG( RKH_TG_MP,        RKH_MP_START,   "MP" );
-DCLR_TRG( RKH_TG_RQ,        RKH_RQ_START,   "RQ" );
-DCLR_TRG( RKH_TG_SMA,       RKH_SMA_START,  "SMA" );
-DCLR_TRG( RKH_TG_SM,        RKH_SM_START,   "SM" );
-DCLR_TRG( RKH_TG_TMR,       RKH_TMR_START,  "TMR" );
-DCLR_TRG( RKH_TG_FWK,       RKH_FWK_START,  "FWK" );
-DCLR_TRG( RKH_TG_USR,       RKH_USR_START,  "USR" );
-DCLR_TRG( RKH_TG_UT,        RKH_UT_START,   "UT" );
-DCLR_TRG( RKH_TG_NGROUP,    0,              "NONE" );
+DCLR_TRG( RKH_TG_MP,        "MP" );
+DCLR_TRG( RKH_TG_RQ,        "RQ" );
+DCLR_TRG( RKH_TG_SMA,       "SMA" );
+DCLR_TRG( RKH_TG_SM,        "SM" );
+DCLR_TRG( RKH_TG_TMR,       "TMR" );
+DCLR_TRG( RKH_TG_FWK,       "FWK" );
+DCLR_TRG( RKH_TG_USR,       "USR" );
+DCLR_TRG( RKH_TG_UT,        "UT" );
+DCLR_TRG( RKH_TG_NGROUP,    "NONE" );
 
 static TRG_T *grp_tbl[] =
 {

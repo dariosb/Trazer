@@ -66,14 +66,12 @@
 
 void
 unitrazer_sm_trn_expect(UNITY_LINE_TYPE cmock_line, 
-                        const RKH_SMA_T *exp_ao,
                         const RKH_ST_T *exp_sourceState, 
                         const RKH_ST_T *exp_targetState)
 {
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
     RKH_TRC_UI32(cmock_line);
     RKH_TRC_UI8(RKH_TE_SM_TRN);
-    RKH_TRC_SYM(exp_ao);
     RKH_TRC_SYM(exp_sourceState);
     RKH_TRC_SYM(exp_targetState);
     RKH_TRC_END_WOFIL();

@@ -485,6 +485,19 @@ h_tout( const void *tre )
 
 
 char *
+h_2u8( const void *tre )
+{
+	unsigned char u8_1, u8_2;
+
+	u8_1 = (unsigned char)assemble( sizeof( char ) );
+	u8_2 = (unsigned char)assemble( sizeof( char ) );
+	tre_fmt( fmt, CTE( tre ), 2, u8_1, u8_2 );
+	UTRZEVT_INSERT( 2, u8_1, u8_2 );
+	return fmt;
+}
+
+
+char *
 h_sym2u8( const void *tre )
 {
 	unsigned long obj;
@@ -536,6 +549,18 @@ h_symevt( const void *tre )
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
 	UTRZEVT_INSERT( 2, obj, e );
+	return fmt;
+}
+
+
+char *
+h_1sig( const void *tre )
+{
+	TRZE_T e;
+
+	e = (TRZE_T)assemble( sizeof_trze() );
+	tre_fmt( fmt, CTE( tre ), 1, map_sig( e ) );
+	UTRZEVT_INSERT( 1, e );
 	return fmt;
 }
 
@@ -796,6 +821,26 @@ h_exact( const void *tre )
 	
 	sdiag_exec_act( ao, act );
 
+	return fmt;
+}
+
+
+char *
+h_exact_no_ao( const void *tre )
+{
+	unsigned long atype, st, act;
+	char st_s[200];
+	char act_s[200];
+
+	atype = (unsigned long)assemble( sizeof(rui8_t) );
+	st = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+	act = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );	
+
+	strncpy( st_s, map_obj(st), sizeof(st_s) );
+	strncpy( act_s, map_obj(act), sizeof(act_s) );
+
+	tre_fmt( fmt, CTE(tre), 3, atype_str[atype], st_s, act_s );
+	
 	return fmt;
 }
 
@@ -1470,11 +1515,11 @@ h_Expect( const void *tre )
 	line = assemble( sizeof_utline() );
 	trc_e = (unsigned int)assemble( sizeof_trze() );
 
-	p = find_trevt( trc_e );
+	p = find_exp_trevt( trc_e );
 
 	s_evt = p->group + "_" + p->name;
 
-	lprintf( "(%d) %-10s: ", line, s_evt.c_str() );
+	lprintf( "(%d) %s: ", line, s_evt.c_str() );
 
 	return p->fmt_args( p );
 }

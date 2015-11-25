@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\..\..\source\config.cpp" />
     <ClCompile Include="..\..\..\..\source\debug.cpp" />
     <ClCompile Include="..\..\..\..\source\error.cpp" />
+    <ClCompile Include="..\..\..\..\source\evexptbl.cpp" />
     <ClCompile Include="..\..\..\..\source\evtbl.cpp" />
     <ClCompile Include="..\..\..\..\source\getopt.cpp" />
     <ClCompile Include="..\..\..\..\source\lang.cpp" />

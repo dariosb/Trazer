@@ -2,7 +2,6 @@
 #ifndef __EVTBL_H__
 #define __EVTBL_H__
 
-
 #include <string>
 #include <vector>
 #include "tzparse.h"
@@ -31,6 +30,7 @@ typedef struct event_info_st
 //int add_to_evtbl( EVENT_INFO_ST *p );
 
 const TRE_T *find_trevt( unsigned int id );
+const TRE_T *find_exp_trevt( unsigned int id );
 
 string * get_evt_comment( unsigned int id );
 

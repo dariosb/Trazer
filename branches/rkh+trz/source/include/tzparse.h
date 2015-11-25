@@ -99,7 +99,6 @@ typedef struct tre_t
 typedef struct trg_t
 {
 	unsigned char id;
-	unsigned int start;
 	char * name;
 } TRG_T;
 
@@ -147,8 +146,10 @@ char * h_2sym( const void *tre );
 char * h_symtrn( const void *tre );
 char * h_symrc( const void *tre );
 char * h_symu8( const void *tre );
+char * h_2u8( const void *tre );
 char * h_sym2u8( const void *tre );
 char * h_sig2u8( const void *tre );
+char * h_1sig( const void *tre );
 char * h_symevt( const void *tre );
 char * h_sma_get( const void *tre );
 char * h_sma_ff( const void *tre );
@@ -169,6 +170,7 @@ char * h_tstart( const void *tre );
 char * h_tstop( const void *tre );
 char * h_tout( const void *tre );
 char * h_exact( const void *tre );
+char * h_exact_no_ao( const void *tre );
 char * h_sync( const void *tre );
 char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
