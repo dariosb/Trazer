@@ -87,6 +87,9 @@
     <ClCompile Include="..\..\..\..\source\evexptbl.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\unittrz.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\include\cfgdep.h">

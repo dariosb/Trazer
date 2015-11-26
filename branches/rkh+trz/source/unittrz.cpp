@@ -2,60 +2,47 @@
  *	file: unittrz.cpp
  */
 
-#ifndef __TRAZER__
-
 #include <vector>
-#include "rkh.h"
 #include "unittrz.h"
 
 using namespace std;
 
-typedef struct v_u32args_t
-{
-	vector <rui32_t> args;
-}V_U32ARGS_T;
+int expect;
+UTRZ_EXPECT_EVT expected_evt;
 
-typedef struct utrz_evt
-{
-	unsigned char id;
-	V_U32ARGS_T va;
-}UTRZ_EVT_ST;
-
-vector <UTRZ_EVT_ST> utrz_tbl;
-
-typedef struct utrz_arg_t
-{
-	rui8_t	ignored;
-	rui32_t	value;
-}UTRZ_ARG_T;
-
-typedef struct v_utrz_arg_t
-{
-	vector <utrz_arg_t> args;
-}V_UTRZ_ARG_T;
-
-typedef struct utrz_expect_evt
-{
-	unsigned int line;
-	rui8_t id;
-	V_UTRZ_ARG_T va;
-}UTRZ_EXPECT_EVT;
-
-vector <UTRZ_EXPECT_EVT> utrz_expect_evttbl;
-vector <rui8_t> utrz_ignore_evttbl;
+vector <UTRZ_EXPECT_EVT> utrz_expected_lst;
+vector <rui8_t> utrz_ignore_lst;
 
 
 void
 utrz_clean( void )
 {
-	utrz_tbl.clear();
+    utrz_expected_lst.clear();
 }
 
 
 void
-utrz_expect( unsigned int line, rui8_t id, rui8_t nargs, ... )
+utrz_chk_expect( rui8_t nargs, ... )
 {
+    
+}
 
+void
+utrz_add_expect( rui8_t nargs, ... )
+{
+	va_list args;
+	UTRZ_ARG_T va;
+
+	va_start( args, nargs );
+	while( nargs-- )
+	{
+		va.ignored = EVT_EXPECTED;
+		va.value = va_arg( args, rui32_t );
+		expected_evt.va.args.push_back( va );
+	}
+	utrz_expected_lst.push_back( expected_evt );
+	va_end(args);
+    END_EXPECT();
 }
 
 
@@ -72,6 +59,8 @@ sm_init_ignoreArg_initState( unsigned int line, rui8_t id, rui8_t arg_ix )
 
 }
 
+#if 0
+vector <UTRZ_EVT_ST> utrz_tbl;
 
 void
 utrz_insert( rui8_t id, rui8_t nargs, ... )
@@ -123,7 +112,6 @@ utrz_check( rui8_t id, rui8_t nargs, ... )
 	va_end( args );
 	return -1;
 }
-
 
 
 #endif
