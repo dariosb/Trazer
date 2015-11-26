@@ -199,7 +199,8 @@ UT_RET_CODE
 ut_process(ProcessOut *pOut)
 {
     /* Blocking call with timeout */
-    return UT_PROC_FAIL;
+    //return UT_PROC_FAIL;
+	return UT_PROC_SUCCESS;
 }
 
 /* ---------------------------- Global functions --------------------------- */

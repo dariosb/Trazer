@@ -3,14 +3,16 @@
  */
 
 #include <vector>
+#include <list>
 #include "unittrz.h"
+#include "tzlog.h"
 
 using namespace std;
 
 int expect;
 UTRZ_EXPECT_EVT expected_evt;
 
-vector <UTRZ_EXPECT_EVT> utrz_expected_lst;
+list <UTRZ_EXPECT_EVT> utrz_expected_lst;
 vector <rui8_t> utrz_ignore_lst;
 
 
@@ -18,14 +20,9 @@ void
 utrz_clean( void )
 {
     utrz_expected_lst.clear();
+    utrz_ignore_lst.clear();
 }
 
-
-void
-utrz_chk_expect( rui8_t nargs, ... )
-{
-    
-}
 
 void
 utrz_add_expect( rui8_t nargs, ... )
@@ -43,6 +40,48 @@ utrz_add_expect( rui8_t nargs, ... )
 	utrz_expected_lst.push_back( expected_evt );
 	va_end(args);
     END_EXPECT();
+}
+
+
+void
+utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
+{
+	va_list args;
+	UTRZ_ARG_T va;
+    UTRZ_EXPECT_EVT rcv_evt;
+    UTRZ_EXPECT_EVT exp_evt;
+   	vector<rui32_t>::iterator arg_ix;
+
+    if( utrz_expected_lst.empty() )
+        return; 
+
+    if( is_ignored( id ) )
+        return;
+
+    rcv_evt.id = id;
+
+    /** process incoming trace event args **/
+	va_start( args, nargs );
+	while( nargs-- )
+	{
+		va.ignored = EVT_EXPECTED;
+		va.value = va_arg( args, rui32_t );        
+        rcv_evt.va.args.push_back( va );
+	}
+	va_end(args);
+
+    /** get expected trace event from list **/
+    exp_evt = utrz_expected_lst.front();
+    utrz_expected_lst.pop_front();
+
+    /** compare trace events id´s  **/
+    if( exp_evt.id != rcv_evt.id )
+    {
+        lprintf("FAIL: Trace Events diferents\n");
+        return;
+    }
+
+
 }
 
 

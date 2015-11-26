@@ -72,7 +72,7 @@ void utrz_clean( void );
 
 
 void utrz_add_expect( rui8_t nargs, ... );
-void utrz_chk_expect( rui8_t nargs, ... );
+void utrz_chk_expect( rui8_t id, rui8_t nargs, ... );
 
 void utrz_insert( rui8_t id, rui8_t nargs, ... );
 ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );
@@ -80,12 +80,12 @@ ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );
 
 #define RKH_TRC_CLEANUP()			utrz_clean()
 
-#define UTRZEVT_ADD_OR_CHK_EXPECT( q, ... )	        \
-        {                                           \
-            if( expect )                            \
-                utrz_add_expect( q, __VA_ARGS__ );  \
-            else                                    \
-                utrz_chk_expect( q, __VA_ARGS__ );  \
+#define UTRZEVT_ADD_OR_CHK_EXPECT( e, q, ... )	        \
+        {                                               \
+            if( expect )                                \
+                utrz_add_expect( q, __VA_ARGS__ );      \
+            else                                        \
+                utrz_chk_expect( CTE(e)->id, q, __VA_ARGS__ );   \
         }
 
 #define RKH_TRC_IS_FINAL_STATE(ao,state)	RKH_TE_SM_STATE,2,(ao),(state)

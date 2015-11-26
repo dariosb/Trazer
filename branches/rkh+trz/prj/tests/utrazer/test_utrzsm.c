@@ -64,6 +64,13 @@ TEST_SETUP(utrzsm)
     RKH_TR_FWK_STATE(aotest, &s211);
     RKH_TR_FWK_SIG(A);
 
+	/* set trace filters */
+	RKH_FILTER_ON_GROUP( RKH_TRC_ALL_GROUPS );
+	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
+	RKH_FILTER_OFF_EVENT( A );
+	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
+	RKH_FILTER_OFF_SMA( aotest );
+
     rkh_sma_init_hsm(aotest);
 }
 

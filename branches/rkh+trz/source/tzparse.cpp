@@ -206,7 +206,7 @@ h_none( const void *tre )
 	(void)tre;
 
 	strcpy( fmt, " " );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 0 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 0 );
 	return fmt;
 }
 
@@ -218,7 +218,7 @@ h_1sym( const void *tre )
 
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE(tre), 1, map_obj( obj ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 1, obj );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 1, obj );
 	return fmt;
 }
 
@@ -231,7 +231,7 @@ h_2sym( const void *tre )
 	obj1 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	obj2 = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj1 ), map_obj( obj2 ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj1, obj2 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj1, obj2 );
 
 	if( CTE(tre)->id == RKH_TE_SM_STATE )
 		sdiag_state( obj1, obj2 );
@@ -251,7 +251,7 @@ h_symtrn( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( smaobj ), map_obj( ssobj ), 
 					tsobj == 0 ? map_obj( ssobj ) : map_obj( tsobj ) );
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, smaobj, ssobj, tsobj == 0 ? ssobj : tsobj );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, smaobj, ssobj, tsobj == 0 ? ssobj : tsobj );
 	return fmt;
 }
 
@@ -267,7 +267,7 @@ h_sync( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 3, 
 			map_obj( f ), map_obj( snr ), map_obj( dest ));
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, f, snr, dest );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, f, snr, dest );
 	sdiag_sync( f, snr, dest );
 
 	return fmt;
@@ -283,7 +283,7 @@ h_symrc( const void *tre )
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), rctbl[ u8 ] );
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, u8 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, u8 );
 	return fmt;
 }
 
@@ -298,7 +298,7 @@ h_symu8( const void *tre )
 	u8 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), u8 );
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, u8 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, u8 );
 	return fmt;
 }
 
@@ -315,7 +315,7 @@ h_mp_init( const void *tre )
 	bsize = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, bsize  );
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj, nblock, bsize );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj, nblock, bsize );
 	return fmt;
 }
 
@@ -334,12 +334,12 @@ h_mp_get( const void *tre )
 	{
 		nmin = assemble( TRZ_RKH_CFG_MP_SIZEOF_NBLOCK );
 		tre_fmt( fmt, CTE(tre), 3, map_obj( obj ), nblock, nmin  );
-		UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj, nblock, nmin );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj, nblock, nmin );
 	}
 	else
 	{
 		tre_fmt( fmt, CTE(tre), 2, map_obj( obj ), nblock );
-		UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, nblock );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, nblock );
 	}
 
 	return fmt;
@@ -355,7 +355,7 @@ h_symnblk( const void *tre )
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nblock = (TRZNB_T)assemble( sizeof_trznb() );
 	tre_fmt( fmt, CTE(tre), 2, map_obj( obj ), nblock  );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, nblock );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, nblock );
 	return fmt;
 }
 
@@ -372,7 +372,7 @@ h_2symnused( const void *tre )
 
 	tre_fmt( fmt, CTE( tre ), 1, map_obj( obj1 ) );
 	tre_fmtfrom_cat( fmt, CTE(tre), 1, 2, map_obj( obj2 ), nelem );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj1, obj2, nelem );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj1, obj2, nelem );
 	return fmt;
 }
 
@@ -386,7 +386,7 @@ h_symnused( const void *tre )
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	nelem = (TRZNE_T)assemble( sizeof_trzne() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), nelem );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, nelem );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, nelem );
 	return fmt;
 }
 
@@ -404,12 +404,12 @@ h_rq_ffll( const void *tre )
 	{
 		nmin = (unsigned long)assemble( sizeof_trzne() );
 		tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), nelem, nmin );
-		UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj, nelem, nmin );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj, nelem, nmin );
 	}
 	else
 	{
 		tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), nelem );
-		UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, nelem );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, nelem );
 	}
 	return fmt;
 }
@@ -424,7 +424,7 @@ h_tinit( const void *tre )
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, e );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, e );
 	tmrtbl_init( obj, e );
 	return fmt;
 }
@@ -443,7 +443,7 @@ h_tstart( const void *tre )
 
 	tre_fmt( fmt, CTE( tre ), 1, map_obj( obj1 ) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 1, 3, map_obj( obj2 ), ntick, per );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 4, obj1, obj2, ntick, per );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, obj1, obj2, ntick, per );
 	tmrtbl_start( obj1, obj2 );
 	return fmt;
 }
@@ -460,7 +460,7 @@ h_tstop( const void *tre )
 	per = (TRZNT_T)assemble( sizeof_trznt() );
 
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj1 ), ntick, per );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj1, ntick, per );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj1, ntick, per );
 	return fmt;
 }
 
@@ -478,7 +478,7 @@ h_tout( const void *tre )
 
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( t ), map_sig(sig) );
 	tre_fmtfrom_cat( fmt, CTE( tre ), 2, 1, map_obj( ao ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, t, sig, ao );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, t, sig, ao );
 	sdiag_tmrevt( t );
 
 	return fmt;
@@ -493,7 +493,7 @@ h_2u8( const void *tre )
 	u8_1 = (unsigned char)assemble( sizeof( char ) );
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 2, u8_1, u8_2 );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, u8_1, u8_2 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, u8_1, u8_2 );
 	return fmt;
 }
 
@@ -508,7 +508,7 @@ h_sym2u8( const void *tre )
 	u8_1 = (unsigned char)assemble( sizeof( char ) );
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), u8_1, u8_2 );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, obj, u8_1, u8_2 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj, u8_1, u8_2 );
 	return fmt;
 }
 
@@ -523,7 +523,7 @@ h_sig2u8( const void *tre )
 	u8_1 = (unsigned char)assemble( sizeof( char ) );
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 3, map_sig( sig ), u8_1, u8_2 );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, sig, u8_1, u8_2 );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, sig, u8_1, u8_2 );
 	return fmt;
 }
 
@@ -535,7 +535,7 @@ h_evt( const void *tre )
 
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 1, map_sig( e ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 1, e );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 1, e );
 	return fmt;
 }
 
@@ -549,7 +549,7 @@ h_symevt( const void *tre )
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), map_sig( e ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, e );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, e );
 	return fmt;
 }
 
@@ -561,7 +561,7 @@ h_1sig( const void *tre )
 
 	e = (TRZE_T)assemble( sizeof_trze() );
 	tre_fmt( fmt, CTE( tre ), 1, map_sig( e ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 1, e );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 1, e );
 	return fmt;
 }
 
@@ -578,7 +578,7 @@ h_sma_get( const void *tre )
 	pid = (unsigned char)assemble( sizeof( char ) );
 	refc = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 4, map_obj( ao ), map_sig( e ), pid, refc );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 4, ao, e, pid, refc );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, ao, e, pid, refc );
 	return fmt;
 
 }
@@ -604,7 +604,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 					map_obj( trn.sobj ), 
 					pid,
 			  		refc );
-		UTRZEVT_ADD_OR_CHK_EXPECT( 5, trn.tobj, trn.e, trn.sobj, pid, refc );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 5, trn.tobj, trn.e, trn.sobj, pid, refc );
 
 		sdiag_async_evt( &trn );
 	}
@@ -620,7 +620,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 					pid,
 			  		refc );
 
-		UTRZEVT_ADD_OR_CHK_EXPECT( 5, trn.tobj, trn.e, pid, refc );
+		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 5, trn.tobj, trn.e, pid, refc );
 	}
 
 	*ptrn = trn;
@@ -638,7 +638,7 @@ h_sma_ff( const void *tre )
 	p = h_sma_ffll( tre, &trn );
 	
 	post_fifo_symevt( trn.tobj, trn.e, curr_tstamp );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, trn.tobj, trn.e, curr_tstamp );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, trn.tobj, trn.e, curr_tstamp );
 
 	return p;
 }
@@ -653,7 +653,7 @@ h_sma_lf( const void *tre )
 	p = h_sma_ffll( tre, &trn );
 	
 	post_lifo_symevt( trn.tobj, trn.e, curr_tstamp );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, trn.tobj, trn.e, curr_tstamp );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, trn.tobj, trn.e, curr_tstamp );
 	
 	return p;	
 }
@@ -681,7 +681,7 @@ h_sma_dch( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 4, map_obj( obj ), map_sig( curr_e ), 
 			map_obj(stobj), rt );
 
-	UTRZEVT_ADD_OR_CHK_EXPECT( 4, obj, curr_e, stobj, rt );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, obj, curr_e, stobj, rt );
 	return fmt;
 }
 
@@ -698,7 +698,7 @@ h_epreg( const void *tre )
 	u32 = (unsigned long)assemble( sizeof( long ) );
 	esize = (TRZES_T)assemble( sizeof_trzes() );
 	tre_fmt( fmt, CTE( tre ), 3, u8, u32, esize  );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, u8, u32, esize );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, u8, u32, esize );
 	return fmt;
 }
 
@@ -715,7 +715,7 @@ h_ae( const void *tre )
 	pid = (unsigned char)assemble( sizeof(char) );
 	refc = (unsigned char)assemble( sizeof(char) );
 	tre_fmt( fmt, CTE( tre ), 4, esize, map_sig( e ), pid, refc );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 4, esize, e, pid, refc );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, esize, e, pid, refc );
 	return fmt;
 }
 
@@ -733,7 +733,7 @@ h_symobj( const void *tre )
 		++s;
 
 	tre_fmt( fmt, CTE( tre ), 2, obj, s );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, obj, s );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, s );
 	add_to_symtbl( obj, s );
 	return fmt;
 }
@@ -756,7 +756,7 @@ h_symst( const void *tre )
 		++ao;
 
 	tre_fmt( fmt, CTE( tre ), 3, ao, obj, s );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, ao, obj, s );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, ao, obj, s );
 	add_to_symtbl( obj, s );
 	return fmt;
 }
@@ -770,7 +770,7 @@ h_symsig( const void *tre )
 	e = (TRZE_T)assemble( sizeof_trze() );
 	s = assemble_str();
 	tre_fmt( fmt, CTE( tre ), 2, e, s );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, e, s );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, e, s );
 	add_to_sigtbl( e, s );
 	return fmt;
 }
@@ -785,7 +785,7 @@ h_symuevt( const void *tre )
 	ue = (uchar)assemble( sizeof_trze() );
 	s = assemble_str();
 	tre_fmt( fmt, CTE( tre ), 2, ue, s );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, ue, s );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, ue, s );
 	add_to_uevttbl( ue, s );
 	return fmt;
 }
@@ -820,7 +820,7 @@ h_exact( const void *tre )
 
 	tre_fmt( fmt, CTE(tre), 4, atype, ao_s, st_s, act_s );
 	
-	UTRZEVT_ADD_OR_CHK_EXPECT( 4, atype, ao, st, act );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, atype, ao, st, act );
 
 	sdiag_exec_act( ao, act );
 
@@ -844,7 +844,7 @@ h_exact_no_ao( const void *tre )
 
 	tre_fmt( fmt, CTE(tre), 3, atype_str[atype], st_s, act_s );
 	
-	UTRZEVT_ADD_OR_CHK_EXPECT( 3, atype, st, act );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, atype, st, act );
 
 	return fmt;
 }
@@ -863,7 +863,7 @@ h_assert( const void *tre )
 	line = (rui16_t)assemble( sizeof(rui16_t) );
 
 	tre_fmt( fmt, CTE( tre ), 2, pfname, line );
-	UTRZEVT_ADD_OR_CHK_EXPECT( 2, pfname, line );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, pfname, line );
 
 	return fmt;
 }
@@ -1473,7 +1473,8 @@ trazer_init( void )
 
 char *
 h_utInit( const void *tre )
-{
+{    
+    utrz_clean();
 	return fmt;
 }
 
