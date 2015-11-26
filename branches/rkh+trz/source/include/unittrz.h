@@ -53,7 +53,7 @@ typedef struct v_utrz_arg_t
 typedef struct utrz_expect_evt
 {
 	unsigned int line;
-	rui8_t id;
+	rui32_t id;
 	V_UTRZ_ARG_T va;
 }UTRZ_EXPECT_EVT;
 
@@ -73,7 +73,10 @@ extern int expect;
 
 
 void utrz_clean( void );
+void utrz_verify( char *ptext );
 
+
+void utrz_add_expect_any_args( rui32_t line, rui32_t e );
 
 void utrz_add_expect( rui8_t nargs, ... );
 void utrz_chk_expect( rui8_t id, rui8_t nargs, ... );

@@ -6,6 +6,7 @@
 #include <list>
 #include "unittrz.h"
 #include "tzlog.h"
+#include "tzparse.h"
 
 using namespace std;
 
@@ -35,6 +36,41 @@ utrz_clean( void )
     utrz_expected_lst.clear();
     memset( utrz_ign_group, GRP_EXPECTED, sizeof(utrz_ign_group) );
     memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
+}
+
+void
+utrz_verify( char *ptext )
+{
+    if( utrz_expected_lst.empty() )
+        sprintf( ptext, "DONE" );
+    else
+        sprintf( ptext, "FAIL" );
+}
+
+
+
+void
+utrz_add_expect_any_args( rui32_t line, rui32_t e )
+{
+	UTRZ_ARG_T va;
+    const TRE_T *p;
+    rui8_t nargs;
+
+    NEW_EXPECT_EVT( line, e );
+
+    p = find_exp_trevt( e );
+    
+    nargs = p->va.args.size();
+
+	while( nargs-- )
+	{
+		va.ignored = EVT_IGNORED;
+        va.value = 0;
+		expected_evt.va.args.push_back( va );
+	}
+	utrz_expected_lst.push_back( expected_evt );
+
+    END_EXPECT();
 }
 
 

@@ -1490,6 +1490,7 @@ h_utCleanup( const void *tre )
 char *
 h_utVerify( const void *tre )
 {
+    utrz_verify( fmt );
 	return fmt;
 }
 
@@ -1497,7 +1498,7 @@ h_utVerify( const void *tre )
 char *
 h_Expect( const void *tre )
 {
-	unsigned long line; 
+	rui32_t line; 
 	unsigned int trc_e;
 	const TRE_T * p;
 	string s_evt;
@@ -1514,6 +1515,26 @@ h_Expect( const void *tre )
 
 	return p->fmt_args( p );
 }
+
+
+char *
+h_ExpAnyArg( const void *tre )
+{
+	rui32_t line; 
+	unsigned int trc_e;
+    const TRE_T *p;
+
+   	line = assemble( sizeof_utline() );
+	trc_e = (unsigned int)assemble( sizeof_trze() );
+
+    utrz_add_expect_any_args( line, trc_e );
+
+    p = find_trevt( trc_e );
+
+    tre_fmt( fmt, CTE(tre), 2, line, p->name.c_str() );
+	return fmt;
+}
+
 
 
 char *
