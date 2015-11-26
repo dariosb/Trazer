@@ -76,6 +76,9 @@ extern "C" {
 #define sm_trn_ignore() \
     unitrazer_ignore(__LINE__, RKH_TE_SM_TRN)
 
+#define sm_ts_state_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_TS_STATE)
+
 #define sm_trn_ignoreArg_sourceState() \
     unitrazer_ignoreArg(__LINE__, RKH_TE_SM_TRN, UT_ARGNO_1)
 

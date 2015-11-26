@@ -88,23 +88,23 @@ static FMT_ID_T *tg_sma_tbl[] =
 };
 
 /* --- State machine events (SM group) --------------------------------- */
-DCLR_TRE( RKH_TE_SM_INIT,       "SM",  "INIT",       h_2sym,	ao_s, ist_s );
-DCLR_TRE( RKH_TE_SM_CLRH,       "SM",  "CLRH",       h_2sym,	ao_s, h_s );
-DCLR_TRE( RKH_TE_SM_TRN,        "SM",  "TRN",        h_symtrn,	ao_s, sst_s, tst_s );
-DCLR_TRE( RKH_TE_SM_STATE,      "SM",  "STATE",	     h_2sym,	ao_s, nxtst_s );
-DCLR_TRE( RKH_TE_SM_ENSTATE,    "SM",  "ENSTATE",    h_2sym,	ao_s, st_s );
-DCLR_TRE( RKH_TE_SM_EXSTATE,    "SM",  "EXSTATE",    h_2sym,	ao_s, st_s );
-DCLR_TRE( RKH_TE_SM_NENEX,      "SM",  "NENEX",	     h_sym2u8,	ao_s, nen_d, nex_d );
-DCLR_TRE( RKH_TE_SM_NTRNACT,    "SM",  "NTRNACT",    h_sym2u8,	ao_s, nta_d, nts_d );
-DCLR_TRE( RKH_TE_SM_TS_STATE,   "SM",  "TS_STATE",	 h_2sym,	ao_s, st_s );
-DCLR_TRE( RKH_TE_SM_EVT_PROC,   "SM",  "EVT_PROC",	 h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_EVT_NFOUND, "SM",  "EVT_NFOUND", h_symevt,	ao_s, sig_s );
-DCLR_TRE( RKH_TE_SM_GRD_FALSE,  "SM",  "GRD_FALSE",  h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_CND_NFOUND, "SM",  "CND_NFOUND", h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_UNKN_STATE, "SM",  "UNKN_STATE", h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_EX_HLEVEL,  "SM",  "EX_HLEVEL",  h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_1sym,	ao_s );
-DCLR_TRE( RKH_TE_SM_EXE_ACT,    "SM",  "EXE_ACT",    h_exact,	aty_s, ao_s, st_s, func_s );
+DCLR_TRE( RKH_TE_SM_INIT,       "SM", "INIT",       h_2sym,	  ao_s, ist_s );
+DCLR_TRE( RKH_TE_SM_CLRH,       "SM", "CLRH",       h_2sym,	  ao_s, h_s );
+DCLR_TRE( RKH_TE_SM_TRN,        "SM", "TRN",        h_symtrn, ao_s, sst_s, tst_s );
+DCLR_TRE( RKH_TE_SM_STATE,      "SM", "STATE",	    h_2sym,	  ao_s, nxtst_s );
+DCLR_TRE( RKH_TE_SM_ENSTATE,    "SM", "ENSTATE",    h_2sym,	  ao_s, st_s );
+DCLR_TRE( RKH_TE_SM_EXSTATE,    "SM", "EXSTATE",    h_2sym,	  ao_s, st_s );
+DCLR_TRE( RKH_TE_SM_NENEX,      "SM", "NENEX",	    h_sym2u8, ao_s, nen_d, nex_d );
+DCLR_TRE( RKH_TE_SM_NTRNACT,    "SM", "NTRNACT",    h_sym2u8, ao_s, nta_d, nts_d );
+DCLR_TRE( RKH_TE_SM_TS_STATE,   "SM", "TS_STATE",	h_2sym,	  ao_s, st_s );
+DCLR_TRE( RKH_TE_SM_EVT_PROC,   "SM", "EVT_PROC",	h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_EVT_NFOUND, "SM", "EVT_NFOUND", h_symevt, ao_s, sig_s );
+DCLR_TRE( RKH_TE_SM_GRD_FALSE,  "SM", "GRD_FALSE",  h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_CND_NFOUND, "SM", "CND_NFOUND", h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_UNKN_STATE, "SM", "UNKN_STATE", h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_EX_HLEVEL,  "SM", "EX_HLEVEL",  h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM", "EX_TSEG",    h_1sym,	  ao_s );
+DCLR_TRE( RKH_TE_SM_EXE_ACT,    "SM", "EXE_ACT",    h_exact,  aty_s, ao_s, st_s, func_s );
 
 static FMT_ID_T *tg_sm_tbl[] =
 {
@@ -129,11 +129,11 @@ static FMT_ID_T *tg_sm_tbl[] =
 };
 
 /* --- Timer events (TIM group) ---------------------------------------- */
-DCLR_TRE( RKH_TE_TMR_INIT,		"TIM", "INIT",		h_tinit,	t_s, sig_s );
-DCLR_TRE( RKH_TE_TMR_START,		"TIM", "START",		h_tstart,	t_s, ao_s, ntick_d, per_d );
-DCLR_TRE( RKH_TE_TMR_STOP,		"TIM", "STOP",		h_tstop,	t_s, ntick_d, per_d );
-DCLR_TRE( RKH_TE_TMR_TOUT,		"TIM", "TOUT",		h_tout,		t_s, sig_s, ao_s );
-DCLR_TRE( RKH_TE_TMR_REM,		"TIM", "REM",		h_1sym,		t_s );
+DCLR_TRE( RKH_TE_TMR_INIT,	"TIM", "INIT",	h_tinit,  t_s, sig_s );
+DCLR_TRE( RKH_TE_TMR_START,	"TIM", "START",	h_tstart, t_s, ao_s, ntick_d, per_d );
+DCLR_TRE( RKH_TE_TMR_STOP,	"TIM", "STOP",	h_tstop,  t_s, ntick_d, per_d );
+DCLR_TRE( RKH_TE_TMR_TOUT,	"TIM", "TOUT",	h_tout,	  t_s, sig_s, ao_s );
+DCLR_TRE( RKH_TE_TMR_REM,	"TIM", "REM",	h_1sym,	  t_s );
 
 static FMT_ID_T *tg_tmr_tbl[] =
 {
@@ -146,28 +146,28 @@ static FMT_ID_T *tg_tmr_tbl[] =
 };
 
 /* --- Framework and misc. events (FWK group) -------------------------- */
-DCLR_TRE( RKH_TE_FWK_EN,        "FWK", "EN",         h_none,	NULL );
-DCLR_TRE( RKH_TE_FWK_EX,        "FWK", "EX",         h_none,	NULL );
-DCLR_TRE( RKH_TE_FWK_EPREG,     "FWK", "EPREG",      h_epreg,	ep_d, ss_d, es_d );
-DCLR_TRE( RKH_TE_FWK_AE,        "FWK", "AE",         h_ae,		es_d, sig_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_FWK_GC,        "FWK", "GC",         h_sig2u8,	sig_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_FWK_GCR,       "FWK", "GCR",        h_sig2u8,	sig_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_FWK_DEFER,     "FWK", "DEFER",      h_symevt,	q_s, sig_s );
-DCLR_TRE( RKH_TE_FWK_RCALL,     "FWK", "RCALL",      h_symevt,	ao_s, sig_s );
-DCLR_TRE( RKH_TE_FWK_OBJ,       "FWK", "OBJ",        h_symobj,	obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_SIG,       "FWK", "SIG",        h_symsig,	sig_d, nm_s );
-DCLR_TRE( RKH_TE_FWK_FUN,		"FWK", "FUN",        h_symobj,	func_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_EXE_FUN,	"FWK", "EXE_FUN",    h_1sym,	func_s );
-DCLR_TRE( RKH_TE_FWK_SYNC_EVT,	"FWK", "SYNC_EVT",   h_sync,	func_s, snr_s, ao_s );
-DCLR_TRE( RKH_TE_FWK_TUSR,      "FWK", "TUSR",       h_symuevt,	usrtrc_d, nm_s );
-DCLR_TRE( RKH_TE_FWK_TCFG,      "FWK", "TCFG",       h_tcfg,	NULL );
-DCLR_TRE( RKH_TE_FWK_ASSERT,    "FWK", "ASSERT",     h_assert,	file_s, line_d );
-DCLR_TRE( RKH_TE_FWK_AO,        "FWK", "AO",         h_symobj,	obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_STATE,     "FWK", "STATE",      h_symst,	ao_s, obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_PSTATE,    "FWK", "PSTATE",     h_symst,	ao_s, obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_TIMER,     "FWK", "TIMER",      h_symobj,	obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_EPOOL,     "FWK", "EPOOL",      h_symobj,	obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_QUEUE,     "FWK", "QUEUE",      h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_EN,      "FWK", "EN",       h_none,	NULL );
+DCLR_TRE( RKH_TE_FWK_EX,      "FWK", "EX",       h_none,	NULL );
+DCLR_TRE( RKH_TE_FWK_EPREG,   "FWK", "EPREG",    h_epreg,	ep_d, ss_d, es_d );
+DCLR_TRE( RKH_TE_FWK_AE,      "FWK", "AE",     h_ae, es_d, sig_s, pid_d, refc_d );
+DCLR_TRE( RKH_TE_FWK_GC,      "FWK", "GC",       h_sig2u8,	sig_s, pid_d, refc_d );
+DCLR_TRE( RKH_TE_FWK_GCR,     "FWK", "GCR",      h_sig2u8,	sig_s, pid_d, refc_d );
+DCLR_TRE( RKH_TE_FWK_DEFER,   "FWK", "DEFER",    h_symevt,	q_s, sig_s );
+DCLR_TRE( RKH_TE_FWK_RCALL,   "FWK", "RCALL",    h_symevt,	ao_s, sig_s );
+DCLR_TRE( RKH_TE_FWK_OBJ,     "FWK", "OBJ",      h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_SIG,     "FWK", "SIG",      h_symsig,	sig_d, nm_s );
+DCLR_TRE( RKH_TE_FWK_FUN,	  "FWK", "FUN",      h_symobj,	func_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_EXE_FUN, "FWK", "EXE_FUN",  h_1sym,	func_s );
+DCLR_TRE( RKH_TE_FWK_SYNC_EVT,"FWK", "SYNC_EVT", h_sync,	func_s, snr_s, ao_s );
+DCLR_TRE( RKH_TE_FWK_TUSR,    "FWK", "TUSR",     h_symuevt,	usrtrc_d, nm_s );
+DCLR_TRE( RKH_TE_FWK_TCFG,    "FWK", "TCFG",     h_tcfg,	NULL );
+DCLR_TRE( RKH_TE_FWK_ASSERT,  "FWK", "ASSERT",   h_assert,	file_s, line_d );
+DCLR_TRE( RKH_TE_FWK_AO,      "FWK", "AO",       h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_STATE,   "FWK", "STATE",    h_symst,	ao_s, obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_PSTATE,    "FWK", "PSTATE", h_symst,	ao_s, obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_TIMER,     "FWK", "TIMER",  h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_EPOOL,     "FWK", "EPOOL",  h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_QUEUE,     "FWK", "QUEUE",  h_symobj,	obj_x, nm_s );
 
 static FMT_ID_T *tg_fwk_tbl[] =
 {
@@ -211,14 +211,14 @@ static FMT_ID_T *tg_usr_tbl[] =
 };
 
 /* --- Unit test harness events (UT group) ----------------------------- */
-DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",		h_utInit,	    NULL );
-DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",	h_utCleanup,	NULL );
-DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",		h_utVerify, 	NULL );
-DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",	h_IgnGroup, 	NULL );
-DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT",		h_Expect,	line_d, aty_s, aty_s );
-DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArgs, line_d, aty_s );
-DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		NULL,	NULL );
-DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	NULL,	NULL );
+DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",	    h_utInit,	 NULL );
+DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",    h_utCleanup, NULL );
+DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",	    NULL,        NULL );
+DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",    h_IgnGroup,  line_d, aty_s );
+DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT", 	h_Expect,    line_d, aty_s, aty_s );
+DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	NULL,        NULL  );
+DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		h_IgnEvt,    line_d, aty_s );
+DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	NULL,	     NULL );
 
 
 /* --- Trace Event Groups Table ---------------------------------------- */
@@ -303,13 +303,13 @@ static TRG_T *grp_tbl[] =
 
 const
 TRG_T *
-find_trgroup( unsigned int id )
+find_trgroup( RKH_TG_T grp )
 {
 	static TRG_T **p;
 
-	for( p=&grp_tbl[0]; (*p)->id != RKH_TG_NGROUP; ++p )
+	for( p=&grp_tbl[0]; (*p)->grp != RKH_TG_NGROUP; ++p )
 	{
-		if( id == (*p)->id )
+		if( grp == (*p)->grp )
 			return (*p);
 	}
 	return (TRG_T *)0;

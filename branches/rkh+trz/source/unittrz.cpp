@@ -11,16 +11,30 @@ using namespace std;
 
 int expect;
 UTRZ_EXPECT_EVT expected_evt;
-
 list <UTRZ_EXPECT_EVT> utrz_expected_lst;
-vector <rui8_t> utrz_ignore_lst;
+
+static RKH_TG_T utrz_ign_group[ RKH_TG_NGROUP ]; 
+static rui32_t utrz_ign_evt[ RKH_TE_NEVENT ]; 
+
+bool
+is_ignored( rui32_t e  )
+{
+    if( utrz_ign_group[GETGRP(e)] == GRP_IGNORED )
+        return true;
+
+    if( utrz_ign_evt[e] == EVT_IGNORED )
+        return true;
+
+    return false;
+}
 
 
 void
 utrz_clean( void )
 {
     utrz_expected_lst.clear();
-    utrz_ignore_lst.clear();
+    memset( utrz_ign_group, GRP_EXPECTED, sizeof(utrz_ign_group) );
+    memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
 }
 
 
@@ -81,7 +95,27 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
         return;
     }
 
+    /*** TODO: compare Trace events args expected and received */
 
+
+}
+
+void
+utrz_ignore_group( RKH_TG_T grp )
+{
+    if( grp >= RKH_TG_NGROUP )
+        return;
+
+    utrz_ign_group[ grp ] = GRP_IGNORED;
+}
+
+void
+utrz_ignore_evt( rui32_t e )
+{
+    if(  e >= RKH_TE_NEVENT )
+        return;
+
+    utrz_ign_evt[ e ] = EVT_IGNORED;
 }
 
 

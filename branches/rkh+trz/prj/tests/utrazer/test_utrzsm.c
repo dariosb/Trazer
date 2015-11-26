@@ -54,6 +54,7 @@ TEST_SETUP(utrzsm)
      */
     unitrazer_init();
     fwk_ignore();        /* Ignore every trace event of FWK group */
+	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
 
     RKH_TR_FWK_AO(aotest);
     RKH_TR_FWK_STATE(aotest, &s);
@@ -69,6 +70,7 @@ TEST_SETUP(utrzsm)
 	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
 	RKH_FILTER_OFF_EVENT( A );
 	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
+	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_FWK );
 	RKH_FILTER_OFF_SMA( aotest );
 
     rkh_sma_init_hsm(aotest);
@@ -97,7 +99,7 @@ TEST(utrzsm, simpleTransition)
     /* -------- Exercise ------------ 
      * Do something to the system 
      */
-
+	RKH_TR_FWK_STATE(aotest, &s);
     /* Each recorded trace event is checked to see that it matches */
     /* the expected trace event exactly. If calls are out of order or */
     /* parameters are wrong, the test immediately fails. */

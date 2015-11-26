@@ -39,6 +39,6 @@ string * get_evt_comment( unsigned int id );
 #define TR_EVT_PRN_ARG_SEP	", "
 #define TR_EVT_PRNBUFF_SIZE	100
 
-const TRG_T * find_trgroup( unsigned int id );
+const TRG_T * find_trgroup( RKH_TG_T grp );
 
 #endif

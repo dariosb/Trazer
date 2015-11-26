@@ -14,13 +14,17 @@ extern "C"{
 #include <stdarg.h>
 #include "rkhtype.h"
 #include "rkhdef.h"
+#include "rkhtrc.h"
 
 using namespace std;
 
 enum
 {
     EVT_EXPECTED,
-    EVT_IGNORED
+    GRP_EXPECTED = EVT_EXPECTED,
+
+    EVT_IGNORED,
+    GRP_IGNORED = EVT_IGNORED,
 };
 
 typedef struct v_u32args_t
@@ -30,7 +34,7 @@ typedef struct v_u32args_t
 
 typedef struct utrz_evt
 {
-	unsigned char id;
+	rui32_t id;
 	V_U32ARGS_T va;
 }UTRZ_EVT_ST;
 
@@ -73,6 +77,9 @@ void utrz_clean( void );
 
 void utrz_add_expect( rui8_t nargs, ... );
 void utrz_chk_expect( rui8_t id, rui8_t nargs, ... );
+
+void utrz_ignore_group( RKH_TG_T grp );
+void utrz_ignore_evt( rui32_t e );
 
 void utrz_insert( rui8_t id, rui8_t nargs, ... );
 ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );

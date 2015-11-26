@@ -27,6 +27,7 @@
 
 #ifdef __TRAZER__
 #include "rkhtype.h"
+#include "rkhtrc.h"
 #else
 #include "rkh.h"
 #endif
@@ -98,7 +99,7 @@ typedef struct tre_t
 
 typedef struct trg_t
 {
-	unsigned char id;
+	RKH_TG_T grp;
 	char * name;
 } TRG_T;
 
@@ -176,8 +177,9 @@ char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );
 char * h_ExpAnyArgs( const void *tre );
-char * h_IgnGroup( const void *tre );
 char * h_Expect( const void *tre );
+char * h_IgnGroup( const void *tre );
+char * h_IgnEvt( const void *tre );
 char * h_utInit( const void *tre );
 char * h_utCleanup( const void *tre );
 char * h_utVerify( const void *tre );

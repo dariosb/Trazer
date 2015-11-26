@@ -1495,23 +1495,6 @@ h_utVerify( const void *tre )
 
 
 char *
-h_IgnGroup( const void *tre )
-{
-	unsigned long line; 
-	unsigned int trc_gr;
-	const TRG_T * p;
-	
-	line = assemble( sizeof_utline() );
-	trc_gr = (unsigned int)assemble( 1 );
-
-	p = find_trgroup( trc_gr );
-
-    sprintf( fmt, "(%d) %s", line, p->name );
-	return fmt;
-}
-
-
-char *
 h_Expect( const void *tre )
 {
 	unsigned long line; 
@@ -1532,11 +1515,43 @@ h_Expect( const void *tre )
 	return p->fmt_args( p );
 }
 
+
 char *
-h_ExpAnyArgs( const void *tre )
+h_IgnGroup( const void *tre )
 {
+	unsigned long line; 
+	unsigned int trc_gr;
+	const TRG_T * p;
+	
+	line = assemble( sizeof_utline() );
+	trc_gr = (unsigned int)assemble( 1 );
+
+	p = find_trgroup( trc_gr );
+
+    if( p!= NULL )
+    {
+        utrz_ignore_group( p->grp );
+        tre_fmt( fmt, CTE(tre), 2, line, p->name );
+    }
+
 	return fmt;
 }
 
 
+char *
+h_IgnEvt( const void *tre )
+{
+	unsigned long line; 
+	unsigned int trc_e;
+    const TRE_T *p;
+
+   	line = assemble( sizeof_utline() );
+	trc_e = (unsigned int)assemble( sizeof_trze() );
+    utrz_ignore_evt( trc_e );
+
+    p = find_trevt( trc_e );
+
+    tre_fmt( fmt, CTE(tre), 2, line, p->name.c_str() );
+	return fmt;
+}
 
