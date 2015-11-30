@@ -7,6 +7,7 @@
 #include "unittrz.h"
 #include "tzlog.h"
 #include "tzparse.h"
+#include "evexptbl.h"
 
 using namespace std;
 
@@ -58,6 +59,9 @@ utrz_add_expect_any_args( rui32_t line, rui32_t e )
 
     NEW_EXPECT_EVT( line, e );
 
+    /** removes ignore attribute **/
+    utrz_ign_evt[ expected_evt.id ] = EVT_EXPECTED;
+
     p = find_exp_trevt( e );
     
     nargs = p->va.args.size();
@@ -80,10 +84,13 @@ utrz_add_expect( rui8_t nargs, ... )
 	va_list args;
 	UTRZ_ARG_T va;
 
+    /** removes ignore attribute **/
+    utrz_ign_evt[ expected_evt.id ] = EVT_EXPECTED;
+
 	va_start( args, nargs );
 	while( nargs-- )
 	{
-		va.ignored = EVT_EXPECTED;
+		va.ignored = ARG_EXPECTED;
 		va.value = va_arg( args, rui32_t );
 		expected_evt.va.args.push_back( va );
 	}
@@ -97,9 +104,9 @@ void
 utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
 {
 	va_list args;
-	UTRZ_ARG_T va;
     UTRZ_EXPECT_EVT rcv_evt;
     UTRZ_EXPECT_EVT exp_evt;
+	CHEK_ARG_T p;
    	vector<rui32_t>::iterator arg_ix;
 
     if( utrz_expected_lst.empty() )
@@ -108,33 +115,43 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
     if( is_ignored( id ) )
         return;
 
-    rcv_evt.id = id;
-
-    /** process incoming trace event args **/
-	va_start( args, nargs );
-	while( nargs-- )
-	{
-		va.ignored = EVT_EXPECTED;
-		va.value = va_arg( args, rui32_t );        
-        rcv_evt.va.args.push_back( va );
-	}
-	va_end(args);
 
     /** get expected trace event from list **/
     exp_evt = utrz_expected_lst.front();
     utrz_expected_lst.pop_front();
 
     /** compare trace events id´s  **/
-    if( exp_evt.id != rcv_evt.id )
+    if( exp_evt.id != id )
     {
-        lprintf("FAIL: Trace Events diferents\n");
+        lprintf("FAIL: Trace Event out of sequence");
         return;
     }
 
-    /*** TODO: compare Trace events args expected and received */
+    /*** compare Trace events args expected and received */
 
+    rcv_evt.id = id;
 
+    p = find_exp_chk_fun( id );
+	va_start( args, nargs );
+    p( &exp_evt, nargs, args );
+	va_end(args);
 }
+
+
+void
+utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
+{
+    UTRZ_EXPECT_EVT last_expect; 
+    
+    last_expect = utrz_expected_lst.back();
+
+    /** check if event refered is equal to last expected **/
+    if( e == last_expect.id )
+        last_expect.va.args[ix].ignored = ARG_IGNORED;
+    else
+        lprintf( "Error (%d): IgnoredArg called without expect", line);
+}
+
 
 void
 utrz_ignore_group( RKH_TG_T grp )
@@ -154,19 +171,6 @@ utrz_ignore_evt( rui32_t e )
     utrz_ign_evt[ e ] = EVT_IGNORED;
 }
 
-
-void
-sm_init_ignore( rui8_t id )
-{
-
-}
-
-
-void
-sm_init_ignoreArg_initState( unsigned int line, rui8_t id, rui8_t arg_ix )
-{
-
-}
 
 #if 0
 vector <UTRZ_EVT_ST> utrz_tbl;

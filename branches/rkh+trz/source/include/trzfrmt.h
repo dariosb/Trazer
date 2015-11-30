@@ -45,5 +45,6 @@
 #define p_d			(char *)"p=%d"
 #define rt_d		(char *)"rt=%d"
 #define aty_s		(char *)"%s"
+#define arg_d		(char *)"arg#=%d"
 
 #endif

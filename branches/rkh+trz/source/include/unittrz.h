@@ -22,9 +22,11 @@ enum
 {
     EVT_EXPECTED,
     GRP_EXPECTED = EVT_EXPECTED,
+    ARG_EXPECTED = EVT_EXPECTED,
 
     EVT_IGNORED,
     GRP_IGNORED = EVT_IGNORED,
+    ARG_IGNORED = EVT_IGNORED
 };
 
 typedef struct v_u32args_t
@@ -81,6 +83,7 @@ void utrz_add_expect_any_args( rui32_t line, rui32_t e );
 void utrz_add_expect( rui8_t nargs, ... );
 void utrz_chk_expect( rui8_t id, rui8_t nargs, ... );
 
+void utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix );
 void utrz_ignore_group( RKH_TG_T grp );
 void utrz_ignore_evt( rui32_t e );
 
@@ -104,14 +107,6 @@ ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );
 #ifdef __cplusplus
 }
 #endif
-
-#else
-
-#define RKH_TRC_CLEANUP();			
-#define UTRZEVT_INSERT( q, ... );
-
-#define RKH_TRC_IS_FINAL_STATE(ao,state);
-#define TEST_ASSERT_TRUE(x);
 
 #endif
 

@@ -182,6 +182,7 @@ char * h_ExpAnyArg( const void *tre );
 char * h_Expect( const void *tre );
 char * h_IgnGroup( const void *tre );
 char * h_IgnEvt( const void *tre );
+char * h_IgnArg( const void *tre );
 char * h_utInit( const void *tre );
 char * h_utCleanup( const void *tre );
 char * h_utVerify( const void *tre );

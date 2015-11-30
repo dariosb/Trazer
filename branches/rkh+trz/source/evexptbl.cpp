@@ -3,11 +3,13 @@
  */
 
 #include <stdio.h>
+#include "tzlog.h"
 #include "evtbl.h"
 #include "rkhtrc.h"
 #include "tzparse.h"
 #include "messages.h"
 #include "trzfrmt.h"
+#include "evexptbl.h"
 
 using namespace std;
 
@@ -25,26 +27,26 @@ using namespace std;
 	  #id															        \
 	};
 
-#define EXP_TRE_ST(id)		&st_##id
+#define EXP_TRE_ST(id, cf)		{ &st_##id, cf }
 
 DCLR_EXP_TRE( RKH_TE_NEVENT,    "ERR",  "ERR#", NULL,   NULL );
 
 /* --- Memory Pool events (MP group) ----------------------------------- */
-static FMT_ID_T *exp_tg_mp_tbl[] =
+static FMT_EXP_ST exp_tg_mp_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- Queue events (RQ group) ----------------------------------------- */
-static FMT_ID_T *exp_tg_rq_tbl[] =
+static FMT_EXP_ST exp_tg_rq_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- State Machine Application events (SMA group) -------------------- */
-static FMT_ID_T *exp_tg_sma_tbl[] =
+static FMT_EXP_ST exp_tg_sma_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- State machine events (SM group) --------------------------------- */
@@ -67,56 +69,57 @@ DCLR_EXP_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_none,    NULL );
 DCLR_EXP_TRE( RKH_TE_SM_EXE_ACT,    "SM",  "EXE_ACT",    h_exact_no_ao,	aty_s, st_s, func_s );
 
 
-static FMT_ID_T *exp_tg_sm_tbl[] =
+static FMT_EXP_ST exp_tg_sm_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_SM_INIT),
-	EXP_TRE_ST( RKH_TE_SM_CLRH),
-	EXP_TRE_ST( RKH_TE_SM_TRN),
-	EXP_TRE_ST( RKH_TE_SM_STATE),
-	EXP_TRE_ST( RKH_TE_SM_ENSTATE),
-	EXP_TRE_ST( RKH_TE_SM_EXSTATE),
-	EXP_TRE_ST( RKH_TE_SM_NENEX),
-	EXP_TRE_ST( RKH_TE_SM_NTRNACT),
-	EXP_TRE_ST( RKH_TE_SM_TS_STATE),
-	EXP_TRE_ST( RKH_TE_SM_EVT_PROC),
-	EXP_TRE_ST( RKH_TE_SM_EVT_NFOUND),
-	EXP_TRE_ST( RKH_TE_SM_GRD_FALSE),
-	EXP_TRE_ST( RKH_TE_SM_CND_NFOUND),
-	EXP_TRE_ST( RKH_TE_SM_UNKN_STATE),
-	EXP_TRE_ST( RKH_TE_SM_EX_HLEVEL),
-	EXP_TRE_ST( RKH_TE_SM_EX_TSEG),
-	EXP_TRE_ST( RKH_TE_SM_EXE_ACT),
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_SM_INIT,        c_sminit),
+	EXP_TRE_ST( RKH_TE_SM_CLRH,        c_smclrh),
+	EXP_TRE_ST( RKH_TE_SM_TRN,         c_smtrn),
+	EXP_TRE_ST( RKH_TE_SM_STATE,       c_smst),  
+	EXP_TRE_ST( RKH_TE_SM_ENSTATE,     c_smenst),  
+	EXP_TRE_ST( RKH_TE_SM_EXSTATE,     c_smexst),  
+	EXP_TRE_ST( RKH_TE_SM_NENEX,       c_smnenex), 
+	EXP_TRE_ST( RKH_TE_SM_NTRNACT,     c_smntrna), 
+	EXP_TRE_ST( RKH_TE_SM_TS_STATE,    c_smtsst),  
+	EXP_TRE_ST( RKH_TE_SM_EVT_PROC,    c_smevpr),  
+	EXP_TRE_ST( RKH_TE_SM_EVT_NFOUND,  c_smnfnd),  
+	EXP_TRE_ST( RKH_TE_SM_GRD_FALSE,   c_smgf),    
+	EXP_TRE_ST( RKH_TE_SM_CND_NFOUND,  c_smnf),    
+	EXP_TRE_ST( RKH_TE_SM_UNKN_STATE,  c_smukst),  
+	EXP_TRE_ST( RKH_TE_SM_EX_HLEVEL,   c_smexhl),  
+	EXP_TRE_ST( RKH_TE_SM_EX_TSEG,     c_smextseg),
+	EXP_TRE_ST( RKH_TE_SM_EXE_ACT,     c_smexeact),
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- Timer events (TIM group) ---------------------------------------- */
-static FMT_ID_T *exp_tg_tmr_tbl[] =
+static FMT_EXP_ST exp_tg_tmr_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- Framework and misc. events (FWK group) -------------------------- */
-static FMT_ID_T *exp_tg_fwk_tbl[] =
+static FMT_EXP_ST exp_tg_fwk_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- User events (USR group) ----------------------------------------- */
-static FMT_ID_T *exp_tg_usr_tbl[] =
+static FMT_EXP_ST exp_tg_usr_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
 /* --- User events (USR group) ----------------------------------------- */
-static FMT_ID_T *exp_tg_ut_tbl[] =
+static FMT_EXP_ST exp_tg_ut_tbl[] =
 {
-    EXP_TRE_ST( RKH_TE_NEVENT )
+    EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 
-static FMT_ID_T **exp_tgroups_tbl[] =
+static FMT_EXP_ST *exp_tgroups_tbl[] =
 {
-    exp_tg_mp_tbl, exp_tg_rq_tbl, exp_tg_sma_tbl, exp_tg_sm_tbl,
-    exp_tg_tmr_tbl, exp_tg_fwk_tbl, exp_tg_usr_tbl, exp_tg_ut_tbl
+	exp_tg_mp_tbl, exp_tg_rq_tbl, exp_tg_sma_tbl, 
+    exp_tg_sm_tbl, exp_tg_tmr_tbl, exp_tg_fwk_tbl,
+    exp_tg_usr_tbl, exp_tg_ut_tbl
 };
 
 
@@ -134,7 +137,7 @@ find_exp_trevt( unsigned int id )
 
     te = EXTE( id, grp );
 
-	for( p = exp_tgroups_tbl[grp]; (*p)->tre.id != RKH_TE_NEVENT; ++p )
+	for( p = &(exp_tgroups_tbl[grp]->p); (*p)->tre.id != RKH_TE_NEVENT; ++p )
 	{
 		if( id == (*p)->tre.id )
 				return &((*p)->tre);
@@ -143,5 +146,53 @@ find_exp_trevt( unsigned int id )
 }
 
 
+CHEK_ARG_T
+find_exp_chk_fun( unsigned int id )
+{
+    FMT_EXP_ST *p;
+	static CHEK_ARG_T *pf;
+    RKH_TG_T grp;
+    RKH_TE_ID_T te;
+
+    grp = GETGRP(id);
+    if( grp >= RKH_TG_NGROUP )
+	    return ( CHEK_ARG_T )0;
+
+    te = EXTE( id, grp );
+
+	for( p = exp_tgroups_tbl[grp]; p->p->tre.id != RKH_TE_NEVENT; ++p )
+	{
+		if( id == p->p->tre.id )
+			return p->chk;
+	}
+	return ( CHEK_ARG_T )0;
+}
 
 
+void
+c_none( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
+{
+}
+
+
+void
+c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
+{
+    rui8_t i;
+
+    /* trash ao argument not used for this events */
+    va_arg( args, rui32_t );
+	nargs--;
+
+    for( i=0; nargs--; ++i )
+	{
+		if( pex->va.args[i].ignored == ARG_IGNORED )
+            continue;
+        
+        if( pex->va.args[i].value != va_arg( args, rui32_t ) )
+        {
+            lprintf( "FAIL in Arg#: %d", i );
+            break;
+        }
+	}
+}

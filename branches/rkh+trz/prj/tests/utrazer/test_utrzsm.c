@@ -93,7 +93,7 @@ TEST(utrzsm, simpleTransition)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-	sm_trn_expect(CST(&s11), CST(&s211));
+	sm_trn_expect(CST(&s21), CST(&s21));
 	sm_trn_expectAnyArgs();
 	sm_evtProc_expect();
 

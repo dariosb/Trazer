@@ -218,7 +218,7 @@ DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",    h_IgnGroup,  line_d, aty_s
 DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT", 	h_Expect,    line_d, aty_s, aty_s );
 DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArg, line_d, aty_s );
 DCLR_TRE( RKH_TE_UT_IGNORE,			"UT", "IGNORE",		h_IgnEvt,    line_d, aty_s );
-DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	NULL,	     NULL );
+DCLR_TRE( RKH_TE_UT_IGNORE_ARG,		"UT", "IGNORE_ARG",	h_IgnArg,	 line_d, aty_s, arg_d );
 
 
 /* --- Trace Event Groups Table ---------------------------------------- */
