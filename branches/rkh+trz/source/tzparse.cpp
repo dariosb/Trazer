@@ -18,6 +18,7 @@
 #include "tzlog.h"
 #include "seqdiag.h"
 #include "unittrz.h"
+#include "tcp.h"
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -975,6 +976,7 @@ h_tcfg( const void *tre )
 	cfg_printf( 	TRZ_RKH_CFG_TRC_CHK_EN );
 	cfg_printf( TSTAMP_TICK_HZ );
 
+    tcp_printf( "OK" );
 	return (char *)("\n");
 }
 
@@ -1178,6 +1180,7 @@ usr_fmt( const void *tre )
 	rui8_t done;
 	const USR_TBL_T *pfmt;
 
+    tcp_printf( "OK" );
 	pt = (const rui8_t *)tre;
 	if( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) 
 	{

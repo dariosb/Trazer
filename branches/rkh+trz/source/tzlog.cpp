@@ -4,6 +4,7 @@
 
 #include "error.h"
 #include "options.h"
+#include "tcp.h"
 
 #include <stdio.h>
 #include <stdarg.h>

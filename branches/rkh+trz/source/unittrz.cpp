@@ -8,6 +8,7 @@
 #include "tzlog.h"
 #include "tzparse.h"
 #include "evexptbl.h"
+#include "tcp.h"
 
 using namespace std;
 
@@ -37,15 +38,23 @@ utrz_clean( void )
     utrz_expected_lst.clear();
     memset( utrz_ign_group, GRP_EXPECTED, sizeof(utrz_ign_group) );
     memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
+	tcp_printf("OK");
 }
 
 void
 utrz_verify( char *ptext )
 {
     if( utrz_expected_lst.empty() )
+    {
         sprintf( ptext, "DONE" );
+        tcp_printf( "DONE" );
+    }
     else
+    {
         sprintf( ptext, "FAIL" );
+        tcp_printf( "FAIL" );
+    }
+
 }
 
 
@@ -75,6 +84,7 @@ utrz_add_expect_any_args( rui32_t line, rui32_t e )
 	utrz_expected_lst.push_back( expected_evt );
 
     END_EXPECT();
+	tcp_printf("OK");
 }
 
 
@@ -97,6 +107,8 @@ utrz_add_expect( rui8_t nargs, ... )
 	utrz_expected_lst.push_back( expected_evt );
 	va_end(args);
     END_EXPECT();
+
+	tcp_printf("OK");
 }
 
 
@@ -109,12 +121,11 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
 	CHEK_ARG_T p;
    	vector<rui32_t>::iterator arg_ix;
 
-    if( utrz_expected_lst.empty() )
-        return; 
-
-    if( is_ignored( id ) )
+    if( utrz_expected_lst.empty() || is_ignored( id ) )
+    {
+		tcp_printf("OK");
         return;
-
+    }
 
     /** get expected trace event from list **/
     exp_evt = utrz_expected_lst.front();
@@ -123,6 +134,7 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
     /** compare trace events id´s  **/
     if( exp_evt.id != id )
     {
+		tcp_printf("FAIL: Trace Event out of sequence");
         lprintf("FAIL: Trace Event out of sequence");
         return;
     }
@@ -147,9 +159,15 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
 
     /** check if event refered is equal to last expected **/
     if( e == last_expect.id )
+    {
         last_expect.va.args[ix].ignored = ARG_IGNORED;
+	    tcp_printf("OK");
+    }
     else
+	{
         lprintf( "Error (%d): IgnoredArg called without expect", line);
+		tcp_printf("Error (%d): IgnoredArg called without expect", line);
+	}
 }
 
 
@@ -160,6 +178,7 @@ utrz_ignore_group( RKH_TG_T grp )
         return;
 
     utrz_ign_group[ grp ] = GRP_IGNORED;
+	tcp_printf("OK");
 }
 
 void
@@ -169,6 +188,7 @@ utrz_ignore_evt( rui32_t e )
         return;
 
     utrz_ign_evt[ e ] = EVT_IGNORED;
+	tcp_printf("OK");
 }
 
 

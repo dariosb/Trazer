@@ -198,8 +198,12 @@ static
 UT_RET_CODE
 ut_process(ProcessOut *pOut)
 {
+	int r;
+    if( r = tcp_trace_recv( tsock, pOut->msg, UT_SIZEOF_MSG ) < 0 )
+		return UT_PROC_FAIL;
     /* Blocking call with timeout */
-    //return UT_PROC_FAIL;
+    printf( pOut->msg );
+	printf( "\n" );
 	return UT_PROC_SUCCESS;
 }
 

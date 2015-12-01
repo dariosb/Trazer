@@ -10,6 +10,7 @@
 #include "messages.h"
 #include "trzfrmt.h"
 #include "evexptbl.h"
+#include "tcp.h"
 
 using namespace std;
 
@@ -192,7 +193,9 @@ c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
         if( pex->va.args[i].value != va_arg( args, rui32_t ) )
         {
             lprintf( "FAIL in Arg#: %d", i );
+            tcp_printf( "FAIL in Arg#: %d", i );
             break;
         }
 	}
+    tcp_printf( "OK" );
 }

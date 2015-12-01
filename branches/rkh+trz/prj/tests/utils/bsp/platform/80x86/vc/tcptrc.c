@@ -105,6 +105,71 @@ tcp_trace_send( SOCKET s, const char *buf, int len )
 	send( s, buf, len, 0 ); 
 }
 
+#define UTRZACK_HEADER "UTRZACK:"
+#define UTRZANSW_LENGTH_WIDTH	6
+#define UTRZACK_TAIL ":"
+
+#define UTRZACK_LENGTH	(strlen(UTRZACK_HEADER) + UTRZANSW_LENGTH_WIDTH + strlen(UTRZACK_TAIL))
+
+
+int
+tcp_trace_recv( SOCKET s, const char *buf, int len )
+{
+	int q, l;
+	fd_set readSet;
+       int nfound;
+	       struct timeval delay;
+
+#if 0
+    while(!FD_ISSET(s, &readSet))
+        n=0;
+#endif
+	
+	 delay.tv_sec = 0;
+     delay.tv_usec = 200000;
+
+	 FD_ZERO(&readSet);
+     FD_SET(s, &readSet);
+
+     nfound = select(0, &readSet, 0, 0, &delay);        /* selective blocking */
+     if (nfound == SOCKET_ERROR)
+	 {
+          printf("Client socket select failed.\n"
+                 "Windows socket error 0x%08X.",
+                 WSAGetLastError());
+          return -1;                                         /* terminate */
+      }
+	
+	while(!FD_ISSET(s, &readSet))
+        q=0;
+	l = UTRZACK_LENGTH;
+	if( q = recv(s, (char *)buf, l, 0) != UTRZACK_LENGTH )
+		return -1;
+
+	l = atoi( buf+strlen(UTRZACK_HEADER) );
+	
+	if( q = recv(s, (char *)buf, (int)l, 0) < 0)
+		return -1;
+
+	return q;
+
+	//return recv(s, (char *)buf, (int)len, 0);
+#if 0
+    if (n == SOCKET_ERROR)
+	{
+        printf("Client socket error.\n"
+               "Windows socket error 0x%08X.",
+                WSAGetLastError());
+    }
+    else if (n <= 0)                         /* the client hang up */
+    {
+         closesocket(s);
+         return 0;                            /* no data from client */
+     }
+#endif
+}
+
+
 
 void
 tcp_trace_close( SOCKET s )
