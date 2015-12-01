@@ -58,6 +58,7 @@
 #endif
 
 #include "unity.h"
+#include "unitrazer.h"
 #include "bsp.h"
 #include "rkh.h"
 
@@ -70,7 +71,6 @@
 #define BIN_TRACE           0
 #define SOCKET_TRACE        1
 #define ESC                 0x1B
-#define UT_SIZEOF_MSG       256
 
 /* ---------------------------- Local data types --------------------------- */
 
@@ -79,14 +79,6 @@ typedef enum
     UT_PROC_SUCCESS, UT_PROC_FAIL
 } UT_RET_CODE;
 
-typedef struct ProcessOut ProcessOut;
-struct ProcessOut
-{
-    char msg[UT_SIZEOF_MSG];    /* String terminated in '\0' according to */
-                                /* cmock's ruby scripts */
-    UNITY_LINE_TYPE line;       /* Line number of expectation */
-    /* Another parameters from trazer */
-};
 
 /* ---------------------------- Global variables --------------------------- */
 /* ---------------------------- Local variables ---------------------------- */
@@ -107,7 +99,7 @@ static rui8_t l_isr_tick;
 static FILE *ftbin;
 #endif
 
-static ProcessOut out;
+static UtrzProcessOut out;
 
 /*
  *  For socket trace feature.
@@ -194,14 +186,20 @@ isr_kbd_thread( LPVOID par )	/* Win32 thread to emulate keyboard ISR */
     return 0;
 }
 
+#include "tzparse.h"
+
 static
 UT_RET_CODE
-ut_process(ProcessOut *pOut)
+ut_process(UtrzProcessOut *pOut)
 {
-	int r;
-    if( r = tcp_trace_recv( tsock, pOut->msg, UT_SIZEOF_MSG ) < 0 )
+
+    if( utrz_recv( (void *)tsock, pOut ) > 0 )
+		return UT_PROC_SUCCESS;
+	else
 		return UT_PROC_FAIL;
-    /* Blocking call with timeout */
+
+
+
     printf( pOut->msg );
 	printf( "\n" );
 	return UT_PROC_SUCCESS;

@@ -169,7 +169,22 @@ tcp_trace_recv( SOCKET s, const char *buf, int len )
 #endif
 }
 
+#include "unitrazer.h"
+#include "tzparse.h"
+int
+utrz_recv( void *s, UtrzProcessOut *p )
+{
+	char c;
+	int n;
 
+	/* Blocking call with timeout */
+	while ((n = recv((SOCKET)s, &c, sizeof(c), 0)) != -1)
+	{
+		if (n > 0)
+			trazer_parse(c);
+	}
+	return 0;
+}
 
 void
 tcp_trace_close( SOCKET s )

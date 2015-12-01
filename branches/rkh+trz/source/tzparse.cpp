@@ -976,7 +976,7 @@ h_tcfg( const void *tre )
 	cfg_printf( 	TRZ_RKH_CFG_TRC_CHK_EN );
 	cfg_printf( TSTAMP_TICK_HZ );
 
-    tcp_printf( "OK" );
+    utrz_tcp_continue();
 	return (char *)("\n");
 }
 
@@ -1471,6 +1471,7 @@ trazer_init( void )
 	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", TRZ_RKH_CFG_TRC_TSTAMP_EN );
 	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", TRZ_RKH_CFG_TRC_CHK_EN );
 	lprintf( "\n" );
+	rkh_trc_init();
 }
 
 

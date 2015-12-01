@@ -276,6 +276,8 @@ static char pre_buff[2048];
 #define UTRZANSW_LENGTH_WIDTH	6
 #define UTRZACK_TAIL ":"
 
+#include "rkhtrc.h"
+
 void
 tcp_printf( const char *fmt, ... )
 {
@@ -287,4 +289,40 @@ tcp_printf( const char *fmt, ... )
 	sprintf( pre_buff, UTRZACK_HEADER "%06d" UTRZACK_TAIL, strlen(send_buff)+1 );
     tcpSend( (unsigned char *)pre_buff, 15 );
     tcpSend( (unsigned char *)send_buff, strlen(send_buff)+1 );
+}
+
+
+void
+rkh_trc_flush(void)
+{
+    rui8_t *blk;
+    TRCQTY_T nbytes;
+
+	for(;;)
+    {
+        nbytes = (TRCQTY_T)1024;
+        blk = rkh_trc_get_block(&nbytes);
+
+        if ((blk != (rui8_t *)0))
+        {
+			tcpSend(blk, nbytes);
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void
+utrz_tcp_resp( RKH_TE_ID_T e, rui32_t line, char *msg )
+{
+	rkh_trc_begin( e );
+	RKH_TRC_UI32(line);
+	if(msg != NULL )
+		RKH_TRC_STR(msg);
+	else
+		RKH_TRC_STR("OK");
+	rkh_trc_end();
+	rkh_trc_flush();
 }

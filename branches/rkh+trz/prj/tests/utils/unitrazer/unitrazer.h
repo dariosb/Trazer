@@ -115,9 +115,23 @@ extern "C" {
 #define UT_ARGNO_5      (rui8_t)4
 #define UT_ARGNO_6      (rui8_t)5
 
+#define UT_SIZEOF_MSG       256
+
 /* ------------------------------- Data types ------------------------------ */
+typedef struct UtrzProcessOut UtrzProcessOut;
+
+struct UtrzProcessOut
+{
+    char msg[UT_SIZEOF_MSG];    /* String terminated in '\0' according to */
+                                /* cmock's ruby scripts */
+    UNITY_LINE_TYPE line;       /* Line number of expectation */
+    /* Another parameters from trazer */
+};
+
 /* -------------------------- External variables --------------------------- */
 /* -------------------------- Function prototypes -------------------------- */
+
+int utrz_recv( void *s, UtrzProcessOut *p );
 
 /* ============================ Expect functions =========================== */
 
@@ -205,6 +219,7 @@ void unitrazer_ignoreArg(UNITY_LINE_TYPE cmock_line, rui8_t trcEvt,
  *  \param[in] group        group to ignore
  */
 void unitrazer_ignoreGroup(UNITY_LINE_TYPE cmock_line, RKH_TRC_GROUPS group);
+
 
 /* -------------------- External C language linkage end -------------------- */
 

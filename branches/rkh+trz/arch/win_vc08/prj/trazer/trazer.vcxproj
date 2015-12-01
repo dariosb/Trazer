@@ -99,6 +99,7 @@
     <ClCompile Include="..\..\..\..\source\getopt.cpp" />
     <ClCompile Include="..\..\..\..\source\lang.cpp" />
     <ClCompile Include="..\..\..\..\source\messages.cpp" />
+    <ClCompile Include="..\..\..\..\source\rkhtrc.cpp" />
     <ClCompile Include="..\..\..\..\source\unittrz.cpp" />
     <ClCompile Include="..\..\myser.cpp" />
     <ClCompile Include="..\..\..\..\source\options.cpp" />

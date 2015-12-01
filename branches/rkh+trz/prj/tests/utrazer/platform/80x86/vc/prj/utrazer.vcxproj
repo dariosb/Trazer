@@ -99,6 +99,7 @@
     <ClCompile Include="..\..\..\..\..\unity\fixture\unity_fixture.c" />
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\tcptrc.c" />
+    <ClCompile Include="..\..\..\..\..\utils\unitrazer\tzparse.c" />
     <ClCompile Include="..\..\..\..\..\utils\unitrazer\unitrazer.c" />
     <ClCompile Include="..\..\..\..\src\aotest.c" />
     <ClCompile Include="..\..\..\..\src\aotest_act.c" />

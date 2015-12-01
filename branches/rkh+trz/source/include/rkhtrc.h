@@ -60,6 +60,11 @@
 #include "rkhdef.h"
 #include "rkhevt.h"
 
+#define RKH_CFG_TRC_SIZEOF_STREAM	1024
+#define RKH_CFG_TRC_EN			RKH_ENABLED
+#define RKH_CFG_TRC_CHK_EN		RKH_ENABLED
+#define RKH_CFG_TRC_RTFIL_EN  RKH_DISABLED
+#define RKH_HOOK_PUT_TRCEVT()		;
 /* ---------------------- External C language linkage ---------------------- */
 
 #ifdef __cplusplus
@@ -3191,6 +3196,8 @@ typedef enum rkh_trc_events
     RKH_TE_UT_EXPECT_ANYARGS,
     RKH_TE_UT_IGNORE,
     RKH_TE_UT_IGNORE_ARG,
+	RKH_TE_UT_RESP,
+	RKH_TE_UT_CONTINUE,
 
     RKH_TE_NEVENT = 255
 } RKH_TRC_EVENTS;
