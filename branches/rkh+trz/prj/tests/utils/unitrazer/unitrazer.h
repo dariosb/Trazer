@@ -118,10 +118,16 @@ extern "C" {
 #define UT_SIZEOF_MSG       256
 
 /* ------------------------------- Data types ------------------------------ */
+typedef enum
+{
+    UT_PROC_SUCCESS, UT_PROC_FAIL, UT_PROC_BUSY
+} UT_RET_CODE;
+
 typedef struct UtrzProcessOut UtrzProcessOut;
 
 struct UtrzProcessOut
 {
+	UT_RET_CODE status;			/* result code UT_PROC_SUCCESS/FAIL */
     char msg[UT_SIZEOF_MSG];    /* String terminated in '\0' according to */
                                 /* cmock's ruby scripts */
     UNITY_LINE_TYPE line;       /* Line number of expectation */

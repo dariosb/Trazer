@@ -40,7 +40,7 @@ utrz_clean( void )
     utrz_expected_lst.clear();
     memset( utrz_ign_group, GRP_EXPECTED, sizeof(utrz_ign_group) );
     memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
-    utrz_tcp_continue();
+    utrz_tcp_success();
 }
 
 
@@ -50,12 +50,12 @@ utrz_verify( char *ptext )
     if( utrz_expected_lst.empty() )
     {
         sprintf( ptext, "DONE" );
-        utrz_tcp_continue();
+        utrz_tcp_success();
     }
     else
     {
         sprintf( ptext, "FAIL" );
-        utrz_tcp_resp( RKH_TE_UT_RESP, 0,"Utrazer Verification Fail");
+        utrz_tcp_resp( RKH_TE_UT_FAIL, 0,"Utrazer Verification Fail");
     }
 }
 
@@ -85,7 +85,7 @@ utrz_add_expect_any_args( rui32_t line, rui32_t e )
 	utrz_expected_lst.push_back( expected_evt );
 
     END_EXPECT();
-    utrz_tcp_continue();
+    utrz_tcp_success();
 }
 
 
@@ -109,7 +109,7 @@ utrz_add_expect( rui8_t nargs, ... )
 	va_end(args);
     END_EXPECT();
 
-    utrz_tcp_continue();
+    utrz_tcp_success();
 }
 
 
@@ -124,7 +124,7 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
 
     if( utrz_expected_lst.empty() || is_ignored( id ) )
     {
-        utrz_tcp_continue();
+        utrz_tcp_success();
         return;
     }
 
@@ -135,7 +135,7 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
     /** compare trace events id´s  **/
     if( exp_evt.id != id )
     {
-		utrz_tcp_resp( RKH_TE_UT_RESP, exp_evt.line, "FAIL: Trace Event out of sequence" );
+		utrz_tcp_resp( RKH_TE_UT_FAIL, exp_evt.line, "FAIL: Trace Event out of sequence" );
 		lprintf("FAIL: Trace Event out of sequence");
         return;
     }
@@ -162,12 +162,12 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
     if( e == last_expect.id )
     {
         last_expect.va.args[ix].ignored = ARG_IGNORED;
-		utrz_tcp_continue();
+		utrz_tcp_success();
     }
     else
 	{
         lprintf( "Error (%d): IgnoredArg called without expect", line);
-		utrz_tcp_resp( RKH_TE_UT_RESP, line, "Error: IgnoredArg called without expect" );
+		utrz_tcp_resp( RKH_TE_UT_FAIL, line, "Error: IgnoredArg called without expect" );
 	}
 }
 
@@ -179,7 +179,7 @@ utrz_ignore_group( RKH_TG_T grp )
         return;
 
     utrz_ign_group[ grp ] = GRP_IGNORED;
-    utrz_tcp_continue();
+    utrz_tcp_success();
 }
 
 void
@@ -189,7 +189,7 @@ utrz_ignore_evt( rui32_t e )
         return;
 
     utrz_ign_evt[ e ] = EVT_IGNORED;
-    utrz_tcp_continue();
+    utrz_tcp_success();
 }
 
 

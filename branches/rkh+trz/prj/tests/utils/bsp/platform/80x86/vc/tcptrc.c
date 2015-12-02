@@ -176,14 +176,16 @@ utrz_recv( void *s, UtrzProcessOut *p )
 {
 	char c;
 	int n;
-
+	
+	p->status = UT_PROC_BUSY;
 	/* Blocking call with timeout */
-	while ((n = recv((SOCKET)s, &c, sizeof(c), 0)) != -1)
+	while( (n = recv((SOCKET)s, &c, sizeof(c), 0)) > 0 )
 	{
-		if (n > 0)
-			trazer_parse(c);
+		trazer_parse(c, p);
+		if( p->status != UT_PROC_BUSY )
+			return 1;
 	}
-	return 0;
+	return -1;
 }
 
 void

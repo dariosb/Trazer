@@ -74,10 +74,6 @@
 
 /* ---------------------------- Local data types --------------------------- */
 
-typedef enum
-{
-    UT_PROC_SUCCESS, UT_PROC_FAIL
-} UT_RET_CODE;
 
 
 /* ---------------------------- Global variables --------------------------- */
@@ -192,17 +188,10 @@ static
 UT_RET_CODE
 ut_process(UtrzProcessOut *pOut)
 {
-
     if( utrz_recv( (void *)tsock, pOut ) > 0 )
-		return UT_PROC_SUCCESS;
+		return pOut->status;
 	else
 		return UT_PROC_FAIL;
-
-
-
-    printf( pOut->msg );
-	printf( "\n" );
-	return UT_PROC_SUCCESS;
 }
 
 /* ---------------------------- Global functions --------------------------- */
