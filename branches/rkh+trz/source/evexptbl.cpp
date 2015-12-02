@@ -193,9 +193,9 @@ c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
         if( pex->va.args[i].value != va_arg( args, rui32_t ) )
         {
             lprintf( "FAIL in Arg#: %d", i );
-			utrz_tcp_resp( RKH_TE_UT_FAIL, pex->line, "FAIL in Arg#" );
+			utrz_fail( pex->line, UTRZ_ARG_VAL, 0 );
             break;
         }
 	}
-    utrz_tcp_success();
+    utrz_success();
 }

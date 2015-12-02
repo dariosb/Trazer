@@ -976,7 +976,7 @@ h_tcfg( const void *tre )
 	cfg_printf( 	TRZ_RKH_CFG_TRC_CHK_EN );
 	cfg_printf( TSTAMP_TICK_HZ );
 
-    utrz_tcp_success();
+    utrz_success();
 	return (char *)("\n");
 }
 

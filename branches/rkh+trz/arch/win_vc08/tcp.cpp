@@ -314,15 +314,37 @@ rkh_trc_flush(void)
     }
 }
 
-void
-utrz_tcp_resp( RKH_TE_ID_T e, rui32_t line, char *msg )
+
+char *utrz_msgs[] =
 {
+    "Out of order Trace event. ",
+    "IgnoredArg called without expect",
+    "Utrazer Verification Fail",
+    "Arg diferent value"
+};
+
+char utrz_msg[1024];
+
+
+void
+utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
+{
+    int i;
+    va_list val;
+	char *s;
+
+    strcpy( utrz_msg, msg );
+    va_start( val, nargs );
+    for (i=0;i<nargs;i++)
+    {
+        s=va_arg(val, char *);
+        strcat( utrz_msg, s );
+    }
+    
+
 	rkh_trc_begin( e );
 	RKH_TRC_UI32(line);
-	if(msg != NULL )
-		RKH_TRC_STR(msg);
-	else
-		RKH_TRC_STR("OK");
+	RKH_TRC_STR(utrz_msg);
 	rkh_trc_end();
 	rkh_trc_flush();
 }

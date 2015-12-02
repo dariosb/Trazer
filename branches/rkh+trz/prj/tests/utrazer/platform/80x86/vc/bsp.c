@@ -182,7 +182,7 @@ isr_kbd_thread( LPVOID par )	/* Win32 thread to emulate keyboard ISR */
     return 0;
 }
 
-#include "tzparse.h"
+//#include "tzparse.h"
 
 static
 UT_RET_CODE
