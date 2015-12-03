@@ -96,6 +96,7 @@ TEST(utrzsm, simpleTransition)
 	sm_trn_expect(CST(&s21), CST(&s21));
 	sm_trn_expectAnyArgs();
 	sm_evtProc_expect();
+	sm_trn_ignoreArg_sourceState();
 
     /* -------- Exercise ------------ 
      * Do something to the system 

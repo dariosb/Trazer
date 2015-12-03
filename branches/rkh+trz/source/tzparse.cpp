@@ -1546,12 +1546,14 @@ h_IgnArg( const void *tre )
 	unsigned long line; 
 	unsigned int trc_e;
     unsigned char arg_ix;
+	const TRE_T *p;
 
    	line = assemble( sizeof_utline() );
 	trc_e = (unsigned int)assemble( sizeof_trze() );
 	arg_ix = (unsigned int)assemble( 1 );
+	p = find_trevt( trc_e );
 
-    tre_fmt( fmt, CTE(tre), 3, line, trc_e, arg_ix );
+    tre_fmt( fmt, CTE(tre), 3, line, p->name.c_str(), arg_ix );
 
     utrz_ignore_arg( line, trc_e, arg_ix );
     

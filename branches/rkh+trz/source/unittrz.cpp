@@ -134,9 +134,9 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
     /** compare trace events id´s  **/
     if( exp_evt.id != id )
     {
-        /*utrz_msg_build( 2,  "Out of order Trace event. ", 
-                            find_trevt(id)->name.c_str() );*/
-		utrz_fail( exp_evt.line, UTRZ_OUT_OF_ORDER_MSG, 1, find_trevt(id)->name.c_str() );
+		utrz_fail( exp_evt.line, UTRZ_OUT_OF_ORDER_MSG, 4, 
+                " received: ", find_trevt(id)->name.c_str(),
+                " expected: ", find_trevt(exp_evt.id)->name.c_str() );
 		lprintf("FAIL: Trace Event out of sequence");
         return;
     }
@@ -168,7 +168,7 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
     else
 	{
         lprintf( "Error (%d): IgnoredArg called without expect", line);
-		utrz_fail( 0, UTRZ_IGN_CALL_WO_EXP, 0 );
+		utrz_fail( 0, UTRZ_IGN_CALL_WO_EXP, 1, find_trevt(e)->name.c_str() );
 	}
 }
 
@@ -193,60 +193,3 @@ utrz_ignore_evt( rui32_t e )
     utrz_success();
 }
 
-
-#if 0
-vector <UTRZ_EVT_ST> utrz_tbl;
-
-void
-utrz_insert( rui8_t id, rui8_t nargs, ... )
-{
-	va_list args;
-	UTRZ_EVT_ST uevt;
-
-	uevt.id = id;
-	va_start( args, nargs );
-	while( nargs-- )
-		uevt.va.args.push_back( va_arg( args, rui32_t ) );
-	utrz_tbl.push_back( uevt );
-	va_end(args);
-}
-
-
-ri8_t
-utrz_check( rui8_t id, rui8_t nargs, ... )
-{
-	vector<UTRZ_EVT_ST>::iterator i;
-	vector<rui32_t>::iterator j;
-	va_list args;
-	rui32_t arg;
-
-	va_start( args, nargs );
-
-	for( i = utrz_tbl.begin(); i < utrz_tbl.end(); ++i )
-	{
-		if( i->id == id )
-		{
-			if( i->va.args.size() != nargs )
-				return -1;
-
-			for( j = i->va.args.begin(); j < i->va.args.end(); ++j )
-			{
-				arg = va_arg( args, rui32_t );
-				if( *j != arg )
-				{
-					va_end( args );
-					return -1;
-				}
-			}
-
-			va_end( args );
-			return 0;
-		}
-	}
-
-	va_end( args );
-	return -1;
-}
-
-
-#endif
