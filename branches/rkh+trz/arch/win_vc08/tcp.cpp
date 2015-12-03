@@ -318,7 +318,7 @@ rkh_trc_flush(void)
 char *utrz_msgs[] =
 {
     "Out of order Trace event.",
-    "IgnoreArg called before Expect on event "
+    "IgnoreArg called before Expect on event ",
     "Utrazer Verification Fail",
     "Arg diferent value"
 };
@@ -340,7 +340,9 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
         s=va_arg(val, char *);
         strcat( utrz_msg, s );
     }
-    
+   
+    lprintf("line %d:", line); 
+    lprintf(utrz_msg); 
 
 	rkh_trc_begin( e );
 	RKH_TRC_UI32(line);

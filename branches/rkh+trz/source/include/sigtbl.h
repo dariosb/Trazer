@@ -10,6 +10,7 @@
 
 void add_to_sigtbl( TRZE_T sig, const char *name );
 const char * map_sig( TRZE_T sig );
+const char * search_in_sigtbl(  TRZE_T sig  );
 
 
 void tmrtbl_init( ulong tobj, ulong sobj );

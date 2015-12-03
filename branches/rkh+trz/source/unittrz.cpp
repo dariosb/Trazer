@@ -49,13 +49,11 @@ utrz_verify( char *ptext )
 {
     if( utrz_expected_lst.empty() )
     {
-        sprintf( ptext, "DONE" );
         utrz_success();
     }
     else
     {
-        sprintf( ptext, "FAIL" );
-		utrz_fail( 0, UTRZ_VERIFY_FAIL, 0 );
+        utrzVerify_fail();
     }
 }
 
@@ -134,10 +132,10 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
     /** compare trace events id´s  **/
     if( exp_evt.id != id )
     {
-		utrz_fail( exp_evt.line, UTRZ_OUT_OF_ORDER_MSG, 4, 
-                " received: ", find_trevt(id)->name.c_str(),
-                " expected: ", find_trevt(exp_evt.id)->name.c_str() );
-		lprintf("FAIL: Trace Event out of sequence");
+        utrzEvtExpect_fail( exp_evt.line, 
+                find_trevt(id)->name.c_str(), 
+                find_trevt(exp_evt.id)->name.c_str() );
+
         return;
     }
 
@@ -167,8 +165,7 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
     }
     else
 	{
-        lprintf( "Error (%d): IgnoredArg called without expect", line);
-		utrz_fail( 0, UTRZ_IGN_CALL_WO_EXP, 1, find_trevt(e)->name.c_str() );
+        utrzIgnArg_fail( line, find_trevt(e)->name.c_str() );
 	}
 }
 

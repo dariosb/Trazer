@@ -67,6 +67,18 @@ map_obj( unsigned long adr )
 }
 
 
+const char *
+search_in_objtbl(  unsigned long  adr  )
+{
+	vector<SYMOBJ_T>::iterator i;
+
+	for( i = symb_tbl.begin(); i < symb_tbl.end(); ++i )
+		if( i->adr == adr )
+			return i->name.c_str();
+    
+    return NULL;
+}
+
 void
 post_fifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts )
 {

@@ -62,6 +62,20 @@ map_sig( TRZE_T sig )
 }
 
 
+const char *
+search_in_sigtbl(  TRZE_T sig  )
+{
+	vector<SYMSIG_T>::iterator i;
+
+	for( i = sig_tbl.begin(); i < sig_tbl.end(); ++i )
+		if( i->sig == sig )
+			return i->name.c_str();
+
+    return NULL;
+}
+
+
+
 vector <TMREVT_T> tmr_tbl;
 
 void
@@ -118,4 +132,5 @@ tmrtbl_find_sig( ulong sobj )
 	}
 	return 0;	
 }
+
 

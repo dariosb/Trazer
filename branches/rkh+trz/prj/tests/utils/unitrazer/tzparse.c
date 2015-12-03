@@ -15,7 +15,7 @@ rui16_t TSTAMP_TICK_HZ;
 
 #define CTE( te )	((const struct tre_t*)(te))
 
-#define PARSER_MAX_SIZE_BUF			64
+#define PARSER_MAX_SIZE_BUF			255
 #define TRZ_RKH_CFG_TRC_NSEQ_EN		0
 #define TRZ_RKH_CFG_TRC_CHK_EN		1
 
