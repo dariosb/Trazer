@@ -77,7 +77,7 @@ TEST_TEAR_DOWN(utrazer)
 
 TEST(utrazer, firstStateAfterInit)
 {
-    rkh_trc_filter_get(&filStatus);
+    TEST_IGNORE();
 }
 
 /* ------------------------------ End of file ------------------------------ */

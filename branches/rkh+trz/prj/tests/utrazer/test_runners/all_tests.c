@@ -69,6 +69,7 @@ runAllTests(void)
 {
 	RUN_TEST_GROUP(utrazer);
 	RUN_TEST_GROUP(utrzsm);
+	RUN_TEST_GROUP(utrzsm);
 }
 
 /* ---------------------------- Global functions --------------------------- */
@@ -78,7 +79,7 @@ main(int argc, char *argv[])
 {
 	bsp_init(argc, argv);
 	UnityMain(argc, argv, runAllTests);
-
+    rkh_trc_close();
 	for(;;)
         ;
 }

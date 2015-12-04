@@ -182,7 +182,6 @@ isr_kbd_thread( LPVOID par )	/* Win32 thread to emulate keyboard ISR */
     return 0;
 }
 
-//#include "tzparse.h"
 
 static
 UT_RET_CODE
@@ -195,6 +194,20 @@ ut_process(UtrzProcessOut *pOut)
 }
 
 /* ---------------------------- Global functions --------------------------- */
+
+UtrzProcessOut *
+ut_getLastOut(void)
+{
+    return &out;
+}
+
+void
+ut_resetOut(void)
+{
+    out.line = 0;
+    out.msg[0] = '\0';
+    out.status = UT_PROC_INIT;
+}
 
 void
 rkh_hook_timetick(void)
@@ -239,6 +252,11 @@ rkh_hook_idle( void )           /* called within critical section */
     RKH_WAIT_FOR_EVENTS();		/* yield the CPU until new event(s) arrive */
 }
 
+#if 0 
+
+/*
+ * For production code use this
+ */
 void
 rkh_hook_putTrcEvt(void)
 {
@@ -248,6 +266,18 @@ rkh_hook_putTrcEvt(void)
     ret = ut_process(&out);
     UNITY_TEST_ASSERT(ret != UT_PROC_FAIL, out.line, out.msg);
 }
+#else
+
+/*
+ * For utrazer unit test use this 
+ */
+void
+rkh_hook_putTrcEvt(void)
+{
+    RKH_TRC_FLUSH();
+    ut_process(&out);
+}
+#endif
 
 void
 rkh_assert(RKHROM char * const file, int line)

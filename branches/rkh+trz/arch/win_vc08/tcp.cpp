@@ -315,14 +315,6 @@ rkh_trc_flush(void)
 }
 
 
-char *utrz_msgs[] =
-{
-    "Out of order Trace event.",
-    "IgnoreArg called before Expect on event ",
-    "Utrazer Verification Fail",
-    "Arg diferent value"
-};
-
 char utrz_msg[1024];
 
 

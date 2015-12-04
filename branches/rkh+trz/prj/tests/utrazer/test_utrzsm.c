@@ -52,6 +52,7 @@ TEST_SETUP(utrzsm)
     /* -------- Setup ---------------
      * Establish the preconditions to the test 
      */
+    ut_resetOut();
     unitrazer_init();
     fwk_ignore();        /* Ignore every trace event of FWK group */
 	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
@@ -81,36 +82,82 @@ TEST_TEAR_DOWN(utrzsm)
     /* -------- Cleanup -------------
      * Return the system under test to its initial state after the test
      */
-    unitrazer_cleanup();
-    unitrazer_verify(); /* Makes sure there are no unused expectations, if */
-                        /* there are, this function causes the test to fail. */
+	unitrazer_verify(); /* Makes sure there are no unused expectations, if */
+						/* there are, this function causes the test to fail. */
+	unitrazer_cleanup();
 }
 
-TEST(utrzsm, simpleTransition)
+TEST(utrzsm, expectEventOk)
 {
-    ruint ret;
+    UtrzProcessOut *p;
 
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
 	sm_trn_expect(CST(&s21), CST(&s211));
-	sm_trn_expectAnyArgs();
-	sm_evtProc_expect();
-	//sm_trn_ignoreArg_sourceState();
 
     /* -------- Exercise ------------ 
      * Do something to the system 
      */
-	RKH_TR_FWK_STATE(aotest, &s);
+
     /* Each recorded trace event is checked to see that it matches */
     /* the expected trace event exactly. If calls are out of order or */
     /* parameters are wrong, the test immediately fails. */
-    ret = rkh_sma_dispatch(aotest, CE(&eA));
+    RKH_TR_SM_TRN(aotest, &s21, &s211);
 
     /* -------- Verify --------------
      * Check the expected outcome 
      */
-    TEST_ASSERT_EQUAL(RKH_EVT_PROC, ret);
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
+TEST(utrzsm, expectEventOutOfSequence)
+{
+    UtrzProcessOut *p;
+
+	sm_trn_expect(CST(&s21), CST(&s211));
+
+    RKH_TR_SM_ENSTATE(aotest, CST(&s21));
+
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
+    TEST_ASSERT_EQUAL_STRING("Out of order Trace event. received: 'ENSTATE' "
+                             "expected: 'TRN'.", p->msg);
+}
+
+TEST(utrzsm, expectEventWithUnexpectedArg)
+{
+    UtrzProcessOut *p;
+
+	sm_trn_expect(CST(&s21), CST(&s211));
+
+    RKH_TR_SM_TRN(aotest, &s21, &s21);
+
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
+    TEST_ASSERT_EQUAL_STRING("Event 'TRN' ocurred with unexpected "
+                             "value for argument 'tst=s21' expected "
+                             "value='s211'.", p->msg);
+}
+
+TEST(utrzsm, ignoreEvt)
+{	
+    ruint ret;
+
+    TEST_IGNORE();
+    sm_trn_ignore();
+    sm_evtProc_expect();
+
+    RKH_TR_FWK_STATE(aotest, &s);
+    ret = rkh_sma_dispatch(aotest, CE(&eA));
+
+    TEST_ASSERT_EQUAL(RKH_EVT_PROC, ret);
+
+}
+
+TEST(utrzsm, ignoreOneArg)
+{
+    TEST_IGNORE();
+}
 /* ------------------------------ End of file ------------------------------ */

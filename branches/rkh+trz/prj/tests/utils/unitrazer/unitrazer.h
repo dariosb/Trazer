@@ -120,7 +120,7 @@ extern "C" {
 /* ------------------------------- Data types ------------------------------ */
 typedef enum
 {
-    UT_PROC_SUCCESS, UT_PROC_FAIL, UT_PROC_BUSY
+    UT_PROC_SUCCESS, UT_PROC_FAIL, UT_PROC_BUSY, UT_PROC_INIT
 } UT_RET_CODE;
 
 typedef struct UtrzProcessOut UtrzProcessOut;
@@ -138,6 +138,8 @@ struct UtrzProcessOut
 /* -------------------------- Function prototypes -------------------------- */
 
 int utrz_recv( void *s, UtrzProcessOut *p );
+UtrzProcessOut * ut_getLastOut(void);
+void ut_resetOut(void);
 
 /* ============================ Expect functions =========================== */
 

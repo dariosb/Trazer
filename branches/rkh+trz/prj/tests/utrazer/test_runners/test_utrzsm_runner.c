@@ -31,7 +31,11 @@
 
 TEST_GROUP_RUNNER(utrzsm)
 {
-	RUN_TEST_CASE(utrzsm, simpleTransition);
+	RUN_TEST_CASE(utrzsm, expectEventOk);
+	RUN_TEST_CASE(utrzsm, expectEventOutOfSequence);
+	RUN_TEST_CASE(utrzsm, expectEventWithUnexpectedArg);
+	RUN_TEST_CASE(utrzsm, ignoreEvt);
+	RUN_TEST_CASE(utrzsm, ignoreOneArg);
 }
 
 /* ------------------------------ End of file ------------------------------ */
