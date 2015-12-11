@@ -333,6 +333,7 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
         strcat( utrz_msg, s );
     }
    
+
     lprintf("line %d:", line); 
     lprintf(utrz_msg); 
 
@@ -342,3 +343,4 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
 	rkh_trc_end();
 	rkh_trc_flush();
 }
+

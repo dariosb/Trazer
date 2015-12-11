@@ -187,10 +187,10 @@ static
 UT_RET_CODE
 ut_process(UtrzProcessOut *pOut)
 {
-    if( utrz_recv( (void *)tsock, pOut ) > 0 )
-		return pOut->status;
-	else
-		return UT_PROC_FAIL;
+    if( utrz_recv( (void *)tsock, pOut ) <= 0 )
+		pOut->status = UT_PROC_FAIL;
+
+	return pOut->status;
 }
 
 /* ---------------------------- Global functions --------------------------- */

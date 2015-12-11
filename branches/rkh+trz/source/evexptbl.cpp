@@ -173,6 +173,7 @@ find_exp_chk_fun( unsigned int id )
 void
 c_none( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
 {
+	utrz_success();
 }
 
 #include "sigtbl.h"
@@ -225,7 +226,7 @@ c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
 			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
 					  temp_buff, ex_arg_s.c_str() );
                    
-            break;
+            return;
         }
 	}
     utrz_success();
