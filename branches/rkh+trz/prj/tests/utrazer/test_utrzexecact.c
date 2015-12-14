@@ -1,5 +1,5 @@
 /**
- *  \file       test_utrzsm.c
+ *  \file       test_utrzexeact.c
  *  \ingroup    Test
  *
  *  \brief      Unit test for RKH's state machine module.
@@ -28,56 +28,22 @@
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
 
-TEST_GROUP(utrzsm);
+TEST_GROUP(utrzexeact);
 
 /* ---------------------------- Local variables ---------------------------- */
-
-static RKH_ROM_STATIC_EVENT( eA, A );
-static RKH_ROM_STATIC_EVENT( eB, B );
-static RKH_ROM_STATIC_EVENT( eC, C );
-static RKH_ROM_STATIC_EVENT( eD, D );
-static RKH_ROM_STATIC_EVENT( eE, E );
-static RKH_ROM_STATIC_EVENT( eF, F );
-static RKH_ROM_STATIC_EVENT( eG, G );
-static RKH_ROM_STATIC_EVENT( eH, H );
-static RKH_ROM_STATIC_EVENT( eI, I );
-static RKH_ROM_STATIC_EVENT( eTerm, TERMINATE );
-
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_SETUP(utrzsm)
+TEST_SETUP(utrzexeact)
 {
     /* -------- Setup ---------------
      * Establish the preconditions to the test 
      */
-    ut_resetOut();
-    unitrazer_init();
-    fwk_ignore();        /* Ignore every trace event of FWK group */
-	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
-
-    RKH_TR_FWK_AO(aotest);
-    RKH_TR_FWK_STATE(aotest, &s);
-    RKH_TR_FWK_STATE(aotest, &s1);
-    RKH_TR_FWK_STATE(aotest, &s11);
-    RKH_TR_FWK_STATE(aotest, &s2);
-    RKH_TR_FWK_STATE(aotest, &s21);
-    RKH_TR_FWK_STATE(aotest, &s211);
-    RKH_TR_FWK_SIG(A);
-
-	/* set trace filters */
-	RKH_FILTER_ON_GROUP( RKH_TRC_ALL_GROUPS );
-	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
-	RKH_FILTER_OFF_EVENT( A );
-	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
-	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_FWK );
-	RKH_FILTER_OFF_SMA( aotest );
-
-    rkh_sma_init_hsm(aotest);
+    common_test_setup();
 }
 
-TEST_TEAR_DOWN(utrzsm)
+TEST_TEAR_DOWN(utrzexeact)
 {
     /* -------- Cleanup -------------
      * Return the system under test to its initial state after the test
@@ -87,7 +53,7 @@ TEST_TEAR_DOWN(utrzsm)
 	unitrazer_cleanup();
 }
 
-TEST(utrzsm, expectEventOk)
+TEST(utrzexeact, expectEventOk)
 {
     UtrzProcessOut *p;
 
@@ -112,7 +78,7 @@ TEST(utrzsm, expectEventOk)
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
-TEST(utrzsm, expectEventOutOfSequence)
+TEST(utrzexeact, expectEventOutOfSequence)
 {
     UtrzProcessOut *p;
 
@@ -126,7 +92,7 @@ TEST(utrzsm, expectEventOutOfSequence)
                              "expected: 'TRN'.", p->msg);
 }
 
-TEST(utrzsm, expectEventWithUnexpectedArg)
+TEST(utrzexeact, expectEventWithUnexpectedArg)
 {
     UtrzProcessOut *p;
 
@@ -141,7 +107,7 @@ TEST(utrzsm, expectEventWithUnexpectedArg)
                              "value='s211'.", p->msg);
 }
 
-TEST(utrzsm, ignoreEvt)
+TEST(utrzexeact, ignoreEvt)
 {	
     UtrzProcessOut *p;
 
@@ -159,7 +125,7 @@ TEST(utrzsm, ignoreEvt)
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
-TEST(utrzsm, ignoreOneArg)
+TEST(utrzexeact, ignoreOneArg)
 {
     UtrzProcessOut *p;
 
@@ -172,7 +138,7 @@ TEST(utrzsm, ignoreOneArg)
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
-TEST(utrzsm, ignoreOneArgBeforeExpect)
+TEST(utrzexeact, ignoreOneArgBeforeExpect)
 {
     UtrzProcessOut *p;
 

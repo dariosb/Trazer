@@ -1,5 +1,5 @@
 /**
- *  \file       test_utrzsm.c
+ *  \file       test_utrzexeact.c
  *  \ingroup    Test
  *
  *  \brief      ...
@@ -29,14 +29,14 @@
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_GROUP_RUNNER(utrzsm)
+TEST_GROUP_RUNNER(utrzexeact)
 {
-	RUN_TEST_CASE(utrzsm, expectEventOk);
-	RUN_TEST_CASE(utrzsm, expectEventOutOfSequence);
-	RUN_TEST_CASE(utrzsm, expectEventWithUnexpectedArg);
-	RUN_TEST_CASE(utrzsm, ignoreEvt);
-	RUN_TEST_CASE(utrzsm, ignoreOneArg);
-	RUN_TEST_CASE(utrzsm, ignoreOneArgBeforeExpect);
+	RUN_TEST_CASE(utrzexeact, expectEventOk);
+	RUN_TEST_CASE(utrzexeact, expectEventOutOfSequence);
+	RUN_TEST_CASE(utrzexeact, expectEventWithUnexpectedArg);
+	RUN_TEST_CASE(utrzexeact, ignoreEvt);
+	RUN_TEST_CASE(utrzexeact, ignoreOneArg);
+	RUN_TEST_CASE(utrzexeact, ignoreOneArgBeforeExpect);
 }
 
 /* ------------------------------ End of file ------------------------------ */

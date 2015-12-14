@@ -53,6 +53,7 @@
 #include "unity_fixture.h"
 #include "unitrazer.h"
 #include "bsp.h"
+#include "aotest.h"
 
 
 /* ----------------------------- Local macros ------------------------------ */
@@ -69,7 +70,7 @@ runAllTests(void)
 {
 	RUN_TEST_GROUP(utrazer);
 	RUN_TEST_GROUP(utrzsm);
-	RUN_TEST_GROUP(utrzsm);
+	RUN_TEST_GROUP(utrzexeact);
 }
 
 /* ---------------------------- Global functions --------------------------- */
@@ -84,4 +85,35 @@ main(int argc, char *argv[])
         ;
 }
 
+
+void
+common_test_setup( void )
+{
+    ut_resetOut();
+    unitrazer_init();
+    fwk_ignore();        /* Ignore every trace event of FWK group */
+	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
+
+    RKH_TR_FWK_AO(aotest);
+    RKH_TR_FWK_STATE(aotest, &s);
+    RKH_TR_FWK_STATE(aotest, &s1);
+    RKH_TR_FWK_STATE(aotest, &s11);
+    RKH_TR_FWK_STATE(aotest, &s2);
+    RKH_TR_FWK_STATE(aotest, &s21);
+    RKH_TR_FWK_STATE(aotest, &s211);
+    RKH_TR_FWK_SIG(A);
+
+	/* set trace filters */
+	RKH_FILTER_ON_GROUP( RKH_TRC_ALL_GROUPS );
+	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
+	RKH_FILTER_OFF_EVENT( A );
+	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
+	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_FWK );
+	RKH_FILTER_OFF_SMA( aotest );
+
+    rkh_sma_init_hsm(aotest);
+}
+
+void
+common_tear_down( void )
 /* ------------------------------ End of file ------------------------------ */

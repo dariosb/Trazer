@@ -117,6 +117,12 @@
     <ClCompile Include="..\..\..\..\..\utils\unitrazer\tzparse.c">
       <Filter>Source Files\tests\utils\unitrazer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_utrzexeact_runner.c">
+      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_utrzexecact.c">
+      <Filter>Source Files\tests\utrazer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkht.h">
