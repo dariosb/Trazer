@@ -161,6 +161,8 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
     if( e == last_expect.id )
     {
         last_expect.va.args[ix].ignored = ARG_IGNORED;
+		utrz_expected_lst.pop_back();
+		utrz_expected_lst.push_back( last_expect );
 		utrz_success();
     }
     else

@@ -143,21 +143,32 @@ TEST(utrzsm, expectEventWithUnexpectedArg)
 
 TEST(utrzsm, ignoreEvt)
 {	
-    ruint ret;
+    UtrzProcessOut *p;
 
-    TEST_IGNORE();
     sm_trn_ignore();
     sm_evtProc_expect();
 
-    RKH_TR_FWK_STATE(aotest, &s);
-    ret = rkh_sma_dispatch(aotest, CE(&eA));
+    RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    TEST_ASSERT_EQUAL(RKH_EVT_PROC, ret);
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 
+    RKH_TR_SM_EVT_PROC(aotest)
+
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
 TEST(utrzsm, ignoreOneArg)
 {
-    TEST_IGNORE();
+    UtrzProcessOut *p;
+
+	sm_trn_expect(CST(&s21), CST(&s211));
+    sm_trn_ignoreArg_sourceState();
+
+    RKH_TR_SM_TRN(aotest, &s211, &s211);
+
+    p = ut_getLastOut();
+    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 /* ------------------------------ End of file ------------------------------ */
