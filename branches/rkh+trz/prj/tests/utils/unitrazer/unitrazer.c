@@ -78,6 +78,28 @@ unitrazer_sm_trn_expect(UNITY_LINE_TYPE cmock_line,
 }
 
 void
+unitrazer_sm_init_expect(UNITY_LINE_TYPE cmock_line, 
+                        const RKH_ST_T *exp_initState)
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmock_line);
+    RKH_TRC_UI8(RKH_TE_SM_INIT);
+    RKH_TRC_SYM(exp_initState);
+    RKH_TRC_END_WOFIL();
+}
+
+void
+unitrazer_sm_init_expect(UNITY_LINE_TYPE cmock_line, 
+                        const RKH_ST_T *exp_historyState)
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmock_line);
+    RKH_TRC_UI8(RKH_TE_SM_CLRH);
+    RKH_TRC_SYM(exp_historyState);
+    RKH_TRC_END_WOFIL();
+}
+
+void
 unitrazer_sm_evtProc_expect(UNITY_LINE_TYPE cmock_line)
 {
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
@@ -85,6 +107,20 @@ unitrazer_sm_evtProc_expect(UNITY_LINE_TYPE cmock_line)
     RKH_TRC_UI8(RKH_TE_SM_EVT_PROC);
     RKH_TRC_END_WOFIL();
 }
+
+
+void
+unitrazer_sm_execAct_expect( UNITY_LINE_TYPE cmock_line )
+{
+    /* todo */
+    /*
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmock_line);
+    RKH_TRC_UI8(RKH_TE_SM_EXE_ACT);
+
+    RKH_TRC_END_WOFIL();*/
+}
+
 
 /* ... */
 

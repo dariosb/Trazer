@@ -22,6 +22,7 @@
 #include "unitrazer.h"
 #include "rkh.h"
 #include "aotest.h"
+#include "test_common.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
@@ -48,9 +49,7 @@ TEST_TEAR_DOWN(utrzexeact)
     /* -------- Cleanup -------------
      * Return the system under test to its initial state after the test
      */
-	unitrazer_verify(); /* Makes sure there are no unused expectations, if */
-						/* there are, this function causes the test to fail. */
-	unitrazer_cleanup();
+    common_tear_down();
 }
 
 TEST(utrzexeact, expectEventOk)
@@ -60,7 +59,7 @@ TEST(utrzexeact, expectEventOk)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-	sm_trn_expect(CST(&s21), CST(&s211));
+	sm_exeact_expect(CST(&s21), CST(&s211));
 
     /* -------- Exercise ------------ 
      * Do something to the system 

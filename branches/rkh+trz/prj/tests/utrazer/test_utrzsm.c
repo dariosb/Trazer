@@ -22,6 +22,7 @@
 #include "unitrazer.h"
 #include "rkh.h"
 #include "aotest.h"
+#include "test_common.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
@@ -52,29 +53,7 @@ TEST_SETUP(utrzsm)
     /* -------- Setup ---------------
      * Establish the preconditions to the test 
      */
-    ut_resetOut();
-    unitrazer_init();
-    fwk_ignore();        /* Ignore every trace event of FWK group */
-	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
-
-    RKH_TR_FWK_AO(aotest);
-    RKH_TR_FWK_STATE(aotest, &s);
-    RKH_TR_FWK_STATE(aotest, &s1);
-    RKH_TR_FWK_STATE(aotest, &s11);
-    RKH_TR_FWK_STATE(aotest, &s2);
-    RKH_TR_FWK_STATE(aotest, &s21);
-    RKH_TR_FWK_STATE(aotest, &s211);
-    RKH_TR_FWK_SIG(A);
-
-	/* set trace filters */
-	RKH_FILTER_ON_GROUP( RKH_TRC_ALL_GROUPS );
-	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
-	RKH_FILTER_OFF_EVENT( A );
-	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
-	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_FWK );
-	RKH_FILTER_OFF_SMA( aotest );
-
-    rkh_sma_init_hsm(aotest);
+    common_test_setup();
 }
 
 TEST_TEAR_DOWN(utrzsm)
@@ -82,9 +61,7 @@ TEST_TEAR_DOWN(utrzsm)
     /* -------- Cleanup -------------
      * Return the system under test to its initial state after the test
      */
-	unitrazer_verify(); /* Makes sure there are no unused expectations, if */
-						/* there are, this function causes the test to fail. */
-	unitrazer_cleanup();
+    common_tear_down();
 }
 
 TEST(utrzsm, expectEventOk)

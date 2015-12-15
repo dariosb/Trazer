@@ -66,6 +66,32 @@ extern "C" {
 /* --------------------------------- Macros -------------------------------- */
 /* ============================= Expect macros ============================= */
 
+/* RKH_TE_SM_INIT */
+#define sm_init_expect(initState) \
+    unitrazer_sm_init_expect(__LINE__, initState )
+
+#define sm_init_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_INIT)
+
+#define sm_init_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_INIT)
+
+#define sm_init_ignoreArg_initState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_INIT, UT_ARGNO_1)
+
+/* RKH_TE_SM_CLRH */
+#define sm_clrh_expect(historyState) \
+    unitrazer_sm_init_expect(__LINE__, historyState )
+
+#define sm_clrh_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_CLRH)
+
+#define sm_clrh_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_CLRH)
+
+#define sm_clrh_ignoreArg_historyState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_CLRH, UT_ARGNO_1)   
+
 /* RKH_TE_SM_TRN */
 #define sm_trn_expect(sourceState, targetState) \
     unitrazer_sm_trn_expect(__LINE__, sourceState, targetState)
@@ -76,14 +102,95 @@ extern "C" {
 #define sm_trn_ignore() \
     unitrazer_ignore(__LINE__, RKH_TE_SM_TRN)
 
-#define sm_ts_state_ignore() \
-    unitrazer_ignore(__LINE__, RKH_TE_SM_TS_STATE)
-
 #define sm_trn_ignoreArg_sourceState() \
     unitrazer_ignoreArg(__LINE__, RKH_TE_SM_TRN, UT_ARGNO_1)
 
 #define sm_trn_ignoreArg_targetState() \
     unitrazer_ignoreArg(__LINE__, RKH_TE_SM_TRN, UT_ARGNO_2)
+
+/* RKH_TE_SM_STATE */
+#define sm_state_expect(nextState) \
+    unitrazer_sm_state_expect(__LINE__, nextState)
+
+#define sm_state_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_STATE)
+
+#define sm_state_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_STATE)
+
+#define sm_state_ignoreArg_nextState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_STATE, UT_ARGNO_1)
+
+/* RKH_TE_SM_ENSTATE */
+#define sm_enstate_expect(entryState) \
+    unitrazer_sm_state_expect(__LINE__, entryState)
+
+#define sm_enstate_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_ENSTATE)
+
+#define sm_enstate_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_ENSTATE)
+
+#define sm_enstate_ignoreArg_entryState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_ENSTATE, UT_ARGNO_1)
+
+/* RKH_TE_SM_EXSTATE */
+#define sm_exstate_expect(entryState) \
+    unitrazer_sm_state_expect(__LINE__, entryState)
+
+#define sm_exstate_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_EXSTATE)
+
+#define sm_exstate_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_EXSTATE)
+
+#define sm_exstate_ignoreArg_exitState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EXSTATE, UT_ARGNO_1)
+
+/* RKH_TE_SM_NENEX */
+#define sm_nenex_expect(nEntry, nExit) \
+    unitrazer_sm_nenex_expect(__LINE__, nEntry, nExit)
+
+#define sm_nenex_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_NENEX)
+
+#define sm_nenex_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_NENEX)
+
+#define sm_nenex_ignoreArg_nEntry() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_NENEX, UT_ARGNO_1)
+
+#define sm_nenex_ignoreArg_nExit() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_NENEX, UT_ARGNO_2)
+
+/* RKH_TE_SM_NTRNACT */
+#define sm_ntrnact_expect(nActions, nSegments) \
+    unitrazer_sm_ntrnact_expect(__LINE__, nActions, nSegments)
+
+#define sm_ntrnact_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_NTRNACT)
+
+#define sm_ntrnact_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_NTRNACT)
+
+#define sm_ntrnact_ignoreArg_nActions() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_NTRNACT, UT_ARGNO_1)
+
+#define sm_ntrnact_ignoreArg_nSegments() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_NTRNACT, UT_ARGNO_2)
+
+/* RKH_TE_SM_TS_STATE */
+#define sm_tsState_expect(targetState) \
+    unitrazer_sm_tsState_expect(__LINE__, targetState)
+
+#define sm_tsState_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_TS_STATE)
+
+#define sm_tsState_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_TS_STATE)
+
+#define sm_tsState_ignoreArg_targetState() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_TS_STATE, UT_ARGNO_1)
 
 /* RKH_TE_SM_EVT_PROC */
 #define sm_evtProc_expect() \
@@ -91,6 +198,57 @@ extern "C" {
 
 #define sm_evtProc_ignore() \
     unitrazer_ignore(__LINE__, RKH_TE_SM_EVT_PROC)
+
+/* RKH_TE_SM_EVT_NFOUND */
+#define sm_evtNotFound_expect(signal) \
+    unitrazer_sm_evtNotFound_expect(__LINE__, signal)
+
+#define sm_evtNotFound_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_EVT_NFOUND)
+
+#define sm_evtNotFound_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_EVT_NFOUND)
+
+#define sm_evtNotFound_ignoreArg_signal() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EVT_NFOUND, UT_ARGNO_1)
+
+/* RKH_TE_SM_GRD_FALSE */
+#define sm_grdFalse_expect() \
+    unitrazer_sm_grdFalse_expect(__LINE__)
+
+#define sm_grdFalse_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_GRD_FALSE)
+
+/* RKH_TE_SM_CND_NFOUND */
+#define sm_cndNotFound_expect() \
+    unitrazer_sm_cndNotFound_expect(__LINE__)
+
+#define sm_cndNotFound_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_CND_NFOUND)
+
+/* RKH_TE_SM_UNKN_STATE */
+#define sm_unknState_expect() \
+    unitrazer_sm_unknState_expect(__LINE__)
+
+#define sm_unknState_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_UNKN_STATE)
+    
+/* RKH_TE_SM_EX_HLEVEL */
+#define sm_exHLevel_expect() \
+    unitrazer_sm_exHLevel_expect(__LINE__)
+
+#define sm_exHLevel_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_EX_HLEVEL)
+    
+/* RKH_TE_SM_EX_TSEG */
+#define sm_exTSeg_expect() \
+    unitrazer_sm_exTSeg_expect(__LINE__)
+
+#define sm_exTSeg_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_EX_TSEG)
+        
+/* RKH_TE_SM_EXE_ACT */
+
 
 /* ... */
 

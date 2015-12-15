@@ -116,4 +116,9 @@ common_test_setup( void )
 
 void
 common_tear_down( void )
+{
+	unitrazer_verify(); /* Makes sure there are no unused expectations, if */
+						/* there are, this function causes the test to fail. */
+	unitrazer_cleanup();    
+}
 /* ------------------------------ End of file ------------------------------ */
