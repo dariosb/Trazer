@@ -92,7 +92,7 @@ common_test_setup( void )
     ut_resetOut();
     unitrazer_init();
     fwk_ignore();        /* Ignore every trace event of FWK group */
-	sm_ts_state_ignore();        /* Ignore every trace event of FWK group */
+	sm_tsState_ignore();        /* Ignore every trace event of FWK group */
 
     RKH_TR_FWK_AO(aotest);
     RKH_TR_FWK_STATE(aotest, &s);

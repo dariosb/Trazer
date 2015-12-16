@@ -59,7 +59,7 @@ TEST(utrzexeact, expectEventOk)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-	sm_exeact_expect(CST(&s21), CST(&s211));
+	//sm_exeact_expect(CST(&s21), CST(&s211));
 
     /* -------- Exercise ------------ 
      * Do something to the system 

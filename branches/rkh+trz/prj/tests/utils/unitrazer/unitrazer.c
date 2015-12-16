@@ -61,70 +61,48 @@
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
-
 /* ============================ Expect functions =========================== */
 
 void
-unitrazer_sm_trn_expect(UNITY_LINE_TYPE cmock_line, 
-                        const RKH_ST_T *exp_sourceState, 
-                        const RKH_ST_T *exp_targetState)
+unitrazer_expect_wSymArg( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
+                        rui8_t nArgs, ... )
 {
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(RKH_TE_SM_TRN);
-    RKH_TRC_SYM(exp_sourceState);
-    RKH_TRC_SYM(exp_targetState);
-    RKH_TRC_END_WOFIL();
-}
+    va_list args;
 
-void
-unitrazer_sm_init_expect(UNITY_LINE_TYPE cmock_line, 
-                        const RKH_ST_T *exp_initState)
-{
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(RKH_TE_SM_INIT);
-    RKH_TRC_SYM(exp_initState);
-    RKH_TRC_END_WOFIL();
-}
-
-void
-unitrazer_sm_init_expect(UNITY_LINE_TYPE cmock_line, 
-                        const RKH_ST_T *exp_historyState)
-{
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(RKH_TE_SM_CLRH);
-    RKH_TRC_SYM(exp_historyState);
-    RKH_TRC_END_WOFIL();
-}
-
-void
-unitrazer_sm_evtProc_expect(UNITY_LINE_TYPE cmock_line)
-{
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(RKH_TE_SM_EVT_PROC);
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT);
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(trcEvt);
+   	va_start(args, nArgs);
+   	while( nArgs-- )
+    {
+        RKH_TRC_SYM(va_arg(args, const void *));
+    }
+    va_end(args);
     RKH_TRC_END_WOFIL();
 }
 
 
 void
-unitrazer_sm_execAct_expect( UNITY_LINE_TYPE cmock_line )
+unitrazer_expect_wSig( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
+                        RKH_SIG_T signal )
 {
-    /* todo */
-    /*
-    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
-    RKH_TRC_UI32(cmock_line);
-    RKH_TRC_UI8(RKH_TE_SM_EXE_ACT);
-
-    RKH_TRC_END_WOFIL();*/
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT);
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(trcEvt);
+    RKH_TRC_SIG(signal);
+    RKH_TRC_END_WOFIL();
 }
 
+void
+unitrazer_expect_noArgs( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt )
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(trcEvt);
+    RKH_TRC_END_WOFIL();
+}
 
-/* ... */
-
-/* ======================== Common expect functions ======================== */
+/* ============================ Init function ============================== */
 
 void 
 unitrazer_init(void)
@@ -133,6 +111,8 @@ unitrazer_init(void)
     RKH_TRC_END_WOFIL();
 }
 
+/* ============================ CleanUp function =========================== */
+
 void 
 unitrazer_cleanup(void)
 {
@@ -140,12 +120,16 @@ unitrazer_cleanup(void)
     RKH_TRC_END_WOFIL();
 }
 
+/* ============================ Verify function ============================ */
+
 void 
 unitrazer_verify(void)
 {
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_VERIFY);
     RKH_TRC_END_WOFIL();
 }
+
+/* ============================ Ignore functions =========================== */
 
 void 
 unitrazer_ignoreGroup(UNITY_LINE_TYPE cmock_line, RKH_TRC_GROUPS group)
@@ -183,7 +167,5 @@ unitrazer_ignoreArg(UNITY_LINE_TYPE cmock_line, rui8_t trcEvt, rui8_t noArg)
     RKH_TRC_UI8(noArg);
     RKH_TRC_END_WOFIL();
 }
-
-
 
 /* ------------------------------ File footer ------------------------------ */
