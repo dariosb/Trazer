@@ -123,6 +123,21 @@
     <ClCompile Include="..\..\..\..\test_utrzexecact.c">
       <Filter>Source Files\tests\utrazer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_common.c">
+      <Filter>Source Files\tests\utrazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_utrzexpect_runner.c">
+      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_utrzexpect.c">
+      <Filter>Source Files\tests\utrazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_utrzignore.c">
+      <Filter>Source Files\tests\utrazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_utrzignore_runner.c">
+      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkht.h">

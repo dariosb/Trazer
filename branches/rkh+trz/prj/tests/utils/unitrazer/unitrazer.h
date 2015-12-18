@@ -209,7 +209,11 @@ extern "C" {
     unitrazer_sm_exTSeg_expect(__LINE__)
 
 /* RKH_TE_SM_EXE_ACT */
-/**** TODO **/
+#define sm_exeAct_expect(actType, state, action) \
+    unitrazer_sm_exeAct_expect(__LINE__, actType, state, action)    
+
+#define sm_exeAct_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_EXE_ACT)
 
 /* ============================= Ignore macros ============================= */
 
@@ -294,6 +298,21 @@ extern "C" {
 /* RKH_TE_SM_EX_TSEG */
 #define sm_exTSeg_ignore() \
     unitrazer_ignore(__LINE__, RKH_TE_SM_EX_TSEG)
+
+/* RKH_TE_SM_EXE_ACT */
+#define sm_exeAct_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_EXE_ACT)
+
+#define sm_exeAct_ignoreArg_actType() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EXE_ACT, UT_ARGNO_1)
+
+#define sm_exeAct_ignoreArg_state() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EXE_ACT, UT_ARGNO_2)
+
+#define sm_exeAct_ignoreArg_action() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EXE_ACT, UT_ARGNO_3)
+    
+/* -------------------------------- Ignore Groups--------------------------- */
 
 /* RKH_MP_GROUP */
 #define mp_ignore() \
@@ -411,6 +430,18 @@ void unitrazer_verify(void);
  *                          arguments
  */
 void unitrazer_expectAnyArgs(UNITY_LINE_TYPE cmock_line, rui8_t trcEvt);
+
+/** 
+ *  \brief 
+ *  Expect for RKH_TE_SM_EXE_ACT trace event.
+ *
+ *  \param[in] cmock_line   line number from which this function is called
+ *  \param[in] actType      action type according to RKH_SUBTE_SM_EXE_ACT enum 
+ *  \param[in] state        action execution context
+ *  \param[in] action       executed action
+ */
+void unitrazer_sm_exeAct_expect( UNITY_LINE_TYPE cmockLine, 
+                            rui8_t actType, RKH_ST_T *state, void * action );
 
 /** 
  *  \brief 

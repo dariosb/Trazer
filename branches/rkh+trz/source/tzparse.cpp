@@ -819,7 +819,7 @@ h_exact( const void *tre )
 	strncpy( st_s, map_obj(st), sizeof(st_s) );
 	strncpy( act_s, map_obj(act), sizeof(act_s) );
 
-	tre_fmt( fmt, CTE(tre), 4, atype, ao_s, st_s, act_s );
+	tre_fmt( fmt, CTE(tre), 4, atype_str[atype], ao_s, st_s, act_s );
 	
 	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, atype, ao, st, act );
 

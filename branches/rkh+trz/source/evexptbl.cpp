@@ -232,3 +232,56 @@ c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
     utrz_success();
 }
 
+
+void
+c_sm_exe_act( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
+{
+    rui8_t i;
+	rui32_t exp_arg, rcv_arg;
+	rui8_t rcv_act_t, exp_act_t;
+	char *arg_t;
+	char temp_buff[255];
+	string ex_arg_s;
+	string rc_arg_s;
+
+    rcv_act_t = va_arg( args, rui8_t );
+	nargs--;
+
+	if( pex->va.args[0].ignored != ARG_IGNORED )
+	{
+		exp_act_t = pex->va.args[0].value; 
+        if( exp_act_t != rcv_act_t )
+        {
+			arg_t =  find_exp_trevt( pex->id )->va.args[0];
+			sprintf( temp_buff, arg_t, atype_str[rcv_act_t] );
+			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
+					  temp_buff, atype_str[exp_act_t] );
+            return;
+        }
+	}
+            
+    /* trash ao argument not used for this events */
+    va_arg( args, rui32_t );
+	nargs--;
+
+    for( i=1; nargs--; ++i )
+	{
+		if( pex->va.args[i].ignored == ARG_IGNORED )
+            continue;
+        
+        exp_arg = pex->va.args[i].value; 
+        rcv_arg = va_arg( args, rui32_t );
+        if( exp_arg != rcv_arg )
+        {
+			arg_t =  find_exp_trevt( pex->id )->va.args[i];
+			get_arg_sym( &rc_arg_s, rcv_arg );
+			sprintf( temp_buff, arg_t, rc_arg_s.c_str() );
+			get_arg_sym( &ex_arg_s, exp_arg );
+			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
+					  temp_buff, ex_arg_s.c_str() );
+                   
+            return;
+        }
+	}
+    utrz_success();
+}

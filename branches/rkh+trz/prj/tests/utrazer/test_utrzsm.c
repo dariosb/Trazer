@@ -161,5 +161,7 @@ TEST(utrzsm, ignoreOneArgBeforeExpect)
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
     TEST_ASSERT_EQUAL_STRING("IgnoreArg called before Expect on event 'TRN'."
                                 , p->msg);
+	RKH_TR_SM_TRN(aotest, &s21, &s211);
+	RKH_TR_SM_EVT_PROC(aotest);
 }
 /* ------------------------------ End of file ------------------------------ */

@@ -585,7 +585,7 @@
  *	record.
  */
 
-#define RKH_CFG_TRC_SM_EXE_ACT_EN		RKH_DISABLED
+#define RKH_CFG_TRC_SM_EXE_ACT_EN		RKH_ENABLED
 
 /**
  *	If the #RKH_CFG_TRC_NSEQ_EN is set to 1 then RKH will add to the trace 

@@ -22,6 +22,7 @@
 #include "unitrazer.h"
 #include "rkh.h"
 #include "aotest.h"
+#include "aotest_act.h"
 #include "test_common.h"
 
 /* ----------------------------- Local macros ------------------------------ */
@@ -59,7 +60,8 @@ TEST(utrzexeact, expectEventOk)
     /* -------- Expectations --------
      * Record the trace event expectations to be met
      */
-	//sm_exeact_expect(CST(&s21), CST(&s211));
+	sm_exeAct_expect(RKH_SUBTE_SM_EXE_ACT_EN,
+                        CST(&s21), foo_set2zero );
 
     /* -------- Exercise ------------ 
      * Do something to the system 
@@ -68,7 +70,7 @@ TEST(utrzexeact, expectEventOk)
     /* Each recorded trace event is checked to see that it matches */
     /* the expected trace event exactly. If calls are out of order or */
     /* parameters are wrong, the test immediately fails. */
-    RKH_TR_SM_TRN(aotest, &s21, &s211);
+    RKH_TR_SM_EXE_ACT( RKH_SUBTE_SM_EXE_ACT_EN, aotest, &s21, foo_set2zero );
 
     /* -------- Verify --------------
      * Check the expected outcome 
@@ -149,5 +151,7 @@ TEST(utrzexeact, ignoreOneArgBeforeExpect)
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
     TEST_ASSERT_EQUAL_STRING("IgnoreArg called before Expect on event 'TRN'."
                                 , p->msg);
+	RKH_TR_SM_TRN(aotest, &s21, &s211);
+	RKH_TR_SM_EVT_PROC(aotest);
 }
 /* ------------------------------ End of file ------------------------------ */

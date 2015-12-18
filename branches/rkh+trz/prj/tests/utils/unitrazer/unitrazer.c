@@ -84,7 +84,7 @@ unitrazer_expect_wSymArg( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
 
 void
 unitrazer_expect_wSig( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
-                        RKH_SIG_T signal )
+                        RKH_SIG_T signal)
 {
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT);
     RKH_TRC_UI32(cmockLine);
@@ -99,6 +99,19 @@ unitrazer_expect_noArgs( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt )
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
     RKH_TRC_UI32(cmockLine);
     RKH_TRC_UI8(trcEvt);
+    RKH_TRC_END_WOFIL();
+}
+
+void
+unitrazer_sm_exeAct_expect( UNITY_LINE_TYPE cmockLine, 
+                            rui8_t actType, RKH_ST_T *state, void * action )
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(RKH_TE_SM_EXE_ACT);
+    RKH_TRC_UI8(actType);
+    RKH_TRC_SYM(state);
+    RKH_TRC_FUN(action);
     RKH_TRC_END_WOFIL();
 }
 
