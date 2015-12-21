@@ -55,6 +55,7 @@
 #include <time.h>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>        /* Win32 API for multithreading */
+#include <stdlib.h>
 #endif
 
 #include "unity.h"

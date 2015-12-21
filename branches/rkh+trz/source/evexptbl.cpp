@@ -185,9 +185,9 @@ get_arg_sym( string *s, rui32_t arg )
     const char *p;
   	char buff [2+sizeof(long)*8+1];	
 
-    if( (p = search_in_objtbl( arg )) != NULL )
+    if( (p = search_in_sigtbl( arg )) != NULL )
         s->assign(p);
-    else if( (p = search_in_sigtbl( arg )) != NULL )
+    else if( (p = search_in_objtbl( arg )) != NULL )
         s->assign(p);
     else
     {
@@ -257,9 +257,7 @@ c_sm_no_num_args( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
         if( exp_arg != rcv_arg )
         {
 			arg_t =  find_exp_trevt( pex->id )->va.args[i];
-//			get_arg_sym( &rc_arg_s, rcv_arg );
 			sprintf( temp_buff, arg_t, rcv_arg );
-			//get_arg_sym( &ex_arg_s, exp_arg );
 			sprintf(ex_arg_s, "%d", exp_arg);
 			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
 					  temp_buff, ex_arg_s );

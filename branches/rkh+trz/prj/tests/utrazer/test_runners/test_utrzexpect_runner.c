@@ -63,7 +63,6 @@ TEST_GROUP_RUNNER(utrzExpect)
 	RUN_TEST_CASE(utrzExpect, sm_ntrnact_Ok);
 	RUN_TEST_CASE(utrzExpect, sm_ntrnact_OutOfSequence);
 	RUN_TEST_CASE(utrzExpect, sm_ntrnact_WithUnexpectedArg);    
-#if 0
     /* RKH_TE_SM_TS_STATE */
 	RUN_TEST_CASE(utrzExpect, sm_tsstate_Ok);
 	RUN_TEST_CASE(utrzExpect, sm_tsstate_OutOfSequence);
@@ -94,8 +93,6 @@ TEST_GROUP_RUNNER(utrzExpect)
    	RUN_TEST_CASE(utrzExpect, sm_exeAct_Ok);
 	RUN_TEST_CASE(utrzExpect, sm_exeAct_OutOfSequence);
 	RUN_TEST_CASE(utrzExpect, sm_exeAct_WithUnexpectedArg);
-
-#endif
 }
 
 /* ------------------------------ End of file ------------------------------ */

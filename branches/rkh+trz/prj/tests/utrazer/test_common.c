@@ -52,6 +52,7 @@
 #include "test_common.h"
 #include "unitrazer.h"
 #include "aotest.h"
+#include "aotest_act.h"
 
 
 /* ----------------------------- Local macros ------------------------------ */
@@ -79,11 +80,15 @@ common_test_setup( void )
     RKH_TR_FWK_STATE(aotest, &s21);
     RKH_TR_FWK_STATE(aotest, &s211);
     RKH_TR_FWK_SIG(A);
+    RKH_TR_FWK_SIG(B);
+    RKH_TR_FWK_FUN(foo_set2zero);
+    RKH_TR_FWK_FUN(foo_set2one);
 
 	/* set trace filters */
 	RKH_FILTER_ON_GROUP( RKH_TRC_ALL_GROUPS );
 	RKH_FILTER_ON_EVENT( RKH_TRC_ALL_EVENTS );
-	RKH_FILTER_OFF_EVENT( A );
+	RKH_FILTER_OFF_SIGNAL( A );
+	RKH_FILTER_OFF_SIGNAL( B );
 	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SM );
 	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_FWK );
 	RKH_FILTER_OFF_SMA( aotest );

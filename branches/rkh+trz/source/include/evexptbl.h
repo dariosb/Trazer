@@ -35,7 +35,7 @@ void c_sm_no_num_args ( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args );
 #define  c_smnenex      c_sm_no_num_args
 #define  c_smntrna      c_sm_no_num_args
 #define  c_smtsst       c_sm_no_ao  
-#define  c_smevpr       c_sm_no_ao
+#define  c_smevpr       c_sm_no_num_args
 #define  c_smnfnd       c_sm_no_ao
 #define  c_smgf         c_sm_no_ao    
 #define  c_smnf         c_sm_no_ao    
