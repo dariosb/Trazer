@@ -83,6 +83,24 @@ unitrazer_expect_wSymArg( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
 
 
 void
+unitrazer_expect_wNumArg( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
+                        rui8_t nArgs, ... )
+{
+    va_list args;
+
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT);
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(trcEvt);
+   	va_start(args, nArgs);
+   	while( nArgs-- )
+    {
+        RKH_TRC_UI8(va_arg(args, rui8_t));
+    }
+    va_end(args);
+    RKH_TRC_END_WOFIL();
+}
+
+void
 unitrazer_expect_wSig( UNITY_LINE_TYPE cmockLine, RKH_TRC_EVENTS trcEvt,
                         RKH_SIG_T signal)
 {

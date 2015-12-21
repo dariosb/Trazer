@@ -108,7 +108,7 @@ TEST(utrzExpect, sm_init_WithUnexpectedArg)
 
     RKH_TR_SM_INIT(aotest, &s211);
 
-    utrzExpect_WithUnexpectedArg_check( "INIT", "ist", str(s21), str(s211) )
+    utrzExpect_WithUnexpectedArg_check( "INIT", "ist", str(s21), str(s211) );
 }
 
 /* RKH_TE_SM_CLRH */
@@ -137,7 +137,7 @@ TEST(utrzExpect, sm_clrh_WithUnexpectedArg)
 
     RKH_TR_SM_CLRH(aotest, &s211);
     
-    utrzExpect_WithUnexpectedArg_check( "CLRH", "h", str(s21), str(s211) )
+    utrzExpect_WithUnexpectedArg_check( "CLRH", "h", str(s21), str(s211) );
 }
 
 /* RKH_TE_SM_TRN */
@@ -166,30 +166,170 @@ TEST(utrzExpect, sm_trn_WithUnexpectedArg)
 
     RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    utrzExpect_WithUnexpectedArg_check( "TRN", "tst", str(s211), str(s21) )
+    utrzExpect_WithUnexpectedArg_check( "TRN", "tst", str(s211), str(s21) );
+
+	sm_trn_expect(CST(&s21), CST(&s211));
+
+    RKH_TR_SM_TRN(aotest, &s211, &s211);
+
+    utrzExpect_WithUnexpectedArg_check( "TRN", "sst", str(s21), str(s211) );    
+}
+
+    /* RKH_TE_SM_STATE */
+
+TEST(utrzExpect, sm_state_Ok)
+{
+	sm_state_expect(CST(&s21));
+    
+    RKH_TR_SM_STATE(aotest, &s21);
+
+    utrzExpect_Ok_check();
+}
+
+TEST(utrzExpect, sm_state_OutOfSequence)
+{
+	sm_state_expect(CST(&s21));
+
+    RKH_TR_SM_ENSTATE(aotest, CST(&s21));
+
+    utrzExpect_OutOfSequence_check( "STATE", "ENSTATE" );
+}
+
+TEST(utrzExpect, sm_state_WithUnexpectedArg)
+{
+	sm_state_expect(CST(&s21));
+
+    RKH_TR_SM_STATE(aotest, &s211);
+
+    utrzExpect_WithUnexpectedArg_check( "STATE", "nxtst", str(s21), str(s211) );
+}
+
+    /* RKH_TE_SM_ENSTATE */
+TEST(utrzExpect, sm_enstate_Ok)
+{
+	sm_enstate_expect(CST(&s21));
+    
+    RKH_TR_SM_ENSTATE(aotest, &s21);
+
+    utrzExpect_Ok_check();
+}
+
+TEST(utrzExpect, sm_enstate_OutOfSequence)
+{
+	sm_enstate_expect(CST(&s21));
+
+    RKH_TR_SM_STATE(aotest, &s21);
+
+    utrzExpect_OutOfSequence_check( "ENSTATE", "STATE" );
+}
+
+TEST(utrzExpect, sm_enstate_WithUnexpectedArg)
+{
+	sm_enstate_expect(CST(&s21));
+
+    RKH_TR_SM_ENSTATE(aotest, &s211);
+
+    utrzExpect_WithUnexpectedArg_check( "ENSTATE", "st", str(s21), str(s211) );
+}
+
+    /* RKH_TE_SM_EXSTATE */
+TEST(utrzExpect, sm_exstate_Ok)
+{
+	sm_exstate_expect(CST(&s21));
+    
+    RKH_TR_SM_EXSTATE(aotest, &s21);
+
+    utrzExpect_Ok_check();
+}
+
+TEST(utrzExpect, sm_exstate_OutOfSequence)
+{
+	sm_exstate_expect(CST(&s21));
+
+    RKH_TR_SM_STATE(aotest, &s21);
+
+    utrzExpect_OutOfSequence_check( "EXSTATE", "STATE" );
+}
+
+TEST(utrzExpect, sm_exstate_WithUnexpectedArg)
+{
+	sm_exstate_expect(CST(&s21));
+
+    RKH_TR_SM_EXSTATE(aotest, &s211);
+
+    utrzExpect_WithUnexpectedArg_check( "EXSTATE", "st", str(s21), str(s211) );
+}
+
+    /* RKH_TE_SM_NENEX */
+
+TEST(utrzExpect, sm_nenex_Ok)
+{
+	sm_nenex_expect(2,3);
+    
+    RKH_TR_SM_NENEX(aotest, 2, 3);
+
+    utrzExpect_Ok_check();
+}
+
+TEST(utrzExpect, sm_nenex_OutOfSequence)
+{
+	sm_nenex_expect(2,3);
+
+    RKH_TR_SM_STATE(aotest, &s21);
+
+    utrzExpect_OutOfSequence_check( "NENEX", "STATE" );
+}
+
+TEST(utrzExpect, sm_nenex_WithUnexpectedArg)
+{
+	sm_nenex_expect(2,3);
+    
+    RKH_TR_SM_NENEX(aotest, 3, 3);
+
+    utrzExpect_WithUnexpectedArg_check("NENEX", "nen", "2", "3");
+
+	sm_nenex_expect(2,3);
+    
+    RKH_TR_SM_NENEX(aotest, 2, 2);
+
+    utrzExpect_WithUnexpectedArg_check("NENEX", "nex", "3", "2");    
+}
+
+    /* RKH_TE_SM_NTRNACT */
+TEST(utrzExpect, sm_ntrnact_Ok)
+{
+	sm_ntrnact_expect(2,3);
+    
+    RKH_TR_SM_NTRNACT(aotest, 2, 3);
+
+    utrzExpect_Ok_check();
+}
+
+TEST(utrzExpect, sm_ntrnact_OutOfSequence)
+{
+	sm_ntrnact_expect(2,3);
+
+    RKH_TR_SM_STATE(aotest, &s21);
+
+    utrzExpect_OutOfSequence_check( "NTRNACT", "STATE" );
+}
+
+TEST(utrzExpect, sm_ntrnact_WithUnexpectedArg)
+{
+	sm_ntrnact_expect(2,3);
+    
+    RKH_TR_SM_NTRNACT(aotest, 3, 3);
+
+    utrzExpect_WithUnexpectedArg_check("NTRNACT", "nta", "2", "3");
+
+	sm_ntrnact_expect(2,3);
+    
+    RKH_TR_SM_NTRNACT(aotest, 2, 2);
+
+    utrzExpect_WithUnexpectedArg_check("NTRNACT", "nts", "3", "2");    
 }
 
 #if 0
-    /* RKH_TE_SM_STATE */
-   	RUN_TEST_CASE(utrzExpect, sm_state_Ok);
-	RUN_TEST_CASE(utrzExpect, sm_state_OutOfSequence);
-	RUN_TEST_CASE(utrzExpect, sm_state_WithUnexpectedArg);
-    /* RKH_TE_SM_ENSTATE */
-	RUN_TEST_CASE(utrzExpect, sm_enstate_Ok);
-	RUN_TEST_CASE(utrzExpect, sm_enstate_OutOfSequence);
-	RUN_TEST_CASE(utrzExpect, sm_enstate_WithUnexpectedArg);    
-    /* RKH_TE_SM_EXSTATE */
-	RUN_TEST_CASE(utrzExpect, sm_exstate_Ok);
-	RUN_TEST_CASE(utrzExpect, sm_exstate_OutOfSequence);
-	RUN_TEST_CASE(utrzExpect, sm_exstate_WithUnexpectedArg);    
-    /* RKH_TE_SM_NENEX */
-	RUN_TEST_CASE(utrzExpect, sm_nenex_Ok);
-	RUN_TEST_CASE(utrzExpect, sm_nenex_OutOfSequence);
-	RUN_TEST_CASE(utrzExpect, sm_nenex_WithUnexpectedArg);    
-    /* RKH_TE_SM_NTRNACT */
-	RUN_TEST_CASE(utrzExpect, sm_ntrnact_Ok);
-	RUN_TEST_CASE(utrzExpect, sm_ntrnact_OutOfSequence);
-	RUN_TEST_CASE(utrzExpect, sm_ntrnact_WithUnexpectedArg);    
     /* RKH_TE_SM_TS_STATE */
 	RUN_TEST_CASE(utrzExpect, sm_tsstate_Ok);
 	RUN_TEST_CASE(utrzExpect, sm_tsstate_OutOfSequence);
@@ -222,44 +362,26 @@ TEST(utrzExpect, sm_trn_WithUnexpectedArg)
 
 TEST(utrzExpect, sm_exeAct_Ok)
 {
-    UtrzProcessOut *p;
-
 	sm_exeAct_expect(RKH_SUBTE_SM_EXE_ACT_EN,
                         CST(&s21), foo_set2zero );
 
     RKH_TR_SM_EXE_ACT( RKH_SUBTE_SM_EXE_ACT_EN, aotest, &s21, foo_set2zero );
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzExpect_Ok_check();
 }
 
 TEST(utrzExpect, sm_exeAct_OutOfSequence)
 {
-    UtrzProcessOut *p;
-
-	sm_trn_expect(CST(&s21), CST(&s211));
+   	sm_exeAct_expect(RKH_SUBTE_SM_EXE_ACT_EN,
+                        CST(&s21), foo_set2zero );
 
     RKH_TR_SM_ENSTATE(aotest, CST(&s21));
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
-    TEST_ASSERT_EQUAL_STRING("Out of order Trace event. received: 'ENSTATE' "
-                             "expected: 'TRN'.", p->msg);
+    utrzExpect_OutOfSequence_check( "EXE_ACT", "ENSTATE" );
 }
 
 TEST(utrzExpect, sm_exeAct_WithUnexpectedArg)
 {
-    UtrzProcessOut *p;
-
-	sm_trn_expect(CST(&s21), CST(&s211));
-
-    RKH_TR_SM_TRN(aotest, &s21, &s21);
-
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
-    TEST_ASSERT_EQUAL_STRING("Event 'TRN' ocurred with unexpected "
-                             "value for argument 'tst=s21' expected "
-                             "value='s211'.", p->msg);
 }
 
 /* ------------------------------ End of file ------------------------------ */

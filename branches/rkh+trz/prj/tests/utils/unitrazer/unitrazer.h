@@ -121,14 +121,14 @@ extern "C" {
     unitrazer_expect_wSymArg(line, RKH_TE_SM_EXSTATE, 1, exitState)
 
 #define sm_exstate_expect(exitState) \
-    unitrazer_sm_state_expect(__LINE__, exitState)
+    unitrazer_exstate_expect(__LINE__, exitState)
 
 #define sm_exstate_expectAnyArgs() \
     unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_EXSTATE)
 
 /* RKH_TE_SM_NENEX */
 #define unitrazer_sm_nenex_expect(line, nEntry, nExit) \
-    unitrazer_expect_wSymArg(line, RKH_TE_SM_NENEX, 2, nEntry, nExit )
+    unitrazer_expect_wNumArg(line, RKH_TE_SM_NENEX, 2, nEntry, nExit )
 
 #define sm_nenex_expect(nEntry, nExit) \
     unitrazer_sm_nenex_expect(__LINE__, nEntry, nExit)
@@ -138,7 +138,7 @@ extern "C" {
 
 /* RKH_TE_SM_NTRNACT */
 #define unitrazer_sm_ntrnact_expect(line, nActions, nSegments) \
-    unitrazer_expect_wSymArg(line, RKH_TE_SM_NTRNACT, 2, nActions, nSegments)
+    unitrazer_expect_wNumArg(line, RKH_TE_SM_NTRNACT, 2, nActions, nSegments)
 
 #define sm_ntrnact_expect(nActions, nSegments) \
     unitrazer_sm_ntrnact_expect(__LINE__, nActions, nSegments)
@@ -377,6 +377,18 @@ void ut_resetOut(void);
  *  \param[in] ...           list of arguments
  */
 void unitrazer_expect_wSymArg( UNITY_LINE_TYPE cmock_line, 
+                            RKH_TRC_EVENTS trace_event, rui8_t nArgs, ... );
+
+/** 
+ *  \brief 
+ *  Identifies the trace event to expect with one or more arguments.
+ *
+ *  \param[in] cmockLine    line number from which this function is called
+ *  \param[in] trcEvt        trace event to expect
+ *  \param[in] nArgs         number of trace event arguments
+ *  \param[in] ...           list of arguments
+ */
+void unitrazer_expect_wNumArg( UNITY_LINE_TYPE cmock_line, 
                             RKH_TRC_EVENTS trace_event, rui8_t nArgs, ... );
 
 /** 

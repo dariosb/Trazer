@@ -234,6 +234,43 @@ c_sm_no_ao( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
 
 
 void
+c_sm_no_num_args( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
+{
+    rui8_t i;
+	rui32_t exp_arg, rcv_arg;
+	char *arg_t;
+	char temp_buff[255];
+	char ex_arg_s[255];
+	string rc_arg_s;
+
+    /* trash ao argument not used for this events */
+    va_arg( args, rui32_t );
+	nargs--;
+
+    for( i=0; nargs--; ++i )
+	{
+		if( pex->va.args[i].ignored == ARG_IGNORED )
+            continue;
+        
+        exp_arg = pex->va.args[i].value; 
+        rcv_arg = va_arg( args, rui8_t );
+        if( exp_arg != rcv_arg )
+        {
+			arg_t =  find_exp_trevt( pex->id )->va.args[i];
+//			get_arg_sym( &rc_arg_s, rcv_arg );
+			sprintf( temp_buff, arg_t, rcv_arg );
+			//get_arg_sym( &ex_arg_s, exp_arg );
+			sprintf(ex_arg_s, "%d", exp_arg);
+			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
+					  temp_buff, ex_arg_s );
+                   
+            return;
+        }
+	}
+    utrz_success();
+}
+
+void
 c_sm_exe_act( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
 {
     rui8_t i;
