@@ -175,20 +175,18 @@ utrz_ignore_arg( rui32_t line, rui32_t e, rui8_t ix )
 void
 utrz_ignore_group( RKH_TG_T grp )
 {
-    if( grp >= RKH_TG_NGROUP )
-        return;
+    if( grp < RKH_TG_NGROUP )
+        utrz_ign_group[ grp ] = GRP_IGNORED;
 
-    utrz_ign_group[ grp ] = GRP_IGNORED;
     utrz_success();
 }
 
 void
 utrz_ignore_evt( rui32_t e )
 {
-    if(  e >= RKH_TE_NEVENT )
-        return;
+    if(  e < RKH_TE_NEVENT )
+        utrz_ign_evt[ e ] = EVT_IGNORED;
 
-    utrz_ign_evt[ e ] = EVT_IGNORED;
     utrz_success();
 }
 

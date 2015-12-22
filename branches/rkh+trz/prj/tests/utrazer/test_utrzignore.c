@@ -25,6 +25,19 @@
 #include "test_common.h"
 
 /* ----------------------------- Local macros ------------------------------ */
+#define utrzOkCheck()   \
+        {                       \
+            UtrzProcessOut *p;  \
+            p = ut_getLastOut();    \
+            TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);  \
+        }
+
+#define utrzFailCheck()   \
+        {                       \
+            UtrzProcessOut *p;  \
+            p = ut_getLastOut();    \
+            TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);  \
+        }
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
@@ -53,37 +66,28 @@ TEST_TEAR_DOWN(utrzIgnore)
 }
 
 
-/* RKH_TE_SM_TRN */
-
 TEST(utrzIgnore, sm_trn_Ok)
 {	
-    UtrzProcessOut *p;
-
     sm_trn_ignore();
     sm_evtProc_expect();
 
     RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 
     RKH_TR_SM_EVT_PROC(aotest)
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 }
 
 TEST(utrzIgnore, sm_trn_OneArg)
 {
-    UtrzProcessOut *p;
-
 	sm_trn_expect(CST(&s21), CST(&s211));
     sm_trn_ignoreArg_sourceState();
 
     RKH_TR_SM_TRN(aotest, &s211, &s211);
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 }
 
 TEST(utrzIgnore, sm_trn_OneArgBeforeExpect)
@@ -106,33 +110,26 @@ TEST(utrzIgnore, sm_trn_OneArgBeforeExpect)
 
 TEST(utrzIgnore, sm_exeAct_Ok)
 {	
-    UtrzProcessOut *p;
-
     sm_trn_ignore();
     sm_evtProc_expect();
 
     RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 
     RKH_TR_SM_EVT_PROC(aotest)
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 }
 
 TEST(utrzIgnore, sm_exeAct_OneArg)
 {
-    UtrzProcessOut *p;
-
 	sm_trn_expect(CST(&s21), CST(&s211));
     sm_trn_ignoreArg_sourceState();
 
     RKH_TR_SM_TRN(aotest, &s211, &s211);
 
-    p = ut_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
+    utrzOkCheck();
 }
 
 TEST(utrzIgnore, sm_exeAct_OneArgBeforeExpect)
@@ -151,4 +148,40 @@ TEST(utrzIgnore, sm_exeAct_OneArgBeforeExpect)
 	RKH_TR_SM_EVT_PROC(aotest);
 }
 
+
+TEST(utrzIgnore, ignoreAnEventOfIgnoredGroup)
+{
+    fwk_ignore();
+    sm_evtProc_expect();
+
+    RKH_TR_FWK_AO(aotest);
+    RKH_TR_SM_EVT_PROC(aotest);
+
+    utrzOkCheck();
+}
+
+
+TEST(utrzIgnore, ignoreAnOutOfRangeGroup)
+{
+    unitrazer_ignoreGroup(__LINE__, RKH_TG_NGROUP);
+
+    utrzOkCheck();
+}
+
+TEST(utrzIgnore, ignoreAnOutOfRangeEvent)
+{
+    unitrazer_ignore(__LINE__, RKH_TE_TMR_TOUT);
+
+	utrzOkCheck();
+}
+
+TEST(utrzIgnore, verifyFail)
+{
+	sm_trn_expect(CST(&s21), CST(&s211));
+
+    unitrazer_verify();
+	utrzFailCheck();
+
+	unitrazer_cleanup();
+}
 /* ------------------------------ End of file ------------------------------ */

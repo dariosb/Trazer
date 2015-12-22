@@ -55,6 +55,14 @@ TEST_GROUP_RUNNER(utrzIgnore)
    	RUN_TEST_CASE(utrzIgnore, sm_exeAct_Ok);
 	RUN_TEST_CASE(utrzIgnore, sm_exeAct_OneArg);
 	RUN_TEST_CASE(utrzIgnore, sm_exeAct_OneArgBeforeExpect);
+
+    
+    RUN_TEST_CASE(utrzIgnore, ignoreAnEventOfIgnoredGroup);
+    RUN_TEST_CASE(utrzIgnore, ignoreAnOutOfRangeGroup);
+    RUN_TEST_CASE(utrzIgnore, ignoreAnOutOfRangeEvent);
+
+    RUN_TEST_CASE(utrzIgnore, verifyFail);
+
 }
 
 /* ------------------------------ End of file ------------------------------ */

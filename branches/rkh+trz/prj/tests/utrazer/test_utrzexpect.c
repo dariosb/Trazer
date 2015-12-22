@@ -44,7 +44,6 @@
                     " received: '"rc"' expected: '"ex"'.", p->msg); \
         }
 
-
 #define utrzExpect_WithUnexpectedArg_check( ev, an, e, r )  \
         {                                               \
             UtrzProcessOut *p;                          \
@@ -54,7 +53,17 @@
                              "value for argument '"an"="r"' expected "       \
                              "value='"e"'.", p->msg);                        \
         }
-             
+
+#define utrzExpect_WithUnexpectedArgNoName_check( ev, e, r )  \
+        {                                               \
+            UtrzProcessOut *p;                          \
+            p = ut_getLastOut();                        \
+            TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status); \
+            TEST_ASSERT_EQUAL_STRING("Event '"ev"' ocurred with unexpected " \
+                             "value for argument '"r"' expected "       \
+                             "value='"e"'.", p->msg);                        \
+        }
+
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
@@ -173,6 +182,16 @@ TEST(utrzExpect, sm_trn_WithUnexpectedArg)
     RKH_TR_SM_TRN(aotest, &s211, &s211);
 
     utrzExpect_WithUnexpectedArg_check( "TRN", "sst", str(s21), str(s211) );    
+}
+
+
+TEST(utrzExpect, sm_trn_WithAnyArgs)
+{
+	sm_trn_expectAnyArgs();
+
+    RKH_TR_SM_TRN(aotest, &s211, &s211);
+
+    utrzExpect_Ok_check();
 }
 
     /* RKH_TE_SM_STATE */
@@ -541,6 +560,22 @@ TEST(utrzExpect, sm_exeAct_WithUnexpectedArg)
 
     utrzExpect_WithUnexpectedArg_check("EXE_ACT", "fn", 
                                         str(foo_set2zero), str(foo_set2one));    
+
+    sm_exeAct_expect(RKH_SUBTE_SM_EXE_ACT_EN,
+                        CST(&s21), foo_set2zero );
+
+    RKH_TR_SM_EXE_ACT( RKH_SUBTE_SM_EXE_ACT_EX, aotest, &s21, foo_set2one );
+
+    utrzExpect_WithUnexpectedArgNoName_check("EXE_ACT", "Entry", "Exit");    
+}
+
+TEST(utrzExpect, sm_exeAct_WithAnyArgs)
+{
+	sm_exeAct_expectAnyArgs(RKH_SUBTE_SM_EXE_ACT_EN, CST(&s21), foo_set2zero);
+
+    RKH_TR_SM_EXE_ACT( RKH_SUBTE_SM_EXE_ACT_INI, aotest, &s211, foo_set2one );
+
+    utrzExpect_Ok_check();
 }
 
 /* ------------------------------ End of file ------------------------------ */

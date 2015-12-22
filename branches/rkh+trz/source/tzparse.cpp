@@ -1573,11 +1573,14 @@ h_IgnGroup( const void *tre )
 	p = find_trgroup( trc_gr );
 
     if( p!= NULL )
-    {
-        utrz_ignore_group( p->grp );
+	{
+		utrz_ignore_group( p->grp );
         tre_fmt( fmt, CTE(tre), 2, line, p->name );
-    }
-
+	}
+	else
+	{
+		utrz_ignore_group( trc_gr );
+	}
 	return fmt;
 }
 
