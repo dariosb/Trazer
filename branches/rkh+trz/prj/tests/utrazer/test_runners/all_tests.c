@@ -83,7 +83,7 @@ main(int argc, char *argv[])
 	bsp_init(argc, argv);
 	UnityMain(argc, argv, runAllTests);
     rkh_trc_close();
-	while(getchar());
+	getchar();
 	return EXIT_SUCCESS;
 }
 

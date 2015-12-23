@@ -44,6 +44,7 @@
 
 #include "tcptrc.h"
 #include "rkh.h"
+#include "tzparse.h"
 #include <stdio.h>
 
 
@@ -57,7 +58,8 @@ tcp_trace_open( unsigned short port, char *srv_ip, SOCKET *ps )
 	SOCKADDR_IN target; /* Socket address information */
 	SOCKET s;
 	int err;
-
+	
+	trazer_init();
 	/* --- INITIALIZATION ----------------------------------- */
 	wVersionRequested = MAKEWORD( 1, 1 );
 	err = WSAStartup( wVersionRequested, &wsaData );

@@ -152,6 +152,14 @@ parser( UtrzProcessOut *p )
 
 
 void
+trazer_init( void )
+{
+	parser_init();
+	state = PARSER_COLLECT;
+}
+
+
+void
 trazer_parse( rui8_t d, UtrzProcessOut *p )
 {
 	switch( state )
