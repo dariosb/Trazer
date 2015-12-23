@@ -116,6 +116,7 @@
     <ClCompile Include="..\..\..\..\source\tzparse.cpp" />
     <ClCompile Include="..\..\..\..\source\uevtbl.cpp" />
     <ClCompile Include="..\..\utils.cpp" />
+    <ClCompile Include="..\..\utrzhal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\include\cfgdep.h" />

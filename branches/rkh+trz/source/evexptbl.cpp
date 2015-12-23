@@ -10,7 +10,7 @@
 #include "messages.h"
 #include "trzfrmt.h"
 #include "evexptbl.h"
-#include "tcp.h"
+#include "utrzhal.h"
 
 using namespace std;
 
@@ -151,7 +151,6 @@ CHEK_ARG_T
 find_exp_chk_fun( unsigned int id )
 {
     FMT_EXP_ST *p;
-	static CHEK_ARG_T *pf;
     RKH_TG_T grp;
     RKH_TE_ID_T te;
 

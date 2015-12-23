@@ -135,7 +135,7 @@ typedef struct usrevt_t
 #define EXTERNC
 #endif
 
-char * atype_str[];
+extern char * atype_str[];
 
 EXTERNC void trazer_parse( rui8_t d );
 EXTERNC void trazer_init( void );

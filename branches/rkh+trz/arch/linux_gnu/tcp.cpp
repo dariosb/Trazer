@@ -66,6 +66,15 @@ int tcpOpen(int portNum)
 }
 
 
+int
+tcpSend(unsigned char *buf, int size)
+{
+	int n;
+	n = send(l_clentSock, (char *)buf, (int)size, 0);
+	return n;
+}
+
+
 void
 tcpClose(void)
 {

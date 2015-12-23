@@ -9,7 +9,7 @@
 #include "tzparse.h"
 #include "evexptbl.h"
 #include "rkhtrc.h"
-#include "tcp.h"
+#include "utrzhal.h"
 
 using namespace std;
 

@@ -3,7 +3,9 @@
  */
 
 #include "tcp.h"
+#include "rkhtrc.h"
 #include "mydefs.h"
+#include "utrzhal.h"
 #include "tzlog.h"
 #include <winsock2.h>
 #include <stdio.h>
@@ -272,12 +274,6 @@ tcpSend(unsigned char *buf, int size)
 static char send_buff[2048];
 static char pre_buff[2048];
 
-#define UTRZACK_HEADER "UTRZACK:"
-#define UTRZANSW_LENGTH_WIDTH	6
-#define UTRZACK_TAIL ":"
-
-#include "rkhtrc.h"
-
 void
 tcp_printf( const char *fmt, ... )
 {
@@ -292,55 +288,5 @@ tcp_printf( const char *fmt, ... )
 }
 
 
-void
-rkh_trc_flush(void)
-{
-    rui8_t *blk;
-    TRCQTY_T nbytes;
 
-	for(;;)
-    {
-        nbytes = (TRCQTY_T)1024;
-        blk = rkh_trc_get_block(&nbytes);
-
-        if ((blk != (rui8_t *)0))
-        {
-			tcpSend(blk, nbytes);
-        }
-        else
-        {
-            break;
-        }
-    }
-}
-
-
-char utrz_msg[1024];
-
-
-void
-utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
-{
-    int i;
-    va_list val;
-	char *s;
-
-    strcpy( utrz_msg, msg );
-    va_start( val, nargs );
-    for (i=0;i<nargs;i++)
-    {
-        s=va_arg(val, char *);
-        strcat( utrz_msg, s );
-    }
-   
-
-    lprintf("line %d:", line); 
-    lprintf(utrz_msg); 
-
-	rkh_trc_begin( e );
-	RKH_TRC_UI32(line);
-	RKH_TRC_STR(utrz_msg);
-	rkh_trc_end();
-	rkh_trc_flush();
-}
 

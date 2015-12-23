@@ -19,6 +19,8 @@
 #include "seqdiag.h"
 #include "unittrz.h"
 #include "tcp.h"
+#include "utrzhal.h"
+#include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -792,7 +794,7 @@ h_symuevt( const void *tre )
 }
 
 
-char * atype_str[] =
+char * atype_str[6] =
 {
 	"Effect",
 	"Entry",

@@ -1,9 +1,11 @@
 /*
  * symbtbl.cpp
  */
+
 #include <string>
 #include <vector>
 #include <cstdio>
+#include <string.h>
 #include "symbtbl.h"
 #include "rkhtrc.h"
 #include "tzparse.h"
