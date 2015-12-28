@@ -43,8 +43,11 @@ This version is compatible to use with RKH V2.0
                         RKH_FILTER_OFF_EVENT( RKH_TE_SMA_FIFO );
                         RKH_FILTER_OFF_EVENT( RKH_TE_SMA_DCH );
 
+\section trazer_2_4 Version 2.4 Release date: Dec 28, 2015
 -Compatibility with RKH V2.4.05
 -Sequence diagram online generation in msc lenguage 
  compatible with MSC-generator-v4.5.
+-UnitTrazer. TDD harness framework with RKH and Trazer.
+
 ....
 */
