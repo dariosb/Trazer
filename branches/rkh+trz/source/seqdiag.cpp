@@ -280,8 +280,6 @@ insert_rawsdiag( const char *fname, const char *s )
 {
 	FILE *fseq;
 	ofstream ft;
-	static long p;
-
 
 	if( !fexists( fname ) )
 		return;

@@ -23,15 +23,15 @@ enum
 
 extern char *utrz_msgs[];
 
-void utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... );
-#define utrz_success()  				utrz_resp( RKH_TE_UT_SUCCESS, 0, "", 0 )
+void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
+#define utrz_success()  				utrz_resp( RKH_TE_UT_SUCCESS, 0, "", 0, 0 )
 
 #define utrz_fail( l, m, n, ... )       utrz_resp( RKH_TE_UT_FAIL, (l), m, n, __VA_ARGS__ )
 
 #define utrzIgnArg_fail(l,e)            utrz_fail( (l), "IgnoreArg called before "          \
                                                         "Expect on event ", 3,              \
                                                          "'", (e), "'." )
-#define utrzVerify_fail()               utrz_fail( 0, "Utrazer Verification Fail.", 0 )
+#define utrzVerify_fail()               utrz_fail( 0, "Utrazer Verification Fail.", 0, 0 )
 #define utrzEvtExpect_fail(l,r,e)       utrz_fail( (l), "Out of order Trace event.", 5,     \
                                                         " received: '", (r),                \
                                                         "' expected: '", (e),               \

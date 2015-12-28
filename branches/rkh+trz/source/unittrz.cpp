@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <list>
+#include <string.h>
 #include "unittrz.h"
 #include "tzlog.h"
 #include "tzparse.h"

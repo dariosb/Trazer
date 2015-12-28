@@ -3,6 +3,7 @@
  */
 #include <string>
 #include <vector>
+#include "string.h"
 #include "uevtbl.h"
 #include "rkhtrc.h"
 #include "tzparse.h"

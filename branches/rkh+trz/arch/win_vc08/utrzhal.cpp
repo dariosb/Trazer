@@ -35,7 +35,7 @@ rkh_trc_flush(void)
 }
 
 void
-utrz_resp( RKH_TE_ID_T e, rui32_t line, char *msg, int nargs, ... )
+utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
 {
     int i;
     va_list val;

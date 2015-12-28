@@ -252,12 +252,13 @@ c_sm_no_num_args( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
             continue;
         
         exp_arg = pex->va.args[i].value; 
-        rcv_arg = va_arg( args, rui8_t );
+        rcv_arg = va_arg( args, int );
+
         if( exp_arg != rcv_arg )
         {
 			arg_t =  find_exp_trevt( pex->id )->va.args[i];
 			sprintf( temp_buff, arg_t, rcv_arg );
-			sprintf(ex_arg_s, "%d", exp_arg);
+			sprintf(ex_arg_s, "%d", (int)exp_arg);
 			utrz_ArgExpect_fail( pex->line, find_trevt(pex->id)->name.c_str(), 
 					  temp_buff, ex_arg_s );
                    
@@ -278,7 +279,7 @@ c_sm_exe_act( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args )
 	string ex_arg_s;
 	string rc_arg_s;
 
-    rcv_act_t = va_arg( args, rui8_t );
+    rcv_act_t = va_arg( args, int );
 	nargs--;
 
 	if( pex->va.args[0].ignored != ARG_IGNORED )

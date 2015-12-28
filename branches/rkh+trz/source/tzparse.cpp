@@ -209,7 +209,7 @@ h_none( const void *tre )
 	(void)tre;
 
 	strcpy( fmt, " " );
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 0 );
+    UTRZEVT_ADD_OR_CHK_EXPECT( tre, 0, 0 );
 	return fmt;
 }
 
@@ -794,7 +794,7 @@ h_symuevt( const void *tre )
 }
 
 
-char * atype_str[6] =
+const char * atype_str[6] =
 {
 	"Effect",
 	"Entry",
@@ -1182,7 +1182,7 @@ usr_fmt( const void *tre )
 	rui8_t done;
 	const USR_TBL_T *pfmt;
 
-    tcp_printf( "OK" );
+    utrz_success();
 	pt = (const rui8_t *)tre;
 	if( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) 
 	{

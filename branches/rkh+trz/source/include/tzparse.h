@@ -100,7 +100,7 @@ typedef struct tre_t
 typedef struct trg_t
 {
 	RKH_TG_T grp;
-	char * name;
+	const char * name;
 } TRG_T;
 
 typedef struct sym_evt_q
@@ -135,7 +135,7 @@ typedef struct usrevt_t
 #define EXTERNC
 #endif
 
-extern char * atype_str[];
+extern const char * atype_str[];
 
 EXTERNC void trazer_parse( rui8_t d );
 EXTERNC void trazer_init( void );
