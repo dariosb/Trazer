@@ -6,7 +6,6 @@
 #include "rkhtype.h"
 #include "rkhtrc.h"
 #include "tzparse.h"
-#include "unitrazer.h"
 #include <stdio.h>
 
 static rui32_t lastnseq;

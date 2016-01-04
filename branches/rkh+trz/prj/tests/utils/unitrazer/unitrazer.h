@@ -361,7 +361,6 @@ struct UtrzProcessOut
 /* -------------------------- External variables --------------------------- */
 /* -------------------------- Function prototypes -------------------------- */
 
-int utrz_recv( void *s, UtrzProcessOut *p );
 UtrzProcessOut * ut_getLastOut(void);
 void ut_resetOut(void);
 

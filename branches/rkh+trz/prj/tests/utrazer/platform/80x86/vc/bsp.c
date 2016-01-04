@@ -60,6 +60,7 @@
 
 #include "unity.h"
 #include "unitrazer.h"
+#include "tzparse.h"
 #include "bsp.h"
 #include "rkh.h"
 
@@ -185,10 +186,28 @@ isr_kbd_thread( LPVOID par )	/* Win32 thread to emulate keyboard ISR */
 
 
 static
+int
+utrz_recv( SOCKET s, UtrzProcessOut *p )
+{
+	char c;
+	int n;
+	
+	p->status = UT_PROC_BUSY;
+	while( (n = tcp_trace_recv((SOCKET)s, &c, sizeof(c))) > 0 )
+	{
+		trazer_parse(c, p);
+		if( p->status != UT_PROC_BUSY )
+			return 1;
+	}
+	return -1;
+}
+
+
+static
 UT_RET_CODE
 ut_process(UtrzProcessOut *pOut)
 {
-    if( utrz_recv( (void *)tsock, pOut ) <= 0 )
+    if( utrz_recv( tsock, pOut ) <= 0 )
 		pOut->status = UT_PROC_FAIL;
 
 	return pOut->status;
@@ -297,7 +316,7 @@ void
 rkh_trc_open(void)
 {
 	rkh_trc_init();
-
+	trazer_init();
 	FTBIN_OPEN();
 	TCP_TRACE_OPEN();
 	RKH_TRC_SEND_CFG( BSP_TS_RATE_HZ );

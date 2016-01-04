@@ -48,6 +48,4 @@ This version is compatible to use with RKH V2.0
 -Sequence diagram online generation in msc lenguage 
  compatible with MSC-generator-v4.5.
 -UnitTrazer. TDD harness framework with RKH and Trazer.
-
-....
 */

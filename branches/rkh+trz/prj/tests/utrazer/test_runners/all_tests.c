@@ -68,7 +68,6 @@ static
 void 
 runAllTests(void)
 {
-	RUN_TEST_GROUP(utrazer);
 	RUN_TEST_GROUP(utrzsm);
 	RUN_TEST_GROUP(utrzexeact);
 	RUN_TEST_GROUP(utrzExpect);

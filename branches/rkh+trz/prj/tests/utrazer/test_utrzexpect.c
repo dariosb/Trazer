@@ -571,7 +571,7 @@ TEST(utrzExpect, sm_exeAct_WithUnexpectedArg)
 
 TEST(utrzExpect, sm_exeAct_WithAnyArgs)
 {
-	sm_exeAct_expectAnyArgs(RKH_SUBTE_SM_EXE_ACT_EN, CST(&s21), foo_set2zero);
+	sm_exeAct_expectAnyArgs();
 
     RKH_TR_SM_EXE_ACT( RKH_SUBTE_SM_EXE_ACT_INI, aotest, &s211, foo_set2one );
 

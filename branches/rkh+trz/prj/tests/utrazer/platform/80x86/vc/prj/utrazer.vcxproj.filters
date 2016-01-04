@@ -78,9 +78,6 @@
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c">
       <Filter>Source Files\rkh</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\test_utrazer.c">
-      <Filter>Source Files\tests\utrazer</Filter>
-    </ClCompile>
     <ClCompile Include="..\bsp.c">
       <Filter>Source Files\tests\utrazer</Filter>
     </ClCompile>
@@ -98,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\utils\unitrazer\unitrazer.c">
       <Filter>Source Files\tests\utils\unitrazer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\test_runners\test_utrazer_runner.c">
-      <Filter>Source Files\tests\utrazer\test_runners</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\aotest.c">
       <Filter>Source Files\tests\src</Filter>

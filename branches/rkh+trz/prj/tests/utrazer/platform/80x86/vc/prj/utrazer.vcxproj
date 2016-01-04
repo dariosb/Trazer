@@ -105,12 +105,10 @@
     <ClCompile Include="..\..\..\..\src\aotest_act.c" />
     <ClCompile Include="..\..\..\..\test_common.c" />
     <ClCompile Include="..\..\..\..\test_runners\all_tests.c" />
-    <ClCompile Include="..\..\..\..\test_runners\test_utrazer_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_utrzexeact_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_utrzexpect_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_utrzignore_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_utrzsm_runner.c" />
-    <ClCompile Include="..\..\..\..\test_utrazer.c" />
     <ClCompile Include="..\..\..\..\test_utrzexecact.c" />
     <ClCompile Include="..\..\..\..\test_utrzexpect.c" />
     <ClCompile Include="..\..\..\..\test_utrzignore.c" />

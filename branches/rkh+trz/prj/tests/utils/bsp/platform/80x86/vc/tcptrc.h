@@ -96,7 +96,7 @@ void tcp_trace_send( SOCKET s, const char *buf, int len );
  * 	\param len 			---.
  */
  
-int tcp_trace_recv( SOCKET s, const char *buf, int len );
+int tcp_trace_recv( SOCKET s, char *buf, int len );
 
 /**
  * 	\brief
