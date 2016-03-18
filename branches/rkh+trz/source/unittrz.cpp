@@ -120,9 +120,15 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
 	CHEK_ARG_T p;
    	vector<rui32_t>::iterator arg_ix;
 
-    if( utrz_expected_lst.empty() || is_ignored( id ) )
+    if( is_ignored( id ) )
     {
         utrz_success();
+        return;
+    }
+
+    if( utrz_expected_lst.empty() )
+    {
+        utrzMoreEvtThanExpect(find_trevt(id)->name.c_str());
         return;
     }
 

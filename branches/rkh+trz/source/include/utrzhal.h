@@ -38,9 +38,13 @@ void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
                                                         "'." )
 
 #define utrz_ArgExpect_fail(l,e,at,x )  utrz_fail( (l), "Event '",   6,                               \
-                                                    (e),                                                \
-                                                    "' ocurred with unexpected value for argument '",   \
+                                                    (e),                                              \
+                                                    "' ocurred with unexpected value for argument '", \
                                                     (at), "' expected value='", (x), "'." )
+
+#define utrzMoreEvtThanExpect(e )       utrz_fail( 0, "Event '",   2,                        \
+                                                    (e),                                     \
+                                                    "' ocurred more times than expected." )
 
 #ifdef __cplusplus
 }
