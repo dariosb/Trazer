@@ -50,7 +50,8 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
     }
    
 
-    lprintf("line %d:", line); 
+//    lprintf("line %d:", line); 
+
     lprintf(utrz_msg); 
 
 	rkh_trc_begin( e );
