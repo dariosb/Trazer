@@ -211,9 +211,9 @@ static FMT_ID_T *tg_usr_tbl[] =
 };
 
 /* --- Unit test harness events (UT group) ----------------------------- */
-DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",	    h_utInit,	 NULL );
-DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",    h_utCleanup, NULL );
-DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",	    h_utVerify,  NULL );
+DCLR_TRE( RKH_TE_UT_INIT,			"UT", "INIT",	    h_utInit,	 line_d );
+DCLR_TRE( RKH_TE_UT_CLEANUP,		"UT", "CLEANUP",    h_utCleanup, line_d );
+DCLR_TRE( RKH_TE_UT_VERIFY,			"UT", "VERIFY",	    h_utVerify,  line_d );
 DCLR_TRE( RKH_TE_UT_IGNORE_GROUP,	"UT", "IGN_GRP",    h_IgnGroup,  line_d, aty_s );
 DCLR_TRE( RKH_TE_UT_EXPECT,			"UT", "EXPECT", 	h_Expect,    line_d, aty_s, aty_s );
 DCLR_TRE( RKH_TE_UT_EXPECT_ANYARGS, "UT", "EXP_ANYARG",	h_ExpAnyArg, line_d, aty_s );

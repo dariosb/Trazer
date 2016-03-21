@@ -74,8 +74,9 @@ extern int expect;
         }
 
 
-void utrz_clean( void );
-void utrz_verify( char *ptext );
+void utrz_init( char *ptext, rui32_t line );
+void utrz_clean( char *ptext, rui32_t line );
+void utrz_verify( char *ptext, rui32_t line );
 
 
 void utrz_add_expect_any_args( rui32_t line, rui32_t e );

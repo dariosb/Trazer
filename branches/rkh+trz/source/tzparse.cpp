@@ -1480,7 +1480,10 @@ trazer_init( void )
 char *
 h_utInit( const void *tre )
 {    
-    utrz_clean();
+	rui32_t line; 
+
+  	line = assemble( sizeof_utline() );
+    utrz_init( fmt, line );
 	return fmt;
 }
 
@@ -1488,7 +1491,10 @@ h_utInit( const void *tre )
 char *
 h_utCleanup( const void *tre )
 {
-    utrz_clean();
+	rui32_t line; 
+
+  	line = assemble( sizeof_utline() );
+    utrz_clean( fmt, line );
 	return fmt;
 }
 
@@ -1496,7 +1502,11 @@ h_utCleanup( const void *tre )
 char *
 h_utVerify( const void *tre )
 {
-    utrz_verify( fmt );
+	rui32_t line; 
+
+  	line = assemble( sizeof_utline() );
+    utrz_verify( fmt, line );
+    tre_fmt( fmt, CTE(tre), 1, line );    
 	return fmt;
 }
 
@@ -1517,7 +1527,7 @@ h_Expect( const void *tre )
     NEW_EXPECT_EVT( line, trc_e );
     
     s_evt = p->group + "_" + p->name;
-	lprintf( "(%d) %s: ", line, s_evt.c_str() );
+	lprintf( "(%d), %s: ", line, s_evt.c_str() );
 
 	return p->fmt_args( p );
 }

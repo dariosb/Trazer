@@ -33,28 +33,55 @@ is_ignored( rui32_t e  )
     return false;
 }
 
+static rui32_t current_line;
 
 void
-utrz_clean( void )
+utrz_init( char *ptext, rui32_t line )
 {
+    current_line = line;
 	rkh_trc_init();
     utrz_expected_lst.clear();
+    /*
+     * All groups buts SM wired to be ignored by default
+     * on future may implement ca command line option for 
+     * enable/disable each group
+     */
+#if 0
     memset( utrz_ign_group, GRP_EXPECTED, sizeof(utrz_ign_group) );
+#else
+    memset( utrz_ign_group, GRP_IGNORED, sizeof(utrz_ign_group) );
+    utrz_ign_group[ RKH_TG_SM ] = GRP_EXPECTED;
+#endif
     memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
     utrz_success();
 }
 
 
 void
-utrz_verify( char *ptext )
+utrz_clean( char *ptext, rui32_t line )
 {
+    current_line = line;
+    utrz_expected_lst.clear();
+    utrz_success();
+}
+
+
+void
+utrz_verify( char *ptext, rui32_t line )
+{
+    UTRZ_EXPECT_EVT exp_evt;
+
     if( utrz_expected_lst.empty() )
     {
         utrz_success();
     }
     else
     {
-        utrzVerify_fail();
+        /** get last expected trace event from list **/
+        exp_evt = utrz_expected_lst.front();
+
+        utrzVerify_fail(line,
+               find_trevt(exp_evt.id)->name.c_str());
     }
 }
 
@@ -128,7 +155,7 @@ utrz_chk_expect( rui8_t id, rui8_t nargs, ... )
 
     if( utrz_expected_lst.empty() )
     {
-        utrzMoreEvtThanExpect(find_trevt(id)->name.c_str());
+        utrzMoreEvtThanExpect(current_line, find_trevt(id)->name.c_str());
         return;
     }
 
