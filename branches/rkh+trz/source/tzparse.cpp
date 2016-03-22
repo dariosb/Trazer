@@ -865,8 +865,8 @@ h_assert( const void *tre )
 
 	line = (rui16_t)assemble( sizeof(rui16_t) );
 
-	tre_fmt( fmt, CTE( tre ), 2, pfname, line );
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, pfname, line );
+	tre_fmt( fmt, CTE( tre ), 2, line, pfname );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, line, pfname );
 
 	return fmt;
 }

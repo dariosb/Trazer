@@ -161,7 +161,7 @@ DCLR_TRE( RKH_TE_FWK_EXE_FUN, "FWK", "EXE_FUN",  h_1sym,	func_s );
 DCLR_TRE( RKH_TE_FWK_SYNC_EVT,"FWK", "SYNC_EVT", h_sync,	func_s, snr_s, ao_s );
 DCLR_TRE( RKH_TE_FWK_TUSR,    "FWK", "TUSR",     h_symuevt,	usrtrc_d, nm_s );
 DCLR_TRE( RKH_TE_FWK_TCFG,    "FWK", "TCFG",     h_tcfg,	NULL );
-DCLR_TRE( RKH_TE_FWK_ASSERT,  "FWK", "ASSERT",   h_assert,	file_s, line_d );
+DCLR_TRE( RKH_TE_FWK_ASSERT,  "FWK", "ASSERT",   h_assert,	line_d, file_s);
 DCLR_TRE( RKH_TE_FWK_AO,      "FWK", "AO",       h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_STATE,   "FWK", "STATE",    h_symst,	ao_s, obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_PSTATE,    "FWK", "PSTATE", h_symst,	ao_s, obj_x, nm_s );
