@@ -3,9 +3,10 @@ PROGNAME=trazer
 CC=g++
 
 TRZSRCPATH=$(PWD)/../../source
+RKHPATH=$(PWD)/../../rkh/source
 
-DEFINE= -D__LINUX__ -DLINUX_DEBUG -DN__cplusplus -DN_DEBUG -D_CONSOLE -D__W32STVC08__
-CFLAGS = -ansi -Wall -I$(TRZSRCPATH)/include -I$(PWD)
+DEFINE= -D__LINUX__ -DLINUX_DEBUG -D__TRAZER__ -DN__cplusplus -DN_DEBUG -D_CONSOLE -D__LNXGNU__
+CFLAGS = -ansi -Wall -I$(TRZSRCPATH)/include -I$(RKHPATH)/include -I$(PWD)
 LDFLAGS	= -lc -pthread
 
 trzobjects:=$(patsubst %.cpp,%.o,$(wildcard $(TRZSRCPATH)/*.cpp)) 

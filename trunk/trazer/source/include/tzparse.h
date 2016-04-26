@@ -25,7 +25,12 @@
 #ifndef __TZPARSE_H__
 #define __TZPARSE_H__
 
+#ifdef __TRAZER__
 #include "rkhtype.h"
+#include "rkhtrc.h"
+#else
+#include "rkh.h"
+#endif
 #include "mytypes.h"
 #include <string>
 #include <vector>
@@ -92,6 +97,12 @@ typedef struct tre_t
 	HDLR_T fmt_args;
 } TRE_T;
 
+typedef struct trg_t
+{
+	RKH_TG_T grp;
+	const char * name;
+} TRG_T;
+
 typedef struct sym_evt_q
 {
 	unsigned long tstamp;
@@ -117,8 +128,19 @@ typedef struct usrevt_t
 	string name;
 } SYMUEVT_T;
 
-void trazer_parse( rkhui8_t d );
-void trazer_init( void );
+
+#ifdef __cplusplus
+#define EXTERNC extern "C"
+#else
+#define EXTERNC
+#endif
+
+extern const char * atype_str[];
+
+EXTERNC void trazer_parse( rui8_t d );
+EXTERNC void trazer_init( void );
+
+const TRE_T * find_exp_trevt( unsigned int id );
 
 char * h_none( const void *tre );
 char * h_epreg( const void *tre );
@@ -129,8 +151,10 @@ char * h_2sym( const void *tre );
 char * h_symtrn( const void *tre );
 char * h_symrc( const void *tre );
 char * h_symu8( const void *tre );
+char * h_2u8( const void *tre );
 char * h_sym2u8( const void *tre );
 char * h_sig2u8( const void *tre );
+char * h_1sig( const void *tre );
 char * h_symevt( const void *tre );
 char * h_sma_get( const void *tre );
 char * h_sma_ff( const void *tre );
@@ -146,12 +170,23 @@ char * h_symobj( const void *tre );
 char * h_symst( const void *tre );
 char * h_symsig( const void *tre );
 char * h_symuevt( const void *tre );
+char * h_tinit( const void *tre );
 char * h_tstart( const void *tre );
 char * h_tstop( const void *tre );
 char * h_tout( const void *tre );
+char * h_exact( const void *tre );
+char * h_exact_no_ao( const void *tre );
+char * h_sync( const void *tre );
 char * h_assert( const void *tre );
 char * h_tcfg( const void *tre );
 char * usr_fmt( const void *tre );
-
+char * h_ExpAnyArg( const void *tre );
+char * h_Expect( const void *tre );
+char * h_IgnGroup( const void *tre );
+char * h_IgnEvt( const void *tre );
+char * h_IgnArg( const void *tre );
+char * h_utInit( const void *tre );
+char * h_utCleanup( const void *tre );
+char * h_utVerify( const void *tre );
 
 #endif

@@ -21,7 +21,7 @@ str2lower( const char *src )
 	memset( aux_buff, '\0', sizeof(aux_buff) );
 
 	while( *src != NULL && (dest < ENDOF_AUX_BUFF) )
-		*dest++ = tolower(*src++);
+		*dest++ = (char)tolower(*src++);
 
 	return aux_buff;
 }
@@ -36,7 +36,7 @@ str2upper( const char *src )
 	memset( aux_buff, '\0', sizeof(aux_buff) );
 
 	while( *src != NULL && (dest < ENDOF_AUX_BUFF) )
-		*dest++ = toupper(*src++);
+		*dest++ = (char)toupper(*src++);
 
 	return aux_buff;
 }

@@ -3,7 +3,9 @@
  */
 
 #include "tcp.h"
+#include "rkhtrc.h"
 #include "mydefs.h"
+#include "utrzhal.h"
 #include "tzlog.h"
 #include <winsock2.h>
 #include <stdio.h>
@@ -176,3 +178,115 @@ tcpRead(unsigned char *buf, int size)
 
     return n;
 }
+
+
+int
+tcpSend(unsigned char *buf, int size)
+{
+#if 0
+    fd_set sendSet;
+    int nfound;
+    int n;
+    struct timeval delay;
+    if (l_clentSock == INVALID_SOCKET)	   /* still waiting for the client? */
+	{
+
+        n = 0;                                   /* no data from the client */
+
+        FD_ZERO(&sendSet);
+        FD_SET(l_serverSock, &sendSet);
+
+        nfound = select(0, &sendSet, 0, 0, &delay);
+        if (nfound == SOCKET_ERROR)
+		{
+            printf("Server socket select failed.\n"
+                   "Windows socket error 0x%08X.",
+                   WSAGetLastError());
+            return -1;                                         /* terminate */
+        }
+
+        if (FD_ISSET(l_serverSock, &sendSet))
+		{
+            struct sockaddr_in fromAddr;
+            int fromLen = (int)sizeof(fromAddr);
+            l_clentSock = accept(l_serverSock,
+                                 (struct sockaddr *)&fromAddr, &fromLen);
+            if (l_clentSock == INVALID_SOCKET)
+			{
+                printf("Server socket accept failed.\n"
+                       "Windows socket error 0x%08X.",
+                       WSAGetLastError());
+                return -1;                                     /* terminate */
+            }
+            printf("Accepted connection from %s, port %d\n",
+                   inet_ntoa(fromAddr.sin_addr),
+                   (int)ntohs(fromAddr.sin_port));
+        }
+    }
+    else
+	{
+        FD_ZERO(&sendSet);
+        FD_SET(l_clentSock, &sendSet);
+
+        nfound = select(0, &sendSet, 0, 0, &delay);        /* selective blocking */
+        if (nfound == SOCKET_ERROR)
+		{
+            printf("Client socket select failed.\n"
+                   "Windows socket error 0x%08X.",
+                   WSAGetLastError());
+            return -1;                                         /* terminate */
+        }
+        if (FD_ISSET(l_clentSock, &sendSet))
+		{
+            n = send(l_clentSock, (char *)buf, (int)size, 0);
+            if (n == SOCKET_ERROR)
+			{
+                printf("Client socket error.\n"
+                       "Windows socket error 0x%08X.",
+                       WSAGetLastError());
+            }
+            else if (n <= 0)                         /* the client hang up */
+			{
+                closesocket(l_clentSock);
+
+                /* go back to waiting for a client, or a keypress
+                * to terminate
+                */
+                l_clentSock = INVALID_SOCKET;
+                return 0;                            /* no data from client */
+            }
+        }
+        else
+		{
+            n = 0;                               /* no data from the client */
+        }
+    }
+
+    return n;
+#else
+	int n;
+	n = send(l_clentSock, (char *)buf, (int)size, 0);
+	return n;
+#endif
+}
+
+
+static char send_buff[2048];
+static char pre_buff[2048];
+
+void
+tcp_printf( const char *fmt, ... )
+{
+	va_list args;
+
+	va_start(args,fmt);
+	vsprintf( send_buff, fmt, args );
+    va_end(args);
+	sprintf( pre_buff, UTRZACK_HEADER "%06d" UTRZACK_TAIL, strlen(send_buff)+1 );
+    tcpSend( (unsigned char *)pre_buff, 15 );
+    tcpSend( (unsigned char *)send_buff, strlen(send_buff)+1 );
+}
+
+
+
+
