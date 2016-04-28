@@ -73,6 +73,7 @@ extern int expect;
             expected_evt.id = (e);          \
         }
 
+void unitrazer_init( void );
 
 void utrz_init( char *ptext, rui32_t line );
 void utrz_clean( char *ptext, rui32_t line );

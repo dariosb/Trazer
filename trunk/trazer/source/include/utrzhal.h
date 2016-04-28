@@ -23,6 +23,9 @@ enum
 
 extern char *utrz_msgs[];
 
+void utrz_hal_start( void );
+void utrz_hal_stop( void );
+
 void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
 #define utrz_success()  				                \
             utrz_resp( RKH_TE_UT_SUCCESS, 0, "", 0, 0 )
@@ -38,25 +41,25 @@ void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
 #define utrzVerify_fail(l,e)                                            \
             utrz_fail( (l), "Event '",  2,                              \
                             (e),                                        \
-                            "' ocurred less times than expected."       \
+                            "' occurred less times than expected."       \
                     )
 
 #define utrzEvtExpect_fail(l,r,e)                               \
             utrz_fail( (l), "Out of order Trace event.", 5,     \
-                            " ocurred: '", (r),                 \
+                            " occurred: '", (r),                 \
                             "' expected: '", (e),               \
                             "'." )
 
 #define utrz_ArgExpect_fail(l,e,at,x )                          \
             utrz_fail( (l), "Event '",   6,                              \
                        (e),                                              \
-                       "' ocurred with unexpected value for argument '", \
+                       "' occurred with unexpected value for argument '", \
                        (at), "' expected value='", (x), "'." )
 
 #define utrzMoreEvtThanExpect(l,e)                              \
             utrz_fail( (l), "Event '",   2,                     \
                        (e),                                     \
-                       "' ocurred more times than expected." )
+                       "' occurred more times than expected." )
 
 #ifdef __cplusplus
 }

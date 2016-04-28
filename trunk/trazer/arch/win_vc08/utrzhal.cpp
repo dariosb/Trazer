@@ -12,6 +12,7 @@
 
 char utrz_msg[1024];
 
+
 void
 rkh_trc_flush(void)
 {
@@ -34,12 +35,29 @@ rkh_trc_flush(void)
     }
 }
 
+static rui32_t utrz_running = 0;
+
+void
+utrz_hal_start( void )
+{
+    utrz_running = 1;
+}
+
+void 
+utrz_hal_stop( void )
+{
+    utrz_running = 0;
+}
+
 void
 utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
 {
     int i;
     va_list val;
 	char *s;
+
+    if( !utrz_running )
+        return;
 
     strcpy( utrz_msg, msg );
     va_start( val, nargs );

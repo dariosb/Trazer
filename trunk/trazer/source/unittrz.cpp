@@ -33,13 +33,10 @@ is_ignored( rui32_t e  )
     return false;
 }
 
-static rui32_t current_line;
 
 void
-utrz_init( char *ptext, rui32_t line )
+unitrazer_init( void )
 {
-    current_line = line;
-	rkh_trc_init();
     utrz_expected_lst.clear();
     /*
      * All groups buts SM wired to be ignored by default
@@ -53,6 +50,23 @@ utrz_init( char *ptext, rui32_t line )
     utrz_ign_group[ RKH_TG_SM ] = GRP_EXPECTED;
 #endif
     memset( utrz_ign_evt, EVT_EXPECTED, sizeof(utrz_ign_evt) );
+
+    utrz_hal_stop();
+}
+
+
+static rui32_t current_line;
+
+void
+utrz_init( char *ptext, rui32_t line )
+{
+    current_line = line;
+	rkh_trc_init();
+
+    unitrazer_init();
+
+    utrz_hal_start();
+
     utrz_success();
 }
 

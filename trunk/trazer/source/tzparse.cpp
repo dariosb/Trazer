@@ -1474,6 +1474,8 @@ trazer_init( void )
 	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", TRZ_RKH_CFG_TRC_CHK_EN );
 	lprintf( "\n" );
 	rkh_trc_init();
+
+    unitrazer_init();
 }
 
 
