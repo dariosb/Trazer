@@ -1,6 +1,8 @@
 /**
 \page rev_page_trazer Trazer revision history
 
+\tableofcontents
+
 \section trazer_1_0 Version 1.0 Release date: Apr 07, 2012
 
 This is the intial release of the Trazer visualization tool.

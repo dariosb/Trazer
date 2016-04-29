@@ -34,6 +34,21 @@ rkh_trc_flush(void)
     }
 }
 
+static rui32_t utrz_running = 0;
+
+void
+utrz_hal_start( void )
+{
+    utrz_running = 1;
+}
+
+void 
+utrz_hal_stop( void )
+{
+    utrz_running = 0;
+}
+
+
 void
 utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
 {
@@ -41,6 +56,9 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
     va_list val;
 	char *s;
 
+    if( !utrz_running )
+        return;
+    
     strcpy( utrz_msg, msg );
     va_start( val, nargs );
     for (i=0;i<nargs;i++)
@@ -50,8 +68,8 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
     }
    
 
-    lprintf("line %d:", line); 
-    lprintf(utrz_msg); 
+//    lprintf("line %d:", line); 
+//    lprintf(utrz_msg); 
 
 	rkh_trc_begin( e );
 	RKH_TRC_UI32(line);
