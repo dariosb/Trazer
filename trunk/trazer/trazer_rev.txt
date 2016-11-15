@@ -3,6 +3,15 @@
 
 \tableofcontents
 
+\section trazer_2_5 Version 2.5
+\releasedate ----
+
+\todo
+- Add event identification number (sequence number), 
+  to track post and dispatch instance, on responce time calculation.
+- Replace RKH_TE_SMA_DCH by RKH_TE_SMA_GET for responce time calculation.
+
+<HR>
 \section trazer_2_4 Version 2.4
 \releasedate 2016-28-04
 
