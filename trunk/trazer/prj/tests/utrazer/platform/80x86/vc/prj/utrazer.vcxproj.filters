@@ -48,36 +48,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.c">
-      <Filter>Source Files\rkh\port</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtrc.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtim.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtbl.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhsma.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhs.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhrq.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhmp.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhdyn.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c">
-      <Filter>Source Files\rkh</Filter>
-    </ClCompile>
     <ClCompile Include="..\bsp.c">
       <Filter>Source Files\tests\utrazer</Filter>
     </ClCompile>
@@ -132,53 +102,38 @@
     <ClCompile Include="..\..\..\..\test_runners\test_utrzignore_runner.c">
       <Filter>Source Files\tests\utrazer\test_runners</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkh.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhdyn.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhmp.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhrq.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhs.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhsma.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtbl.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtim.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtrc.c">
+      <Filter>Source Files\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkhport.c">
+      <Filter>Source Files\rkh\port</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkht.h">
-      <Filter>Source Files\rkh\port</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.h">
-      <Filter>Source Files\rkh\port</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtype.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtrc.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtim.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhs.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhrq.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhrdy.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhplat.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhmp.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhitl.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhevt.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhdef.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhassert.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkh.h">
-      <Filter>Source Files\rkh\inc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\rkhcfg.h">
       <Filter>Source Files\tests\utrazer</Filter>
     </ClInclude>
@@ -214,6 +169,54 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\aotest_act.h">
       <Filter>Source Files\tests\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkhport.h">
+      <Filter>Source Files\rkh\port</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkht.h">
+      <Filter>Source Files\rkh\port</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkh.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhassert.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhdef.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhevt.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhitl.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhmp.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhplat.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhrdy.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhrq.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhs.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtim.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtrc.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtype.h">
+      <Filter>Source Files\rkh\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\utils\unitrazer\tzparse.h">
+      <Filter>Source Files\tests\utils\unitrazer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

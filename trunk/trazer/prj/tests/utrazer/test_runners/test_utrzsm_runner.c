@@ -1,8 +1,8 @@
 /**
- *  \file       test_utrzsm.c
- *  \ingroup    Test
+ *  \file       test_utrzsm_runner.c
+ *  \ingroup    test_utrzsm_group
  *
- *  \brief      ...
+ *  \brief      State machine group runner
  */
 
 /* -------------------------- Development history -------------------------- */
@@ -37,6 +37,7 @@ TEST_GROUP_RUNNER(utrzsm)
 	RUN_TEST_CASE(utrzsm, ignoreEvt);
 	RUN_TEST_CASE(utrzsm, ignoreOneArg);
 	RUN_TEST_CASE(utrzsm, ignoreOneArgBeforeExpect);
+	RUN_TEST_CASE(utrzsm, eventMoreThanExpect);
 }
 
 /* ------------------------------ End of file ------------------------------ */

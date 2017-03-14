@@ -48,8 +48,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\utils\bsp\platform\80x86\vc;$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\unitrazer;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\src;$(ProjectDir)..\..\..\..\..\utrazer;$(ProjectDir)..\;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__W32STVC08__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\utils\bsp\platform\80x86\vc;$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\unitrazer;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\src;$(ProjectDir)..\..\..\..\..\utrazer;$(ProjectDir)..\;$(ProjectDir)..\..\..\..\..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__W32STVC08__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -86,16 +86,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhdyn.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhmp.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhrq.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhs.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhsma.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtbl.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtim.c" />
-    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtrc.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkhport.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkh.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhdyn.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhmp.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhrq.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhs.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhsma.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtbl.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtim.c" />
+    <ClCompile Include="..\..\..\..\..\..\source\rkhtrc.c" />
     <ClCompile Include="..\..\..\..\..\unity\fixture\unity_fixture.c" />
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\tcptrc.c" />
@@ -116,21 +116,21 @@
     <ClCompile Include="..\bsp.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkh.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhassert.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhdef.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhevt.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhitl.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhmp.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhplat.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhrdy.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhrq.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhs.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtim.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtrc.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtype.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkhport.h" />
-    <ClInclude Include="..\..\..\..\..\..\..\rkh\source\portable\80x86\win32_st\vc08\rkht.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkh.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhassert.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhdef.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhevt.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhitl.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhmp.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhplat.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhrdy.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhrq.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhs.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtim.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtrc.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\include\rkhtype.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkhport.h" />
+    <ClInclude Include="..\..\..\..\..\..\source\portable\80x86\win32_st\vc08\rkht.h" />
     <ClInclude Include="..\..\..\..\..\unity\fixture\unity_fixture.h" />
     <ClInclude Include="..\..\..\..\..\unity\fixture\unity_fixture_internals.h" />
     <ClInclude Include="..\..\..\..\..\unity\fixture\unity_fixture_malloc_overrides.h" />
@@ -138,6 +138,7 @@
     <ClInclude Include="..\..\..\..\..\unity\unity_config.h" />
     <ClInclude Include="..\..\..\..\..\unity\unity_internals.h" />
     <ClInclude Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\tcptrc.h" />
+    <ClInclude Include="..\..\..\..\..\utils\unitrazer\tzparse.h" />
     <ClInclude Include="..\..\..\..\..\utils\unitrazer\unitrazer.h" />
     <ClInclude Include="..\..\..\..\rkhcfg.h" />
     <ClInclude Include="..\..\..\..\src\aotest.h" />

@@ -1,8 +1,13 @@
 /**
- *  \file       test_utrzexeact.c
- *  \ingroup    Test
+ *  \file       test_utrzexecact.c
+ *  \ingroup    test_utrz
+ *  \ingroup    test_utrzexecact_group
+ *  \brief      Unit test for uTrazer module - Execution action test group
  *
- *  \brief      Unit test for RKH's state machine module.
+ *  \addtogroup test
+ *  @{
+ *  \addtogroup test_utrz
+ *  @{
  */
 
 /* -------------------------- Development history -------------------------- */
@@ -53,6 +58,13 @@ TEST_TEAR_DOWN(utrzexeact)
     common_tear_down();
 }
 
+/**
+ *  \addtogroup test_utrzexecact_group Execution action test group
+ *  @{
+ *  \name Test cases of Execution action group
+ *  @{ 
+ */
+
 TEST(utrzexeact, expectEventOk)
 {
     UtrzProcessOut *p;
@@ -75,7 +87,7 @@ TEST(utrzexeact, expectEventOk)
     /* -------- Verify --------------
      * Check the expected outcome 
      */
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
@@ -87,9 +99,9 @@ TEST(utrzexeact, expectEventOutOfSequence)
 
     RKH_TR_SM_ENSTATE(aotest, CST(&s21));
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
-    TEST_ASSERT_EQUAL_STRING("Out of order Trace event. received: 'ENSTATE' "
+    TEST_ASSERT_EQUAL_STRING("Out of order Trace event. occurred: 'ENSTATE' "
                              "expected: 'TRN'.", p->msg);
 }
 
@@ -101,9 +113,9 @@ TEST(utrzexeact, expectEventWithUnexpectedArg)
 
     RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
-    TEST_ASSERT_EQUAL_STRING("Event 'TRN' ocurred with unexpected "
+    TEST_ASSERT_EQUAL_STRING("Event 'TRN' occurred with unexpected "
                              "value for argument 'tst=s21' expected "
                              "value='s211'.", p->msg);
 }
@@ -117,12 +129,12 @@ TEST(utrzexeact, ignoreEvt)
 
     RKH_TR_SM_TRN(aotest, &s21, &s21);
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 
     RKH_TR_SM_EVT_PROC(aotest)
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
@@ -135,7 +147,7 @@ TEST(utrzexeact, ignoreOneArg)
 
     RKH_TR_SM_TRN(aotest, &s211, &s211);
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
 }
 
@@ -147,11 +159,16 @@ TEST(utrzexeact, ignoreOneArgBeforeExpect)
 	sm_evtProc_expect();
     sm_trn_ignoreArg_sourceState();
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
     TEST_ASSERT_EQUAL_STRING("IgnoreArg called before Expect on event 'TRN'."
                                 , p->msg);
 	RKH_TR_SM_TRN(aotest, &s21, &s211);
 	RKH_TR_SM_EVT_PROC(aotest);
 }
+
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
 /* ------------------------------ End of file ------------------------------ */

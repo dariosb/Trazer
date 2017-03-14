@@ -1,8 +1,13 @@
 /**
  *  \file       test_utrzignore.c
- *  \ingroup    Test
+ *  \ingroup    test_utrz
+ *  \ingroup    test_utrzignore_group
+ *  \brief      Unit test for uTrazer module - Ignore test group
  *
- *  \brief      Unit test for RKH's state machine module.
+ *  \addtogroup test
+ *  @{
+ *  \addtogroup test_utrz
+ *  @{
  */
 
 /* -------------------------- Development history -------------------------- */
@@ -28,14 +33,14 @@
 #define utrzOkCheck()   \
         {                       \
             UtrzProcessOut *p;  \
-            p = ut_getLastOut();    \
+            p = unitrazer_getLastOut();    \
             TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);  \
         }
 
 #define utrzFailCheck()   \
         {                       \
             UtrzProcessOut *p;  \
-            p = ut_getLastOut();    \
+            p = unitrazer_getLastOut();    \
             TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);  \
         }
 /* ------------------------------- Constants ------------------------------- */
@@ -65,6 +70,12 @@ TEST_TEAR_DOWN(utrzIgnore)
     common_tear_down();
 }
 
+/**
+ *  \addtogroup test_utrzignore_group Ignore test group
+ *  @{
+ *  \name Test cases of Ignore group
+ *  @{ 
+ */
 
 TEST(utrzIgnore, sm_trn_Ok)
 {	
@@ -98,15 +109,13 @@ TEST(utrzIgnore, sm_trn_OneArgBeforeExpect)
 	sm_evtProc_expect();
     sm_trn_ignoreArg_sourceState();
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
     TEST_ASSERT_EQUAL_STRING("IgnoreArg called before Expect on event 'TRN'."
                                 , p->msg);
 	RKH_TR_SM_TRN(aotest, &s21, &s211);
 	RKH_TR_SM_EVT_PROC(aotest);
 }
-
-/* RKH_TE_SM_EXE_ACT */
 
 TEST(utrzIgnore, sm_exeAct_Ok)
 {	
@@ -140,7 +149,7 @@ TEST(utrzIgnore, sm_exeAct_OneArgBeforeExpect)
 	sm_evtProc_expect();
     sm_trn_ignoreArg_sourceState();
 
-    p = ut_getLastOut();
+    p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_FAIL, p->status);
     TEST_ASSERT_EQUAL_STRING("IgnoreArg called before Expect on event 'TRN'."
                                 , p->msg);
@@ -184,4 +193,9 @@ TEST(utrzIgnore, verifyFail)
 
 	unitrazer_cleanup();
 }
+
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
 /* ------------------------------ End of file ------------------------------ */
