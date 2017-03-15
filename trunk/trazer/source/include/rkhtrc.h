@@ -81,7 +81,7 @@
  *          RKH_TRC_UI8(poolID_); \
  *          RKH_TRC_UI8(refCntr_); \
  *          RKH_TRC_NE(nElem_); \
- *          RKH_TRC_NE(nMin_); \
+ *          RKH_TRC_RQ_NMIN(nMin_); \
  *      RKH_TRC_END_NOCRIT()
  *	\endcode
  *
@@ -314,7 +314,7 @@
     RKH_TRC_TE_ID(eid); \
     RKH_TRC_NSEQ();  \
     RKH_TRC_TSTAMP()
-
+ 
 /* ---------------------- External C language linkage ---------------------- */
 #ifdef __cplusplus
     extern "C" {
@@ -951,7 +951,7 @@
 /* The last trace event */
 #define RKH_TE_NEVENT           (RKH_UT_END + 1)
 
-#if 0
+#if 0        
 /* ------------------------- Configuration errors -------------------------- */
 /*
  *  LOOK FOR WRONG #define CONSTANTS
@@ -983,7 +983,7 @@
     #error  "by RKH_TOT_NUM_TRC_EVTS must be <= RKH_TRC_MAX_EVENTS"
 #endif
 
-#if ((RKH_TMR_END - RKH_TMR_START) > ((RKH_TMR_TTBL_RANGE * 8) - 1))
+#if ((RKH_TMR_END - RKH_TMR_START) > ((RKH_TIM_TTBL_RANGE * 8) - 1))
     #error  "rkhtrc.h, the total number of trace events represented"
     #error  "by RKH_TOT_NUM_TRC_EVTS must be <= RKH_TRC_MAX_EVENTS"
 #endif
@@ -1591,7 +1591,7 @@
 #endif
 
 /**
- *  Insert a event size value as trace record argument.
+ *  Insert an event size value as trace record argument.
  */
 #if RKH_CFG_FWK_SIZEOF_EVT_SIZE == 8
         #define RKH_TRC_ES(es) \
@@ -1904,7 +1904,7 @@
                     RKH_TRC_UI8(poolID_); \
                     RKH_TRC_UI8(refCntr_); \
                     RKH_TRC_NE(nElem_); \
-                    RKH_TRC_NE(nMin_); \
+                    RKH_TRC_RQ_NMIN(nMin_); \
                 RKH_TRC_END()
 
             /**
@@ -1936,7 +1936,7 @@
                     RKH_TRC_UI8(poolID_); \
                     RKH_TRC_UI8(refCntr_); \
                     RKH_TRC_NE(nElem_); \
-                    RKH_TRC_NE(nMin_); \
+                    RKH_TRC_RQ_NMIN(nMin_); \
                 RKH_TRC_END_NOCRIT()
 
             /**
@@ -1968,7 +1968,7 @@
                     RKH_TRC_UI8(poolID_); \
                     RKH_TRC_UI8(refCntr_); \
                     RKH_TRC_NE(nElem_); \
-                    RKH_TRC_NE(nMin_); \
+                    RKH_TRC_RQ_NMIN(nMin_); \
                 RKH_TRC_END_NOCRIT()
 
             /**
@@ -2017,11 +2017,11 @@
             #define RKH_TR_SMA_GET(actObj_, evt_, poolID_, refCntr_, nElem_, \
                                    nMin_) \
                 (void)0
-            #define RKH_TR_SMA_FIFO(actObj_, evt_, sender_, poolID_, refCntr_, \
-                                    nElem_, nMin_) \
+            #define RKH_TR_SMA_FIFO(actObj_, evt_, sender_, poolID_, \
+                                    refCntr_, nElem_, nMin_) \
                 (void)0
-            #define RKH_TR_SMA_LIFO(actObj_, evt_, sender_, poolID_, refCntr_, \
-                                    nElem_, nMin_) \
+            #define RKH_TR_SMA_LIFO(actObj_, evt_, sender_, poolID_, \
+                                    refCntr_, nElem_, nMin_) \
                 (void)0
             #define RKH_TR_SMA_REG(actObj_, prio) \
                 (void)0
@@ -2619,15 +2619,18 @@
              *  \trcGroup       RKH_TG_FWK
              *  \trcEvent       RKH_TE_FWK_EPREG
              *
-             *  \param[in] evtPool_   Event pool id
-             *  \param[in] storageSize_   Storage size
-             *  \param[in] evtSize_   Event size
+             *  \param[in] evtPool_     Event pool id
+             *  \param[in] storageSize_ Storage size
+             *  \param[in] evtSize_     Event size
+             *  \param[in] poolSize_    Total number of blocks
              */
-            #define RKH_TR_FWK_EPREG(evtPool_, storageSize_, evtSize_) \
+            #define RKH_TR_FWK_EPREG(evtPool_, storageSize_, evtSize_, \
+                                     poolSize_) \
                 RKH_TRC_BEGIN_WOAOSIG(RKH_TE_FWK_EPREG) \
                     RKH_TRC_UI8(evtPool_); \
                     RKH_TRC_UI32(storageSize_); \
                     RKH_TRC_ES(evtSize_); \
+                    RKH_TRC_NBLK(poolSize_); \
                 RKH_TRC_END()
 
             /**
@@ -2642,12 +2645,13 @@
              *  \param[in] evt_     Pointer to event object
              *  \param[in] nUsed_   Current number of memory blocks used 
              *  \param[in] nMin_    Lowest number of free blocks ever present 
-             *  \param[in] sender_  Pointer to the actor that request a memory block. 
-             *                      It is not necessarily a pointer to an active 
-             *                      object. In fact, if RKH_ALLOC_EVT() is called from 
-             *                      an interrupt or other context, it can create a 
-             *                      unique object just to unambiguously identify the 
-             *                      publisher of the event.
+             *  \param[in] sender_  Pointer to the actor that request a memory
+             *                      block. It is not necessarily a pointer to
+             *                      an active object. In fact, if 
+             *                      RKH_ALLOC_EVT() is called from an 
+             *                      interrupt or other context, it can create 
+             *                      a unique object just to unambiguously 
+             *                      identify the publisher of the event.
              */
             #define RKH_TR_FWK_AE(evtSize_, evt_, nUsed_, nMin_, sender_) \
                 RKH_TRC_BEGIN_WOAOSIG(RKH_TE_FWK_AE) \
@@ -2655,8 +2659,8 @@
                     RKH_TRC_SIG((evt_)->e); \
                     RKH_TRC_UI8((evt_)->pool - 1); \
                     RKH_TRC_UI8((evt_)->nref); \
-                    RKH_TRC_UI8(nUsed_); \
-                    RKH_TRC_UI8(nMin_); \
+                    RKH_TRC_NBLK(nUsed_); \
+                    RKH_TRC_MP_NMIN(nMin_); \
                     RKH_TRC_SYM(sender_); \
                 RKH_TRC_END()
 
@@ -2690,20 +2694,21 @@
              *  \param[in] evt_     Pointer to event object
              *  \param[in] nUsed_   Current number of memory blocks used 
              *  \param[in] nMin_    Lowest number of free blocks ever present 
-             *  \param[in] sender_  Pointer to the actor that request a memory block. 
-             *                      It is not necessarily a pointer to an active 
-             *                      object. In fact, if RKH_FWK_GC() is called from 
-             *                      an interrupt or other context, it can create a 
-             *                      unique object just to unambiguously identify the 
-             *                      publisher of the event.
+             *  \param[in] sender_  Pointer to the actor that request a memory
+             *                      block. It is not necessarily a pointer to
+             *                      an active object. In fact, if 
+             *                      RKH_ALLOC_EVT() is called from an 
+             *                      interrupt or other context, it can create 
+             *                      a unique object just to unambiguously 
+             *                      identify the publisher of the event.
              */
             #define RKH_TR_FWK_GCR(evt_, nUsed_, nMin_, sender_) \
                 RKH_TRC_BEGIN_WOAOSIG_NOCRIT(RKH_TE_FWK_GCR) \
                     RKH_TRC_SIG((evt_)->e); \
                     RKH_TRC_UI8((evt_)->pool); \
                     RKH_TRC_UI8((evt_)->nref); \
-                    RKH_TRC_UI8(nUsed_); \
-                    RKH_TRC_UI8(nMin_); \
+                    RKH_TRC_NBLK(nUsed_); \
+                    RKH_TRC_MP_NMIN(nMin_); \
                     RKH_TRC_SYM(sender_); \
                 RKH_TRC_END_NOCRIT()
 
@@ -3373,7 +3378,8 @@
         #else
             #define RKH_TR_FWK_EN()                                     (void)0
             #define RKH_TR_FWK_EX()                                     (void)0
-            #define RKH_TR_FWK_EPREG(evtPool_, storageSize_, evtSize_)  (void)0
+            #define RKH_TR_FWK_EPREG(evtPool_, storageSize_, evtSize_, \
+                                     poolSize_)                         (void)0
             #define RKH_TR_FWK_AE(evtSize_, evt_, nUsed_, nMin_, sndr_) (void)0
             #define RKH_TR_FWK_GC(evt_, poolID_, refCnt_)               (void)0
             #define RKH_TR_FWK_GCR(evt_, nUsed_, nMin_, sndr_)          (void)0
@@ -3384,8 +3390,8 @@
             #define RKH_TR_FWK_SIG(stateObj_)                           (void)0
             #define RKH_TR_FWK_FUN(stateObj_)                           (void)0
             #define RKH_TR_FWK_EXE_FUN(function_)                       (void)0
-            #define RKH_TR_FWK_SYNC_EVT(function_, senderObj_, receiverObj_) \
-                (void)0
+            #define RKH_TR_FWK_SYNC_EVT(function_, senderObj_, \
+                                        receiverObj_)                   (void)0
             #define RKH_TR_FWK_TUSR(__e)                                (void)0
             #define RKH_TR_FWK_TCFG(timeStamp_)                         (void)0
             #define RKH_TR_FWK_ASSERT(mod_, ln_)                        (void)0
@@ -3416,10 +3422,10 @@
         #define RKH_TR_SMA_ACT(ao, p, s)                  (void)0
         #define RKH_TR_SMA_TERM(ao, p)                    (void)0
         #define RKH_TR_SMA_GET(ao, ev, pid, rc, ne, nm)   (void)0
-        #define RKH_TR_SMA_FIFO(ao, ev, snr, pid, rc, ne, nm) \
-                (void)0
-        #define RKH_TR_SMA_LIFO(ao, ev, snr, pid, rc, ne, nm) \
-                (void)0
+        #define RKH_TR_SMA_FIFO(ao, ev, snr, pid, rc, ne, \
+                                nm)                       (void)0
+        #define RKH_TR_SMA_LIFO(ao, ev, snr, pid, rc, ne, \
+                                nm)                       (void)0
         #define RKH_TR_SMA_REG(ao, prio)                  (void)0
         #define RKH_TR_SMA_UNREG(ao, prio)                (void)0
 
@@ -3453,9 +3459,9 @@
         /* --- Framework (RKH) --------------------------------------------- */
         #define RKH_TR_FWK_EN()                           (void)0
         #define RKH_TR_FWK_EX()                           (void)0
-        #define RKH_TR_FWK_EPREG(ep, ss, es)              (void)0
-        #define RKH_TR_FWK_AE(es, ev, nUsed_, nMin_, sndr_) \
-                (void)0
+        #define RKH_TR_FWK_EPREG(ep, ss, es, poolSize_)   (void)0
+        #define RKH_TR_FWK_AE(es, ev, nUsed_, nMin_, \
+                              sndr_)                      (void)0
         #define RKH_TR_FWK_GC(ev, pid, rc)                (void)0
         #define RKH_TR_FWK_GCR(ev, nUsed_, nMin_, sndr_)  (void)0
         #define RKH_TR_FWK_DEFER(q, ev)                   (void)0

@@ -6,11 +6,14 @@
 
 
 #define q_s			(char *)"q=%s"
+#define actor_s	    (char *)"actor=%s"
 #define mp_s		(char *)"mp=%s"
 #define nblock_d	(char *)"nb=%d"
+#define psize_d		(char *)"ps=%d"
 #define bsize_d		(char *)"bs=%d"
 #define nfree_d		(char *)"nfree=%d"
 #define nelem_d		(char *)"nelem=%d"
+#define size_d		(char *)"size=%d"
 #define nmin_d		(char *)"nmin=%d"
 #define snr_s		(char *)"snr=%s"
 #define pid_d		(char *)"pid=%d"
