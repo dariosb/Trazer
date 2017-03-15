@@ -104,7 +104,7 @@ static UtrzProcessOut out;
     #include "tcptrc.h"
 
 /* Trazer Tool IP Address */
-    #define TRC_IP_ADDR                 "192.168.56.1"
+    #define TRC_IP_ADDR                 "127.1.1.1"
 
 /* Trazer Tool TCP Port Address */
     #define TRC_TCP_PORT                6602
@@ -298,7 +298,8 @@ rkh_trc_open(void)
     trazer_init();
     FTBIN_OPEN();
     TCP_TRACE_OPEN();
-    RKH_TRC_SEND_CFG(BSP_TS_RATE_HZ);
+	unitrazer_init();
+	RKH_TRC_SEND_CFG(BSP_TS_RATE_HZ);
 }
 
 void
@@ -349,7 +350,7 @@ bsp_init(int argc, char *argv[])
     (void)argv;
 
     rkh_fwk_init();
-    RKH_TRC_OPEN();
+	RKH_TRC_OPEN();
 }
 
 /* ------------------------------ End of file ------------------------------ */
