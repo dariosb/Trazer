@@ -2,12 +2,8 @@
  * evtbl.cpp
  */
 
-#include <stdio.h>
-#include "evtbl.h"
-#include "rkhtrc.h"
-#include "tzparse.h"
-#include "messages.h"
 #include "trzfrmt.h"
+#include "evtbl.h"
 
 using namespace std;
 

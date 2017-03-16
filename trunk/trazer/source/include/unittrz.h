@@ -14,7 +14,7 @@ extern "C"{
 #include <stdarg.h>
 #include "rkhtype.h"
 #include "rkhdef.h"
-#include "rkhtrc.h"
+#include "utrzhal.h"
 
 using namespace std;
 
@@ -92,6 +92,39 @@ void utrz_ignore_evt( rui32_t e );
 void utrz_insert( rui8_t id, rui8_t nargs, ... );
 ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );
 
+#define utrz_success()  				                \
+            utrz_resp( RKH_TE_UT_SUCCESS, 0, "", 0, 0 )
+
+#define utrz_fail( l, m, n, ... )                       \
+            utrz_resp( RKH_TE_UT_FAIL, (l), m, n, __VA_ARGS__ )
+
+#define utrzIgnArg_fail(l,e)                                    \
+            utrz_fail( (l), "IgnoreArg called before "          \
+                            "Expect on event ", 3,              \
+                            "'", (e), "'." )
+
+#define utrzVerify_fail(l,e)                                            \
+            utrz_fail( (l), "Event '",  2,                              \
+                            (e),                                        \
+                            "' occurred less times than expected."       \
+                    )
+
+#define utrzEvtExpect_fail(l,r,e)                               \
+            utrz_fail( (l), "Out of order Trace event.", 5,     \
+                            " occurred: '", (r),                 \
+                            "' expected: '", (e),               \
+                            "'." )
+
+#define utrz_ArgExpect_fail(l,e,at,x )                          \
+            utrz_fail( (l), "Event '",   6,                              \
+                       (e),                                              \
+                       "' occurred with unexpected value for argument '", \
+                       (at), "' expected value='", (x), "'." )
+
+#define utrzMoreEvtThanExpect(l,e)                              \
+            utrz_fail( (l), "Event '",   2,                     \
+                       (e),                                     \
+                       "' occurred more times than expected." )
 
 #define RKH_TRC_CLEANUP()			utrz_clean()
 

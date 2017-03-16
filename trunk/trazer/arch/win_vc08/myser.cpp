@@ -19,7 +19,7 @@ static
 void
 ser_rx_isr( unsigned char byte )
 {
-	trazer_parse( byte );
+	tzparser_exec( byte );
 }
 
 void

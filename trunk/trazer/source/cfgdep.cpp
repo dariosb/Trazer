@@ -43,8 +43,12 @@ get_trheader( int en_tstamp, int sz_tstamp, int en_nseq )
 }
 
 void
-trazer_output( int flg, TRAZER_DATA_T* tz )
+trazer_output( TRAZER_DATA_T* tz )
 {
+    int flg = PREPARE_TZOUT_FLGS( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+										TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
+										TRZ_RKH_CFG_TRC_NSEQ_EN );
+
 	if( flg & TRAZER_TCFG_EN_TSTAMP_MSK )
 	{
 		switch( flg & TRAZER_TCFG_SIZEOF_TSTAMP_MSK )

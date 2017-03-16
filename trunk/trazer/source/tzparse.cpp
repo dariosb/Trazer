@@ -2,79 +2,48 @@
  *	file: trazer.c
  */
 
-
 #include "mytypes.h"
 #include "rkhtrc.h"
 #include "mdebug.h"
-#include "myevt.h"
 #include "messages.h"
 #include "tzparse.h"
 #include "evtbl.h"
 #include "symbtbl.h"
-#include "version.h"
 #include "sigtbl.h"
 #include "uevtbl.h"
 #include "cfgdep.h"
 #include "tzlog.h"
 #include "seqdiag.h"
 #include "unittrz.h"
-#include "tcp.h"
-#include "utrzhal.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
 
 
-
-/*
-#define get_nseq()		nseq = ( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr[ 1 ] : 0;
-#define set_to_ts()		trb = ( TRZ_RKH_CFG_TRC_NSEQ_EN == 1 ) ? tr + 2 : tr + 1;
-*/
-
-static uint lastnseq;
-rui16_t TSTAMP_TICK_HZ;
-
-
-/*
-#define get_ts()												\
-			( RKH_TRC_EN_TSTAMP == 1 ) ? 						\
-			( TRZTS_T )assemble( RKH_TRC_SIZEOF_TSTAMP ) : 0
-*/
 #define CTE( te )	((const struct tre_t*)(te))
 
-
-/*
- *  dispatch ret code table
- */
-static const char *rctbl[] =	
+const char * atype_str[6] =
 {
-	"RKH_OK",
-	"RKH_INPUT_NOT_FOUND",
-	"RKH_CONDITION_NOT_FOUND",
-	"RKH_GUARD_FALSE",
-	"RKH_UNKNOWN_STATE",
-	"RKH_EXCEED_HCAL_LEVEL",
-	"RKH_EXCEED_TRC_SEGS"
+	"Effect",
+	"Entry",
+	"Exit",
+	"Init",
+	"Prepro",
+	"Guard"
 };
 
-#define PARSER_MAX_SIZE_BUF			64
 
+#define PARSER_MAX_SIZE_BUF			64
 
 enum
 {
 	PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING
 };
 
-
-static rui8_t *trb;				
-static char fmt[ 1024 ];
-extern FILE *fdbg;
-
 static rui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
 static char symstr[ 16 ];
+static rui8_t *trb;
+static char fmt[ 1024 ];
 static unsigned long curr_tstamp;
-
+static uint lastnseq;
 
 static
 unsigned long
@@ -128,6 +97,7 @@ get_ts( int en_ts, int sz_ts )
 }
 
 
+static
 int
 verify_nseq( uint nseq )
 {
@@ -275,21 +245,6 @@ h_sync( const void *tre )
 
 	return fmt;
 }
-
-char *
-h_symrc( const void *tre )
-{
-	unsigned long obj;
-	unsigned char u8;
-
-	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
-	u8 = (unsigned char)assemble( sizeof( char ) );
-	tre_fmt( fmt, CTE( tre ), 2, map_obj( obj ), rctbl[ u8 ] );
-
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, u8 );
-	return fmt;
-}
-
 
 char *
 h_symu8( const void *tre )
@@ -527,18 +482,6 @@ h_sig2u8( const void *tre )
 	u8_2 = (unsigned char)assemble( sizeof( char ) );
 	tre_fmt( fmt, CTE( tre ), 3, map_sig( sig ), u8_1, u8_2 );
 	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, sig, u8_1, u8_2 );
-	return fmt;
-}
-
-
-char *
-h_evt( const void *tre )
-{
-	TRZE_T e;
-
-	e = (TRZE_T)assemble( sizeof_trze() );
-	tre_fmt( fmt, CTE( tre ), 1, map_sig( e ) );
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 1, e );
 	return fmt;
 }
 
@@ -924,16 +867,6 @@ h_symuevt( const void *tre )
 }
 
 
-const char * atype_str[6] =
-{
-	"Effect",
-	"Entry",
-	"Exit",
-	"Init",
-	"Prepro",
-	"Guard"
-};
-
 char *
 h_exact( const void *tre )
 {
@@ -1030,6 +963,7 @@ char *
 h_tcfg( const void *tre )
 {
 	rui32_t *trb_32;
+    rui16_t tstamp_tick_hz;
 
 	(void)tre;
 
@@ -1072,7 +1006,7 @@ h_tcfg( const void *tre )
 	TRZ_RKH_CFG_MP_SIZEOF_BSIZE = (*trb >> 4) & 0x0F;
 	TRZ_RKH_CFG_FWK_MAX_EVT_POOL = (*trb++) & 0x0F;
 	
-	TSTAMP_TICK_HZ = *(rui16_t *)trb;
+	tstamp_tick_hz = *(rui16_t *)trb;
 
 	sdiag_text( MSC_TARGET_START );
 	
@@ -1106,7 +1040,7 @@ h_tcfg( const void *tre )
 	cfg_printf( 	TRZ_RKH_CFG_TRC_NSEQ_EN );
 	cfg_printf( 	TRZ_RKH_CFG_TRC_TSTAMP_EN );
 	cfg_printf( 	TRZ_RKH_CFG_TRC_CHK_EN );
-	cfg_printf( TSTAMP_TICK_HZ );
+	cfg_printf( tstamp_tick_hz );
 
     utrz_success();
 	return (char *)("\n");
@@ -1391,6 +1325,7 @@ parser_chk( void )
 	return 1;
 }
 
+static
 void
 show_curr_frm( void )
 {
@@ -1412,18 +1347,12 @@ void
 proc_tcfg_evt( const TRE_T *ftr )
 {
 	TRAZER_DATA_T tz_data;
-	int tz_flg;
-
-	tz_flg = PREPARE_TZOUT_FLGS(	TRAZER_TCFG_EN_TSTAMP_DFT, 
-									TRAZER_TCFG_SIZEOF_TSTAMP_DFT,
-									TRAZER_TCFG_EN_NSEQ_DFT );
-
 	tz_data.nseq = get_nseq( TRAZER_TCFG_EN_NSEQ_DFT );
 	tz_data.ts = get_ts( TRAZER_TCFG_EN_TSTAMP_DFT, TRAZER_SIZEOF_TSTAMP_DFT );
 	tz_data.group = ftr->group.c_str();
 	tz_data.name = ftr->name.c_str();
 
-	trazer_output(	tz_flg, &tz_data );
+	trazer_output(	&tz_data );
 
 	lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 
@@ -1443,7 +1372,6 @@ parser( void )
 {
 	static const TRE_T *ftr;			/* received trace event */
 	TRAZER_DATA_T tz_data;
-	int tz_flg;
 
 
 	if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
@@ -1462,10 +1390,6 @@ parser( void )
 
 		/* Runtime trace events */
 	
-		tz_flg = PREPARE_TZOUT_FLGS( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
-										TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
-										TRZ_RKH_CFG_TRC_NSEQ_EN );
-
 		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
@@ -1476,7 +1400,7 @@ parser( void )
 		tz_data.group = ftr->group.c_str();
 		tz_data.name = ftr->name.c_str();
 
-		trazer_output(	tz_flg, &tz_data );
+		trazer_output(	&tz_data );
 
 		lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 
@@ -1486,10 +1410,6 @@ parser( void )
 	else if( GET_TE_GROUP( tr[0] ) == RKH_TG_USR )
 	{
 		ftr = &fmt_usr_tbl;
-
-		tz_flg = PREPARE_TZOUT_FLGS( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
-										TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP,
-										TRZ_RKH_CFG_TRC_NSEQ_EN );
 
 		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
@@ -1506,7 +1426,7 @@ parser( void )
 			tz_data.name = fmt;
 		}
 
-		trazer_output(	tz_flg, &tz_data );
+		trazer_output(	&tz_data );
 		
 		(*ftr->fmt_args)( (const void *)(tr) ); 
 
@@ -1517,7 +1437,7 @@ parser( void )
 }
 
 void 
-trazer_parse( rui8_t d )
+tzparser_exec( rui8_t d )
 {
 	switch( state )
 	{
@@ -1570,42 +1490,9 @@ trazer_parse( rui8_t d )
 }
 
 void
-trazer_init( void )
+tzparser_init( void )
 {
 	lastnseq = 255;
-	lprintf( VERSION_STRING_TXT );
-	lprintf( "\nUsing local RKH configuration\n\n" );
-	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_TSTAMP = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP*8 );
-	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_PTR    = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR*8 );
-	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT        = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT*8 );
-	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT_SIZE   = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE*8 );
-	lprintf( "   RKH_CFG_FWK_MAX_EVT_POOL      = %d\n", TRZ_RKH_CFG_FWK_MAX_EVT_POOL );
-	lprintf( "   RKH_CFG_RQ_GET_LWMARK_EN      = %d\n", TRZ_RKH_CFG_RQ_GET_LWMARK_EN );
-	lprintf( "   RKH_CFG_RQ_SIZEOF_NELEM       = %d\n", TRZ_RKH_CFG_RQ_SIZEOF_NELEM*8 );
-	lprintf( "   RKH_CFG_MP_GET_LWM_EN         = %d\n", TRZ_RKH_CFG_MP_GET_LWM_EN );
-	lprintf( "   RKH_CFG_MP_SIZEOF_NBLOCK      = %d\n", TRZ_RKH_CFG_MP_SIZEOF_NBLOCK*8 );
-	lprintf( "   RKH_CFG_MP_SIZEOF_BSIZE       = %d\n", TRZ_RKH_CFG_MP_SIZEOF_BSIZE*8 );
-	lprintf( "   RKH_CFG_SMA_TRC_SNDR_EN       = %d\n", TRZ_RKH_CFG_SMA_TRC_SNDR_EN );
-	lprintf( "   RKH_CFG_TMR_SIZEOF_NTIMER     = %d\n", TRZ_RKH_CFG_TMR_SIZEOF_NTIMER*8 );
-	lprintf( "   RKH_CFG_TRC_RTFIL_EN          = %d\n", TRZ_RKH_CFG_TRC_RTFIL_EN );
-	lprintf( "   RKH_CFG_TRC_USER_TRACE_EN     = %d\n", TRZ_RKH_CFG_TRC_USER_TRACE_EN );
-	lprintf( "   RKH_CFG_TRC_ALL_EN            = %d\n", TRZ_RKH_CFG_TRC_ALL_EN );
-	lprintf( "   RKH_CFG_TRC_MP_EN             = %d\n", TRZ_RKH_CFG_TRC_MP_EN );
-	lprintf( "   RKH_CFG_TRC_RQ_EN             = %d\n", TRZ_RKH_CFG_TRC_RQ_EN );
-	lprintf( "   RKH_CFG_TRC_SMA_EN            = %d\n", TRZ_RKH_CFG_TRC_SMA_EN );
-	lprintf( "   RKH_CFG_TRC_TMR_EN            = %d\n", TRZ_RKH_CFG_TRC_TMR_EN );
-	lprintf( "   RKH_CFG_TRC_SM_EN             = %d\n", TRZ_RKH_CFG_TRC_SM_EN );
-	lprintf( "   RKH_CFG_TRC_FWK_EN            = %d\n", TRZ_RKH_CFG_TRC_FWK_EN );
-	lprintf( "   RKH_CFG_TRC_ASSERT_EN         = %d\n", TRZ_RKH_CFG_TRC_ASSERT_EN );
-	lprintf( "   RKH_CFG_TRC_RTFIL_SMA_EN      = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SMA_EN );
-	lprintf( "   RKH_CFG_TRC_RTFIL_SIGNAL_EN   = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SIGNAL_EN );
-	lprintf( "   RKH_CFG_TRC_NSEQ_EN           = %d\n", TRZ_RKH_CFG_TRC_NSEQ_EN );
-	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", TRZ_RKH_CFG_TRC_TSTAMP_EN );
-	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", TRZ_RKH_CFG_TRC_CHK_EN );
-	lprintf( "\n" );
-	rkh_trc_init();
-
-    unitrazer_init();
 }
 
 

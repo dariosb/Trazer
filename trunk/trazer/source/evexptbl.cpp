@@ -1,19 +1,9 @@
 /*
- * evtbl.cpp
+ * evexptbl.cpp
  */
 
-#include <stdio.h>
-#include "tzlog.h"
-#include "evtbl.h"
-#include "rkhtrc.h"
-#include "tzparse.h"
-#include "messages.h"
 #include "trzfrmt.h"
 #include "evexptbl.h"
-#include "utrzhal.h"
-
-using namespace std;
-
 
 #define DCLR_EXP_TRE( id, gn, nm, fargs, ... )							    \
 	char* exp_arg_##id[] = { __VA_ARGS__ };								    \

@@ -137,8 +137,8 @@ typedef struct usrevt_t
 
 extern const char * atype_str[];
 
-EXTERNC void trazer_parse( rui8_t d );
-EXTERNC void trazer_init( void );
+void tzparser_init( void );
+void tzparser_exec( rui8_t d );
 
 const TRE_T * find_exp_trevt( unsigned int id );
 
@@ -146,11 +146,9 @@ char * h_none( const void *tre );
 char * h_epreg( const void *tre );
 char * h_ae( const void *tre );
 char * h_gcr( const void *tre );
-char * h_evt( const void *tre );
 char * h_1sym( const void *tre );
 char * h_2sym( const void *tre );
 char * h_symtrn( const void *tre );
-char * h_symrc( const void *tre );
 char * h_symu8( const void *tre );
 char * h_2u8( const void *tre );
 char * h_sym2u8( const void *tre );

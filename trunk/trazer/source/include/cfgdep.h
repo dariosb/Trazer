@@ -87,7 +87,7 @@ int sizeof_type( int type );
 #define sizeof_utline()		sizeof_type( 4 )
 
 
-void trazer_output( int flg, TRAZER_DATA_T* tz );
+void trazer_output( TRAZER_DATA_T* tz );
 /*
 const char *get_trheader( int en_tstamp, int sz_tstamp, int en_nseq );
 #define trheader		get_trheader()

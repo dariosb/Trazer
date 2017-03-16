@@ -5,10 +5,7 @@
 #include <string>
 #include <vector>
 #include "evtbl.h"
-#include "tzparse.h"
 #include "unittrz.h"
-
-using namespace std;
 
 typedef void(*CHEK_ARG_T)( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args );
 

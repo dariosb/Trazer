@@ -4,13 +4,9 @@
 
 #include <vector>
 #include <list>
-#include <string.h>
-#include "unittrz.h"
-#include "tzlog.h"
-#include "tzparse.h"
-#include "evexptbl.h"
 #include "rkhtrc.h"
-#include "utrzhal.h"
+#include "unittrz.h"
+#include "evexptbl.h"
 
 using namespace std;
 
@@ -37,6 +33,8 @@ is_ignored( rui32_t e  )
 void
 unitrazer_init( void )
 {
+	rkh_trc_init();
+
     utrz_expected_lst.clear();
     /*
      * All groups buts SM wired to be ignored by default

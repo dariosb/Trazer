@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
+#include "version.h"
 #include "rerror.h"
 #include "getopt.h"
 #include "lang.h"
@@ -13,10 +14,12 @@
 #include "messages.h"
 #include "error.h"
 #include "tzparse.h"
+#include "unittrz.h"
 #include "tzlog.h"
 #include "utils.h"
 #include "seqdiag.h"
 #include "tcp.h"
+#include "cfgdep.h"
 
 FILE *f;
 
@@ -30,6 +33,43 @@ enum
 };
 
 static int instr = NONE_STREAM;
+
+static
+void
+trazer_init( void )
+{
+	lprintf( VERSION_STRING_TXT );
+	lprintf( "\nUsing local RKH configuration\n\n" );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_TSTAMP = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP*8 );
+	lprintf( "   RKH_CFGPORT_TRC_SIZEOF_PTR    = %d\n", TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT        = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT*8 );
+	lprintf( "   RKH_CFG_FWK_SIZEOF_EVT_SIZE   = %d\n", TRZ_RKH_CFG_FWK_SIZEOF_EVT_SIZE*8 );
+	lprintf( "   RKH_CFG_FWK_MAX_EVT_POOL      = %d\n", TRZ_RKH_CFG_FWK_MAX_EVT_POOL );
+	lprintf( "   RKH_CFG_RQ_GET_LWMARK_EN      = %d\n", TRZ_RKH_CFG_RQ_GET_LWMARK_EN );
+	lprintf( "   RKH_CFG_RQ_SIZEOF_NELEM       = %d\n", TRZ_RKH_CFG_RQ_SIZEOF_NELEM*8 );
+	lprintf( "   RKH_CFG_MP_GET_LWM_EN         = %d\n", TRZ_RKH_CFG_MP_GET_LWM_EN );
+	lprintf( "   RKH_CFG_MP_SIZEOF_NBLOCK      = %d\n", TRZ_RKH_CFG_MP_SIZEOF_NBLOCK*8 );
+	lprintf( "   RKH_CFG_MP_SIZEOF_BSIZE       = %d\n", TRZ_RKH_CFG_MP_SIZEOF_BSIZE*8 );
+	lprintf( "   RKH_CFG_SMA_TRC_SNDR_EN       = %d\n", TRZ_RKH_CFG_SMA_TRC_SNDR_EN );
+	lprintf( "   RKH_CFG_TMR_SIZEOF_NTIMER     = %d\n", TRZ_RKH_CFG_TMR_SIZEOF_NTIMER*8 );
+	lprintf( "   RKH_CFG_TRC_RTFIL_EN          = %d\n", TRZ_RKH_CFG_TRC_RTFIL_EN );
+	lprintf( "   RKH_CFG_TRC_USER_TRACE_EN     = %d\n", TRZ_RKH_CFG_TRC_USER_TRACE_EN );
+	lprintf( "   RKH_CFG_TRC_ALL_EN            = %d\n", TRZ_RKH_CFG_TRC_ALL_EN );
+	lprintf( "   RKH_CFG_TRC_MP_EN             = %d\n", TRZ_RKH_CFG_TRC_MP_EN );
+	lprintf( "   RKH_CFG_TRC_RQ_EN             = %d\n", TRZ_RKH_CFG_TRC_RQ_EN );
+	lprintf( "   RKH_CFG_TRC_SMA_EN            = %d\n", TRZ_RKH_CFG_TRC_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_TMR_EN            = %d\n", TRZ_RKH_CFG_TRC_TMR_EN );
+	lprintf( "   RKH_CFG_TRC_SM_EN             = %d\n", TRZ_RKH_CFG_TRC_SM_EN );
+	lprintf( "   RKH_CFG_TRC_FWK_EN            = %d\n", TRZ_RKH_CFG_TRC_FWK_EN );
+	lprintf( "   RKH_CFG_TRC_ASSERT_EN         = %d\n", TRZ_RKH_CFG_TRC_ASSERT_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SMA_EN      = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SMA_EN );
+	lprintf( "   RKH_CFG_TRC_RTFIL_SIGNAL_EN   = %d\n", TRZ_RKH_CFG_TRC_RTFIL_SIGNAL_EN );
+	lprintf( "   RKH_CFG_TRC_NSEQ_EN           = %d\n", TRZ_RKH_CFG_TRC_NSEQ_EN );
+	lprintf( "   RKH_CFG_TRC_TSTAMP_EN         = %d\n", TRZ_RKH_CFG_TRC_TSTAMP_EN );
+	lprintf( "   RKH_CFG_TRC_CHK_EN            = %d\n", TRZ_RKH_CFG_TRC_CHK_EN );
+	lprintf( "\n" );
+
+}
 
 static
 void
@@ -73,6 +113,10 @@ main(int argc, char **argv)
 
 	trazer_init();
 
+    tzparser_init();
+
+    unitrazer_init();
+
 	seqdiag_init();
 
 	if( !options.instream_tcpsock.empty() )
@@ -89,7 +133,7 @@ main(int argc, char **argv)
 		while ((n = tcpRead((unsigned char *)&c, sizeof(c))) != -1)
 		{
 			if (n > 0)
-				trazer_parse(c);
+				tzparser_exec(c);
 		}
 	}
 
@@ -105,7 +149,7 @@ main(int argc, char **argv)
 
 		while( ( r = fread( &c, sizeof(c), sizeof(c), f ) ) == sizeof( c ) )
 		{
-			trazer_parse( c );
+			tzparser_exec( c );
 		}
 	}
 
@@ -116,7 +160,7 @@ main(int argc, char **argv)
 				options.baudrate.c_str(), 
 				options.parity.c_str() );
 
-		init_serial( &trazer_parse );
+		init_serial( &tzparser_exec );
 
 		instr = SERIAL_STREAM;
 
