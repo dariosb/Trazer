@@ -8,6 +8,8 @@
 #include <stdarg.h>
 //#include <conio.h>
 
+#if ACTIVE_DEBUG
+
 void
 dprintf( const char* fmt, ...)
 {
@@ -24,3 +26,4 @@ dprintf( const char* fmt, ...)
 
 }
 
+#endif

@@ -77,17 +77,19 @@ TEST_SETUP(sma)
      * Establish the preconditions to the test 
      */
     common_test_setup();
+    receiver.sm.romrkh = &base;
 
 	rkh_fwk_init();
 	
-	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SMA );
-
 	rkh_trc_init();
+
+	RKH_FILTER_OFF_EVENT(RKH_TRC_ALL_EVENTS);
+	RKH_FILTER_OFF_ALL_SMA();
+	RKH_FILTER_OFF_ALL_SIGNALS();
 
 	tzparser_init();
 
     Mocktzlog_Init();
-	
 }
 
 TEST_TEAR_DOWN(sma)
@@ -118,9 +120,12 @@ TEST(sma, act)
     TEST_ASSERT_NOT_EQUAL(0, trcSize);
     TEST_ASSERT_NOT_NULL(ptrc);
     
+	lprintf_Expect("");
+
     for(i=0, p=ptrc; i<trcSize; ++i, ++ptrc)
         tzparser_exec(*ptrc);
 
+	
 //    TEST_ASSERT_EQUAL_STRING()
 }
 

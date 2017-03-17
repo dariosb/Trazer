@@ -113,7 +113,6 @@
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\bsp.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\rkhassert_stub.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c" />
-    <ClCompile Include="..\..\..\..\stubs\mocks\Mockmdebug.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mocktzlog.c" />
     <ClCompile Include="..\..\..\..\test_common.c" />

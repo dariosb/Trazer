@@ -150,9 +150,6 @@
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c">
       <Filter>Source Files\tests\mocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\stubs\mocks\Mockmdebug.c">
-      <Filter>Source Files\tests\mocks</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">
