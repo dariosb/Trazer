@@ -6,7 +6,7 @@
 #define __CFGDEP_H__
 
 #include "config.h"
-#include "tzparse.h"
+#include "tzpdef.h"
 
 /**
  * Trace Config Event default stream format

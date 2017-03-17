@@ -2,6 +2,10 @@
  * seqdiag.h
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef __SEQDIAG_H__
 #define __SEQDIAG_H__
 
@@ -37,22 +41,20 @@ typedef struct
 	ulong sobj;
 }TMREVT_T;
 
+
+
+void sdiag_async_evt( EVENT_ST *p );
+void sdiag_state( ulong smobj, ulong stobj );
+void sdiag_tmrevt( ulong t );
+void sdiag_text( const char *s );
+void sdiag_exec_act( ulong ao, ulong act );
+void sdiag_sync( ulong f, ulong snr, ulong dest );
+
+void seqdiag_init( void );
+
+#endif
+
 #ifdef __cplusplus
-#define EXTERNC extern "C"
-#else
-#define EXTERNC
+}
 #endif
 
-
-EXTERNC void sdiag_async_evt( EVENT_ST *p );
-EXTERNC void sdiag_state( ulong smobj, ulong stobj );
-EXTERNC void sdiag_tmrevt( ulong t );
-EXTERNC void sdiag_text( const char *s );
-EXTERNC void sdiag_exec_act( ulong ao, ulong act );
-EXTERNC void sdiag_sync( ulong f, ulong snr, ulong dest );
-
-EXTERNC void seqdiag_init( void );
-
-
-
-#endif

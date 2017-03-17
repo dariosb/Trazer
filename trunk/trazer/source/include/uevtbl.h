@@ -5,7 +5,7 @@
 #ifndef __UEVTTBL_H__
 #define __UEVTTBL_H__
 
-#include "tzparse.h"
+#include "tzpdef.h"
 #include "mytypes.h"
 
 void add_to_uevttbl( uchar uevt, const char *name );

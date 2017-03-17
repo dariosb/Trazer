@@ -1,6 +1,9 @@
 /*
  * tzlog.h
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef __TZLOG_H__
 #define __TZLOG_H__
@@ -13,3 +16,9 @@ void start_log( const char *fname );
 #define rkhver_printf(x)	lprintf( "%-38c| %-30s= %s\n", ' ', #x, (x) );
 
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+

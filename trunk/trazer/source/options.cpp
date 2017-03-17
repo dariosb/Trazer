@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "messages.h"
 #include "options.h"
 #include "error.h"
 #include "getopt.h"

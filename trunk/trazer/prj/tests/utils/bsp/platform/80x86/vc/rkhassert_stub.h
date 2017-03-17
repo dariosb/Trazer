@@ -30,15 +30,15 @@
  */
 
 /**
- *  \file       all_tests.c
- *  \ingroup    test_utrz
+ *  \file       rkhassert_stub.c
+ *  \ingroup    Test
  *
- *  \brief      Test runner of uTrazer module
+ *  \brief      Assertion stub for 80x86 OS win32
  */
 
 /* -------------------------- Development history -------------------------- */
 /*
- *  2015.11.11  LeFr  v2.4.05  ---
+ *  2015.10.24  LeFr  v2.4.05  ---
  */
 
 /* -------------------------------- Authors -------------------------------- */
@@ -47,36 +47,37 @@
  */
 
 /* --------------------------------- Notes --------------------------------- */
+/* --------------------------------- Module -------------------------------- */
+
+#ifndef __RKHASSERT_STUB_H__
+#define __RKHASSERT_STUB_H__
+
 /* ----------------------------- Include files ----------------------------- */
 
-#include <stdlib.h>
-#include "unity_fixture.h"
+#include "rkh.h"
 
+/* ---------------------- External C language linkage ---------------------- */
 
-/* ----------------------------- Local macros ------------------------------ */
-/* ------------------------------- Constants ------------------------------- */
-/* ---------------------------- Local data types --------------------------- */
-/* ---------------------------- Global variables --------------------------- */
-/* ---------------------------- Local variables ---------------------------- */
-/* ----------------------- Local function prototypes ----------------------- */
-/* ---------------------------- Local functions ---------------------------- */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-static 
-void 
-runAllTests(void)
-{
-	RUN_TEST_GROUP(sm);
-	RUN_TEST_GROUP(sma);
+/* --------------------------------- Macros -------------------------------- */
+/* -------------------------------- Constants ------------------------------ */
+/* ------------------------------- Data types ------------------------------ */
+/* -------------------------- External variables --------------------------- */
+/* -------------------------- Function prototypes -------------------------- */
+
+void rkh_assertStub_reset(void);
+const char *rkh_assertStub_getLastError(void);
+
+/* -------------------- External C language linkage end -------------------- */
+
+#ifdef __cplusplus
 }
+#endif
 
-/* ---------------------------- Global functions --------------------------- */
+/* ------------------------------ Module end ------------------------------- */
 
-int
-main(int argc, char *argv[])
-{
-	UnityMain(argc, argv, runAllTests);
-	getchar();
-	return EXIT_SUCCESS;
-}
-
+#endif
 /* ------------------------------ End of file ------------------------------ */

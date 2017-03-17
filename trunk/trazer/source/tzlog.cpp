@@ -1,15 +1,12 @@
 /*
- * evtbl.cpp
+ * tzlog.cpp
  */
 
 #include "error.h"
 #include "options.h"
-#include "tcp.h"
-
+#include "tzlog.h"
 #include <stdio.h>
 #include <stdarg.h>
-#include <string.h>
-//#include <conio.h>
 
 FILE *flog;
 
@@ -43,3 +40,4 @@ start_log( const char *fname )
 		fatal_error( "Can't open file %s\n", fname );
 	}
 }
+

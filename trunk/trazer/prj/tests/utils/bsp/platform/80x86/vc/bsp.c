@@ -30,15 +30,15 @@
  */
 
 /**
- *  \file       all_tests.c
- *  \ingroup    test_utrz
+ *  \file       bsp.c
+ *  \ingroup    Test
  *
- *  \brief      Test runner of uTrazer module
+ *  \brief      BSP for 80x86 OS win32
  */
 
 /* -------------------------- Development history -------------------------- */
 /*
- *  2015.11.11  LeFr  v2.4.05  ---
+ *  2015.11.19  LeFr  v2.4.05  ---
  */
 
 /* -------------------------------- Authors -------------------------------- */
@@ -48,35 +48,76 @@
 
 /* --------------------------------- Notes --------------------------------- */
 /* ----------------------------- Include files ----------------------------- */
+#include <conio.h>
 
-#include <stdlib.h>
-#include "unity_fixture.h"
+#if RKH_CFG_TRC_EN == RKH_ENABLED
+#include <time.h>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>        /* Win32 API for multithreading */
+#endif
 
+#include "unity.h"
+#include "bsp.h"
+#include "rkh.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
 /* ---------------------------- Local variables ---------------------------- */
+RKH_THIS_MODULE
+rui8_t running;
+
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
-
-static 
-void 
-runAllTests(void)
+/* ---------------------------- Global functions --------------------------- */
+void
+unitrazer_resetOut(void)
 {
-	RUN_TEST_GROUP(sm);
-	RUN_TEST_GROUP(sma);
 }
 
-/* ---------------------------- Global functions --------------------------- */
-
-int
-main(int argc, char *argv[])
+void
+rkh_hook_idle(void)             /* called within critical section */
 {
-	UnityMain(argc, argv, runAllTests);
-	getchar();
-	return EXIT_SUCCESS;
+    RKH_EXIT_CRITICAL(dummy);
+}
+
+#if RKH_CFG_TRC_EN == RKH_ENABLED
+void
+rkh_trc_open(void)
+{
+    rkh_trc_init();
+}
+
+void
+rkh_trc_close(void)
+{
+}
+
+RKH_TS_T
+rkh_trc_getts(void)
+{
+    return (RKH_TS_T)0x01234567;
+}
+
+void
+rkh_trc_flush(void)
+{
+}
+
+void
+rkh_hook_putTrcEvt(void)
+{
+}
+#endif
+
+void
+bsp_init(int argc, char *argv[])
+{
+    (void)argc;
+    (void)argv;
+
+    rkh_fwk_init();
 }
 
 /* ------------------------------ End of file ------------------------------ */

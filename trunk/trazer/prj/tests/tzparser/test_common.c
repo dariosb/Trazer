@@ -50,9 +50,6 @@
 /* ----------------------------- Include files ----------------------------- */
 
 #include "test_common.h"
-#include "unitrazer.h"
-#include "aotest.h"
-#include "aotest_act.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */

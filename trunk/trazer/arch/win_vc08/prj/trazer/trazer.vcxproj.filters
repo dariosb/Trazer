@@ -72,9 +72,6 @@
     <ClCompile Include="..\..\..\..\source\trazer.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\tzlog.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\source\tzparse.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -94,6 +91,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\..\utrzhal.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\tzlog.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

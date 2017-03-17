@@ -6,7 +6,7 @@
 #include "string.h"
 #include "uevtbl.h"
 #include "rkhtrc.h"
-#include "tzparse.h"
+#include "tzpdef.h"
 #include "messages.h"
 
 using namespace std;

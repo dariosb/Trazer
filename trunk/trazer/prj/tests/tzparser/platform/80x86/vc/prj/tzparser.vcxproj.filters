@@ -28,6 +28,21 @@
     <Filter Include="Source Files\tests\unity">
       <UniqueIdentifier>{c757db84-f157-43d8-aa9d-2ec35f4374db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\tests\utils\rkh">
+      <UniqueIdentifier>{410ad671-f19f-4c63-9be9-ed5c78ee85da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\utils\bsp">
+      <UniqueIdentifier>{3681d86c-803f-40c8-a82e-1a5f38862f27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\trazer">
+      <UniqueIdentifier>{6e982654-dd7e-42dc-895d-ba463ff492c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\mocks">
+      <UniqueIdentifier>{a8d1a3c8-0793-4d05-a478-05075f5093bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\cmock">
+      <UniqueIdentifier>{aa4542d7-2a4a-40d9-abc6-2e0e24f027d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\test_runners\all_tests.c">
@@ -48,11 +63,98 @@
     <ClCompile Include="..\..\..\..\test_runners\test_sm_runner.c">
       <Filter>Source Files\tests\utrazer\test_runners</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_sma.c">
+      <Filter>Source Files\tests\utrazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_sma_runner.c">
+      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhdyn.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhmp.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhrq.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhs.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhsma.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtbl.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtim.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtrc.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\rkh\source\portable\test\rkhport.c">
+      <Filter>Source Files\tests\utils\rkh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\rkhassert_stub.c">
+      <Filter>Source Files\tests\utils\bsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\bsp.c">
+      <Filter>Source Files\tests\utils\bsp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\tzparse.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\unittrz.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\evtbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\evexptbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\symbtbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\sigtbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\config.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\arch\win_vc08\utils.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\cfgdep.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\uevtbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\CMock-master\src\cmock.c">
+      <Filter>Source Files\tests\cmock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\stubs\mocks\Mocktzlog.c">
+      <Filter>Source Files\tests\mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c">
+      <Filter>Source Files\tests\mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c">
+      <Filter>Source Files\tests\mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\stubs\mocks\Mockmdebug.c">
+      <Filter>Source Files\tests\mocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\rkhcfg.h">
-      <Filter>Source Files\tests\utrazer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">
       <Filter>Source Files\tests\unity</Filter>
     </ClInclude>

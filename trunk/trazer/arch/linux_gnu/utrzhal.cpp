@@ -10,8 +10,6 @@
 #include "utrzhal.h"
 #include "mydefs.h"
 
-char utrz_msg[1024];
-
 void
 rkh_trc_flush(void)
 {
@@ -32,49 +30,5 @@ rkh_trc_flush(void)
             break;
         }
     }
-}
-
-static rui32_t utrz_running = 0;
-
-void
-utrz_hal_start( void )
-{
-    utrz_running = 1;
-}
-
-void 
-utrz_hal_stop( void )
-{
-    utrz_running = 0;
-}
-
-
-void
-utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
-{
-    int i;
-    va_list val;
-	char *s;
-
-    if( !utrz_running )
-        return;
-    
-    strcpy( utrz_msg, msg );
-    va_start( val, nargs );
-    for (i=0;i<nargs;i++)
-    {
-        s=va_arg(val, char *);
-        strcat( utrz_msg, s );
-    }
-   
-
-//    lprintf("line %d:", line); 
-//    lprintf(utrz_msg); 
-
-	rkh_trc_begin( e );
-	RKH_TRC_UI32(line);
-	RKH_TRC_STR(utrz_msg);
-	rkh_trc_end();
-	rkh_trc_flush();
 }
 

@@ -1,6 +1,6 @@
 /**
- *  \file       test_sm_runner.c
- *  \ingroup    test_sm_group
+ *  \file       test_sma_runner.c
+ *  \ingroup    test_sma_group
  *
  *  \brief      State machine group runner
  */
@@ -29,9 +29,9 @@
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_GROUP_RUNNER(sm)
+TEST_GROUP_RUNNER(sma)
 {
-	RUN_TEST_CASE(sm, init);
+	RUN_TEST_CASE(sma, act);
 }
 
 /* ------------------------------ End of file ------------------------------ */

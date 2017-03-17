@@ -92,6 +92,8 @@ void utrz_ignore_evt( rui32_t e );
 void utrz_insert( rui8_t id, rui8_t nargs, ... );
 ri8_t utrz_check( rui8_t id, rui8_t nargs, ... );
 
+void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
+
 #define utrz_success()  				                \
             utrz_resp( RKH_TE_UT_SUCCESS, 0, "", 0, 0 )
 

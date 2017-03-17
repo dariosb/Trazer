@@ -1,8 +1,8 @@
 /**
- *  \file       test_sm_runner.c
- *  \ingroup    test_sm_group
+ *  \file       aotest_act.c
+ *  \ingroup    Test
  *
- *  \brief      State machine group runner
+ *  \brief      Production code.
  */
 
 /* -------------------------- Development history -------------------------- */
@@ -18,7 +18,10 @@
 /* --------------------------------- Notes --------------------------------- */
 /* ----------------------------- Include files ----------------------------- */
 
-#include "unity_fixture.h"
+#include <stdio.h>
+#include "rkh.h"
+#include "aotest.h"
+#include "aotest_act.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
@@ -29,9 +32,45 @@
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_GROUP_RUNNER(sm)
+/* Defines HSM init function */
+void
+aotest_init(aoTest *const me)
 {
-	RUN_TEST_CASE(sm, init);
+    me->foo = 0;
+}
+
+/*
+ * Defines transition action functions
+ */
+void
+foo_set2zero(aoTest *const me, RKH_EVT_T *pe)
+{
+    (void)pe;
+
+    me->foo = 0;
+}
+
+void
+foo_set2one(aoTest *const me, RKH_EVT_T *pe)
+{
+    (void)pe;
+
+    me->foo = 1;
+}
+
+/*
+ * Defines guards functions
+ */
+rbool_t
+foo_isn_zero(aoTest*const me, RKH_EVT_T *pe)
+{
+    return me->foo != 0;
+}
+
+rbool_t
+foo_is_zero(aoTest *const me, RKH_EVT_T *pe)
+{
+    return me->foo == 0;
 }
 
 /* ------------------------------ End of file ------------------------------ */

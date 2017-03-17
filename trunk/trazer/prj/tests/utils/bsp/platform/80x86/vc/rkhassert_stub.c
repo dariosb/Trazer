@@ -30,15 +30,15 @@
  */
 
 /**
- *  \file       all_tests.c
- *  \ingroup    test_utrz
+ *  \file       rkhassert_stub.c
+ *  \ingroup    Test
  *
- *  \brief      Test runner of uTrazer module
+ *  \brief      Assertion stub for 80x86 OS win32
  */
 
 /* -------------------------- Development history -------------------------- */
 /*
- *  2015.11.11  LeFr  v2.4.05  ---
+ *  2015.11.19  LeFr  v2.4.05  ---
  */
 
 /* -------------------------------- Authors -------------------------------- */
@@ -49,34 +49,47 @@
 /* --------------------------------- Notes --------------------------------- */
 /* ----------------------------- Include files ----------------------------- */
 
-#include <stdlib.h>
-#include "unity_fixture.h"
-
+#include "rkh.h"
+#include "rkhassert_stub.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
 /* ---------------------------- Local variables ---------------------------- */
+
+RKH_THIS_MODULE
+static const char *message = "No Error";
+static const char *f = (const char *)0;
+static int l = -1;
+
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
-
-static 
-void 
-runAllTests(void)
-{
-	RUN_TEST_GROUP(sm);
-	RUN_TEST_GROUP(sma);
-}
-
 /* ---------------------------- Global functions --------------------------- */
 
-int
-main(int argc, char *argv[])
+void 
+rkh_assertStub_reset(void)
 {
-	UnityMain(argc, argv, runAllTests);
-	getchar();
-	return EXIT_SUCCESS;
+    message = "No Error";
+}
+
+const char *
+rkh_assertStub_getLastError(void)
+{
+    return message;
+}
+
+void
+rkh_assert(RKHROM char *const file, int line)
+{
+    /* Record the event to trace */
+    RKH_TR_FWK_ASSERT((RKHROM char *)file, line);
+    RKH_TRC_FLUSH();
+
+    /* For unit test */
+    message = "RKH assertion";
+    f = file;
+    l = line;
 }
 
 /* ------------------------------ End of file ------------------------------ */

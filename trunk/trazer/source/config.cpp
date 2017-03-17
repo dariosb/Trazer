@@ -3,22 +3,13 @@
  * 		Management of config options
  * 		This is dependent on application definitions of size types
  */
-#if 0
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <fstream>
-#include <iostream>
-#include <conio.h>
-#endif
-
 #include <string>
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
 
 #include "config.h"
+#include "messages.h"
 #include "error.h"
 #include "mdebug.h"
 #include "utils.h"

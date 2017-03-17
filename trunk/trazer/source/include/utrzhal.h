@@ -23,13 +23,7 @@ enum
 #define UTRZANSW_LENGTH_WIDTH	6
 #define UTRZACK_TAIL ":"
 
-
-extern char *utrz_msgs[];
-
-void utrz_hal_start( void );
-void utrz_hal_stop( void );
-
-void utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... );
+void rkh_trc_flush(void);
 
 #ifdef __cplusplus
 }

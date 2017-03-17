@@ -13,6 +13,7 @@
 #include "config.h"
 #include "messages.h"
 #include "error.h"
+#include "tzpdef.h"
 #include "tzparse.h"
 #include "unittrz.h"
 #include "tzlog.h"

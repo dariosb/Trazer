@@ -4,18 +4,20 @@
 
 #include "mytypes.h"
 #include "rkhtrc.h"
-#include "mdebug.h"
 #include "messages.h"
+#include "tzpdef.h"
 #include "tzparse.h"
 #include "evtbl.h"
 #include "symbtbl.h"
 #include "sigtbl.h"
 #include "uevtbl.h"
 #include "cfgdep.h"
-#include "tzlog.h"
 #include "seqdiag.h"
 #include "unittrz.h"
+#include "tzlog.h"
+#include "mdebug.h"
 
+using namespace std;
 
 #define CTE( te )	((const struct tre_t*)(te))
 
@@ -1327,23 +1329,6 @@ parser_chk( void )
 
 static
 void
-show_curr_frm( void )
-{
-	rui8_t *p;
-	int i;
-	dprintf( "---- |");
-
-	if( TRZ_RKH_CFG_TRC_CHK_EN == 1 )
-	{
-		for( p = tr, i = trix; i--; ++p )
-			dprintf( "0x%X|", *p );
-	}
-	dprintf( " ----\n" );
-}
-
-
-static
-void
 proc_tcfg_evt( const TRE_T *ftr )
 {
 	TRAZER_DATA_T tz_data;
@@ -1365,6 +1350,23 @@ proc_tcfg_evt( const TRE_T *ftr )
 #define GET_USR_TE(e)	(rui8_t)((e) & 7)
 
 extern TRE_T fmt_usr_tbl;
+
+static
+void
+show_curr_frm( void )
+{
+	rui8_t *p;
+	int i;
+	dprintf( "---- |");
+
+	if( TRZ_RKH_CFG_TRC_CHK_EN == 1 )
+	{
+		for( p = tr, i = trix; i--; ++p )
+			dprintf( "0x%X|", *p );
+	}
+	dprintf( " ----\n" );
+}
+
 
 static
 void

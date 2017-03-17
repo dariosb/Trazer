@@ -1,6 +1,6 @@
 /**
- *  \file       test_sm.c
- *  \ingroup    test_sm_group
+ *  \file       test_sma.c
+ *  \ingroup    test_sma_group
  *  \brief      Unit test for uTrazer module - State machine test group
  *
  *  \addtogroup test
@@ -24,34 +24,80 @@
 /* ----------------------------- Include files ----------------------------- */
 
 #include "unity_fixture.h"
+#include "rkhtrc.h"
 #include "test_common.h"
+#include "tzparse.h"
+#include "Mocktzlog.h"
+#include "Mockerror.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
 
-TEST_GROUP(sm);
+TEST_GROUP(sma);
 
 /* ---------------------------- Local variables ---------------------------- */
+static RKHROM RKH_ROM_T base = {0, 0, "receiver"};
+static RKH_SMA_T receiver;
+static RKH_SMA_T sender;
+static RKH_EVT_T event;
+
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
+static
+TRCQTY_T
+getTraceStream(rui8_t **p)
+{
+    rui8_t *blk;
+    TRCQTY_T nbytes;
+
+    FOREVER
+    {
+        nbytes = (TRCQTY_T)1024;
+        blk = rkh_trc_get_block(&nbytes);
+
+        if ((blk != (rui8_t *)0))
+        {
+			*p = blk;
+            return nbytes;
+        }
+        else
+        {
+			return 0;
+        }
+    }
+}
+
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_SETUP(sm)
+TEST_SETUP(sma)
 {
     /* -------- Setup ---------------
      * Establish the preconditions to the test 
      */
     common_test_setup();
+
+	rkh_fwk_init();
+	
+	RKH_FILTER_OFF_GROUP_ALL_EVENTS( RKH_TG_SMA );
+
+	rkh_trc_init();
+
+	tzparser_init();
+
+    Mocktzlog_Init();
+	
 }
 
-TEST_TEAR_DOWN(sm)
+TEST_TEAR_DOWN(sma)
 {
     /* -------- Cleanup -------------
      * Return the system under test to its initial state after the test
      */
     common_tear_down();
+    Mocktzlog_Verify();
+    Mocktzlog_Destroy();
 }
 
 /**
@@ -61,31 +107,21 @@ TEST_TEAR_DOWN(sm)
  *  @{ 
  */
 
-TEST(sm, init)
+TEST(sma, act)
 {
-#if 0
-    UtrzProcessOut *p;
+	TRCQTY_T trcSize, i;
+    rui8_t *ptrc, *p;
 
-    /* -------- Expectations --------
-     * Record the trace event expectations to be met
-     */
-	sm_trn_expect(CST(&s21), CST(&s211));
+	RKH_TR_SMA_ACT(&receiver, RKH_GET_PRIO(&receiver), 16);
 
-    /* -------- Exercise ------------ 
-     * Do something to the system 
-     */
+    trcSize = getTraceStream(&ptrc);
+    TEST_ASSERT_NOT_EQUAL(0, trcSize);
+    TEST_ASSERT_NOT_NULL(ptrc);
+    
+    for(i=0, p=ptrc; i<trcSize; ++i, ++ptrc)
+        tzparser_exec(*ptrc);
 
-    /* Each recorded trace event is checked to see that it matches */
-    /* the expected trace event exactly. If calls are out of order or */
-    /* parameters are wrong, the test immediately fails. */
-    RKH_TR_SM_TRN(aotest, &s21, &s211);
-
-    /* -------- Verify --------------
-     * Check the expected outcome 
-     */
-    p = unitrazer_getLastOut();
-    TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
-#endif
+//    TEST_ASSERT_EQUAL_STRING()
 }
 
 

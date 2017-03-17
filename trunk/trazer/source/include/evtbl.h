@@ -3,7 +3,7 @@
 #define __EVTBL_H__
 
 #include <string>
-#include "tzparse.h"
+#include "tzpdef.h"
 
 typedef struct fmt_id_t
 {

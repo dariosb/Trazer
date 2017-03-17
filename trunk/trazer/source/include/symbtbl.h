@@ -5,7 +5,7 @@
 #ifndef __SYMBTBL_H__
 #define __SYMBTBL_H__
 
-#include "tzparse.h"
+#include "tzpdef.h"
 
 void clear_symtbl( void );
 void add_to_symtbl( unsigned long obj, const char *sym );
