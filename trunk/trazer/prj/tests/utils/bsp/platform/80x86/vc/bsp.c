@@ -97,7 +97,7 @@ rkh_trc_close(void)
 RKH_TS_T
 rkh_trc_getts(void)
 {
-    return (RKH_TS_T)0x01234567;
+    return (RKH_TS_T)0x1234567;
 }
 
 void

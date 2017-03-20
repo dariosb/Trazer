@@ -16,12 +16,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Source Files\tests\utrazer">
-      <UniqueIdentifier>{6a1e96a5-bd32-4e63-9b50-cc4f46a8743f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests\utrazer\test_runners">
-      <UniqueIdentifier>{06d50d17-4409-4532-9038-f191fa7788cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\tests\utils">
       <UniqueIdentifier>{005fbd4e-9123-41b8-82a0-87a4c47894d7}</UniqueIdentifier>
     </Filter>
@@ -37,16 +31,25 @@
     <Filter Include="Source Files\tests\trazer">
       <UniqueIdentifier>{6e982654-dd7e-42dc-895d-ba463ff492c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\mocks">
-      <UniqueIdentifier>{a8d1a3c8-0793-4d05-a478-05075f5093bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\tests\cmock">
       <UniqueIdentifier>{aa4542d7-2a4a-40d9-abc6-2e0e24f027d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\stubs">
+      <UniqueIdentifier>{07d28798-fb6f-4145-9a55-abcbbadcbe94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\stubs\mocks">
+      <UniqueIdentifier>{a8d1a3c8-0793-4d05-a478-05075f5093bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\trzparse">
+      <UniqueIdentifier>{6a1e96a5-bd32-4e63-9b50-cc4f46a8743f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\trzparse\test_runners">
+      <UniqueIdentifier>{06d50d17-4409-4532-9038-f191fa7788cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\test_runners\all_tests.c">
-      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\unity\unity.c">
       <Filter>Source Files\tests\unity</Filter>
@@ -55,19 +58,19 @@
       <Filter>Source Files\tests\unity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_common.c">
-      <Filter>Source Files\tests\utrazer</Filter>
+      <Filter>Source Files\tests\trzparse</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_sm.c">
-      <Filter>Source Files\tests\utrazer</Filter>
+      <Filter>Source Files\tests\trzparse</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_sm_runner.c">
-      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_sma.c">
-      <Filter>Source Files\tests\utrazer</Filter>
+      <Filter>Source Files\tests\trzparse</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_sma_runner.c">
-      <Filter>Source Files\tests\utrazer\test_runners</Filter>
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c">
       <Filter>Source Files\tests\utils\rkh</Filter>
@@ -141,14 +144,14 @@
     <ClCompile Include="..\..\..\..\..\..\..\..\CMock-master\src\cmock.c">
       <Filter>Source Files\tests\cmock</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\stubs\mocks\Mocktzlog.c">
-      <Filter>Source Files\tests\mocks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c">
-      <Filter>Source Files\tests\mocks</Filter>
+      <Filter>Source Files\tests\stubs\mocks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c">
-      <Filter>Source Files\tests\mocks</Filter>
+      <Filter>Source Files\tests\stubs\mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\stubs\Testtzlog.c">
+      <Filter>Source Files\tests\stubs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -54,25 +54,25 @@ trazer_output( TRAZER_DATA_T* tz )
 		switch( flg & TRAZER_TCFG_SIZEOF_TSTAMP_MSK )
 		{
 			case 1:		// RKH_TRC_SIZEOF_TSTAMP 8bit
-				lprintf( " %3u|", tz->ts );
+				lprintf( TRAZER_FMT_TSTAMP_8BIT, tz->ts );
 				break;
 
 			case 2:		// RKH_TRC_SIZEOF_TSTAMP 16bit
-				lprintf( " %5u|", tz->ts );
+				lprintf( TRAZER_FMT_TSTAMP_16BIT, tz->ts );
 				break;
 
 			case 4:		// RKH_TRC_SIZEOF_TSTAMP 32bit
 			default: 
-				lprintf( " %10u|", tz->ts );
+				lprintf( TRAZER_FMT_TSTAMP_32BIT, tz->ts );
 				break;
 		}
 	}
 
 	if( flg & TRAZER_TCFG_EN_NSEQ_MSK )
 	{
-		lprintf( " [%3d] |", tz->nseq );
+		lprintf( TRAZER_FMT_NSEQ, tz->nseq );
 	}
 
-	lprintf( " %-4s| %-10s : ", tz->group, tz->name );
+	lprintf( TRAZER_FMT_TRACE_EVT, tz->group, tz->name );
 }
 

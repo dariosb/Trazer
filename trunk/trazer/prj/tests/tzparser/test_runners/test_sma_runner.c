@@ -32,6 +32,13 @@
 TEST_GROUP_RUNNER(sma)
 {
 	RUN_TEST_CASE(sma, act);
+	RUN_TEST_CASE(sma, term);
+	RUN_TEST_CASE(sma, get);
+	RUN_TEST_CASE(sma, fifo);
+	RUN_TEST_CASE(sma, lifo);
+	RUN_TEST_CASE(sma, reg);
+	RUN_TEST_CASE(sma, unreg);
+	RUN_TEST_CASE(sma, dch);
 }
 
 /* ------------------------------ End of file ------------------------------ */

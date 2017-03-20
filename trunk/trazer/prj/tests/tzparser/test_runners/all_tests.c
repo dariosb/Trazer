@@ -65,7 +65,7 @@ static
 void 
 runAllTests(void)
 {
-	RUN_TEST_GROUP(sm);
+//	RUN_TEST_GROUP(sm);
 	RUN_TEST_GROUP(sma);
 }
 
