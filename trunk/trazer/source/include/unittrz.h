@@ -12,8 +12,8 @@ extern "C"{
 
 #include <vector>
 #include <stdarg.h>
-#include "rkhtype.h"
-#include "rkhdef.h"
+#include "trkhtype.h"
+#include "trkhdef.h"
 #include "utrzhal.h"
 
 using namespace std;

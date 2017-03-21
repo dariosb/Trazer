@@ -26,8 +26,8 @@
 #define __TZPDEF_H__
 
 #ifdef __TRAZER__
-#include "rkhtype.h"
-#include "rkhtrc.h"
+#include "trkhtype.h"
+#include "trkhtrc.h"
 #else
 #include "rkh.h"
 #endif

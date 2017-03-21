@@ -135,7 +135,7 @@ unitrazer_sm_exeAct_expect(UNITY_LINE_TYPE cmockLine,
 /* ============================ Init function ============================== */
 
 void
-unitrazer_init(void)
+unitrazer_init_request(void)
 {
     unitrazer_resetOut();
 

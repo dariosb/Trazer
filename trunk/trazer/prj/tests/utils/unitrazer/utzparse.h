@@ -33,8 +33,8 @@ enum
     PARSER_WFLAG, PARSER_COLLECT, PARSER_ESCAPING
 };
 
-void trazer_parse(rui8_t d, UtrzProcessOut *p);
-void trazer_init(void);
+void utrazer_parse(rui8_t d, UtrzProcessOut *p);
+void utrazer_init(void);
 
 #endif
 /* ------------------------------ End of file ------------------------------ */

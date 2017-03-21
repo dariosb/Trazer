@@ -2,7 +2,7 @@
  * TCP/IP communication for Win32
  */
 
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

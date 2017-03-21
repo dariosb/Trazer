@@ -24,8 +24,8 @@
 /* ----------------------------- Include files ----------------------------- */
 
 #include "unity_fixture.h"
-#include "rkhtrc.h"
 #include "test_common.h"
+#include "rkh.h"
 #include "tzparse.h"
 #include "Mockerror.h"
 #include "Mockseqdiag.h"

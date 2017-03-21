@@ -3,7 +3,7 @@
  */
 
 #include "mytypes.h"
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #include "messages.h"
 #include "tzpdef.h"
 #include "tzparse.h"

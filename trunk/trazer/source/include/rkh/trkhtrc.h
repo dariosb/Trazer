@@ -240,15 +240,15 @@
 
 /* --------------------------------- Notes --------------------------------- */
 /* --------------------------------- Module -------------------------------- */
-#ifndef __RKHTRC_H__
-#define __RKHTRC_H__
+#ifndef __TRKHTRC_H__
+#define __TRKHTRC_H__
 
 /* ----------------------------- Include files ----------------------------- */
 //#include "rkhcfg.h"
-#include "rkhtype.h"
+#include "trkhtype.h"
 //#include "rkhplat.h"
-#include "rkhdef.h"
-#include "rkhevt.h"
+#include "trkhdef.h"
+#include "trkhevt.h"
 
 #define RKH_CFG_TRC_SIZEOF_STREAM	1024
 #define RKH_CFG_TRC_EN			RKH_ENABLED

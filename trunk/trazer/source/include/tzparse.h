@@ -30,7 +30,7 @@ extern "C" {
 #define __TZPARSE_H__
 
 #ifdef __TRAZER__
-#include "rkhtype.h"
+#include "trkhtype.h"
 #else
 #include "rkh.h"
 #endif

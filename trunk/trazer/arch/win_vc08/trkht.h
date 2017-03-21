@@ -28,8 +28,8 @@
  */
 
 
-#ifndef __RKHT_H__
-#define __RKHT_H__
+#ifndef __TRKHT_H__
+#define __TRKHT_H__
 
 
 /*

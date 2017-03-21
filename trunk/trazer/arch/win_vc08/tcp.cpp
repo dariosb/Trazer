@@ -3,7 +3,7 @@
  */
 
 #include "tcp.h"
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #include "mydefs.h"
 #include "utrzhal.h"
 #include "tzlog.h"

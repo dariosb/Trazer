@@ -5,7 +5,7 @@
 #include <vector>
 #include "string.h"
 #include "uevtbl.h"
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #include "tzpdef.h"
 #include "messages.h"
 

@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <string.h>
 #include "symbtbl.h"
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #include "tzpdef.h"
 #include "messages.h"
 

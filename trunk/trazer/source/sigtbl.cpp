@@ -9,7 +9,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include "sigtbl.h"
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #include "tzpdef.h"
 #include "messages.h"
 #include "seqdiag.h"

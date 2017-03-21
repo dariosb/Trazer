@@ -86,16 +86,16 @@
  */
 
 
-#ifndef __RKHTYPE_H__
-#define __RKHTYPE_H__
+#ifndef __TRKHTYPE_H__
+#define __TRKHTYPE_H__
 
 
 #ifdef __CFV1CW63__
-	#include "..\portable\cfv1\rkhs\cw6_3\rkht.h"
+	#include "..\portable\cfv1\rkhs\cw6_3\trkht.h"
 #endif
 
-#ifdef __W32STVC08__
-	#include "rkht.h"
+#ifdef __TEST__
+	#include "trkht.h"
 #endif
 
 

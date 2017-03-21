@@ -59,7 +59,7 @@
 #define __RKHEVT_H__
 
 /* ----------------------------- Include files ----------------------------- */
-#include "rkhtype.h"
+#include "trkhtype.h"
 //#include "rkhcfg.h"
 
 /* ---------------------- External C language linkage ---------------------- */

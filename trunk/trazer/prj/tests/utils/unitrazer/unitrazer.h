@@ -70,7 +70,7 @@ extern "C" {
  *  \brief
  *  Establish the preconditions to the tests.
  */
-#define sm_init() unitrazer_init()
+#define sm_init() unitrazer_init_request()
 
 /**
  *  \brief
@@ -389,7 +389,7 @@ void unitrazer_resetOut(void);
  *  \brief
  *  Establish the preconditions to the tests.
  */
-void unitrazer_init(void);
+void unitrazer_init_request(void);
 
 /**
  *  \brief

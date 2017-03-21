@@ -48,8 +48,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\bsp;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08;$(ProjectDir)..\..\..\..\..\tzparser\stubs;$(ProjectDir)..\..\..\..\..\tzparser\stubs\mocks;$(ProjectDir)..\..\..\..\..\tzparser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\bsp;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include\rkh;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08;$(ProjectDir)..\..\..\..\..\tzparser\stubs;$(ProjectDir)..\..\..\..\..\tzparser\stubs\mocks;$(ProjectDir)..\..\..\..\..\tzparser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -112,6 +112,7 @@
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\bsp.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\rkhassert_stub.c" />
+    <ClCompile Include="..\..\..\..\stubs\MockrkhportTest.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c" />
     <ClCompile Include="..\..\..\..\stubs\Testtzlog.c" />

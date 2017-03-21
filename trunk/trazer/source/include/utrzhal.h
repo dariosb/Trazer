@@ -5,7 +5,7 @@
 #ifndef __UTRZHAL_H__
 #define __UTRZHAL_H__
 
-#include "rkhtrc.h"
+#include "trkhtrc.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
