@@ -8,8 +8,13 @@ extern "C" {
 #ifndef __TZLOG_H__
 #define __TZLOG_H__
 
+#define LPRINTF_BUZZ_SIZE  2000
+
+extern char lprintf_Buff[];
+
 void lprintf( const char *fmt, ... );
 void start_log( const char *fname );
+void initTesttzlog(void);
 
 #define cfg_printf(x)		lprintf( "%-38c| %-30s= %d\n", ' ', #x, (x) );
 #define cfg_printf_sz(x,f)	lprintf( "%-38c| %-30s= %d\n", ' ', #x, (x*f) );
@@ -22,6 +27,7 @@ void start_log( const char *fname );
 #define TRAZER_FMT_NSEQ         " [%3d] |"
 
 #define TRAZER_FMT_TRACE_EVT    " %-4s| %-10s : "
+
 
 #endif
 

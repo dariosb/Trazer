@@ -62,7 +62,7 @@
 #include "bsp.h"
 #include "rkh.h"
 #include "unitrazer.h"
-//#include "unittrz.h"
+#include "unitrzlib.h"
 #include "tzparse.h"
 #include "utzparse.h"
 
@@ -131,42 +131,18 @@ execTrazerParser( rui8_t *p, TRCQTY_T n )
 		tzparser_exec(*p++);
 }
 
-static
-int
-utrz_recv(SOCKET s, UtrzProcessOut *p)
-{
-    char c;
-    int n;
-
-    p->status = UT_PROC_BUSY;
-/*    while ((n = tcp_trace_recv((SOCKET)s, &c, sizeof(c))) > 0)*/
-    {
-        utrazer_parse(c, p);
-        if (p->status != UT_PROC_BUSY)
-        {
-            return 1;
-        }
-    }
-    return -1;
-}
-
-static
-UT_RET_CODE
-ut_process(UtrzProcessOut *pOut)
-{
-/*    if (utrz_recv(tsock, pOut) <= 0)*/
-    {
-        pOut->status = UT_PROC_FAIL;
-    }
-
-    return pOut->status;
-}
 
 /* ---------------------------- Global functions --------------------------- */
 
 UtrzProcessOut *
 unitrazer_getLastOut(void)
 {
+    UTRZ_RESP_T *p;
+
+    p = unitrazer_get_resp();
+    out.status = (p->e == RKH_TE_UT_FAIL) ? UT_PROC_FAIL : UT_PROC_SUCCESS;
+    out.line = p->line;
+    strcpy( out.msg, p->msg );
     return &out;
 }
 
@@ -224,11 +200,12 @@ rkh_hook_idle(void)             /* called within critical section */
 void
 rkh_hook_putTrcEvt(void)
 {
-   UT_RET_CODE ret;
+   UTRZ_RESP_T *p;
 
    RKH_TRC_FLUSH();
-   ret = ut_process(&out);
-   UNITY_TEST_ASSERT(ret != UT_PROC_FAIL, out.line, out.msg);
+   p = unitrazer_get_resp();
+
+   UNITY_TEST_ASSERT(p->e != RKH_TE_UT_FAIL, p->line, p->msg);
 }
 
 void

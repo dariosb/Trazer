@@ -150,11 +150,11 @@
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c">
       <Filter>Source Files\tests\stubs\mocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\stubs\Testtzlog.c">
-      <Filter>Source Files\tests\stubs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\stubs\MockrkhportTest.c">
       <Filter>Source Files\tests\stubs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

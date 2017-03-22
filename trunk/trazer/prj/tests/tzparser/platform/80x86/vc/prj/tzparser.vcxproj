@@ -49,7 +49,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\bsp;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include\rkh;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08;$(ProjectDir)..\..\..\..\..\tzparser\stubs;$(ProjectDir)..\..\..\..\..\tzparser\stubs\mocks;$(ProjectDir)..\..\..\..\..\tzparser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;__TZLOG_STUB__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -105,6 +105,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\sigtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\symbtbl.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\tzparse.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\uevtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\unittrz.cpp" />
@@ -115,7 +116,6 @@
     <ClCompile Include="..\..\..\..\stubs\MockrkhportTest.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c" />
-    <ClCompile Include="..\..\..\..\stubs\Testtzlog.c" />
     <ClCompile Include="..\..\..\..\test_common.c" />
     <ClCompile Include="..\..\..\..\test_runners\all_tests.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_sma_runner.c" />

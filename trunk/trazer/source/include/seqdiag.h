@@ -42,6 +42,7 @@ typedef struct
 }TMREVT_T;
 
 
+#if (__UNITRAZER_LIB__ == 0)    
 
 void sdiag_async_evt( EVENT_ST *p );
 void sdiag_state( ulong smobj, ulong stobj );
@@ -52,6 +53,17 @@ void sdiag_sync( ulong f, ulong snr, ulong dest );
 
 void seqdiag_init( void );
 
+#else
+
+#define sdiag_async_evt( p )            (void)0
+#define sdiag_state( smobj, stobj )     (void)0
+#define sdiag_tmrevt( t )               (void)0
+#define sdiag_text( s )                 (void)0
+#define sdiag_exec_act( ao, act )       (void)0
+#define sdiag_sync( f, snr, dest )      (void)0
+#define seqdiag_init()                  (void)0
+
+#endif
 #endif
 
 #ifdef __cplusplus

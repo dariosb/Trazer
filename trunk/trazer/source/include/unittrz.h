@@ -15,6 +15,7 @@ extern "C"{
 #include "trkhtype.h"
 #include "trkhdef.h"
 #include "utrzhal.h"
+#include "unitrzlib.h"
 
 using namespace std;
 
@@ -72,8 +73,6 @@ extern int expect;
             expected_evt.line = (l);        \
             expected_evt.id = (e);          \
         }
-
-void unitrazer_init( void );
 
 void utrz_init( char *ptext, rui32_t line );
 void utrz_clean( char *ptext, rui32_t line );

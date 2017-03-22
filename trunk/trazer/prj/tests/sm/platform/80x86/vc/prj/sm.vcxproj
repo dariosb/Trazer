@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);RKH_CFG_SMA_SM_CONST=RKH_ENABLED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;__UNITRAZER_LIB__;__TZLOG_STUB__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);RKH_CFG_SMA_SM_CONST=RKH_ENABLED</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\utils\bsp\platform\80x86\vc;$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\unitrazer;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\utrazer;$(ProjectDir)..\..\..\..\stub\mocks;$(ProjectDir)..\;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08\;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include\rkh;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
@@ -126,18 +126,18 @@
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtrc.c" />
     <ClCompile Include="..\..\..\..\..\..\..\source\cfgdep.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\config.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\source\error.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\evexptbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\evtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\source\seqdiag.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\sigtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\symbtbl.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\tzparse.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\uevtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\unittrz.cpp" />
     <ClCompile Include="..\..\..\..\..\cmock\cmock.c" />
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\mocks\Mockerror.c" />
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\mocks\Mockseqdiag.c" />
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\Testtzlog.c" />
     <ClCompile Include="..\..\..\..\..\unity\fixture\unity_fixture.c" />
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\unitrazer\unitrazer.c" />
@@ -154,11 +154,13 @@
     <ClCompile Include="..\..\..\..\test_runners\test_smInstance_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_smPolymorphism_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_smPseudostate_runner.c" />
+    <ClCompile Include="..\..\..\..\test_runners\test_smTransitionWoutUnitrazer_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_smTransition_runner.c" />
     <ClCompile Include="..\..\..\..\test_smInstance.c" />
     <ClCompile Include="..\..\..\..\test_smPolymorphism.c" />
     <ClCompile Include="..\..\..\..\test_smPseudostate.c" />
     <ClCompile Include="..\..\..\..\test_smTransition.c" />
+    <ClCompile Include="..\..\..\..\test_smTransitionWoutUnitrazer.c" />
     <ClCompile Include="..\bsp.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

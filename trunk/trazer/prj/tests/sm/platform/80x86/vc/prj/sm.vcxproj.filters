@@ -41,12 +41,6 @@
     <Filter Include="Source Files\tests\utils\tzparser">
       <UniqueIdentifier>{06b89eba-0786-4705-a751-890986eb48bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\utils\tzparser\stubs">
-      <UniqueIdentifier>{71c99481-f861-4186-b170-140a20eb684d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests\utils\tzparser\stubs\mocks">
-      <UniqueIdentifier>{32e098cc-057a-4c4a-90ad-52d5cbeb9f05}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\rkhcfg.h">
@@ -267,17 +261,8 @@
     <ClCompile Include="..\..\..\..\..\..\..\arch\win_vc08\utils.cpp">
       <Filter>Source Files\tests\utils\tzparser</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\Testtzlog.c">
-      <Filter>Source Files\tests\utils\tzparser\stubs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\source\evtbl.cpp">
       <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\mocks\Mockerror.c">
-      <Filter>Source Files\tests\utils\tzparser\stubs\mocks</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\tzparser\stubs\mocks\Mockseqdiag.c">
-      <Filter>Source Files\tests\utils\tzparser\stubs\mocks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\utils\unitrazer\utzparse.c">
       <Filter>Source Files\tests\utils\unitrazer</Filter>
@@ -287,6 +272,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\stub\mocks\MockrkhportTest.c">
       <Filter>Source Files\tests\sm\stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\seqdiag.cpp">
+      <Filter>Source Files\tests\utils\tzparser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_smTransitionWoutUnitrazer.c">
+      <Filter>Source Files\tests\sm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_smTransitionWoutUnitrazer_runner.c">
+      <Filter>Source Files\tests\sm\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\error.cpp">
+      <Filter>Source Files\tests\utils\tzparser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp">
+      <Filter>Source Files\tests\utils\tzparser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

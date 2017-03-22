@@ -542,6 +542,7 @@ TEST(transition, loopNestedCompositeState)
         RKH_STATE_CAST(&s2211), RKH_STATE_CAST(&s221), RKH_STATE_CAST(0)
     };
 
+    smTest_xS2211_Expect(RKH_CAST(SmTest, smTest));
     smTest_xS221_Expect(RKH_CAST(SmTest, smTest));
     smTest_tr54_Expect(RKH_CAST(SmTest, smTest), &evD);
     smTest_iS22_Expect(RKH_CAST(SmTest, smTest));
@@ -769,11 +770,11 @@ TEST(transition, fails_EventNotFound)
 
 	sm_init_expect(RKH_STATE_CAST(&waiting));
 	sm_enstate_expect(RKH_STATE_CAST(&waiting));
-	sm_evtNotFound_expect(D);
+	sm_evtNotFound_expect(E);
 
     rkh_sm_init((RKH_SM_T *)smTest);
-    setStateForcesfully(smTest, RKH_STATE_CAST(&s1));
-    rkh_sm_dispatch((RKH_SM_T *)smTest, &evD);
+    setState(smTest, RKH_STATE_CAST(&s1));
+    rkh_sm_dispatch((RKH_SM_T *)smTest, &evE);
 
     p = unitrazer_getLastOut();
     TEST_ASSERT_EQUAL(UT_PROC_SUCCESS, p->status);
@@ -793,7 +794,7 @@ TEST(transition, fails_GuardFalse)
                                       RKH_FALSE);
 
     rkh_sm_init((RKH_SM_T *)smTest);
-    setStateForcesfully(smTest, RKH_STATE_CAST(&s1));
+    setState(smTest, RKH_STATE_CAST(&s1));
     rkh_sm_dispatch((RKH_SM_T *)smTest, &evC);
 
     p = unitrazer_getLastOut();
@@ -813,7 +814,7 @@ TEST(transition, fails_ExceededHierarchicalLevel)
     smTest_init_Expect(RKH_CAST(SmTest, smTest));
 
     rkh_sm_init((RKH_SM_T *)smTest);
-    setStateForcesfully(smTest, RKH_STATE_CAST(&s0));
+    setState(smTest, RKH_STATE_CAST(&s0));
     rkh_sm_dispatch((RKH_SM_T *)smTest, &evE);
 
     p = unitrazer_getLastOut();
@@ -836,7 +837,7 @@ TEST(transition, multipleEnabledTrn_FiringFirstTrueGuard)
     sm_grdFalse_expect();
 
     rkh_sm_init((RKH_SM_T *)smTest);
-    setStateForcesfully(smTest, RKH_STATE_CAST(&s4));
+    setState(smTest, RKH_STATE_CAST(&s4));
     rkh_sm_dispatch((RKH_SM_T *)smTest, &evA);
 
     p = unitrazer_getLastOut();
@@ -864,7 +865,7 @@ TEST(transition, multipleEnabledTrn_FiringFirstEmptyGuard)
     sm_tsState_expect(RKH_STATE_CAST(&s4));
 
     rkh_sm_init((RKH_SM_T *)smTest);
-    setStateForcesfully(smTest, RKH_STATE_CAST(&s4));
+    setState(smTest, RKH_STATE_CAST(&s4));
     rkh_sm_dispatch((RKH_SM_T *)smTest, &evB);
 
     p = unitrazer_getLastOut();

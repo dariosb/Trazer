@@ -3,6 +3,8 @@
  */
 
 
+#if (__UNITRAZER_LIB__ == 0)    
+
 #include <string>
 #include <vector>
 #include <fstream>
@@ -22,7 +24,6 @@
 #include <string.h>
 #include <time.h>
 
-//#define SEQDIAG_OUT_FILE		"seqdiag.html"
 static char foname[ SEQDIAG_FNAME_LENGTH ];
 static char sdfname[ SEQDIAG_FNAME_LENGTH ];
 static long seqdiag_len = 0;
@@ -31,6 +32,7 @@ static long seqdiag_len = 0;
 using namespace std;
 
 
+static
 bool
 fexists(const char *filename)
 {
@@ -39,20 +41,7 @@ fexists(const char *filename)
 }
 
 
-#if 0
-void
-end_seqdiag( void )
-{
-	if( fseq != NULL ) 
-	{
-		//seq_printf("\n}\n");
-		fclose( fseq );
-	}
-}
-#endif
-
-
-
+static
 int
 find_infile( const char *fname, const char *ps )
 {
@@ -76,6 +65,7 @@ find_infile( const char *fname, const char *ps )
 	return -1;
 }
 
+static
 void
 fcpy_file( ofstream *ft, const char *sname )
 {
@@ -95,7 +85,7 @@ fcpy_file( ofstream *ft, const char *sname )
 	fs.close();
 }
 
-
+static
 void
 fcpy_until_line( ofstream *ft, const char *sname, int nl )
 {
@@ -114,7 +104,7 @@ fcpy_until_line( ofstream *ft, const char *sname, int nl )
 	fs.close();
 }
 
-
+static
 int
 fcpy_from_line( ofstream *ft, const char *sname, int nl, int qty )
 {
@@ -144,53 +134,11 @@ fcpy_from_line( ofstream *ft, const char *sname, int nl, int qty )
 }
 
 
-#if 0
-static char seqlbuff[100]; 
-
-static vector <string> seqdiag;
-
-void
-seqdiag_text_insert( ofstream *ft, const char *s )
-{
-	string cs;
-
-	vector<string>::iterator i;
-
-	sprintf( seqlbuff, "%s\n", s );
-
-	cs.assign( seqlbuff );
-
-	seqdiag.push_back( cs );
-
-	//start_seqdiag( "trazer.diag" );
-
-	for( i = seqdiag.begin(); i < seqdiag.end(); ++i )
-	{
-		ft->write( i->c_str(), strlen(i->c_str()) );
-		//seq_printf( "\t%s", i->c_str() );
-	}
-	//end_seqdiag();
-}
-
-
-void
-seqdiag_trn_insert( ofstream *ft, TRN_ST *p )
-{
-	char trbuff[ 100 ];
-
-	sprintf( trbuff, "%s -> %s [label=\"%s\"];\n", 
-				map_obj(p->sobj), map_obj(p->tobj), map_sig(p->e) );
-
-	insert_rawsdiag( sdfname, trbuff );
-	seqdiag_text_insert( ft, trbuff );
-}
-
-#endif
-
 static char factor[20];
 static int hfact;
 static uint offs;
 
+static
 int
 get_seqdiag_high_factor( const char *fname )
 {
@@ -256,7 +204,7 @@ update_fout_html( void )
 	system(cmd);*/
 }
 
-
+static
 void
 start_rawsdiag( const char *fname )
 {
@@ -274,7 +222,7 @@ start_rawsdiag( const char *fname )
 	fseq.close();
 }
 
-
+static
 void
 insert_rawsdiag( const char *fname, const char *s )
 {
@@ -395,3 +343,5 @@ seqdiag_init( void )
 
 	start_rawsdiag( sdfname );
 }
+
+#endif

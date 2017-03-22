@@ -29,7 +29,7 @@
 #include "tzparse.h"
 #include "Mockerror.h"
 #include "Mockseqdiag.h"
-#include "Testtzlog.h"
+#include "tzlog.h"
 #include <time.h>
 
 /* ----------------------------- Local macros ------------------------------ */

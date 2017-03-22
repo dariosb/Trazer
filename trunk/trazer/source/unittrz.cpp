@@ -17,7 +17,9 @@ list <UTRZ_EXPECT_EVT> utrz_expected_lst;
 static RKH_TG_T utrz_ign_group[ RKH_TG_NGROUP ]; 
 static rui32_t utrz_ign_evt[ RKH_TE_NEVENT ]; 
 
-static char utrz_msg[1024];
+static UTRZ_RESP_T utrz_last_resp;
+
+static rui32_t current_line;
 
 static
 bool
@@ -56,6 +58,11 @@ unitrazer_init( void )
     utrz_running = 0;
 }
 
+UTRZ_RESP_T *
+unitrazer_get_resp(void)
+{
+    return &utrz_last_resp;
+}
 
 void
 utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
@@ -67,27 +74,30 @@ utrz_resp( RKH_TE_ID_T e, rui32_t line, const char *msg, int nargs, ... )
     if( !utrz_running )
         return;
 
-    strcpy( utrz_msg, msg );
+    strcpy( utrz_last_resp.msg, msg );
     va_start( val, nargs );
     for (i=0;i<nargs;i++)
     {
         s=va_arg(val, char *);
-        strcat( utrz_msg, s );
+        strcat( utrz_last_resp.msg, s );
     }
    
+    utrz_last_resp.e = e;
+    utrz_last_resp.line = line;
 
 //    lprintf("line %d:", line); 
-//    lprintf(utrz_msg); 
+//    lprintf(utrz_last_resp.msg); 
+#if (__UNITRAZER_LIB__ == 0)    
 
-	rkh_trc_begin( e );
-	RKH_TRC_UI32(line);
-	RKH_TRC_STR(utrz_msg);
+	rkh_trc_begin( utrz_last_resp.e );
+	RKH_TRC_UI32(utrz_last_resp.line);
+	RKH_TRC_STR(utrz_last_resp.msg);
 	rkh_trc_end();
 	rkh_trc_flush();
+
+#endif
 }
 
-
-static rui32_t current_line;
 
 void
 utrz_init( char *ptext, rui32_t line )
