@@ -38,9 +38,6 @@
     <Filter Include="Source Files\tests\cmock">
       <UniqueIdentifier>{33f876a0-20dd-43cd-bbbb-2f1eab634f28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\utils\tzparser">
-      <UniqueIdentifier>{06b89eba-0786-4705-a751-890986eb48bf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\rkhcfg.h">
@@ -136,9 +133,6 @@
     <ClInclude Include="..\..\..\..\..\..\..\rkh\source\include\rkhtype.h">
       <Filter>Source Files\rkh\inc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\utils\unitrazer\utzparse.h">
-      <Filter>Source Files\tests\utils\unitrazer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\test_smTransition.c">
@@ -231,62 +225,17 @@
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkhtrc.c">
       <Filter>Source Files\rkh</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\cfgdep.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\config.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\evexptbl.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\sigtbl.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\symbtbl.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\tzparse.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\uevtbl.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\unittrz.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\arch\win_vc08\utils.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\evtbl.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\utils\unitrazer\utzparse.c">
-      <Filter>Source Files\tests\utils\unitrazer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\portable\test\rkhport.c">
       <Filter>Source Files\rkh\port</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\stub\mocks\MockrkhportTest.c">
       <Filter>Source Files\tests\sm\stub</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\seqdiag.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\test_smTransitionWoutUnitrazer.c">
       <Filter>Source Files\tests\sm</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_smTransitionWoutUnitrazer_runner.c">
       <Filter>Source Files\tests\sm\test_runners</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\error.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp">
-      <Filter>Source Files\tests\utils\tzparser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

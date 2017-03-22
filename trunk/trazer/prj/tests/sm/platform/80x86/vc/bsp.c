@@ -61,10 +61,8 @@
 #include "unity.h"
 #include "bsp.h"
 #include "rkh.h"
+
 #include "unitrazer.h"
-#include "unitrzlib.h"
-#include "tzparse.h"
-#include "utzparse.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 
@@ -228,11 +226,7 @@ rkh_trc_open(void)
 {
     rkh_trc_init();
 
-	tzparser_init();
-	unitrazer_init();
-
-	utrazer_init();
-	unitrazer_init_request();
+	unitrazer_start();
 
     RKH_TRC_SEND_CFG(BSP_TS_RATE_HZ);
 }
@@ -265,7 +259,11 @@ rkh_trc_flush(void)
 
         if ((blk != (rui8_t *)0))
         {
-			execTrazerParser(blk, nbytes);
+	        while(nbytes--)
+            {
+        		tzparser_exec(*blk++);
+            }
+
 			break;
         }
         else

@@ -17,7 +17,12 @@ typedef struct utrz_resp_t
     char msg[1024];
 }UTRZ_RESP_T;
 
-void unitrazer_init( void );
+
+void unitrazer_init(void);
+void tzparser_init(void);
+
+void tzparser_exec( rui8_t d );
+
 
 UTRZ_RESP_T * unitrazer_get_resp( void );
 

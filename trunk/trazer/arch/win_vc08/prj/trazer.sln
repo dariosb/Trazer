@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "trazer", "trazer\trazer.vcxproj", "{DDD5C794-7A48-4C99-9843-37A391C89509}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unitrzlib", "unitrzlib\unitrzlib.vcxproj", "{2CDC5C5A-0DAD-4938-8075-1983C6F0AE63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{DDD5C794-7A48-4C99-9843-37A391C89509}.Debug|Win32.Build.0 = Debug|Win32
 		{DDD5C794-7A48-4C99-9843-37A391C89509}.Release|Win32.ActiveCfg = Release|Win32
 		{DDD5C794-7A48-4C99-9843-37A391C89509}.Release|Win32.Build.0 = Release|Win32
+		{2CDC5C5A-0DAD-4938-8075-1983C6F0AE63}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2CDC5C5A-0DAD-4938-8075-1983C6F0AE63}.Debug|Win32.Build.0 = Debug|Win32
+		{2CDC5C5A-0DAD-4938-8075-1983C6F0AE63}.Release|Win32.ActiveCfg = Release|Win32
+		{2CDC5C5A-0DAD-4938-8075-1983C6F0AE63}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
