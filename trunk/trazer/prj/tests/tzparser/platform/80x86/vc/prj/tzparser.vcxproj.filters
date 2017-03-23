@@ -180,6 +180,9 @@
     <ClCompile Include="..\..\..\..\test_runners\test_fwk_runner.c">
       <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\log.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">

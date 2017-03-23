@@ -196,7 +196,7 @@ TEST(sma, dch)
     RKH_TR_SMA_DCH(&receiver, &event, &state);
 
     trazerOutExpect(trazerOut, 3, "SMA", "DCH", "ao=receiver, sig=0X3, "
-                                  "st=state, rt=-1");
+                                  "st=state, rt=0");
 
     execTrazerParser();
 

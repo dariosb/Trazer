@@ -113,6 +113,7 @@
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\bsp.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\rkhassert_stub.c" />
+    <ClCompile Include="..\..\..\..\log.c" />
     <ClCompile Include="..\..\..\..\stubs\MockrkhportTest.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockerror.c" />
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c" />

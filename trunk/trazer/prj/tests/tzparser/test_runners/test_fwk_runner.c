@@ -44,6 +44,7 @@ TEST_GROUP_RUNNER(fwk)
 	RUN_TEST_CASE(fwk, fun);
 	RUN_TEST_CASE(fwk, tusr);
 	RUN_TEST_CASE(fwk, syncevt);
+	RUN_TEST_CASE(fwk, cfg);
 	RUN_TEST_CASE(fwk, assert);
 	RUN_TEST_CASE(fwk, ao);
 	RUN_TEST_CASE(fwk, state);

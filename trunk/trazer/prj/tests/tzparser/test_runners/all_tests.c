@@ -51,6 +51,7 @@
 
 #include <stdlib.h>
 #include "unity_fixture.h"
+#include "log.h"
 
 
 /* ----------------------------- Local macros ------------------------------ */
@@ -78,7 +79,10 @@ runAllTests(void)
 int
 main(int argc, char *argv[])
 {
-	UnityMain(argc, argv, runAllTests);
+    logOpen();
+	test_init();
+    UnityMain(argc, argv, runAllTests);
+    logClose();
 	getchar();
 	return EXIT_SUCCESS;
 }

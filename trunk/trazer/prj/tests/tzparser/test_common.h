@@ -48,6 +48,8 @@ void trazerOutExpect( char *p, ushort nseq, char *group, char *evt, char *args);
 void common_test_setup( void );
 void common_tear_down( void );
 
+void test_init( void );
+
 /* -------------------- External C language linkage end -------------------- */
 
 #ifdef __cplusplus

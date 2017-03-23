@@ -53,6 +53,7 @@
 #include "Mockerror.h"
 #include "Mockseqdiag.h"
 #include "tzlog.h"
+#include "log.h"
 
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
@@ -96,8 +97,12 @@ execTrazerParser( void )
     TEST_ASSERT_NOT_EQUAL(0, trcSize);
     TEST_ASSERT_NOT_NULL(ptrc);
 
+    logStream(ptrc, trcSize);
+
     for(i=0, p=ptrc; i<trcSize; ++i, ++ptrc)
+    {
         tzparser_exec(*ptrc);
+    }
 }
 
 void
@@ -126,13 +131,14 @@ common_test_setup(void)
 	RKH_FILTER_OFF_EVENT(RKH_TRC_ALL_EVENTS);
 	RKH_FILTER_OFF_ALL_SMA();
 	RKH_FILTER_OFF_ALL_SIGNALS();
-
     Mockseqdiag_Init();
     Mockerror_Init();
 
 	tzparser_init();
 
+#if 0
     trazerInitConfiguration();
+#endif
 }
 
 void
@@ -143,6 +149,24 @@ common_tear_down(void)
 
     Mockerror_Verify();
     Mockerror_Destroy();
+
+    logPrint(lprintf_Buff);
+}
+
+void
+test_init( void )
+{
+   	rkh_fwk_init();
+	
+	rkh_trc_init();
+
+	RKH_FILTER_OFF_EVENT(RKH_TRC_ALL_EVENTS);
+	RKH_FILTER_OFF_ALL_SMA();
+	RKH_FILTER_OFF_ALL_SIGNALS();
+
+	tzparser_init();
+
+    trazerInitConfiguration();
 }
 
 /* ------------------------------ End of file ------------------------------ */

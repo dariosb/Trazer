@@ -269,6 +269,17 @@ TEST(fwk, syncevt)
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
+TEST(fwk, cfg)
+{
+    /*
+     * It is not verified the answer.
+     */
+	RKH_TR_FWK_TCFG(CLOCKS_PER_SEC);
+    sdiag_text_Expect(MSC_TARGET_START);
+
+    execTrazerParser();
+}
+
 TEST(fwk, assert)
 {
 	RKH_TR_FWK_ASSERT("file", 20);
@@ -342,10 +353,6 @@ TEST(fwk, timer)
 
 TEST(fwk, epool)
 {
-    /*
-     * Por qué no la misma interfaz que queue? 
-     * por ejemplo: RKH_TR_FWK_EPOOL(&mp);
-     */
 	RKH_TR_FWK_EPOOL(1, "ep0");
 
     trazerOutExpect(trazerOut, nseq, "FWK", "EPOOL", "sadsad");

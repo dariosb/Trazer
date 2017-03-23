@@ -6,10 +6,18 @@
 \section trazer_2_5 Version 2.5
 \releasedate ----
 
+\new
+- Refactoring for unity test of tzparser.
+- unitrazer.lib library for embedd trazer parser on any RKH project, 
+  instead of use it as a external tool.
+  
 \todo
 - Add event identification number (sequence number), 
   to track post and dispatch instance, on responce time calculation.
 - Replace RKH_TE_SMA_DCH by RKH_TE_SMA_GET for responce time calculation.
+- Add pool id list of symbol (symbols adds with RKH_TE_FWK_EPOOL trace evt),
+ for implement id by symbol replacement on events that sends poolid as argument.
+ symilar to symboltbl but instead of obj address, with the poolid.
 
 <HR>
 \section trazer_2_4 Version 2.4
