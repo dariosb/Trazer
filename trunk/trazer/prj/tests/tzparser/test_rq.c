@@ -1,6 +1,6 @@
 /**
- *  \file       test_sma.c
- *  \ingroup    test_sma_group
+ *  \file       test_rq.c
+ *  \ingroup    test_rq
  *  \brief      Unit test for uTrazer module - State machine test group
  *
  *  \addtogroup test
@@ -37,16 +37,13 @@
 /* ---------------------------- Local data types --------------------------- */
 /* ---------------------------- Global variables --------------------------- */
 
-TEST_GROUP(sma);
+TEST_GROUP(rq);
 
 /* ---------------------------- Local variables ---------------------------- */
 static char trazerOut[50];
-static RKHROM RKH_ROM_T base = {0, 0, "receiver"};
+static RKH_RQ_T rq;
 static RKH_SMA_T receiver;
-static RKH_SMA_T sender;
-static RKH_EVT_T event;
-static RKH_ST_T state;
-
+static RKHROM RKH_ROM_T base = {0, 0, "receiver"};
 
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
@@ -55,154 +52,103 @@ void
 trazerSendSymbols( void )
 {
 	RKH_TR_FWK_OBJ( &receiver );
-	RKH_TR_FWK_OBJ( &sender );
-	RKH_TR_FWK_OBJ( &state );
+	RKH_TR_FWK_OBJ( &rq );
     execTrazerParser();
 }
 
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_SETUP(sma)
+TEST_SETUP(rq)
 {
-    common_test_setup();
     receiver.sm.romrkh = &base;
-    event.e = 3;
-    event.pool = 5;
-    event.nref = 7;
-    state.base.name = "state";
 
+    common_test_setup();
     trazerSendSymbols();
 
     initTesttzlog();
 }
 
-TEST_TEAR_DOWN(sma)
+TEST_TEAR_DOWN(rq)
 {
     common_tear_down();
 }
 
-TEST(sma, act)
+TEST(rq, init)
 {
-	RKH_TR_SMA_ACT(&receiver, RKH_GET_PRIO(&receiver), 16);
+	RKH_TR_RQ_INIT(&rq, &receiver, 40);
 
-    trazerOutExpect(trazerOut, 3, "SMA", "ACT", "ao=receiver, prio=0, size=16");
+    trazerOutExpect(trazerOut, 2, "RQ", "INIT", "q=rq, ao=receiver, nelem=40");
     
     execTrazerParser();
 
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-TEST(sma, term)
+TEST(rq, get)
 {
-    RKH_TR_SMA_TERM(&receiver, RKH_GET_PRIO(&receiver));
+	RKH_TR_RQ_GET(&rq, 40);
 
-    trazerOutExpect(trazerOut, 3, "SMA", "TERM", "ao=receiver, prio=0");
-
-    execTrazerParser();
-
-    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
-}
-
-TEST(sma, get)
-{
-    rui8_t nElem, nMin;
-
-    nElem = 4;
-    nMin = 2;
-
-  	RKH_TR_SMA_GET(&receiver, &event, event.pool, event.nref, nElem, nMin);
-
-    trazerOutExpect(trazerOut, 3, "SMA", "GET", "ao=receiver, sig=0X3, pid=5, "
-                                            "rc=7, nelem=4, nmin=2");
-    execTrazerParser();
+    trazerOutExpect(trazerOut, 2, "RQ", "GET", "q=rq, nelem=40");
     
+    execTrazerParser();
+
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-
-TEST(sma, fifo)
+TEST(rq, fifo)
 {
-    rui8_t nElem, nMin;
-    EVENT_ST evt;
+	RKH_TR_RQ_FIFO(&rq, 40, 20);
 
-    nElem = 4;
-    nMin = 2;
-
-    evt.sobj = (ulong)(&sender);
-    evt.tobj = (ulong)(&receiver);
-    evt.e = event.e;
-
-    RKH_TR_SMA_FIFO(&receiver, &event, &sender, event.pool, event.nref, nElem, 
-                    nMin);
-
-    sdiag_async_evt_Expect(&evt);
-
-    trazerOutExpect(trazerOut, 3, "SMA", "FIFO", "ao=receiver, sig=0X3, "
-                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2");
-    execTrazerParser();
+    trazerOutExpect(trazerOut, 2, "RQ", "FIFO", "q=rq, nelem=40, nmin=20");
     
+    execTrazerParser();
+
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-
-TEST(sma, lifo)
+TEST(rq, lifo)
 {
-    rui8_t nElem, nMin;
-    EVENT_ST evt;
+	RKH_TR_RQ_LIFO(&rq, 40, 20);
 
-    nElem = 4;
-    nMin = 2;
-
-    evt.sobj = (ulong)(&sender);
-    evt.tobj = (ulong)(&receiver);
-    evt.e = event.e;
-
-    RKH_TR_SMA_LIFO(&receiver, &event, &sender, event.pool, event.nref, nElem, 
-                    nMin);
-
-    sdiag_async_evt_Expect(&evt);
-
-    trazerOutExpect(trazerOut, 3, "SMA", "LIFO", "ao=receiver, sig=0X3, "
-                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2");
-    execTrazerParser();
+    trazerOutExpect(trazerOut, 2, "RQ", "LIFO", "q=rq, nelem=40, nmin=20");
     
-    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
-}
-
-TEST(sma, reg)
-{
-    RKH_TR_SMA_REG(&receiver, RKH_GET_PRIO(&receiver));
-
-    trazerOutExpect(trazerOut, 3, "SMA", "REG", "ao=receiver, prio=0");
-
     execTrazerParser();
 
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-TEST(sma, unreg)
+TEST(rq, full)
 {
-	RKH_TR_SMA_UNREG(&receiver, RKH_GET_PRIO(&receiver));
+	RKH_TR_RQ_FULL(&rq);
 
-    trazerOutExpect(trazerOut, 3, "SMA", "UNREG", "ao=receiver, prio=0");
-
+    trazerOutExpect(trazerOut, 2, "RQ", "FULL", "q=rq");
+    
     execTrazerParser();
 
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-TEST(sma, dch)
+TEST(rq, dpt)
 {
-    RKH_TR_SMA_DCH(&receiver, &event, &state);
+	RKH_TR_RQ_DPT(&rq);
 
-    trazerOutExpect(trazerOut, 3, "SMA", "DCH", "ao=receiver, sig=0X3, "
-                                  "st=state, rt=-1");
-
+    trazerOutExpect(trazerOut, 2, "RQ", "DPT", "q=rq");
+    
     execTrazerParser();
 
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
+TEST(rq, getlast)
+{
+	RKH_TR_RQ_GET_LAST(&rq);
+
+    trazerOutExpect(trazerOut, 2, "RQ", "GET_LAST", "q=rq");
+    
+    execTrazerParser();
+
+    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
+}
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */

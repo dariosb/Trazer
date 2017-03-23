@@ -7,12 +7,12 @@
 
 /* -------------------------- Development history -------------------------- */
 /*
- *  2015.10.24  LeFr  v2.4.05  Initial version
+ *  2015.11.11  DaBa  v1.0.00  Initial version
  */
 
 /* -------------------------------- Authors -------------------------------- */
 /*
- *  LeFr  Leandro Francucci  francuccilea@gmail.com
+ *  DaBa  Dario Baliña  dariosb@gmail.com
  */
 
 /* --------------------------------- Notes --------------------------------- */
@@ -22,6 +22,11 @@
 #define __TEST_COMMON_H__
 
 /* ----------------------------- Include files ----------------------------- */
+#include "rkh.h"
+#include "mytypes.h"
+#include "unity_fixture.h"
+#include <time.h>
+
 /* ---------------------- External C language linkage ---------------------- */
 
 #ifdef __cplusplus
@@ -34,6 +39,12 @@ extern "C" {
 /* -------------------------- External variables --------------------------- */
 /* -------------------------- Function prototypes -------------------------- */
 
+
+TRCQTY_T getTraceStream(rui8_t **p);
+void execTrazerParser( void );
+void trazerInitConfiguration( void );
+void trazerSendSymbols( void );
+void trazerOutExpect( char *p, ushort nseq, char *group, char *evt, char *args);
 void common_test_setup( void );
 void common_tear_down( void );
 

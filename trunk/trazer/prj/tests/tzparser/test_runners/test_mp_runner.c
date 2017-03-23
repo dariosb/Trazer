@@ -1,11 +1,11 @@
 /**
- *  \file       test_sma_runner.c
- *  \ingroup    test_sma_group
+ *  \file       test_mp_runner.c
+ *  \ingroup    test_mp_group
  *
  *  \brief      State machine group runner
  */
 
-/* -------------------------- Development history -------------------------- */
+//* -------------------------- Development history -------------------------- */
 /*
  *  2015.11.11  DaBa  v1.0.00  Initial version
  */
@@ -29,16 +29,11 @@
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_GROUP_RUNNER(sma)
+TEST_GROUP_RUNNER(mp)
 {
-	RUN_TEST_CASE(sma, act);
-	RUN_TEST_CASE(sma, term);
-	RUN_TEST_CASE(sma, get);
-	RUN_TEST_CASE(sma, fifo);
-	RUN_TEST_CASE(sma, lifo);
-	RUN_TEST_CASE(sma, reg);
-	RUN_TEST_CASE(sma, unreg);
-	RUN_TEST_CASE(sma, dch);
+	RUN_TEST_CASE(mp, init);
+	RUN_TEST_CASE(mp, get);
+	RUN_TEST_CASE(mp, put);
 }
 
 /* ------------------------------ End of file ------------------------------ */

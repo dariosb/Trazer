@@ -38,12 +38,12 @@
 
 /* -------------------------- Development history -------------------------- */
 /*
- *  2015.11.11  LeFr  v2.4.05  ---
+ *  2015.11.11  DaBa  v1.0.00  Initial version
  */
 
 /* -------------------------------- Authors -------------------------------- */
 /*
- *  LeFr  Leandro Francucci  francuccilea@gmail.com
+ *  DaBa  Dario Baliña  dariosb@gmail.com
  */
 
 /* --------------------------------- Notes --------------------------------- */
@@ -65,8 +65,12 @@ static
 void 
 runAllTests(void)
 {
-//	RUN_TEST_GROUP(sm);
+	RUN_TEST_GROUP(mp);
+	RUN_TEST_GROUP(rq);
 	RUN_TEST_GROUP(sma);
+	RUN_TEST_GROUP(sm);
+	RUN_TEST_GROUP(tim);
+	RUN_TEST_GROUP(fwk);
 }
 
 /* ---------------------------- Global functions --------------------------- */

@@ -156,6 +156,30 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp">
       <Filter>Source Files\tests\trazer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_mp_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_mp.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_rq.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_rq_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_tim_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_tim.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_fwk.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_fwk_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">

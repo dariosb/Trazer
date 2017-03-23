@@ -1,6 +1,6 @@
 /**
- *  \file       test_sma_runner.c
- *  \ingroup    test_sma_group
+ *  \file       test_tim_runner.c
+ *  \ingroup    test_tim_group
  *
  *  \brief      State machine group runner
  */
@@ -29,16 +29,13 @@
 /* ---------------------------- Local functions ---------------------------- */
 /* ---------------------------- Global functions --------------------------- */
 
-TEST_GROUP_RUNNER(sma)
+TEST_GROUP_RUNNER(tim)
 {
-	RUN_TEST_CASE(sma, act);
-	RUN_TEST_CASE(sma, term);
-	RUN_TEST_CASE(sma, get);
-	RUN_TEST_CASE(sma, fifo);
-	RUN_TEST_CASE(sma, lifo);
-	RUN_TEST_CASE(sma, reg);
-	RUN_TEST_CASE(sma, unreg);
-	RUN_TEST_CASE(sma, dch);
+	RUN_TEST_CASE(tim, init);
+	RUN_TEST_CASE(tim, start);
+	RUN_TEST_CASE(tim, stop);
+	RUN_TEST_CASE(tim, tout);
+	RUN_TEST_CASE(tim, rem);
 }
 
 /* ------------------------------ End of file ------------------------------ */
