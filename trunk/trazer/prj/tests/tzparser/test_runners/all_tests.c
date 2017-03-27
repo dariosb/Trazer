@@ -72,6 +72,7 @@ runAllTests(void)
 	RUN_TEST_GROUP(sm);
 	RUN_TEST_GROUP(tim);
 	RUN_TEST_GROUP(fwk);
+	RUN_TEST_GROUP(log);
 }
 
 /* ---------------------------- Global functions --------------------------- */
@@ -79,12 +80,11 @@ runAllTests(void)
 int
 main(int argc, char *argv[])
 {
-    logOpen();
 	test_init();
     UnityMain(argc, argv, runAllTests);
-    logClose();
 	getchar();
 	return EXIT_SUCCESS;
 }
 
 /* ------------------------------ End of file ------------------------------ */
+

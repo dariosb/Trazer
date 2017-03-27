@@ -19,18 +19,22 @@ logOpen(void)
 void
 logPrint(char *p)
 {
-    fprintf(flog, p);
+    if(flog != NULL)
+        fprintf(flog, p);
 }
 
 void
 logStream(char *p, unsigned short len)
 {
-	fwrite ( p, 1, len, sflog );
+    if(sflog != NULL)
+	    fwrite( p, 1, len, sflog );
 }
 
 
 logClose(void)
 {
-    fclose(flog);
-    fclose(sflog);
+    if(flog != NULL)
+        fclose(flog);
+    if(sflog !=NULL)
+        fclose(sflog);
 }

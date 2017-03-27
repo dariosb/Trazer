@@ -50,7 +50,6 @@ static RKH_SMA_T sender;
 static RKH_EVT_T event;
 static RKHROM RKH_ROM_T base = {0, 0, "receiver"};
 static RKHROM RKH_ROM_T base1 = {0, 0, "sender"};
-static RKH_MP_T mp;
 static RKH_RQ_T rq;
 static RKH_ST_T st;
 static RKH_TMR_T tim;
@@ -58,12 +57,7 @@ static RKH_TMR_T tim;
 /* ----------------------- Local function prototypes ----------------------- */
 /* ---------------------------- Local functions ---------------------------- */
 
-static
-void
-dummyFunc( void )
-{
-
-}
+static void dummyFunc(void){}
 
 static
 void
@@ -72,8 +66,6 @@ trazerSendSymbols( void )
     RKH_TR_FWK_OBJ( &receiver );
     ++nseq;
 	RKH_TR_FWK_OBJ( &sender );
-    ++nseq;
-	RKH_TR_FWK_OBJ( &mp );
     ++nseq;
 	RKH_TR_FWK_OBJ( &rq );
     ++nseq;

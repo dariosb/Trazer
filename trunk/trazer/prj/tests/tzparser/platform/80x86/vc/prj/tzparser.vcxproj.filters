@@ -183,6 +183,12 @@
     <ClCompile Include="..\..\..\..\log.c">
       <Filter>Source Files\tests\trzparse</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_log.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_log_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">
