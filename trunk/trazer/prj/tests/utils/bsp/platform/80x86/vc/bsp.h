@@ -64,6 +64,7 @@
 void bsp_init( int argc, char *argv[] );
 rui32_t bsp_rand( void );
 void bsp_srand( rui32_t seed );
+void bsp_set_ts( RKH_TS_T ts );
 
 void bsp_cli_req( rui8_t clino );
 void bsp_cli_wait_req( rui8_t clino, RKH_TNT_T req_time );

@@ -51,7 +51,8 @@ static RKH_EVT_T event;
 static RKHROM RKH_ROM_T base = {0, 0, "receiver"};
 static RKHROM RKH_ROM_T base1 = {0, 0, "sender"};
 static RKH_RQ_T rq;
-static RKH_ST_T st;
+static RKH_ST_T st = {{RKH_BASIC, "state"}};;
+static RKH_ST_T pst = {{RKH_CHOICE, "pseudoState"}};;
 static RKH_TMR_T tim;
 
 /* ----------------------- Local function prototypes ----------------------- */
@@ -86,9 +87,8 @@ TEST_SETUP(fwk)
     event.nref = 7;
     receiver.sm.romrkh = &base;
     sender.sm.romrkh = &base1;
-    st.base.name = "state";
 
-    nseq = 0;
+	nseq = 0;
     common_test_setup();
     trazerSendSymbols();
 
@@ -315,13 +315,13 @@ TEST(fwk, state)
 
 TEST(fwk, pstate)
 {
-    char args[40];
+    char args[50];
 
-	RKH_TR_FWK_PSTATE(&receiver, &st);
+	RKH_TR_FWK_PSTATE(&receiver, &pst);
 
-    sprintf(args, "ao=receiver, obj=0x%08X, nm=%s", &st, "state");
+    sprintf(args, "ao=receiver, obj=0x%08X, nm=%s", &pst, "pseudoState");
 
-    trazerOutExpect(trazerOut, nseq, "FWK", "PSTATE", args);
+		trazerOutExpect(trazerOut, nseq, "FWK", "PSTATE", args);
     
     execTrazerParser();
 
@@ -347,7 +347,7 @@ TEST(fwk, epool)
 {
 	RKH_TR_FWK_EPOOL(1, "ep0");
 
-    trazerOutExpect(trazerOut, nseq, "FWK", "EPOOL", "sadsad");
+    trazerOutExpect(trazerOut, nseq, "FWK", "EPOOL", "ep=1, nm=ep0");
     
     execTrazerParser();
 

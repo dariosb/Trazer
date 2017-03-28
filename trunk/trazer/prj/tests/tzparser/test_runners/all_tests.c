@@ -73,6 +73,7 @@ runAllTests(void)
 	RUN_TEST_GROUP(tim);
 	RUN_TEST_GROUP(fwk);
 	RUN_TEST_GROUP(log);
+	RUN_TEST_GROUP(rtime);
 }
 
 /* ---------------------------- Global functions --------------------------- */

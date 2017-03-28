@@ -192,6 +192,12 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\rtimtbl.cpp">
       <Filter>Source Files\tests\trazer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\test_rtime.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_runners\test_rtime_runner.c">
+      <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\unity.h">

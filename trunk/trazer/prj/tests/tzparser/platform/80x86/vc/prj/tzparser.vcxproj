@@ -48,7 +48,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\bsp;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include\rkh;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08;$(ProjectDir)..\..\..\..\..\tzparser\stubs;$(ProjectDir)..\..\..\..\..\tzparser\stubs\mocks;$(ProjectDir)..\..\..\..\..\tzparser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\unity\fixture;$(ProjectDir)..\..\..\..\..\utils\bsp\platform\80x86\vc\;$(ProjectDir)..\..\..\..\..\cmock;$(ProjectDir)..\..\..\..\..\unity;$(ProjectDir)..\..\..\..\..\..\..\rkh\source\include;$(ProjectDir)..\..\..\..\..\..\..\source\include\rkh;$(ProjectDir)..\..\..\..\..\..\..\source\include;$(ProjectDir)..\..\..\..\..\..\..\arch\win_vc08;$(ProjectDir)..\..\..\..\..\tzparser\stubs;$(ProjectDir)..\..\..\..\..\tzparser\stubs\mocks;$(ProjectDir)..\..\..\..\..\tzparser;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__TEST__;__TRAZER__;__TZLOG_STUB__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -123,11 +123,13 @@
     <ClCompile Include="..\..\..\..\test_log.c" />
     <ClCompile Include="..\..\..\..\test_mp.c" />
     <ClCompile Include="..\..\..\..\test_rq.c" />
+    <ClCompile Include="..\..\..\..\test_rtime.c" />
     <ClCompile Include="..\..\..\..\test_runners\all_tests.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_fwk_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_log_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_mp_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_rq_runner.c" />
+    <ClCompile Include="..\..\..\..\test_runners\test_rtime_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_sma_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_sm_runner.c" />
     <ClCompile Include="..\..\..\..\test_runners\test_tim_runner.c" />
