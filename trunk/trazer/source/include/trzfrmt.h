@@ -49,5 +49,6 @@
 #define rt_d		(char *)"rt=%d"
 #define aty_s		(char *)"%s"
 #define arg_d		(char *)"arg#=%d"
+#define nseq_d		(char *)"nseq=%u"
 
 #endif

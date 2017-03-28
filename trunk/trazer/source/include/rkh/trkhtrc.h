@@ -1980,13 +1980,13 @@
              *  \trcEvent       RKH_TE_SMA_REG
              *
              *  \param[in] actObj_   Active object
-             *  \param[in] prio Active object priority
+             *  \param[in] actObjPrio_ Active object priority
              */
-            #define RKH_TR_SMA_REG(actObj_, prio) \
+            #define RKH_TR_SMA_REG(actObj_, actObjPrio_) \
                 RKH_TRC_BEGIN_WOSIG_NOCRIT(RKH_TE_SMA_REG, \
                                            RKH_SMA_ACCESS_CONST(actObj_, prio)) \
                     RKH_TRC_SYM(actObj_); \
-                    RKH_TRC_UI8(prio); \
+                    RKH_TRC_UI8(actObjPrio_); \
                 RKH_TRC_END_NOCRIT()
 
             /**
@@ -1998,13 +1998,13 @@
              *  \trcEvent       RKH_TE_SMA_UNREG
              *
              *  \param[in] actObj_   Active object
-             *  \param[in] prio Active object priority
+             *  \param[in] actObjPrio_ Active object priority
              */
-            #define RKH_TR_SMA_UNREG(actObj_, prio) \
+            #define RKH_TR_SMA_UNREG(actObj_, actObjPrio_) \
                 RKH_TRC_BEGIN_WOSIG_NOCRIT(RKH_TE_SMA_UNREG, \
                                            RKH_SMA_ACCESS_CONST(actObj_, prio)) \
                     RKH_TRC_SYM(actObj_); \
-                    RKH_TRC_UI8(prio); \
+                    RKH_TRC_UI8(actObjPrio_); \
                 RKH_TRC_END_NOCRIT()
 
             /** @} doxygen end group definition */
@@ -2023,9 +2023,9 @@
             #define RKH_TR_SMA_LIFO(actObj_, evt_, sender_, poolID_, \
                                     refCntr_, nElem_, nMin_) \
                 (void)0
-            #define RKH_TR_SMA_REG(actObj_, prio) \
+            #define RKH_TR_SMA_REG(actObj_, actObjPrio_) \
                 (void)0
-            #define RKH_TR_SMA_UNREG(actObj_, prio) \
+            #define RKH_TR_SMA_UNREG(actObj_, actObjPrio_) \
                 (void)0
         #endif
 
@@ -2705,7 +2705,7 @@
             #define RKH_TR_FWK_GCR(evt_, nUsed_, nMin_, sender_) \
                 RKH_TRC_BEGIN_WOAOSIG_NOCRIT(RKH_TE_FWK_GCR) \
                     RKH_TRC_SIG((evt_)->e); \
-                    RKH_TRC_UI8((evt_)->pool); \
+                    RKH_TRC_UI8((evt_)->pool - 1); \
                     RKH_TRC_UI8((evt_)->nref); \
                     RKH_TRC_NBLK(nUsed_); \
                     RKH_TRC_MP_NMIN(nMin_); \
@@ -3426,8 +3426,8 @@
                                 nm)                       (void)0
         #define RKH_TR_SMA_LIFO(ao, ev, snr, pid, rc, ne, \
                                 nm)                       (void)0
-        #define RKH_TR_SMA_REG(ao, prio)                  (void)0
-        #define RKH_TR_SMA_UNREG(ao, prio)                (void)0
+        #define RKH_TR_SMA_REG(ao, actObjPrio_)           (void)0
+        #define RKH_TR_SMA_UNREG(ao, actObjPrio_)         (void)0
 
         /* --- State machine (SM) ------------------------------------------ */
         #define RKH_TR_SM_INIT(ao, ist)                   (void)0

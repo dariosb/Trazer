@@ -9,6 +9,7 @@
 #include "tzparse.h"
 #include "evtbl.h"
 #include "symbtbl.h"
+#include "rtimtbl.h"
 #include "sigtbl.h"
 #include "uevtbl.h"
 #include "cfgdep.h"
@@ -535,25 +536,35 @@ h_sma_get( const void *tre )
 	unsigned long ao, nElem, nMin;
 	TRZE_T e;
 	unsigned char pid, refc;
+	unsigned long post_tstamp;
+	long rt;
+	unsigned long nseq = 0;
 
 	ao = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	e = (TRZE_T)assemble( sizeof_trze() );
 	pid = (unsigned char)assemble( sizeof( char ) );
 	refc = (unsigned char)assemble( sizeof( char ) );
 	nElem = (unsigned long)assemble( sizeof_trzne() );
+
+	if( remove_symevt_tstamp( ao, e, &post_tstamp, &nseq ) < 0 )
+		rt = -1;
+	else
+		rt = ( (curr_tstamp - post_tstamp) >= 0 ) ?
+						( curr_tstamp - post_tstamp ) : -1 ;
+
 	if( TRZ_RKH_CFG_RQ_GET_LWMARK_EN == 1 )
     {   
         nMin = (unsigned long)assemble( sizeof_trzne() );
-    	tre_fmt( fmt, CTE( tre ), 6, map_obj( ao ), map_sig( e ), pid, 
-                                                           refc, nElem, nMin );
-    	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, ao, e, pid, refc, nElem, nMin );
+    	tre_fmt( fmt, CTE( tre ), 8, map_obj( ao ), map_sig( e ), pid, 
+                                                refc, nElem, nMin, rt, nseq );
+    	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 8, ao, e, pid, refc, nElem, nMin,
+                                                rt, nseq );
     }
     else
     {
-    	tre_fmt( fmt, CTE( tre ), 5, map_obj( ao ), map_sig( e ), pid, 
-                                                           refc, nElem );
-    	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 5, ao, e, pid, refc, nElem );
-    
+    	tre_fmt( fmt, CTE( tre ), 7, map_obj( ao ), map_sig( e ), pid, 
+                                                refc, nElem, rt, nseq );
+    	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, ao, e, pid, refc, nElem, rt, nseq );
     }
 	return fmt;
 
@@ -565,7 +576,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 {
 	EVENT_ST trn;
 	unsigned char pid, refc;
-    unsigned long nElem, nMin;
+    unsigned long nElem, nMin, nseq;
 
 	trn.tobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	trn.e = (TRZE_T)assemble( sizeof_trze() );
@@ -579,25 +590,27 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 	    if( TRZ_RKH_CFG_RQ_GET_LWMARK_EN == 1 )
         {
             nMin = (unsigned long)assemble( sizeof_trzne() );
+	        post_fifo_symevt( trn.tobj, trn.e, curr_tstamp, &nseq );
+    		tre_fmt( fmt, CTE( tre ), 8,
+	    				map_obj( trn.tobj ), 
+		    			map_sig( trn.e ), 
+			    		map_obj( trn.sobj ), 
+				    	pid,
+			  		    refc, nElem, nMin, nseq );
+    		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 8, trn.tobj, trn.e, trn.sobj, pid,
+                                            refc, nElem, nMin, nseq );
+        }
+        else
+        {
+	        post_fifo_symevt( trn.tobj, trn.e, curr_tstamp, &nseq );
     		tre_fmt( fmt, CTE( tre ), 7,
 	    				map_obj( trn.tobj ), 
 		    			map_sig( trn.e ), 
 			    		map_obj( trn.sobj ), 
 				    	pid,
-			  		    refc, nElem, nMin );
+			  		    refc, nElem, nseq);
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, trn.tobj, trn.e, trn.sobj, pid,
-                                            refc, nElem, nMin );
-        }
-        else
-        {
-    		tre_fmt( fmt, CTE( tre ), 6,
-	    				map_obj( trn.tobj ), 
-		    			map_sig( trn.e ), 
-			    		map_obj( trn.sobj ), 
-				    	pid,
-			  		    refc, nElem);
-    		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, trn.tobj, trn.e, trn.sobj, pid,
-                                            refc, nElem);
+                                            refc, nElem, nseq);
         
         }
 
@@ -611,29 +624,31 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 	    if( TRZ_RKH_CFG_RQ_GET_LWMARK_EN == 1 )
         {
     	    nMin = (unsigned long)assemble( sizeof_trzne() );
+	        post_fifo_symevt( trn.tobj, trn.e, curr_tstamp, &nseq );
+    		tre_fmt( fmt, CTE( tre ), 2, 
+	    				map_obj( trn.tobj ),
+		    			map_sig( trn.e ));
+
+    		tre_fmtfrom_cat( fmt, CTE( tre ), 3, 5, 
+	    				pid,
+		    	  		refc, nElem, nMin, nseq );
+
+    		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, trn.tobj, trn.e, pid,
+                                            refc, nElem, nMin, nseq );
+        }
+        else
+        {
+	        post_fifo_symevt( trn.tobj, trn.e, curr_tstamp, &nseq );
     		tre_fmt( fmt, CTE( tre ), 2, 
 	    				map_obj( trn.tobj ),
 		    			map_sig( trn.e ));
 
     		tre_fmtfrom_cat( fmt, CTE( tre ), 3, 4, 
 	    				pid,
-		    	  		refc, nElem, nMin );
+		    	  		refc, nElem, nseq);
 
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, trn.tobj, trn.e, pid,
-                                            refc, nElem, nMin );
-        }
-        else
-        {
-    		tre_fmt( fmt, CTE( tre ), 2, 
-	    				map_obj( trn.tobj ),
-		    			map_sig( trn.e ));
-
-    		tre_fmtfrom_cat( fmt, CTE( tre ), 3, 3, 
-	    				pid,
-		    	  		refc, nElem);
-
-    		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 5, trn.tobj, trn.e, pid,
-                                            refc, nElem);
+                                            refc, nElem, nseq);
         
         }
 	}
@@ -648,13 +663,10 @@ char *
 h_sma_ff( const void *tre )
 {
 	EVENT_ST trn;
-	char *p;
+    char *p;
 
 	p = h_sma_ffll( tre, &trn );
 	
-	post_fifo_symevt( trn.tobj, trn.e, curr_tstamp );
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, trn.tobj, trn.e, curr_tstamp );
-
 	return p;
 }
 
@@ -663,12 +675,9 @@ char *
 h_sma_lf( const void *tre )
 {
 	EVENT_ST trn;
-	char *p;
+  	char *p;
 
 	p = h_sma_ffll( tre, &trn );
-	
-	post_lifo_symevt( trn.tobj, trn.e, curr_tstamp );
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, trn.tobj, trn.e, curr_tstamp );
 	
 	return p;	
 }
@@ -679,24 +688,16 @@ h_sma_dch( const void *tre )
 {
 	unsigned long obj, stobj;
 	static TRZE_T curr_e;
-	unsigned long post_tstamp;
-	long rt;
 		
 
 	obj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 	curr_e = (TRZE_T)assemble( sizeof_trze() );
 	stobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
 
-	if( remove_symevt_tstamp( obj, curr_e, &post_tstamp ) < 0 )
-		rt = -1;
-	else
-		rt = ( (curr_tstamp - post_tstamp) >= 0 ) ?
-						( curr_tstamp - post_tstamp ) : -1 ;
+	tre_fmt( fmt, CTE( tre ), 3, map_obj( obj ), map_sig( curr_e ), 
+			map_obj(stobj) );
 
-	tre_fmt( fmt, CTE( tre ), 4, map_obj( obj ), map_sig( curr_e ), 
-			map_obj(stobj), rt );
-
-	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 4, obj, curr_e, stobj, rt );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, obj, curr_e, stobj );
 	return fmt;
 }
 
@@ -1342,6 +1343,7 @@ proc_tcfg_evt( const TRE_T *ftr )
 	lprintf( "%s\n", (*ftr->fmt_args)( CTE( ftr ) ) );
 
 	clear_symtbl();
+	clear_rt_tbl();
 }
 
 

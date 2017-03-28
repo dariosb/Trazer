@@ -136,9 +136,7 @@ common_test_setup(void)
 
 	tzparser_init();
 
-#if 0
     trazerInitConfiguration();
-#endif
 }
 
 void

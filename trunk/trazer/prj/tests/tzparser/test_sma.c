@@ -113,7 +113,7 @@ TEST(sma, get)
   	RKH_TR_SMA_GET(&receiver, &event, event.pool, event.nref, nElem, nMin);
 
     trazerOutExpect(trazerOut, 3, "SMA", "GET", "ao=receiver, sig=0X3, pid=5, "
-                                            "rc=7, nelem=4, nmin=2");
+                                            "rc=7, nelem=4, nmin=2, rt=-1, nseq=0");
     execTrazerParser();
     
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
@@ -138,7 +138,7 @@ TEST(sma, fifo)
     sdiag_async_evt_Expect(&evt);
 
     trazerOutExpect(trazerOut, 3, "SMA", "FIFO", "ao=receiver, sig=0X3, "
-                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2");
+                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2, nseq=1");
     execTrazerParser();
     
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
@@ -163,7 +163,7 @@ TEST(sma, lifo)
     sdiag_async_evt_Expect(&evt);
 
     trazerOutExpect(trazerOut, 3, "SMA", "LIFO", "ao=receiver, sig=0X3, "
-                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2");
+                               "snr=sender, pid=5, rc=7, nelem=4, nmin=2, nseq=1");
     execTrazerParser();
     
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
@@ -196,7 +196,7 @@ TEST(sma, dch)
     RKH_TR_SMA_DCH(&receiver, &event, &state);
 
     trazerOutExpect(trazerOut, 3, "SMA", "DCH", "ao=receiver, sig=0X3, "
-                                  "st=state, rt=0");
+                                  "st=state");
 
     execTrazerParser();
 

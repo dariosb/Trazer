@@ -63,12 +63,12 @@ static FMT_ID_T *tg_rq_tbl[] =
 /* --- State Machine Application events (SMA group) -------------------- */
 DCLR_TRE( RKH_TE_SMA_ACT,		"SMA", "ACT",		h_sma_act,	ao_s, prio_d, size_d );
 DCLR_TRE( RKH_TE_SMA_TERM,		"SMA", "TERM",		h_symu8,	ao_s, prio_d );
-DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_d, refc_d, nelem_d, nmin_d );
-DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d );
-DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d );
+DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_d, refc_d, nelem_d, nmin_d, rt_d, nseq_d );
+DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d, nseq_d );
+DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d, nseq_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
-DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s, rt_d );
+DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s);
 
 static FMT_ID_T *tg_sma_tbl[] =
 {

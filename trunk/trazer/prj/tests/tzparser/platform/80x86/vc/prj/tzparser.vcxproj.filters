@@ -174,9 +174,6 @@
     <ClCompile Include="..\..\..\..\test_tim.c">
       <Filter>Source Files\tests\trzparse</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\test_fwk.c">
-      <Filter>Source Files\tests\trzparse\test_runners</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_fwk_runner.c">
       <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
@@ -188,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_log_runner.c">
       <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\test_fwk.c">
+      <Filter>Source Files\tests\trzparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\source\rtimtbl.cpp">
+      <Filter>Source Files\tests\trazer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

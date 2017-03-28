@@ -66,13 +66,20 @@ typedef struct sym_evt_q
 {
 	unsigned long tstamp;
 	unsigned long id;	
+	unsigned long nseq;
 }SYM_EVT_Q;
+
+typedef struct rtime_t
+{
+	unsigned long ao;
+	unsigned long seq_counter;
+	deque <SYM_EVT_Q> se_q;
+} RTIME_T;
 
 typedef struct symobj_t
 {
 	unsigned long adr;
 	string name;
-	deque <SYM_EVT_Q> se_q;
 } SYMOBJ_T;
 
 typedef struct symsig_t

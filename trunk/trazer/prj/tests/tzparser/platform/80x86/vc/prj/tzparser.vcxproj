@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\evexptbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\evtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\source\rtimtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\sigtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\symbtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\tzlog.cpp" />

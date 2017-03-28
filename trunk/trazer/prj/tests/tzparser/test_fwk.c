@@ -161,7 +161,7 @@ TEST(fwk, gcr)
 {
 	RKH_TR_FWK_GCR(&event, 1, 2, &receiver);
 
-    trazerOutExpect(trazerOut, nseq, "FWK", "GCR", "sig=0X3, pid=5, "
+    trazerOutExpect(trazerOut, nseq, "FWK", "GCR", "sig=0X3, pid=4, "
                                   "rc=7, nb=1, nmin=2, actor=receiver");
     
     execTrazerParser();

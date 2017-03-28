@@ -96,6 +96,9 @@
     <ClCompile Include="..\..\..\..\source\tzlog.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\rtimtbl.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\include\cfgdep.h">
