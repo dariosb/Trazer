@@ -82,6 +82,12 @@ typedef struct symobj_t
 	string name;
 } SYMOBJ_T;
 
+typedef struct epid_t
+{
+	unsigned long id;
+	string name;
+} EPID_T;
+
 typedef struct symsig_t
 {
 	TRZE_T sig;
@@ -102,6 +108,7 @@ const TRE_T * find_exp_trevt( unsigned int id );
 char * h_none( const void *tre );
 char * h_epreg( const void *tre );
 char * h_ae( const void *tre );
+char * h_gc( const void *tre );
 char * h_gcr( const void *tre );
 char * h_1sym( const void *tre );
 char * h_2sym( const void *tre );
@@ -124,6 +131,7 @@ char * h_2symnused( const void *tre );
 char * h_symnused( const void *tre );
 char * h_rq_ffll( const void *tre );
 char * h_symobj( const void *tre );
+char * h_symepid( const void *tre );
 char * h_symst( const void *tre );
 char * h_symsig( const void *tre );
 char * h_symuevt( const void *tre );

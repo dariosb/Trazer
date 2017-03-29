@@ -14,13 +14,21 @@
 using namespace std;
 
 vector <RTIME_T> rt_tbl;
+static unsigned char rtime_enable = 0;
+
 
 void
 clear_rt_tbl( void )
 {
 	rt_tbl.clear();
+    rtime_enable = 1;
 }
 
+void
+disable_rtime( void )
+{
+    rtime_enable = 0;
+}
 
 void
 post_fifo_symevt( unsigned long ao, TRZE_T e, unsigned long ts, 
@@ -90,6 +98,9 @@ remove_symevt_tstamp( unsigned long ao, TRZE_T e, unsigned long *pt,
 	vector<RTIME_T>::iterator i;
 	SYM_EVT_Q evt;
 	
+    if(rtime_enable == 0)
+        return -1;
+
 	for( i = rt_tbl.begin(); i < rt_tbl.end(); ++i )
 	{
 		if( i->ao == ao )

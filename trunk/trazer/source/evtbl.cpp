@@ -63,9 +63,9 @@ static FMT_ID_T *tg_rq_tbl[] =
 /* --- State Machine Application events (SMA group) -------------------- */
 DCLR_TRE( RKH_TE_SMA_ACT,		"SMA", "ACT",		h_sma_act,	ao_s, prio_d, size_d );
 DCLR_TRE( RKH_TE_SMA_TERM,		"SMA", "TERM",		h_symu8,	ao_s, prio_d );
-DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_d, refc_d, nelem_d, nmin_d, rt_d, nseq_d );
-DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d, nseq_d );
-DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_d, refc_d, nelem_d, nmin_d, nseq_d );
+DCLR_TRE( RKH_TE_SMA_GET,		"SMA", "GET",		h_sma_get,	ao_s, sig_s, pid_s, refc_d, nelem_d, nmin_d, rt_d, nseq_d );
+DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_s, refc_d, nelem_d, nmin_d, nseq_d );
+DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_s, refc_d, nelem_d, nmin_d, nseq_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s);
@@ -145,9 +145,9 @@ static FMT_ID_T *tg_tmr_tbl[] =
 DCLR_TRE( RKH_TE_FWK_EN,      "FWK", "EN",       h_none,	NULL );
 DCLR_TRE( RKH_TE_FWK_EX,      "FWK", "EX",       h_none,	NULL );
 DCLR_TRE( RKH_TE_FWK_EPREG,   "FWK", "EPREG",    h_epreg,	ep_d, ss_d, es_d, psize_d );
-DCLR_TRE( RKH_TE_FWK_AE,      "FWK", "AE",       h_ae, es_d, sig_s, pid_d, refc_d, nblock_d, nmin_d, actor_s  );
-DCLR_TRE( RKH_TE_FWK_GC,      "FWK", "GC",       h_sig2u8,	sig_s, pid_d, refc_d );
-DCLR_TRE( RKH_TE_FWK_GCR,     "FWK", "GCR",      h_gcr,	sig_s, pid_d, refc_d, nblock_d, nmin_d, actor_s );
+DCLR_TRE( RKH_TE_FWK_AE,      "FWK", "AE",       h_ae, es_d, sig_s, pid_s, refc_d, nblock_d, nmin_d, actor_s  );
+DCLR_TRE( RKH_TE_FWK_GC,      "FWK", "GC",       h_gc,	sig_s, pid_s, refc_d );
+DCLR_TRE( RKH_TE_FWK_GCR,     "FWK", "GCR",      h_gcr,	sig_s, pid_s, refc_d, nblock_d, nmin_d, actor_s );
 DCLR_TRE( RKH_TE_FWK_DEFER,   "FWK", "DEFER",    h_symevt,	q_s, sig_s );
 DCLR_TRE( RKH_TE_FWK_RCALL,   "FWK", "RCALL",    h_symevt,	ao_s, sig_s );
 DCLR_TRE( RKH_TE_FWK_OBJ,     "FWK", "OBJ",      h_symobj,	obj_x, nm_s );
@@ -162,7 +162,7 @@ DCLR_TRE( RKH_TE_FWK_AO,      "FWK", "AO",       h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_STATE,   "FWK", "STATE",    h_symst,	ao_s, obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_PSTATE,    "FWK", "PSTATE", h_symst,	ao_s, obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_TIMER,     "FWK", "TIMER",  h_symobj,	obj_x, nm_s );
-DCLR_TRE( RKH_TE_FWK_EPOOL,     "FWK", "EPOOL",  h_symobj,	obj_x, nm_s );
+DCLR_TRE( RKH_TE_FWK_EPOOL,     "FWK", "EPOOL",  h_symepid,	ep_d, nm_s );
 DCLR_TRE( RKH_TE_FWK_QUEUE,     "FWK", "QUEUE",  h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_ACTOR,     "FWK", "ACTOR",  h_symobj,	obj_x, nm_s );
 

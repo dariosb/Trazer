@@ -17,6 +17,7 @@
 #define nmin_d		(char *)"nmin=%d"
 #define snr_s		(char *)"snr=%s"
 #define pid_d		(char *)"pid=%d"
+#define pid_s		(char *)"pid=%s"
 #define refc_d		(char *)"rc=%d"
 #define ao_s		(char *)"ao=%s"
 #define sig_s		(char *)"sig=%s"

@@ -14,11 +14,13 @@
 using namespace std;
 
 vector <SYMOBJ_T> symb_tbl;
+vector <EPID_T> epid_tbl;
 
 void
 clear_symtbl( void )
 {
 	symb_tbl.clear();
+	epid_tbl.clear();
 }
 
 
@@ -80,4 +82,53 @@ search_in_objtbl(  unsigned long  adr  )
     
     return NULL;
 }
+
+
+void
+add_to_epidtbl( unsigned long epid, const char *sym )
+{
+	EPID_T symbol;
+	vector<EPID_T>::iterator i;
+
+	for( i = epid_tbl.begin(); i < epid_tbl.end(); ++i )
+	{
+		if( i->id == epid )
+		{
+			i->name.assign( sym );
+			return;
+		}
+		if( strcmp(i->name.c_str(), sym ) == 0 )
+		{
+			i->id = epid;
+			return;
+		}
+	}
+
+	symbol.id = epid;
+	symbol.name.assign( sym );
+
+	epid_tbl.push_back( symbol );
+}
+
+
+const char * 
+map_epid( unsigned long epid )
+{
+	vector<EPID_T>::iterator i;
+	char buff [2+sizeof(long)*8+1];
+
+    if(epid == 0)
+        return "static";
+
+	for( i = epid_tbl.begin(); i < epid_tbl.end(); ++i )
+		if( i->id == epid )
+			return i->name.c_str();
+
+    sprintf(buff, "%d", epid);
+
+	add_to_epidtbl( epid, buff );
+	return epid_tbl.back().name.c_str();
+}
+
+
 

@@ -15,5 +15,8 @@ void post_fifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts );
 void post_lifo_symevt( unsigned long adr, TRZE_T e, unsigned long ts );
 int remove_symevt_tstamp( unsigned long adr, TRZE_T e, unsigned long *pt );
 
+void add_to_epidtbl( unsigned long epid, const char *sym );
+const char * map_epid( unsigned long epid );
+
 #endif
 

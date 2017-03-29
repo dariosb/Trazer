@@ -555,14 +555,14 @@ h_sma_get( const void *tre )
 	if( TRZ_RKH_CFG_RQ_GET_LWMARK_EN == 1 )
     {   
         nMin = (unsigned long)assemble( sizeof_trzne() );
-    	tre_fmt( fmt, CTE( tre ), 8, map_obj( ao ), map_sig( e ), pid, 
+    	tre_fmt( fmt, CTE( tre ), 8, map_obj( ao ), map_sig( e ), map_epid(pid), 
                                                 refc, nElem, nMin, rt, nseq );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 8, ao, e, pid, refc, nElem, nMin,
                                                 rt, nseq );
     }
     else
     {
-    	tre_fmt( fmt, CTE( tre ), 7, map_obj( ao ), map_sig( e ), pid, 
+    	tre_fmt( fmt, CTE( tre ), 7, map_obj( ao ), map_sig( e ), map_epid(pid), 
                                                 refc, nElem, rt, nseq );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, ao, e, pid, refc, nElem, rt, nseq );
     }
@@ -595,7 +595,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 	    				map_obj( trn.tobj ), 
 		    			map_sig( trn.e ), 
 			    		map_obj( trn.sobj ), 
-				    	pid,
+				    	map_epid(pid),
 			  		    refc, nElem, nMin, nseq );
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 8, trn.tobj, trn.e, trn.sobj, pid,
                                             refc, nElem, nMin, nseq );
@@ -607,7 +607,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 	    				map_obj( trn.tobj ), 
 		    			map_sig( trn.e ), 
 			    		map_obj( trn.sobj ), 
-				    	pid,
+				    	map_epid(pid),
 			  		    refc, nElem, nseq);
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, trn.tobj, trn.e, trn.sobj, pid,
                                             refc, nElem, nseq);
@@ -630,7 +630,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 		    			map_sig( trn.e ));
 
     		tre_fmtfrom_cat( fmt, CTE( tre ), 3, 5, 
-	    				pid,
+	    				map_epid(pid),
 		    	  		refc, nElem, nMin, nseq );
 
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, trn.tobj, trn.e, pid,
@@ -644,7 +644,7 @@ h_sma_ffll( const void *tre, EVENT_ST *ptrn )
 		    			map_sig( trn.e ));
 
     		tre_fmtfrom_cat( fmt, CTE( tre ), 3, 4, 
-	    				pid,
+	    				map_epid(pid),
 		    	  		refc, nElem, nseq);
 
     		UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, trn.tobj, trn.e, pid,
@@ -744,14 +744,14 @@ h_ae( const void *tre )
 
 	if( TRZ_RKH_CFG_MP_GET_LWM_EN == 1 )
     {
-	    tre_fmt( fmt, CTE( tre ), 7, esize, map_sig( e ), pid, refc,
+	    tre_fmt( fmt, CTE( tre ), 7, esize, map_sig( e ), map_epid(pid+1), refc,
                                 nBlock, nMin, actor_s );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 7, esize, e, pid, refc, 
                                         nBlock, nMin, actor );
     }
     else
     {
-	    tre_fmt( fmt, CTE( tre ), 6, esize, map_sig( e ), pid, refc,
+	    tre_fmt( fmt, CTE( tre ), 6, esize, map_sig( e ), map_epid(pid+1), refc,
                                 nBlock, actor_s );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, esize, e, pid, refc, 
                                         nBlock, actor );
@@ -760,6 +760,19 @@ h_ae( const void *tre )
 	return fmt;
 }
 
+char *
+h_gc( const void *tre )
+{
+	unsigned long sig;
+	unsigned char pid, refc;
+
+	sig = (TRZE_T)assemble( sizeof_trze() );
+	pid = (unsigned char)assemble( sizeof( char ) );
+	refc = (unsigned char)assemble( sizeof( char ) );
+	tre_fmt( fmt, CTE( tre ), 3, map_sig( sig ), map_epid(pid), refc );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 3, sig, pid, refc );
+	return fmt;
+}
 
 char *
 h_gcr( const void *tre )
@@ -782,14 +795,14 @@ h_gcr( const void *tre )
 
 	if( TRZ_RKH_CFG_MP_GET_LWM_EN == 1 )
     {
-        tre_fmt( fmt, CTE( tre ), 6, map_sig( e ), pid, refc,
+        tre_fmt( fmt, CTE( tre ), 6, map_sig( e ), map_epid(pid+1), refc,
                                 nBlock, nMin, actor_s );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 6, e, pid, refc, 
                     nBlock, nMin, actor );
     }
     else
     {
-        tre_fmt( fmt, CTE( tre ), 5, map_sig( e ), pid, refc,
+        tre_fmt( fmt, CTE( tre ), 5, map_sig( e ), map_epid(pid+1), refc,
                                 nBlock, actor_s );
     	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 5, e, pid, refc, 
                     nBlock, actor );
@@ -814,6 +827,24 @@ h_symobj( const void *tre )
 	tre_fmt( fmt, CTE( tre ), 2, obj, s );
 	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, obj, s );
 	add_to_symtbl( obj, s );
+	return fmt;
+}
+
+char *
+h_symepid( const void *tre )
+{
+	unsigned long epid;
+	char *s;
+
+    epid = (unsigned long)assemble( sizeof(rui8_t) );
+	s = assemble_str();
+	
+	if( *s == '&' )
+		++s;
+
+	tre_fmt( fmt, CTE( tre ), 2, epid, s );
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, epid, s );
+	add_to_epidtbl( epid+1, s );
 	return fmt;
 }
 
@@ -1397,7 +1428,10 @@ parser( void )
 		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
+        {
+            disable_rtime();
 			lprintf( lost_trace_info );
+        }
 
 		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
 											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
@@ -1418,7 +1452,10 @@ parser( void )
 		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
 		
 		if( !verify_nseq( tz_data.nseq ) )
+        {
+            disable_rtime();
 			lprintf( lost_trace_info );
+        }
 
 		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
 											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
