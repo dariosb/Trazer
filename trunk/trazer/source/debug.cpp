@@ -2,16 +2,18 @@
  * debug.cpp
  */
 
+
 #include "mdebug.h"
 #include "options.h"
 #include <stdio.h>
 #include <stdarg.h>
 //#include <conio.h>
 
+
 #if ACTIVE_DEBUG
 
 void
-dprintf( const char* fmt, ...)
+mdprintf( const char* fmt, ...)
 {
     va_list args;
 

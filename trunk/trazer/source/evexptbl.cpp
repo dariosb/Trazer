@@ -2,6 +2,7 @@
  * evexptbl.cpp
  */
 
+#include <stdio.h>
 #include "trzfrmt.h"
 #include "evexptbl.h"
 
@@ -120,13 +121,13 @@ find_exp_trevt( unsigned int id )
 {
 	static FMT_ID_T **p;
     RKH_TG_T grp;
-    RKH_TE_ID_T te;
+//    RKH_TE_ID_T te;
 
     grp = GETGRP(id);
     if( grp >= RKH_TG_NGROUP )
 	    return ( TRE_T* )0;
 
-    te = EXTE( id, grp );
+//    te = EXTE( id, grp );
 
 	for( p = &(exp_tgroups_tbl[grp]->p); (*p)->tre.id != RKH_TE_NEVENT; ++p )
 	{
@@ -142,13 +143,13 @@ find_exp_chk_fun( unsigned int id )
 {
     FMT_EXP_ST *p;
     RKH_TG_T grp;
-    RKH_TE_ID_T te;
+//    RKH_TE_ID_T te;
 
     grp = GETGRP(id);
     if( grp >= RKH_TG_NGROUP )
 	    return ( CHEK_ARG_T )0;
 
-    te = EXTE( id, grp );
+//    te = EXTE( id, grp );
 
 	for( p = exp_tgroups_tbl[grp]; p->p->tre.id != RKH_TE_NEVENT; ++p )
 	{

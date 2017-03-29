@@ -2,6 +2,8 @@
  *	file: trazer.c
  */
 
+#include <string.h>
+#include <stdio.h>
 #include "mytypes.h"
 #include "trkhtrc.h"
 #include "messages.h"
@@ -1390,14 +1392,14 @@ show_curr_frm( void )
 {
 	rui8_t *p;
 	int i;
-	dprintf( "---- |");
+	mdprintf( "---- |");
 
 	if( TRZ_RKH_CFG_TRC_CHK_EN == 1 )
 	{
 		for( p = tr, i = trix; i--; ++p )
-			dprintf( "0x%X|", *p );
+			mdprintf( "0x%X|", *p );
 	}
-	dprintf( " ----\n" );
+	mdprintf( " ----\n" );
 }
 
 

@@ -141,9 +141,6 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\messages.cpp">
       <Filter>Source Files\tests\trazer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\CMock-master\src\cmock.c">
-      <Filter>Source Files\tests\cmock</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\stubs\mocks\Mockseqdiag.c">
       <Filter>Source Files\tests\stubs\mocks</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\test_runners\test_rtime_runner.c">
       <Filter>Source Files\tests\trzparse\test_runners</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\vortex\trazer trunk\prj\tests\cmock\cmock.c">
+      <Filter>Source Files\tests\cmock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

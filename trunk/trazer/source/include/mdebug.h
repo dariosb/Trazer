@@ -11,11 +11,11 @@ extern "C" {
 
 #if ACTIVE_DEBUG
 
-void dprintf( const char* fmt, ... );
+void mdprintf( const char* fmt, ... );
 
 #else
 
-#define dprintf(...);
+#define mdprintf(...);
 
 #endif
 

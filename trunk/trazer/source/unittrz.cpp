@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <list>
+#include <string.h>
 #include "trkhtrc.h"
 #include "unittrz.h"
 #include "evexptbl.h"

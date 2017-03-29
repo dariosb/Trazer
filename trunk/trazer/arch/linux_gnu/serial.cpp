@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <termios.h>
 
+#include "tzparse.h"
 #include "options.h"
 #include "messages.h"
 #include "serial.h"
@@ -20,7 +21,6 @@
 //extern SERIAL_T serials[NUM_SERIALS];
 //static SERIAL_CBACK_T serial_callback;
 
-#include "tzparse.h"
 
 static int tty_fd;
 static int running;
@@ -42,7 +42,7 @@ isr_ser_thread( void *d )	/* thread to emulate timer ISR */
 		{
 			p = buff;
 			while( count-- )
-				trazer_parse( *p++ );
+				tzparser_exec( *p++ );
 		}
     }
 	pthread_exit(NULL);

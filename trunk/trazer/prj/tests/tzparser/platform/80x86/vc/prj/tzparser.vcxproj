@@ -86,7 +86,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\CMock-master\src\cmock.c" />
     <ClCompile Include="..\..\..\..\..\..\..\arch\win_vc08\utils.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\portable\test\rkhport.c" />
     <ClCompile Include="..\..\..\..\..\..\..\rkh\source\rkh.c" />
@@ -136,6 +135,7 @@
     <ClCompile Include="..\..\..\..\test_sm.c" />
     <ClCompile Include="..\..\..\..\test_sma.c" />
     <ClCompile Include="..\..\..\..\test_tim.c" />
+    <ClCompile Include="H:\vortex\trazer trunk\prj\tests\cmock\cmock.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\fixture\unity_fixture.h" />

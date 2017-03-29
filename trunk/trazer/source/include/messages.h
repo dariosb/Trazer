@@ -3,6 +3,8 @@
  * 		Here the message table 
  */
 
+#ifndef __MESSAGES_H__
+#define __MESSAGES_H__
 /*
  * In Shapes parsing
  */
@@ -34,3 +36,5 @@ extern const char   * help_message,
 					* lost_trace_info,
 					* unknown_te,
 					* stream_chkerr;
+
+#endif
