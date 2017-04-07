@@ -8,13 +8,14 @@ extern "C" {
 #ifndef __TZLOG_H__
 #define __TZLOG_H__
 
-#define LPRINTF_BUZZ_SIZE  100000
+#define LPRINTF_BUZZ_SIZE  1000000
 
 extern char lprintf_Buff[];
 
 void lprintf( const char *fmt, ... );
-void start_log( const char *fname );
 void initTesttzlog(void);
+
+extern void start_log( const char *fname );
 
 #define cfg_printf(x)		lprintf( "%-38c| %-30s= %d\n", ' ', #x, (x) );
 #define cfg_printf_sz(x,f)	lprintf( "%-38c| %-30s= %d\n", ' ', #x, (x*f) );

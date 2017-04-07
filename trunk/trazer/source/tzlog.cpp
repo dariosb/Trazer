@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-FILE *flog;
+FILE *flog = NULL;
 char lprintf_Buff[LPRINTF_BUZZ_SIZE];
 
 void
@@ -31,9 +31,12 @@ lprintf( const char *fmt, ... )
 #ifndef __TZLOG_STUB__
 	if( !options.quiet )
 	    vfprintf( stdout, fmt, args);
-	if( flog != NULL )
-	    vfprintf( flog, fmt, args);
 #endif
+	if( flog != NULL )
+	{
+	    vfprintf( flog, fmt, args);
+		fflush(flog);
+	}
 
     va_end(args);
 
@@ -42,7 +45,9 @@ lprintf( const char *fmt, ... )
 void
 start_log( const char *fname )
 {
-#ifndef __TZLOG_STUB__
+	if(flog != NULL)
+		fclose(flog);
+
 	flog = NULL;
 
 	if( strlen(fname) == 0 )
@@ -52,7 +57,6 @@ start_log( const char *fname )
 	{
 		fatal_error( "Can't open file %s\n", fname );
 	}
-#endif
 }
 
 

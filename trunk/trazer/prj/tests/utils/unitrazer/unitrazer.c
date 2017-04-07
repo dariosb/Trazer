@@ -141,6 +141,7 @@ unitrazer_start(void)
 #ifdef __UNITRAZER_LIB__
 	tzparser_init();
 	unitrazer_init();
+	start_log("unitrazer.log");
 #endif
 
     unitrazer_resetOut();

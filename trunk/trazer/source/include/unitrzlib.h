@@ -23,6 +23,7 @@ void tzparser_init(void);
 
 void tzparser_exec( rui8_t d );
 
+void start_log( const char *fname );
 
 UTRZ_RESP_T * unitrazer_get_resp( void );
 
