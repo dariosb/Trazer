@@ -48,6 +48,7 @@ TEST_GROUP_RUNNER(sm)
 	RUN_TEST_CASE(sm, exhlevel);
 	RUN_TEST_CASE(sm, extseg);
 	RUN_TEST_CASE(sm, exeact);
+	RUN_TEST_CASE(sm, dch);
 }
 
 /* ------------------------------ End of file ------------------------------ */

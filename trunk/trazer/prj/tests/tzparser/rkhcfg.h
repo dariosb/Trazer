@@ -105,12 +105,12 @@
 #define RKH_CFG_FWK_SIZEOF_EVT_SIZE		16u
 
 /**
- *	If the #RKH_CFG_FWK_DEFER_EVT_EN is set to 1 and the dynamic event 
+ *	If the #RKH_CFG_SMA_DEFER_EVT_EN is set to 1 and the dynamic event 
  *	support is enabled (see #RKH_CFG_FWK_DYN_EVT_EN), RKH enables the 
  *	defer and recall event features.
  */
 
-#define RKH_CFG_FWK_DEFER_EVT_EN		RKH_ENABLED
+#define RKH_CFG_SMA_DEFER_EVT_EN		RKH_ENABLED
 
 /**
  *	If the #RKH_CFG_FWK_ASSERT_EN is set to 0 the checking assertions are 
@@ -546,11 +546,11 @@
 #define RKH_CFG_TRC_SM_INIT_EN			RKH_ENABLED
 
 /**
- *	If the #RKH_CFG_TRC_SMA_DCH_EN and #RKH_CFG_TRC_SM_EN are set to 1 then 
+ *	If the #RKH_CFG_TRC_SM_DCH_EN and #RKH_CFG_TRC_SM_EN are set to 1 then 
  *	RKH will include the "start a state machine" trace record.
  */
 
-#define RKH_CFG_TRC_SMA_DCH_EN			RKH_ENABLED
+#define RKH_CFG_TRC_SM_DCH_EN			RKH_ENABLED
 
 /**
  *	If the #RKH_CFG_TRC_SM_CLRH_EN and #RKH_CFG_TRC_SM_EN are set to 1 then 

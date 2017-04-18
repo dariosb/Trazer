@@ -158,7 +158,9 @@ TEST(log, sma)
     execTrazerParser();
 	RKH_TR_SMA_UNREG(&receiver, RKH_GET_PRIO(&receiver));
     execTrazerParser();
-    RKH_TR_SMA_DCH(&receiver, &event, &state);
+	RKH_TR_FWK_DEFER(&rq, &event);
+    execTrazerParser();
+	RKH_TR_FWK_RCALL(&receiver, &event);
     execTrazerParser();
 }
 
@@ -200,6 +202,8 @@ TEST(log, sm)
 	RKH_TR_SM_EXE_ACT(0, &receiver, &state, 0x5A5A5A);
     sdiag_exec_act_Expect((ulong)&receiver, (ulong)0x5A5A5A);
     execTrazerParser();
+	RKH_TR_SM_DCH(&receiver, &event, &state);
+    execTrazerParser();
 }
 
 TEST(log, tim)
@@ -230,10 +234,6 @@ TEST(log, fwk)
 	RKH_TR_FWK_GC(&event, event.pool, 2);
     execTrazerParser();
 	RKH_TR_FWK_GCR(&event, 1, 2, &receiver);
-    execTrazerParser();
-	RKH_TR_FWK_DEFER(&rq, &event);
-    execTrazerParser();
-	RKH_TR_FWK_RCALL(&receiver, &event);
     execTrazerParser();
 	RKH_TR_FWK_OBJ(&receiver);
     execTrazerParser();

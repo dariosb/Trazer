@@ -37,8 +37,6 @@ TEST_GROUP_RUNNER(fwk)
 	RUN_TEST_CASE(fwk, ae);
 	RUN_TEST_CASE(fwk, gc);
 	RUN_TEST_CASE(fwk, gcr);
-	RUN_TEST_CASE(fwk, defer);
-	RUN_TEST_CASE(fwk, rcall);
 	RUN_TEST_CASE(fwk, obj);
 	RUN_TEST_CASE(fwk, sig);
 	RUN_TEST_CASE(fwk, fun);

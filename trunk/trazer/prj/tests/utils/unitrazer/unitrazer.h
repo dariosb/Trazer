@@ -57,10 +57,6 @@
 #include "unity_fixture.h"
 #include "rkh.h"
 
-#ifdef __UNITRAZER_LIB__
-#include "unitrzlib.h"
-#endif
-
 /* ---------------------- External C language linkage ---------------------- */
 
 #ifdef __cplusplus
@@ -74,7 +70,7 @@ extern "C" {
  *  \brief
  *  Establish the preconditions to the tests.
  */
-#define sm_init() unitrazer_start()
+#define sm_init() unitrazer_init()
 
 /**
  *  \brief
@@ -240,6 +236,12 @@ extern "C" {
 #define sm_exeAct_expectAnyArgs() \
     unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_EXE_ACT)
 
+/* RKH_TE_SM_DCH */
+#define sm_dch_expect(signal, state) \
+    unitrazer_sm_dch_expect(__LINE__, signal, state)
+
+#define sm_exeAct_expectAnyArgs() \
+    unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_DCH)
 /* ============================= Ignore macros ============================= */
 
 /* RKH_TE_SM_INIT */
@@ -393,7 +395,7 @@ void unitrazer_resetOut(void);
  *  \brief
  *  Establish the preconditions to the tests.
  */
-void unitrazer_start(void);
+void unitrazer_init(void);
 
 /**
  *  \brief
@@ -502,6 +504,22 @@ void unitrazer_expectAnyArgs(UNITY_LINE_TYPE cmockLine, rui8_t trcEvt);
  */
 void unitrazer_sm_exeAct_expect(UNITY_LINE_TYPE cmockLine,
                                 rui8_t actType, RKH_ST_T *state, void * action);
+
+/**
+ *  \brief
+ *  Expect for RKH_TE_SM_DCH trace event.
+ *
+ *  \param[in] cmockLine    line number from which this function is called
+ *  \param[in] signal       argument of trace event with signal
+ *  \param[in] state        action execution context
+ *
+ *  \note
+ *  This function is internal to RKH and the user application should not call 
+ *  it. Instead, use the corresponding macro for the trace event to expect.
+ */
+void unitrazer_sm_dch_expect(UNITY_LINE_TYPE cmockLine, RKH_SIG_T signal,
+                                RKH_ST_T *state);
+
 
 /**
  *  \brief

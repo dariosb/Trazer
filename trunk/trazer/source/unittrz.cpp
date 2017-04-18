@@ -40,7 +40,9 @@ static rui32_t utrz_running = 0;
 void
 unitrazer_init( void )
 {
+#if (__UNITRAZER_LIB__ == 0) 
 	rkh_trc_init();
+#endif
 
     utrz_expected_lst.clear();
     /*
@@ -104,7 +106,10 @@ void
 utrz_init( char *ptext, rui32_t line )
 {
     current_line = line;
+
+#if (__UNITRAZER_LIB__ == 0) 
 	rkh_trc_init();
+#endif
 
     unitrazer_init();
 

@@ -59,6 +59,7 @@ DCLR_EXP_TRE( RKH_TE_SM_UNKN_STATE, "SM",  "UNKN_STATE", h_none,    NULL );
 DCLR_EXP_TRE( RKH_TE_SM_EX_HLEVEL,  "SM",  "EX_HLEVEL",  h_none,    NULL );
 DCLR_EXP_TRE( RKH_TE_SM_EX_TSEG,    "SM",  "EX_TSEG",    h_none,    NULL );
 DCLR_EXP_TRE( RKH_TE_SM_EXE_ACT,    "SM",  "EXE_ACT",    h_exact_no_ao,	aty_s, st_s, func_s );
+DCLR_EXP_TRE( RKH_TE_SM_DCH,        "SM",  "DCH",        h_sm_dch_noao,	sig_s, st_s );
 
 
 static FMT_EXP_ST exp_tg_sm_tbl[] =
@@ -80,6 +81,7 @@ static FMT_EXP_ST exp_tg_sm_tbl[] =
 	EXP_TRE_ST( RKH_TE_SM_EX_HLEVEL,   c_smexhl),  
 	EXP_TRE_ST( RKH_TE_SM_EX_TSEG,     c_smextseg),
 	EXP_TRE_ST( RKH_TE_SM_EXE_ACT,     c_smexeact),
+	EXP_TRE_ST( RKH_TE_SM_DCH,         c_smdch),
     EXP_TRE_ST( RKH_TE_NEVENT,         c_none)
 };
 

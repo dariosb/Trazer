@@ -169,28 +169,6 @@ TEST(fwk, gcr)
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
 
-TEST(fwk, defer)
-{
-	RKH_TR_FWK_DEFER(&rq, &event);
-
-    trazerOutExpect(trazerOut, nseq, "FWK", "DEFER", "q=rq, sig=0X3");
-    
-    execTrazerParser();
-
-    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
-}
-
-TEST(fwk, rcall)
-{
-	RKH_TR_FWK_RCALL(&receiver, &event);
-
-    trazerOutExpect(trazerOut, nseq, "FWK", "RCALL", "ao=receiver, sig=0X3");
-    
-    execTrazerParser();
-
-    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
-}
-
 TEST(fwk, obj)
 {
     char args[40];

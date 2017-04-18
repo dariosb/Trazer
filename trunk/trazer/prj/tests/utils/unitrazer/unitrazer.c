@@ -53,7 +53,6 @@
 #include "unity_fixture.h"
 #include "unitrazer.h"
 
-
 /* ----------------------------- Local macros ------------------------------ */
 /* ------------------------------- Constants ------------------------------- */
 /* ---------------------------- Local data types --------------------------- */
@@ -133,17 +132,22 @@ unitrazer_sm_exeAct_expect(UNITY_LINE_TYPE cmockLine,
     RKH_TRC_END_WOFIL();
 }
 
+void unitrazer_sm_dch_expect(UNITY_LINE_TYPE cmockLine, RKH_SIG_T signal,
+                                RKH_ST_T *state)
+{
+    RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_EXPECT)
+    RKH_TRC_UI32(cmockLine);
+    RKH_TRC_UI8(RKH_TE_SM_DCH);
+    RKH_TRC_SIG(signal);
+    RKH_TRC_SYM(state);
+    RKH_TRC_END_WOFIL();
+}
+
 /* ============================ Init function ============================== */
 
 void
-unitrazer_start(void)
+unitrazer_init(void)
 {
-#ifdef __UNITRAZER_LIB__
-	tzparser_init();
-	unitrazer_init();
-	start_log("unitrazer.log");
-#endif
-
     unitrazer_resetOut();
 
     RKH_TRC_BEGIN_WOFIL(RKH_TE_UT_INIT);

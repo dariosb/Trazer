@@ -38,7 +38,8 @@ TEST_GROUP_RUNNER(sma)
 	RUN_TEST_CASE(sma, lifo);
 	RUN_TEST_CASE(sma, reg);
 	RUN_TEST_CASE(sma, unreg);
-	RUN_TEST_CASE(sma, dch);
+	RUN_TEST_CASE(sma, defer);
+	RUN_TEST_CASE(sma, rcall);
 }
 
 /* ------------------------------ End of file ------------------------------ */

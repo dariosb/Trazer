@@ -68,7 +68,8 @@ DCLR_TRE( RKH_TE_SMA_FIFO,		"SMA", "FIFO",		h_sma_ff,   ao_s, sig_s, snr_s, pid_
 DCLR_TRE( RKH_TE_SMA_LIFO,		"SMA", "LIFO",		h_sma_lf,   ao_s, sig_s, snr_s, pid_s, refc_d, nelem_d, nmin_d, nseq_d );
 DCLR_TRE( RKH_TE_SMA_REG,		"SMA", "REG",		h_symu8,	ao_s, prio_d );
 DCLR_TRE( RKH_TE_SMA_UNREG,		"SMA", "UNREG",		h_symu8,	ao_s, prio_d );
-DCLR_TRE( RKH_TE_SMA_DCH,       "SMA", "DCH",       h_sma_dch,	ao_s, sig_s, st_s);
+DCLR_TRE( RKH_TE_SMA_DEFER,     "SMA", "DEFER",    h_symevt,	q_s, sig_s );
+DCLR_TRE( RKH_TE_SMA_RCALL,     "SMA", "RCALL",    h_symevt,	ao_s, sig_s );
 
 static FMT_ID_T *tg_sma_tbl[] =
 {
@@ -79,7 +80,8 @@ static FMT_ID_T *tg_sma_tbl[] =
 	TRE_ST( RKH_TE_SMA_LIFO),
 	TRE_ST( RKH_TE_SMA_REG),
 	TRE_ST( RKH_TE_SMA_UNREG),
-	TRE_ST( RKH_TE_SMA_DCH),
+	TRE_ST( RKH_TE_SMA_DEFER),
+	TRE_ST( RKH_TE_SMA_RCALL),
     TRE_ST( RKH_TE_NEVENT )
 };
 
@@ -101,6 +103,7 @@ DCLR_TRE( RKH_TE_SM_UNKN_STATE, "SM", "UNKN_STATE", h_1sym,	  ao_s );
 DCLR_TRE( RKH_TE_SM_EX_HLEVEL,  "SM", "EX_HLEVEL",  h_1sym,	  ao_s );
 DCLR_TRE( RKH_TE_SM_EX_TSEG,    "SM", "EX_TSEG",    h_1sym,	  ao_s );
 DCLR_TRE( RKH_TE_SM_EXE_ACT,    "SM", "EXE_ACT",    h_exact,  aty_s, ao_s, st_s, func_s );
+DCLR_TRE( RKH_TE_SM_DCH,        "SM", "DCH",       h_sm_dch,	ao_s, sig_s, st_s);
 
 static FMT_ID_T *tg_sm_tbl[] =
 {
@@ -121,6 +124,7 @@ static FMT_ID_T *tg_sm_tbl[] =
 	TRE_ST( RKH_TE_SM_EX_HLEVEL),
 	TRE_ST( RKH_TE_SM_EX_TSEG),
 	TRE_ST( RKH_TE_SM_EXE_ACT),
+	TRE_ST( RKH_TE_SM_DCH),
     TRE_ST( RKH_TE_NEVENT )
 };
 
@@ -148,8 +152,6 @@ DCLR_TRE( RKH_TE_FWK_EPREG,   "FWK", "EPREG",    h_epreg,	ep_d, ss_d, es_d, psiz
 DCLR_TRE( RKH_TE_FWK_AE,      "FWK", "AE",       h_ae, es_d, sig_s, pid_s, refc_d, nblock_d, nmin_d, actor_s  );
 DCLR_TRE( RKH_TE_FWK_GC,      "FWK", "GC",       h_gc,	sig_s, pid_s, refc_d );
 DCLR_TRE( RKH_TE_FWK_GCR,     "FWK", "GCR",      h_gcr,	sig_s, pid_s, refc_d, nblock_d, nmin_d, actor_s );
-DCLR_TRE( RKH_TE_FWK_DEFER,   "FWK", "DEFER",    h_symevt,	q_s, sig_s );
-DCLR_TRE( RKH_TE_FWK_RCALL,   "FWK", "RCALL",    h_symevt,	ao_s, sig_s );
 DCLR_TRE( RKH_TE_FWK_OBJ,     "FWK", "OBJ",      h_symobj,	obj_x, nm_s );
 DCLR_TRE( RKH_TE_FWK_SIG,     "FWK", "SIG",      h_symsig,	sig_d, nm_s );
 DCLR_TRE( RKH_TE_FWK_FUN,	  "FWK", "FUN",      h_symobj,	func_x, nm_s );
@@ -174,8 +176,6 @@ static FMT_ID_T *tg_fwk_tbl[] =
 	TRE_ST( RKH_TE_FWK_AE),
 	TRE_ST( RKH_TE_FWK_GC),
 	TRE_ST( RKH_TE_FWK_GCR),
-	TRE_ST( RKH_TE_FWK_DEFER),
-	TRE_ST( RKH_TE_FWK_RCALL),
 	TRE_ST( RKH_TE_FWK_OBJ),
 	TRE_ST( RKH_TE_FWK_SIG),
 	TRE_ST( RKH_TE_FWK_FUN),

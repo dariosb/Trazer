@@ -48,7 +48,7 @@ static char symstr[ 16 ];
 static rui8_t *trb;
 static char fmt[ 1024 ];
 static unsigned long curr_tstamp;
-static uint lastnseq;
+static uint lastnseq = 255;
 
 static
 unsigned long
@@ -686,7 +686,7 @@ h_sma_lf( const void *tre )
 
 
 char *
-h_sma_dch( const void *tre )
+h_sm_dch( const void *tre )
 {
 	unsigned long obj, stobj;
 	static TRZE_T curr_e;
@@ -703,6 +703,21 @@ h_sma_dch( const void *tre )
 	return fmt;
 }
 
+char *
+h_sm_dch_noao( const void *tre )
+{
+	unsigned long stobj;
+	static TRZE_T curr_e;
+		
+
+	curr_e = (TRZE_T)assemble( sizeof_trze() );
+	stobj = (unsigned long)assemble( TRZ_RKH_CFGPORT_TRC_SIZEOF_PTR );
+
+	tre_fmt( fmt, CTE( tre ), 2, map_sig( curr_e ), map_obj(stobj) );
+
+	UTRZEVT_ADD_OR_CHK_EXPECT( tre, 2, curr_e, stobj );
+	return fmt;
+}
 
 
 char *
@@ -1535,7 +1550,9 @@ tzparser_exec( rui8_t d )
 void
 tzparser_init( void )
 {
+#if (__UNITRAZER_LIB__ == 0) 
 	lastnseq = 255;
+#endif
 }
 
 
@@ -1585,6 +1602,12 @@ h_Expect( const void *tre )
 	trc_e = (unsigned int)assemble( sizeof_trze() );
 
 	p = find_exp_trevt( trc_e );
+
+	if( p == NULL )
+	{
+		utrz_resp(RKH_TE_UT_FAIL, line, unknown_te, 0);
+		return (char *)unknown_te;
+	}
 
     NEW_EXPECT_EVT( line, trc_e );
     

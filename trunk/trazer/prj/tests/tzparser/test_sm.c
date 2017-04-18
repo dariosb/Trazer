@@ -275,6 +275,19 @@ TEST(sm, exeact)
 
     TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
 }
+
+TEST(sm, dch)
+{
+    RKH_TR_SM_DCH(&receiver, &event, &state);
+
+    trazerOutExpect(trazerOut, 3, "SM", "DCH", "ao=receiver, sig=0X3, "
+                                  "st=state");
+
+    execTrazerParser();
+
+    TEST_ASSERT_EQUAL_STRING( trazerOut, lprintf_Buff );
+}
+
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */

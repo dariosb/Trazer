@@ -40,5 +40,6 @@ void c_sm_no_num_args ( UTRZ_EXPECT_EVT *pex, rui8_t nargs, va_list args );
 #define  c_smexhl       c_sm_no_ao  
 #define  c_smextseg     c_sm_no_ao
 #define  c_smexeact     c_sm_exe_act
+#define  c_smdch        c_sm_no_ao
 
 #endif
