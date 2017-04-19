@@ -109,6 +109,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\source\tzparse.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\uevtbl.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\source\unittrz.cpp" />
+    <ClCompile Include="..\..\..\..\..\cmock\cmock.c" />
     <ClCompile Include="..\..\..\..\..\unity\fixture\unity_fixture.c" />
     <ClCompile Include="..\..\..\..\..\unity\unity.c" />
     <ClCompile Include="..\..\..\..\..\utils\bsp\platform\80x86\vc\bsp.c" />
@@ -135,7 +136,6 @@
     <ClCompile Include="..\..\..\..\test_sm.c" />
     <ClCompile Include="..\..\..\..\test_sma.c" />
     <ClCompile Include="..\..\..\..\test_tim.c" />
-    <ClCompile Include="H:\vortex\trazer trunk\prj\tests\cmock\cmock.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\unity\fixture\unity_fixture.h" />

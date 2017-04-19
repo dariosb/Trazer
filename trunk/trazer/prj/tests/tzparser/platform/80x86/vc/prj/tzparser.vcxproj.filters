@@ -195,7 +195,7 @@
     <ClCompile Include="..\..\..\..\test_runners\test_rtime_runner.c">
       <Filter>Source Files\tests\trzparse\test_runners</Filter>
     </ClCompile>
-    <ClCompile Include="H:\vortex\trazer trunk\prj\tests\cmock\cmock.c">
+    <ClCompile Include="..\..\..\..\..\cmock\cmock.c">
       <Filter>Source Files\tests\cmock</Filter>
     </ClCompile>
   </ItemGroup>

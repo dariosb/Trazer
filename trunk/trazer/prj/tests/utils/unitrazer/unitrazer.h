@@ -57,6 +57,10 @@
 #include "unity_fixture.h"
 #include "rkh.h"
 
+#ifdef __UNITRAZER_LIB__
+#include "unitrzlib.h"
+#endif
+
 /* ---------------------- External C language linkage ---------------------- */
 
 #ifdef __cplusplus
@@ -70,7 +74,7 @@ extern "C" {
  *  \brief
  *  Establish the preconditions to the tests.
  */
-#define sm_init() unitrazer_init()
+#define sm_init() unitrazer_start()
 
 /**
  *  \brief
@@ -240,8 +244,9 @@ extern "C" {
 #define sm_dch_expect(signal, state) \
     unitrazer_sm_dch_expect(__LINE__, signal, state)
 
-#define sm_exeAct_expectAnyArgs() \
+#define sm_dch_expectAnyArgs() \
     unitrazer_expectAnyArgs(__LINE__, RKH_TE_SM_DCH)
+
 /* ============================= Ignore macros ============================= */
 
 /* RKH_TE_SM_INIT */
@@ -339,6 +344,16 @@ extern "C" {
 #define sm_exeAct_ignoreArg_action() \
     unitrazer_ignoreArg(__LINE__, RKH_TE_SM_EXE_ACT, UT_ARGNO_3)
 
+/* RKH_TE_SM_DCH */
+#define sm_dch_ignore() \
+    unitrazer_ignore(__LINE__, RKH_TE_SM_DCH)
+
+#define sm_dch_ignoreArg_signal() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_DCH, UT_ARGNO_1)
+
+#define sm_dch_ignoreArg_state() \
+    unitrazer_ignoreArg(__LINE__, RKH_TE_SM_DCH, UT_ARGNO_2)
+
 /* -------------------------------- Ignore Groups--------------------------- */
 
 /* RKH_MP_GROUP */
@@ -390,12 +405,14 @@ struct UtrzProcessOut
 
 UtrzProcessOut * unitrazer_getLastOut(void);
 void unitrazer_resetOut(void);
+void unitrazer_log_start(void);
+
 
 /**
  *  \brief
  *  Establish the preconditions to the tests.
  */
-void unitrazer_init(void);
+void unitrazer_start(void);
 
 /**
  *  \brief
@@ -519,7 +536,6 @@ void unitrazer_sm_exeAct_expect(UNITY_LINE_TYPE cmockLine,
  */
 void unitrazer_sm_dch_expect(UNITY_LINE_TYPE cmockLine, RKH_SIG_T signal,
                                 RKH_ST_T *state);
-
 
 /**
  *  \brief

@@ -8,7 +8,7 @@ extern "C" {
 #ifndef __TZLOG_H__
 #define __TZLOG_H__
 
-#define LPRINTF_BUZZ_SIZE  1000000
+#define LPRINTF_BUZZ_SIZE  10000
 
 extern char lprintf_Buff[];
 

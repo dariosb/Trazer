@@ -1425,7 +1425,7 @@ parser( void )
 	static const TRE_T *ftr;			/* received trace event */
 	TRAZER_DATA_T tz_data;
 
-
+	initTesttzlog();
 	if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
 	{
 		if( ftr->fmt_args == ( HDLR_T )0 )		/* Trace event not valid */

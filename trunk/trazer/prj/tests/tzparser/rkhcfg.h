@@ -110,7 +110,7 @@
  *	defer and recall event features.
  */
 
-#define RKH_CFG_SMA_DEFER_EVT_EN		RKH_ENABLED
+#define RKH_CFG_FWK_DEFER_EVT_EN		RKH_ENABLED
 
 /**
  *	If the #RKH_CFG_FWK_ASSERT_EN is set to 0 the checking assertions are 

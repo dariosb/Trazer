@@ -92,6 +92,18 @@ sig_handler( int sig )
 	exit( EXIT_SUCCESS );
 }
 
+FILE *fdbg = NULL;
+
+void
+start_stream_dbg( char *fname )
+{
+	if( ( fdbg = fopen( fname, "w+" ) ) == NULL )
+	{
+		fatal_error( "Can't open file %s\n", fname );
+	}
+}
+
+
 int
 main(int argc, char **argv)
 {
@@ -99,6 +111,8 @@ main(int argc, char **argv)
 	int n;
 	size_t r;
 	int tcpPort;
+
+	start_stream_dbg("instream.bin");
 
 	atexit( close_all );
 	signal( SIGINT, sig_handler );
@@ -134,7 +148,11 @@ main(int argc, char **argv)
 		while ((n = tcpRead((unsigned char *)&c, sizeof(c))) != -1)
 		{
 			if (n > 0)
+			{
+				fwrite ( &c, 1, 1, fdbg );
+				fflush(fdbg);
 				tzparser_exec(c);
+			}
 		}
 	}
 
