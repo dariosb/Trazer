@@ -1,0 +1,1 @@
+OpenCppCoverage -- arch\win_vc08\prj\Debug\trazer.exe -t 6602
