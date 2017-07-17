@@ -87,6 +87,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

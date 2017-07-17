@@ -11,7 +11,7 @@
 #include <stdarg.h>
 
 FILE *flog = NULL;
-char lprintf_Buff[LPRINTF_BUZZ_SIZE];
+static char lprintf_Buff[LPRINTF_BUZZ_SIZE];
 
 void
 lprintf( const char *fmt, ... )
