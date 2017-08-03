@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="trace">
+</Property><Property Name="Solution File" Value="H:\vortex\trz+rkh\rkh\tests\trace\platform\80x86\vc\prj\trace.sln">
+</Property><Property Name="Date" Value="martes, 24 de noviembre de 2015">
+</Property><Property Name="Time" Value="9:22">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="trace.sln" Description="File successfully backed up as H:\vortex\trz+rkh\rkh\tests\trace\platform\80x86\vc\prj\trace.sln.old">
+</Event><Event ErrorLevel="0" Project="trace" Source="trace.vcproj" Description="Converting project file 'h:\vortex\trz+rkh\rkh\tests\trace\platform\80x86\vc\prj\trace.vcproj'.">
+</Event><Event ErrorLevel="1" Project="trace" Source="trace.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="trace" Source="trace.vcproj" Description="Done converting to new project file 'h:\vortex\trz+rkh\rkh\tests\trace\platform\80x86\vc\prj\trace.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="trace" Source="trace.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="trace.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="trace.sln" Description="Converted">
+</Event></UpgradeLog>
