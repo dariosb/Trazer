@@ -3,8 +3,8 @@
 
 \tableofcontents
 
-\section trazer_2_5 Version 2.5
-\releasedate ----
+\section trazer_3_0 Version 3.0
+\releasedate 2017-03-08
 
 \new
 - Refactoring for unity test of tzparser.
