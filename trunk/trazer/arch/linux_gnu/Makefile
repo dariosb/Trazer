@@ -6,9 +6,9 @@ TRZSRCPATH=$(PWD)/../../source
 RKHPATH=$(PWD)/../../rkh/source
 
 #uncomment for trazer build
-#DEFINE= -D__LINUX__ -DLINUX_DEBUG -D__TRAZER__ -DN_DEBUG -D_CONSOLE -D__LNXGNU__ -D__TEST__
+DEFINE= -D__LINUX__ -DLINUX_DEBUG -D__TRAZER__ -DN_DEBUG -D_CONSOLE -D__LNXGNU__ -D__TEST__
 #uncomment for unitrzlib.a first run "make" builds the objs, then run "make unitrzlib.a"
-DEFINE= -D__LINUX__ -DLINUX_DEBUG -D__TRAZER__ -DN_DEBUG -D_CONSOLE -D__LNXGNU__ -D__TEST__ -D__UNITRAZER_LIB__ -D__TZLOG_STUB___
+#DEFINE= -D__LINUX__ -DLINUX_DEBUG -D__TRAZER__ -DN_DEBUG -D_CONSOLE -D__LNXGNU__ -D__TEST__ -D__UNITRAZER_LIB__ -D__TZLOG_STUB___
 CFLAGS = -ansi -Wall -I$(TRZSRCPATH)/include -I$(TRZSRCPATH)/include/rkh -I$(RKHPATH)/include -I$(PWD)
 LDFLAGS	= -lc -pthread
 

@@ -2,8 +2,8 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Trazer"
-!define PRODUCT_VERSION "2.5"
-!define PRODUCT_PUBLISHER "Vortex Technology Solutions"
+!define PRODUCT_VERSION "3.0"
+!define PRODUCT_PUBLISHER "Vortex Technology"
 !define PRODUCT_WEB_SITE "http://sourceforge.net/projects/rkh-reactivesys/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\trazer.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -39,7 +39,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "Trazer_2_5_w32install.exe"
+OutFile "Trazer_3_0_w32install.exe"
 InstallDir "$PROGRAMFILES\Trazer"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
