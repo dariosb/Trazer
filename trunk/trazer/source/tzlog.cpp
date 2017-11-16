@@ -24,17 +24,35 @@ lprintf( const char *fmt, ... )
     if(ps >=  (lprintf_Buff + LPRINTF_BUZZ_SIZE) )
         ps = lprintf_Buff;
 
+	/*
+	 * Portability Note:
+	 * http://www.gnu.org/software/libc/manual/html_node/Variable-Arguments-Output.html
+	 * The value of the va_list pointer is undetermined after the call to vprintf,
+	 * so you must not use va_arg after you call vprintf.Instead, you should call va_end
+	 * to retire the pointer from service.You can call va_start again and begin fetching
+	 * the arguments from the start of the variable argument list. (Alternatively,
+	 * you can use va_copy to make a copy of the va_list pointer before calling vfprintf.)
+	 * Calling vprintf does not destroy the argument list of your function, merely the 
+	 * particular pointer that you passed to it.
+	 */
     va_start(args,fmt);
-
 	vsprintf( ps, fmt, args);
+	va_end(args);
 
 #ifndef __TZLOG_STUB__
-	if( !options.quiet )
-	    vfprintf( stdout, fmt, args);
+	if (!options.quiet)
+	{
+		va_start(args, fmt);
+		vfprintf(stdout, fmt, args);
+		va_end(args);
+	}
 #endif
+
 	if( flog != NULL )
 	{
+		va_start(args, fmt);
 	    vfprintf( flog, fmt, args);
+		va_end(args);
 		fflush(flog);
 	}
 
