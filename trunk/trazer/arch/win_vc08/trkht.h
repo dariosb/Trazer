@@ -62,7 +62,7 @@ typedef unsigned long	rui32_t;
 typedef unsigned int	HUInt;
 typedef unsigned int	ruInt;
 typedef signed int		HInt;
-typedef signed int		rint;
+typedef signed int		rInt;
 
 typedef unsigned int	rbool_t;
 #endif

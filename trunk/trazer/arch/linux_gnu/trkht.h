@@ -50,14 +50,16 @@ typedef signed char 	rkhi8_t;
 typedef signed char 	ri8_t;
 typedef signed short 	rkhi16_t;
 typedef signed short 	ri16_t;
-typedef signed long		rkhi32_t;
-typedef signed long		ri32_t;
+typedef signed int		rkhi32_t;
+typedef signed int		ri32_t;
+
 typedef unsigned char 	rkhui8_t;
 typedef unsigned char 	rui8_t;
 typedef unsigned short 	rkhui16_t;
 typedef unsigned short 	rui16_t;
-typedef unsigned long	rkhui32_t;
-typedef unsigned long	rui32_t;
+typedef unsigned int	rkhui32_t;
+typedef unsigned int	rui32_t;
+
 
 typedef unsigned int	HUInt;
 typedef unsigned int	ruInt;
