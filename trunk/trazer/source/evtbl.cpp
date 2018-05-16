@@ -246,7 +246,7 @@ TRE_T *
 find_trevt( unsigned int id )
 {
 	static FMT_ID_T **p;
-    RKH_TG_T grp;
+    static RKH_TG_T grp;
     RKH_TE_ID_T te;
 
     grp = GETGRP(id);

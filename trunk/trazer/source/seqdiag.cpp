@@ -37,7 +37,11 @@ bool
 fexists(const char *filename)
 {
 	ifstream ifile(filename);
-	return (ifile != NULL);
+	
+	if (ifile.fail())
+		return 0;
+	else
+		return 1;
 }
 
 
@@ -261,7 +265,7 @@ sdiag_async_evt( EVENT_ST *p )
 void
 sdiag_state( ulong smobj, ulong stobj )
 {
-	char trbuff[ 100 ];
+	char trbuff[ 200 ];
 
 	sprintf( trbuff, "%s--%s: %s;\n", 
 				map_obj(smobj), map_obj(smobj), map_obj(stobj) );

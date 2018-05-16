@@ -44,7 +44,7 @@ enum
 
 static rui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
-static char symstr[ 16 ];
+static char symstr[ 100 ];
 static rui8_t *trb;
 static char fmt[ 1024 ];
 static unsigned long curr_tstamp;
@@ -1426,7 +1426,36 @@ parser( void )
 	TRAZER_DATA_T tz_data;
 
 	initTesttzlog();
-	if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
+	if( GET_TE_GROUP( tr[0] ) == RKH_TG_USR )
+	{
+		ftr = &fmt_usr_tbl;
+
+		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
+		
+		if( !verify_nseq( tz_data.nseq ) )
+        {
+            disable_rtime();
+			lprintf( lost_trace_info );
+        }
+
+		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
+											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
+		tz_data.group = ftr->group.c_str();
+
+		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
+		{
+			sprintf( fmt, "%s%d", ftr->name.c_str(), GET_USR_TE( tr[0] ) );
+			tz_data.name = fmt;
+		}
+
+		trazer_output(	&tz_data );
+		
+		(*ftr->fmt_args)( (const void *)(tr) ); 
+
+		return;
+	}
+	
+    else if( (ftr = find_trevt( tr[ 0 ] )) != ( TRE_T* )0 )
 	{
 		if( ftr->fmt_args == ( HDLR_T )0 )		/* Trace event not valid */
 		{
@@ -1462,35 +1491,6 @@ parser( void )
 		return;
 	}
 
-	else if( GET_TE_GROUP( tr[0] ) == RKH_TG_USR )
-	{
-		ftr = &fmt_usr_tbl;
-
-		tz_data.nseq = get_nseq( TRZ_RKH_CFG_TRC_NSEQ_EN );
-		
-		if( !verify_nseq( tz_data.nseq ) )
-        {
-            disable_rtime();
-			lprintf( lost_trace_info );
-        }
-
-		curr_tstamp = tz_data.ts = get_ts( TRZ_RKH_CFG_TRC_TSTAMP_EN, 
-											TRZ_RKH_CFGPORT_TRC_SIZEOF_TSTAMP );
-		tz_data.group = ftr->group.c_str();
-
-		if( (tz_data.name = map_uevt( GET_USR_TE(tr[0]) )) == NULL )
-		{
-			sprintf( fmt, "%s%d", ftr->name.c_str(), GET_USR_TE( tr[0] ) );
-			tz_data.name = fmt;
-		}
-
-		trazer_output(	&tz_data );
-		
-		(*ftr->fmt_args)( (const void *)(tr) ); 
-
-		return;
-	}
-	
 	lprintf( unknown_te, tr[0] );
 }
 
