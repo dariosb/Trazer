@@ -35,7 +35,7 @@ const char * atype_str[6] =
 };
 
 
-#define PARSER_MAX_SIZE_BUF			64
+#define PARSER_MAX_SIZE_BUF			1024
 
 enum
 {
@@ -44,7 +44,7 @@ enum
 
 static rui8_t state = PARSER_WFLAG;
 static unsigned char tr[ PARSER_MAX_SIZE_BUF ], *ptr, trix;
-static char symstr[ 100 ];
+static char symstr[ 1024 ];
 static rui8_t *trb;
 static char fmt[ 1024 ];
 static unsigned long curr_tstamp;

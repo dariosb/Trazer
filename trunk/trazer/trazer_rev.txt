@@ -3,6 +3,15 @@
 
 \tableofcontents
 
+\section trazer_3_1 Version 3.1
+\releasedate 2018-06-29
+
+\new
+- Enlarge stream buffers
+- Fix User Trace parser.
+  
+\todo
+
 \section trazer_3_0 Version 3.0
 \releasedate 2017-03-08
 
