@@ -2,6 +2,11 @@
 \page rev_page_trazer Trazer revision history
 
 \tableofcontents
+\section trazer_3_2 Version 3.2
+\releasedate No Release
+
+\new
+- -s option for load symbols binary file
 
 \section trazer_3_1 Version 3.1
 \releasedate 2018-06-29
