@@ -31,13 +31,14 @@ typedef struct
 	int quiet;
 	string outfile;
 	string instream_tcpsock;
+	string symbols_file;
 	string instream_file;
 	string instream_comport;
 	string baudrate;
 	string parity;
 } OPTIONS_T;
 
-#define CONSOLE_OPTIONS_DEFINITION	"t:dqo:f:c:::hv"
+#define CONSOLE_OPTIONS_DEFINITION	"s:t:dqo:f:c:::hv"
 
 #define OPTIONS_FILE				"trazer.evt"
 

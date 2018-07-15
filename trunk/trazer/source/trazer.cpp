@@ -97,12 +97,19 @@ FILE *fdbg = NULL;
 void
 start_stream_dbg( char *fname )
 {
-	if( ( fdbg = fopen( fname, "w+" ) ) == NULL )
+	if( ( fdbg = fopen( fname, "w+b" ) ) == NULL )
 	{
 		fatal_error( "Can't open file %s\n", fname );
 	}
 }
 
+void
+serialhook(unsigned char c)
+{
+	fwrite ( &c, 1, 1, fdbg );
+	fflush(fdbg);
+    tzparser_exec(c);
+} 
 
 int
 main(int argc, char **argv)
@@ -133,6 +140,24 @@ main(int argc, char **argv)
     unitrazer_init();
 
 	seqdiag_init();
+
+	if( !options.symbols_file.empty() )
+	{
+		lprintf( "\n-------- Parsing symbols from file %s --------\n\n", 
+				options.symbols_file.c_str() );
+
+		if( ( f = fopen( options.symbols_file.c_str(), "rb" ) ) == NULL )
+			fatal_error( no_trace_file, options.symbols_file.c_str() );
+
+		while( ( r = fread( &c, sizeof(c), sizeof(c), f ) ) == sizeof( c ) )
+		{
+		    fwrite ( &c, 1, 1, fdbg );
+			fflush(fdbg);
+			tzparser_exec( c );
+		}
+
+		fclose( f );
+	}
 
 	if( !options.instream_tcpsock.empty() )
 	{
@@ -168,6 +193,8 @@ main(int argc, char **argv)
 
 		while( ( r = fread( &c, sizeof(c), sizeof(c), f ) ) == sizeof( c ) )
 		{
+		    fwrite ( &c, 1, 1, fdbg );
+			fflush(fdbg);
 			tzparser_exec( c );
 		}
 	}
@@ -179,7 +206,7 @@ main(int argc, char **argv)
 				options.baudrate.c_str(), 
 				options.parity.c_str() );
 
-		init_serial( &tzparser_exec );
+		init_serial( &serialhook );
 
 		instr = SERIAL_STREAM;
 

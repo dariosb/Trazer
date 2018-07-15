@@ -44,6 +44,7 @@ const char * err_fopen =
 const char * help_message =
 {
 		"\nOption usage:\n"
+		"\ts: Symbol load from binary stream file\n"
 		"\tf: Parse from binary stream file\n"
 		"\tc: Parse from COM Port\n"
 		"\t      COM Port setup must be specified ex:\n"
@@ -59,6 +60,7 @@ const char * usage_msg =
 {
 		"\nUsage: %s\n"
 		"Option usage:\n"
+		"\t -s Symbol load from binary stream file\n"
 		"\t -f Parse from binary stream file\n"
 		"\t -c Parse from COM Port\n"
 		"\t      COM Port setup must be specified ex:\n"

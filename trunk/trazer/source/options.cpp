@@ -118,6 +118,9 @@ evaluate_args( int argc, char **argv )
 	while( ( c = getopt( argc, argv, opts ) ) != EOF )
 		switch( c )
 		{
+			case 's':
+				options.symbols_file.assign(optarg);
+				break;
 			case 'f':
 				options.instream_file.assign(optarg);
 				break;
