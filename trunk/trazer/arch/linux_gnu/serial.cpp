@@ -27,6 +27,8 @@ static int running;
 static struct termios tio;
 static struct termios old_tio;
 
+static (void)(*serHook)(unsigned char c);
+
 static 
 void *
 isr_ser_thread( void *d )	/* thread to emulate timer ISR */
@@ -42,7 +44,7 @@ isr_ser_thread( void *d )	/* thread to emulate timer ISR */
 		{
 			p = buff;
 			while( count-- )
-				tzparser_exec( *p++ );
+                serHook(*p++);
 		}
     }
 	pthread_exit(NULL);
@@ -165,6 +167,8 @@ init_serial( void (*prcv)(unsigned char byte) )
 
 	/* Destroy the thread attributes */
 	pthread_attr_destroy(&threadAttr);
+
+    serHook = prcv;
 }
 
 
