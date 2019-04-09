@@ -27,7 +27,7 @@ static int running;
 static struct termios tio;
 static struct termios old_tio;
 
-static (void)(*serHook)(unsigned char c);
+static void(*serHook)(unsigned char c);
 
 static 
 void *
